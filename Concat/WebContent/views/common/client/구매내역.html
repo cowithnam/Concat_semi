@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Kmarket::main layout</title>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+      <!-- jQuery library -->
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    
+      <!-- Popper JS -->
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    
+      <!-- Latest compiled JavaScript -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+  
+
+    #product>.cart>form>table {
+      width: 100%;
+      border-bottom: 1px solid #d3d3d3;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    #product>.cart>form>table tr {
+      border-bottom: 1px solid #d3d3d3;
+    }
+
+    #product>.cart>form>table th:first-child {
+      width: 60px;
+    }
+
+    #product>.cart>form>table th {
+      padding: 12px 0;
+      border-top: 2px solid #000;
+      border-bottom: 1px solid #d3d3d3;
+      background: #fff;
+      color: #383838;
+      font-size: 0.95em;
+      text-align: center;
+      letter-spacing: -0.1em;
+    }
+
+
+
+    #product>.cart>form>table td {
+      text-align: center;
+    }
+
+    #product>.cart>form>table td:last-child {
+      color: #ff006c;
+      font-weight: bold;
+    }
+
+
+    #product>.cart>form>table td>article {
+      padding: 6px;
+      overflow: hidden;
+    }
+
+    #product>.cart>form>table td>article>a {
+      float: left;
+      display: inline-block;
+    }
+
+    #product>.cart>form>table td>article>a>img {
+      width: 80px;
+    }
+
+    #product>.cart>form>table td>article>div {
+      float: left;
+      margin-left: 10px;
+    }
+
+    #product>.cart>form>table td>article>div>h2 {
+      text-align: left;
+    }
+
+    #product>.cart>form>table td>article>div>p {
+      text-align: left;
+      color: #777;
+      margin-top: 4px;
+    }
+
+    #product>.cart>form>input[name=del] {
+      border-color: #bdbdbd;
+      border-bottom-color: #828282;
+      background: #fafafa;
+      color: #4d4d4d;
+      padding: 6px 11px;
+      border-width: 1px;
+      margin-top: 6px;
+    }
+
+    #product>.cart>form>.total {
+      float: right;
+      width: 360px;
+      height: 412px;
+      padding: 20px;
+      margin-top: 12px;
+      background: #fff;
+      border: 1px solid #d3d3d3;
+      box-sizing: border-box;
+    }
+
+    #product>.cart>form>.total>h2 {
+      width: 100%;
+      font-weight: bold;
+      font-size: 16px;
+      border-bottom: 1px solid #111;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      box-sizing: border-box;
+      color: #1e1e1e;
+    }
+
+    #product>.cart>form>.total>table {
+      width: 100%;
+    }
+
+    #product>.cart>form>.total>table tr:nth-last-child(1) td {
+      font-size: 20px;
+    }
+
+    #product>.cart>form>.total>table tr:nth-last-child(1) td:last-child {
+      color: #ff006c;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #product>.cart>form>.total>table td {
+      padding: 10px 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    #product>.cart>form>.total>table td:last-child {
+      text-align: right;
+    }
+
+    #product>.cart>form>.total>input[type=submit] {
+      width: 100%;
+      height: 56px;
+      font-size: 26px;
+      border-width: 1px;
+      border-color: #d81818;
+      border-bottom-color: #9e1212;
+      background: #ed2f2f;
+      background-image: -webkit-linear-gradient(#ed2f2f, #dd0e0e);
+      color: #fff;
+      box-sizing: border-box;
+      margin-top: 10px;
+    }
+
+    div {
+      box-sizing: border-box;
+    }
+
+    #wrap {
+      width: 1200px;
+      height: 900px;
+      margin: auto;
+    }
+
+    #header {
+      height: 20%;
+    }
+
+    #header>div {
+      height: 100%;
+      float: left;
+    }
+
+    #header1 {
+      width: 20%;
+    }
+
+    #header1>img {
+      width: 100%;
+      height: 100%;
+    }
+
+    #header2 {
+      width: 60%;
+
+    }
+
+    #header3 {
+      width: 20%;
+      padding-top: 10px;
+      padding-right: 20px;
+      text-align: right;
+      line-height: 180px;
+    }
+
+    #header3>a {
+      text-decoration: none;
+      color: black;
+      font-weight: bolder;
+      margin-left: 10px;
+    }
+
+    #navigator {
+      width: 95%;
+      height: 5%;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+
+    #navigator>div {
+      float: left;
+      background-color: #252525;
+      height: 100%;
+    }
+
+    #cgDiv {
+      height: 100%;
+      width: 100px;
+      border-radius: 20px;
+    }
+
+    #navigator>div>button {
+      height: 100%;
+      border: none;
+      background-color: white;
+      font-size: 20px;
+      font-weight: bolder;
+    }
+
+    #category {
+      font-size: 20px;
+      font-weight: bolder;
+      color: white;
+      position: relative;
+      top: 9px;
+      left: 10px;
+    }
+
+    #content {
+      width: 100%;
+      height: 55%;
+    }
+
+    #banner {
+      width: 100%;
+      height: 500px;
+      /* background-color: #168d63; */
+      background-image: url(resources/image/detail_foil_ticket_03.jpg);
+      background-repeat: no-repeat;
+      background-size: 1200px 500px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+
+    #span1 {
+      font-weight: bolder;
+      font-size: 65px;
+      position: relative;
+      top: 80px;
+      left: 100px;
+    }
+
+    #span2 {
+      position: relative;
+      top: 115px;
+      right: 110px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  
+    <div id="wrapper">
+      <header>
+
+        <main id="product">
+          <aside>
+
+          </aside>
+          <section class="cart">
+            <nav>
+
+              <h1>찜리스트</h1>
+              </p>
+            </nav>
+            <form action="#">
+              <table border="0">
+                <tr>
+                  <th><input type="checkbox" name="all"></th>
+                  <th>상품명</th>
+
+                  <th>구매가</th>
+
+                </tr>
+
+                <tr>
+                  <td><input type="checkbox" name="1"></td>
+                  <td>
+                    <article>
+                      <a href="#">
+                        <img src="	https://via.placeholder.com/80x80" alt="1">
+                      </a>
+                      <div>
+                        <!-- 20개  -->
+                        <h2><a href="#">찜리스트찜리스트찜리스트찜리스트기기기기</a></h2>
+                        <p>상품설명찜리스트</p>
+                      </div>
+                    </article>
+                  </td>
+
+                  <td>27,000</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" name="1"></td>
+                  <td>
+                    <article>
+                      <a href="#">
+                        <img src="	https://via.placeholder.com/80x80" alt="1">
+                      </a>
+                      <div>
+                        <h2><a href="#">상품명</a></h2>
+                        <p>상품설명</p>
+                      </div>
+                    </article>
+                  </td>
+
+                  <td>27,000</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" name="1"></td>
+                  <td>
+                    <article>
+                      <a href="#">
+                        <img src="	https://via.placeholder.com/80x80" alt="1">
+                      </a>
+                      <div>
+                        <h2><a href="#">상품명</a></h2>
+                        <p>상품설명</p>
+                      </div>
+                    </article>
+                  </td>
+
+                  <td>27,000</td>
+
+                </tr>
+              </table>
+              <button class="btn btn-danger">삭제하기</button> 
+              <button class="btn btn-primary">뒤로가기</button>
+
+</body>
+
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concat마켓</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <style>
+    div {
+      box-sizing: border-box;
+    }
+
+    #wrap {
+      width: 1200px;
+      height: 900px;
+      margin: auto;
+    }
+
+    #header {
+      height: 20%;
+    }
+
+    #header>div {
+      height: 100%;
+      float: left;
+    }
+
+    #header1 {
+      width: 20%;
+    }
+
+    #header1>img {
+      width: 100%;
+      height: 100%;
+    }
+
+    #header2 {
+      width: 60%;
+
+    }
+
+    #header3 {
+      width: 20%;
+      padding-top: 10px;
+      padding-right: 20px;
+      text-align: right;
+      line-height: 180px;
+    }
+
+    #header3>a {
+      text-decoration: none;
+      color: black;
+      font-weight: bolder;
+      margin-left: 10px;
+    }
+
+    #navigator {
+      width: 95%;
+      height: 5%;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+
+    #navigator>div {
+      float: left;
+      background-color: #252525;
+      height: 100%;
+    }
+
+    #cgDiv {
+      height: 100%;
+      width: 100px;
+      border-radius: 20px;
+    }
+
+    #navigator>div>button {
+      height: 100%;
+      border: none;
+      background-color: white;
+      font-size: 20px;
+      font-weight: bolder;
+    }
+
+    #category {
+      font-size: 20px;
+      font-weight: bolder;
+      color: white;
+      position: relative;
+      top: 9px;
+      left: 10px;
+    }
+
+    #content {
+      width: 100%;
+      height: 55%;
+    }
+
+    #banner {
+      width: 100%;
+      height: 500px;
+      /* background-color: #168d63; */
+      background-image: url(resources/image/detail_foil_ticket_03.jpg);
+      background-repeat: no-repeat;
+      background-size: 1100px 500px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+
+    #span1 {
+      font-weight: bolder;
+      font-size: 65px;
+      position: relative;
+      top: 80px;
+      left: 100px;
+    }
+
+    #span2 {
+      position: relative;
+      top: 115px;
+      right: 110px;
+      font-weight: bold;
+    }
+
+    .card {
+      float: left;
+      margin: auto;
+
+      padding-left: 25px;
+      margin-right: 25px;
+      margin-bottom: 1%;
+
+    }
+
+    div.searchCate p.tit {
+      display: table-cell;
+      width: 130px;
+      font-size: 20px;
+      font-weight: 600;
+      color: black;
+      text-align: center;
+      background: lightgray;
+      vertical-align: middle;
+    }
+
+    div.searchCate {
+      display: table;
+      float: left;
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+      width: 1100px;
+      border-bottom: 1px dashed #a6c1e5;
+      /*  */
+    }
+
+    div.searchCate ul {
+      float: left;
+      margin-left: 20px;
+      width: 950px;
+    }
+
+    div.searchCate ul li {
+      float: left;
+      margin: 0 10px 25px 0;
+      width: 150px;
+      height: 95px;
+    }
+
+    div.searchCate ul li a,
+    div.searchCate ul li a>img {
+      display: inline-block;
+      width: 150px;
+      height: 95px;
+      margin-right: 20px;
+    }
+    li{
+      list-style-type: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrap">
+    
+      <br><br>
+      <h2>상품리스트</h2>
+      <br><br>
+
+      <div class="prodSearchArea">
+        <div class="searchCate searchCate3">
+          <p class="tit">카테고리</p>
+          <ul>
+            <li>
+              <a href="" class="">
+                <img src="../resources/상품이미지.png" alt="전체">
+              </a>
+            </li>
+            <li>
+              <a href="" class="">
+                <img src="../resources/상품이미지.png" alt="전체">
+              </a>
+            </li>
+            <li>
+              <a href="" class="">
+                <img src="../resources/상품이미지.png" alt="전체">
+              </a>
+            </li>
+            <li>
+              <a href="" class="">
+                <img src="../resources/상품이미지.png" alt="전체">
+              </a>
+            </li>
+            <li>
+              <a href="" class="">
+                <img src="../resources/상품이미지.png" alt="전체">
+              </a>
+            </li>
+            
+
+          </ul>
+        </div>
+
+        <div class="searchCate">
+          <p class="tit">브랜드</p>
+          <ul class="brandCheck">
+            <li><input type="checkbox" name="brandCheckAll" id="brandCheckAll"> 전체</li>
+
+            <li><input type="checkbox" class="check" name="searchBrandNoList" value="126"> 크리스피크림</li>
+
+            <li><input type="checkbox" class="check" name="searchBrandNoList" value="30"> 뚜레쥬르</li>
+
+            <li><input type="checkbox" class="check" name="searchBrandNoList" value="9"> 던킨도너츠</li>
+
+            <li><input type="checkbox" class="check" name="searchBrandNoList" value="2"> 파리바게뜨</li>
+
+            <li><input type="checkbox" class="check" name="searchBrandNoList" value="85"> 빚은</li>
+
+            <li><input type="checkbox" class="check" name="searchBrandNoList" value="23"> 파리크라상</li>
+
+            
+
+          </ul>
+        </div>
+
+        
+      </div>
+
+
+      <br>
+    
+
+      <div class="btn">
+        <a class="btn btn-danger">상품검색</a>
+        <a class="btn btn-primary">초기화</a>
+      </div>
+      <br><br>
+  
+  <div class="container-fluid">
+
+
+    <div class="card center-block" style="width: 15rem;">
+      <img src="../resources/상품이미지.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">브랜드</p>
+        <h5 class="card-title">상품명</h5>
+        <br>
+        <p class="card-text">가격</p>
+        <a href="#" class="btn btn-danger">구매하기</a>
+        <a href="#" class="btn btn-primary">찜하기</a>
+      </div>
+    </div>
+    <div class="card center-block" style="width: 15rem;">
+      <img src="../resources/상품이미지.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">브랜드</p>
+        <h5 class="card-title">상품명</h5>
+        <br>
+        <p class="card-text">가격</p>
+        <a href="#" class="btn btn-danger">구매하기</a>
+        <a href="#" class="btn btn-primary">찜하기</a>
+      </div>
+    </div>
+    <div class="card center-block" style="width: 15rem;">
+      <img src="../resources/상품이미지.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">브랜드</p>
+        <h5 class="card-title">상품명</h5>
+        <br>
+        <p class="card-text">가격</p>
+        <a href="#" class="btn btn-danger">구매하기</a>
+        <a href="#" class="btn btn-primary">찜하기</a>
+      </div>
+    </div>
+    <div class="card center-block" style="width: 15rem;">
+      <img src="../resources/상품이미지.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">브랜드</p>
+        <h5 class="card-title">상품명</h5>
+        <br>
+        <p class="card-text">가격</p>
+        <a href="#" class="btn btn-danger">구매하기</a>
+        <a href="#" class="btn btn-primary">찜하기</a>
+      </div>
+    </div>
+    
+    <div class="card center-block" style="width: 15rem;">
+      <img src="../resources/상품이미지.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">브랜드</p>
+        <h5 class="card-title">상품명</h5>
+        <br>
+        <p class="card-text">가격</p>
+        <a href="#" class="btn btn-danger">구매하기</a>
+        <a href="#" class="btn btn-primary">찜하기</a>
+      </div>
+    </div>
+    <div class="card center-block" style="width: 15rem;">
+      <img src="../resources/상품이미지.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">브랜드</p>
+        <h5 class="card-title">상품명</h5>
+        <br>
+        <p class="card-text">가격</p>
+        <a href="#" class="btn btn-danger">구매하기</a>
+        <a href="#" class="btn btn-primary">찜하기</a>
+      </div>
+    </div>
+    <div class="card center-block" style="width: 15rem;">
+      <img src="../resources/상품이미지.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">브랜드</p>
+        <h5 class="card-title">상품명</h5>
+        <br>
+        <p class="card-text">가격</p>
+        <a href="#" class="btn btn-danger">구매하기</a>
+        <a href="#" class="btn btn-primary">찜하기</a>
+      </div>
+    </div>
+    <div class="card center-block" style="width: 15rem;">
+      <img src="../resources/상품이미지.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">브랜드</p>
+        <h5 class="card-title">상품명</h5>
+        <br>
+        <p class="card-text">가격</p>
+        <a href="#" class="btn btn-danger">구매하기</a>
+        <a href="#" class="btn btn-primary">찜하기</a>
+      </div>
+    </div>
+  
+
+    
+   
+  
+
+</body>
