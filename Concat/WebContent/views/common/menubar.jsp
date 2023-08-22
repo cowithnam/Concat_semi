@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	String filepath = request.getSession().getServletContext().getRealPath("/WebContent/resources/image/");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -257,7 +260,7 @@
     <div id="wrap">
         <div id="header">
             <div id="header1">
-                <img src="https://i.ibb.co/82bvk3h/image.png">
+				  <img src="resources/image/concatlogo.png">
             </div>
             <div id="header2">
                 <div id="search">
@@ -275,16 +278,16 @@
         </div>
         <div id="navigator">
             <div id="cg-div" style="cursor: pointer;">
-                <img src="../../resources/image/menu.png">
+                <img src="resources/image/menu.png">
                 <span id="cg-span">카테고리</span>
                 <div id="category">
                     <ul>
-                        <!-- <li><button type="button"><img src="resources/image/icons8-커피-64.png"></button></li>
-                        <li><a href="#"><button type="button"><img src="resources/image/icons8-피자-64.png"></button></a></li>
-                        <li><a href="#"><button type="button"><img src="resources/image/icons8-햄버거-64.png"></button></a></li>
-                        <li><a href="#"><button type="button"><img src="resources/image/icons8-치킨-64.png"></button></a></li>
-                        <li><a href="#"><button type="button"><img src="resources/image/icons8-빵-64.png"></button></a></li>
-                        <li><a href="#"><button type="button"><img src="resources/image/icons8-아이스크림-콘-64.png"></button></a></li> -->
+                        <li><button type="button"><img src="resources/image/coffee.png"></button></li>
+                        <li><a href="#"><button type="button"><img src="resources/image/pizza.png"></button></a></li>
+                        <li><a href="#"><button type="button"><img src="resources/image/burger.png"></button></a></li>
+                        <li><a href="#"><button type="button"><img src="resources/image/chicken.png"></button></a></li>
+                        <li><a href="#"><button type="button"><img src="resources/image/bread.png"></button></a></li>
+                        <li><a href="#"><button type="button"><img src="resources/image/icecon.png"></button></a></li>
                     </ul>
             </div>
             </div>
