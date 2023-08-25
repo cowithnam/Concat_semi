@@ -1,6 +1,8 @@
 package concat.notice.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +40,7 @@ public class NoticeEnrollController extends HttpServlet {
 		
 		
 		HttpSession session = request.getSession();
-		int userNo =((Member)session.getAttribute("loginMember"));
+		int userNo =((Member)session.getAttribute("loginMember")).getMemNo();
 		
 		Notice n = new Notice();
 		n.setNoticeTitle(noticeTitle);
@@ -48,6 +50,15 @@ public class NoticeEnrollController extends HttpServlet {
 		
 		int result = new NoticeService().insertNotice(n);
 		
+		if(result>0) {
+			session.setAttribute("alertMsg", "성공적으로 공지사항이 등록되었습니다!");
+			response.sendRedirect(request.getContextPath()+"/list.no");
+		}else {
+			request.setAttribute("errorMsg", "공지사항 등록에 실패 했습니다" );
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+			
+		}
 		
 		request.getRequestDispatcher("views/notice/noticeEnrollForm.jsp").forward(request, response);
 	}

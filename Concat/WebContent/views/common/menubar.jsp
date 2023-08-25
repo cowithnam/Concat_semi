@@ -272,8 +272,8 @@
                 </div>
             </div>
             <div id="header3">
-                <a href="#">로그인</a>
-                <a href="#">회원가입</a>
+                <a href="<%= contextPath %>/login.me">로그인</a>
+                
             </div>
         </div>
         <div id="navigator">
