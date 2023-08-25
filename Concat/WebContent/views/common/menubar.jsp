@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
-	String filepath = request.getSession().getServletContext().getRealPath("/WebContent/resources/image/");
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -14,14 +14,14 @@
             box-sizing: border-box;
         }
         #wrap{
-            width: 1400px;
-            height: 2100px;
+            width: 1300px;
+            
             margin: auto;
             
         }
         
         #header{
-            height: 8.58%;
+            height: 180px;
             width: 100%;
         }
 
@@ -102,7 +102,7 @@
 
         #navigator{
             width: 100%;
-            height: 2.145%; 
+            height: 45px; 
             padding-left: 10px;
             margin-bottom: 20px;
         }
