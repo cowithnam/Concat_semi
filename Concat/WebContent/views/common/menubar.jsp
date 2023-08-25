@@ -1,28 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
-	String filepath = request.getSession().getServletContext().getRealPath("/WebContent/resources/image/");
+    String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Concat</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>    <style>
         div{
             box-sizing: border-box;
         }
+        
+        body{
+        	margin: 8px;
+        }
         #wrap{
-            width: 1400px;
-            height: 2100px;
+            width: 1280px;
+ 			height: 225px;
             margin: auto;
-            
         }
         
         #header{
-            height: 8.58%;
-            width: 100%;
+            height: 180px;
+            width: 1400px;
         }
 
         #header>div{
@@ -75,10 +77,10 @@
             position: absolute;
             left: 330px;
             width: 40px;
-            /* background-image: url(resources/image/search.png); */
+            background-image: url(resources/image/search.png);
             background-repeat: no-repeat;
             background-position: center;
-            background-size: 30px 30px;
+            background-size: 25px 25px;
             background-color: white;
             border: none;
         }
@@ -101,8 +103,8 @@
         }
 
         #navigator{
-            width: 100%;
-            height: 2.145%; 
+            width: 1400px;
+            height: 45px; 
             padding-left: 10px;
             margin-bottom: 20px;
         }
@@ -120,7 +122,7 @@
 
         #category:hover{display: block; transform: scale(1);}
 
-        #category button{border: none; cursor: pointer; background-color: white; margin: 0px 20px;  transform: scale(1);}
+        #category a{background-color: white; margin: 0px 20px;  transform: scale(1);}
 
         #navigator a{
             text-decoration: none;
@@ -175,11 +177,6 @@
             position: relative;
             left: 18px;
             bottom: 5px;
-        }
-
-        #content{
-            width: 100%;
-            height: 79%;
         }
 
         .minibar{    
@@ -272,8 +269,10 @@
                 </div>
             </div>
             <div id="header3">
+            	<!-- 로그인 전 -->
                 <a href="#">로그인</a>
                 <a href="#">회원가입</a>
+                <!-- 로그인 후 -->
             </div>
         </div>
         <div id="navigator">
@@ -282,12 +281,12 @@
                 <span id="cg-span">카테고리</span>
                 <div id="category">
                     <ul>
-                        <li><button type="button"><img src="resources/image/coffee.png"></button></li>
-                        <li><a href="#"><button type="button"><img src="resources/image/pizza.png"></button></a></li>
-                        <li><a href="#"><button type="button"><img src="resources/image/burger.png"></button></a></li>
-                        <li><a href="#"><button type="button"><img src="resources/image/chicken.png"></button></a></li>
-                        <li><a href="#"><button type="button"><img src="resources/image/bread.png"></button></a></li>
-                        <li><a href="#"><button type="button"><img src="resources/image/icecon.png"></button></a></li>
+                        <li><a href="#"><img src="resources/image/coffee.png"></a></li>
+                        <li><a href="#"><img src="resources/image/pizza.png"></a></li>
+                        <li><a href="#"><img src="resources/image/burger.png"></a></li>
+                        <li><a href="#"><img src="resources/image/chicken.png"></a></li>
+                        <li><a href="#"><img src="resources/image/bread.png"></a></li>
+                        <li><a href="#"><img src="resources/image/icecon.png"></a></li>
                     </ul>
             </div>
             </div>
@@ -295,6 +294,14 @@
             <div><button>고객센터</button></div>  
         </div>
     </div>
+
+    <script>
+        $(function(){
+            $("#cg-span").click(function(){
+                location.href="<%=contextPath %>/shop.do"
+            });
+        })
+    </script>
 
 </body>
 </html>
