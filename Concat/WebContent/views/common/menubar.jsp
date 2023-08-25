@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <% 
 	String filepath = request.getSession().getServletContext().getRealPath("/WebContent/resources/image/");
+	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -272,8 +273,7 @@
                 </div>
             </div>
             <div id="header3">
-                <a href="#">로그인</a>
-                <a href="#">회원가입</a>
+                <a href="<%= contextPath %>/login.me">로그인</a>
             </div>
         </div>
         <div id="navigator">
