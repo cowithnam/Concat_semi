@@ -37,7 +37,7 @@ private Properties prop = new Properties();
 		
 		try {
 			pstmt = conn.prepareStatement(sql); 
-			System.out.println(conn);
+			
 			
 			pstmt.setString(1, memId);
 			pstmt.setString(2, memPwd);
@@ -45,10 +45,11 @@ private Properties prop = new Properties();
 			rset = pstmt.executeQuery(); 
 			
 			
-			
 			if(rset.next()) {
-				m = new Member(rset.getString("mem_id"),rset.getString("mem_pwd"));
+				 m = new Member(rset.getString("mem_id"),rset.getString("mem_pwd"));
+			
 			}
+			System.out.println(m);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -31,8 +31,11 @@ public class LoginSetController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
+		System.out.println(memId);
+		System.out.println(memPwd);
 	
 		Member loginMember = new MemberService().loginMember(memId, memPwd);
+		
 		
 		if(loginMember == null) {
 			//실패로
