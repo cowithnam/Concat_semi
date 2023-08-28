@@ -32,8 +32,16 @@ public class Member {
 		this.gradeNo = gradeNo;
 		this.totalScore = totalScore;
 	}
-	
-	
+
+	public Member(String memId, String memPwd, String memName, String nickname, String email, String phone) {
+		super();
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memName = memName;
+		this.nickname = nickname;
+		this.email = email;
+		this.phone = phone;
+	}
 
 	public Member(String memId, String memPwd) {
 		super();

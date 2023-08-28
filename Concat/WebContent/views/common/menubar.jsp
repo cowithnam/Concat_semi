@@ -1,8 +1,10 @@
+<%@page import="concat.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
 	String filepath = request.getSession().getServletContext().getRealPath("/WebContent/resources/image/");
 	String contextPath = request.getContextPath();
+	Member loginMember = (Member)session.getAttribute("loginMember");
 %>
 <!DOCTYPE html>
 <html>
@@ -16,13 +18,13 @@
         }
         #wrap{
             width: 1400px;
-            height: 2100px;
+           
             margin: auto;
             
         }
         
         #header{
-            height: 8.58%;
+            height: 180px;
             width: 100%;
         }
 
@@ -103,7 +105,7 @@
 
         #navigator{
             width: 100%;
-            height: 2.145%; 
+            height: 45px; 
             padding-left: 10px;
             margin-bottom: 20px;
         }
@@ -140,7 +142,7 @@
         
         #cg-div{
             background-color: black;
-            height: 100%;
+            height: 50px;
             width: 150px;
             border-radius: 20px;
             margin-right: 15px;
@@ -272,9 +274,19 @@
                     </form>
                 </div>
             </div>
+            <% if(loginMember == null){ %>
             <div id="header3">
                 <a href="<%= contextPath %>/login.me">로그인</a>
             </div>
+            <% }else{ %>
+           	<div id="header4">
+           		<br><br><br>
+                <b style="color: orange;"><%= loginMember.getMemName() %></b>
+	            	<a href="#" style="text-decoration: none; color: black; font-size: medium;">판매하기</a>
+	                <a href="<%= contextPath %>/myPage.me" style="text-decoration: none; color: black;">마이페이지</a>
+	                <a href="<%= contextPath %>/logout.me" style="text-decoration: none; color: black;">로그아웃</a>
+            </div>
+            <% } %>
         </div>
         <div id="navigator">
             <div id="cg-div" style="cursor: pointer;">
@@ -292,7 +304,7 @@
             </div>
             </div>
             <div><button>구매후기</button></div>   
-            <div><button>고객센터</button></div>  
+             <div><button onclick="location.href='<%= contextPath %>/listpage.no'">고객센터</button></div>  
         </div>
     </div>
 

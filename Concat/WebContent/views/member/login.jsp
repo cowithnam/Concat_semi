@@ -76,10 +76,10 @@ a.link-copy {
   background: none;
   border: 2px solid white;
   border-radius: 150px;
-  align-self: center;
-  width: 200px;
+  /* align-self: center; */
+  width: 300px;
   padding: 8px 16px;
-  margin: 14px;
+  margin: 16px;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -218,7 +218,7 @@ a.link-copy {
   background: black;
   color: white;
   font-weight: bold;
-  width: 80%;
+  width: 100%;
   padding: 10px;
   margin-top: 20px;
   border-radius: 50px;
@@ -322,10 +322,11 @@ a.link-copy {
             </div>
             <br>
   
-            <button type="submit" class="btn-sign btn-up" style="width: 300px;">로그인</button>
+            <button type="submit" class="btn-sign btn-up">로그인</button>
           </form>
           <p>아이디가 없으신가요 ? <a href="#" class="link-in">회원가입</a></p>
-          <p>아이디를 잊어버리셨나요? ? <a href="#" class="idfind">아이디찾기</a></p>
+          <p>아이디를 잊어버리셨나요 ? <a href="#" class="idfind">아이디찾기</a></p>
+          <p>비밀번호를 잊어버리셨나요 ? <a href="#" class="pwdfind">비밀번호찾기</a></p>
   
         </div>
   
@@ -334,37 +335,36 @@ a.link-copy {
           <h2>회원가입</h2>
           <form class="form" action="<%=request.getContextPath()%>/memberjoin.me" method="post">
             <div class="form-field">
-              <label for="id"></label>
-              <input type="text" name="id_in" id="id-in" placeholder="아이디를 입력해주세요" required/>
+              <input type="text" name="memId" placeholder="아이디를 입력해주세요" maxlength="12" required/>
+              <!-- <button type="button" onclick="idCheck();">중복확인</button> -->
+              <br>
             </div>
   
             <div class="form-field">
-              <label for="password-in">비밀번호</label>
-              <input type="password" name="password_in" id="password-in" required />
+              <input type="password" name="memPwd"  placeholder="비밀번호를 입력해주세요" required /> <br>
             </div>
             <div class="form-field">
-              <label for="password1-in">비밀번호 확인</label>
-              <input type="password" name="password1_in" id="password1-in" required />
+              <input type="password" name="memPwd"  placeholder="비밀번호를 한번더 입력해주세요" required /> <br>
             </div>
             <div class="form-field">
-              <label for="phone">핸드폰번호</label>
-              <input type="text" name="phone" id="phone"  required/>
+              <input type="text" name="phone"  placeholder="핸드폰 번호를 입력해주세요" required/> <br>
             </div>
             <div class="form-field">
-              <label for="name">이름</label>
-              <input type="text" name="name" id="nickname" required/>
+              <input type="text" name="memName"  placeholder="이름를 입력해주세요" required/> <br>
             </div>
             <div class="form-field">
-              <label for="nickname">닉네임</label>
-              <input type="text" name="nickname" id="nickname" required/>
+              <input type="text" name="nickName"  placeholder="닉네임를 입력해주세요" required/> <br>
             </div>
             <div class="form-field">
-              <label for="email">이메일</label>
-              <input type="email" name="email" id="email" required/>
+              <input type="email" name="email"  placeholder="이메일를 입력해주세요" required/> <br>
             </div>
-          
-            
-            <button class="btn-sign btn-in">회원가입</button>
+    
+            <button type="submit" class="btn-sign btn-up">회원가입</button>
+            <br>
+            <div>
+              <br>
+              <input type="checkbox"> Concat마켓의 이용약관 및 정보이용에 동의합니다.(필수)
+            </div>
           </form>
           <p>아이디가 있으신가요 ? <a href="#" class="link-up">로그인</a></p>
         </div>
