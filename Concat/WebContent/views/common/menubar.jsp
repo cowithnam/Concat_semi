@@ -34,11 +34,11 @@
         #header1{width: 20%;}
 
         #header1>img{
-            width: 350px;
-            height: 350px;
-            position: relative;
-            bottom: 80px;
+            width: 310px;
+            height: 180px;
         }
+        
+        #header1>img:hover{cursor: pointer;}
 
         #header2{width: 60%;}
 
@@ -181,13 +181,13 @@
 
         .minibar{    
             position: absolute;
-            bottom: 70%;
-            right: 10%;
+            top: 580px;
+            right: 9%;
         }
 
         #minibar{
             position: fixed;
-            /* background-image: url(resources/image/icons8-티켓-100.png); */
+            background-image: url(resources/image/minibar.png);
             background-repeat: no-repeat;
             background-size: 130px 105px;
             width: 130px;
@@ -216,17 +216,15 @@
 
         #minibar>a:hover{
             text-decoration: 2px underline;
-            color: lightgoldenrodyellow;
+            color: lightgray;
         }
     
         #banner{
             width: 100%;
             height: 500px;
-            /* background-color: #168d63; */
-            /* background-image: url(resources/image/detail_foil_ticket_03.jpg); */
+            background-image: url(resources/image/bannar1.jpg);
             background-repeat: no-repeat;
             background-size: 1400px 500px;
-            margin-bottom: 20px;
             border-radius: 10px;
         }
 
@@ -257,7 +255,7 @@
     <div id="wrap">
         <div id="header">
             <div id="header1">
-				  <img src="resources/image/concatlogo.png">
+				  <img src="resources/image/concatlogo.png" id="concatLogo">
             </div>
             <div id="header2">
                 <div id="search">
@@ -277,8 +275,8 @@
         </div>
         <div id="navigator">
             <div id="cg-div" style="cursor: pointer;">
-                <img src="resources/image/menu.png">
-                <span id="cg-span">카테고리</span>
+                <img src="resources/image/menu.png" class="enter">
+                <span id="cg-span" class="enter">카테고리</span>
                 <div id="category">
                     <ul>
                         <li><a href="#"><img src="resources/image/coffee.png"></a></li>
@@ -301,7 +299,21 @@
                 location.href="<%=contextPath %>/shop.do"
             });
         })
+        
+        $(function(){
+        	$("#concatLogo").click(function(){
+        		location.href="<%=contextPath %>"
+        	});
+        })
+        	
     </script>
+    
+    <div class="minibar">
+    	<div id="minibar">
+        	<a href="<%= contextPath %>/wishList.bo" id="zzim">찜 목록</a> <br>
+            <a href="#" id="sell-page">판매하기</a>
+        </div>
+    </div>
 
 </body>
 </html>

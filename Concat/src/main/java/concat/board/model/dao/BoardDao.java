@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -28,7 +29,16 @@ public class BoardDao {
 		
 		String sql = prop.getProperty("selectBoardList");
 		
-		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			rset = pstmt.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

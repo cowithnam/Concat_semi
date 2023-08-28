@@ -204,8 +204,15 @@
             <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
           </div>
       </div>
-
   </div>
+
+  <script>
+    $(function(){
+      $(".thumbnail").click(function(){
+        location.href="<%=contextPath %>/detail.bo";
+      });
+    })
+  </script>
     
 </body>
 </html>
