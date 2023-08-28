@@ -1,7 +1,10 @@
+<%@page import="concat.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
+	String filepath = request.getSession().getServletContext().getRealPath("/WebContent/resources/image/");
 	String contextPath = request.getContextPath();
+	Member loginMember = (Member)session.getAttribute("loginMember");
 %>
 <!DOCTYPE html>
 <html>
@@ -15,7 +18,6 @@
         }
         #wrap{
             width: 1300px;
-            
             margin: auto;
             
         }
@@ -271,10 +273,20 @@
                     </form>
                 </div>
             </div>
+            <% if(loginMember == null){ %>
             <div id="header3">
                 <a href="<%= contextPath %>/login.me">로그인</a>
-                
             </div>
+            <% }else{ %>
+           	<div id="header4">
+           		<br><br><br>
+                <b>
+                <%= loginMember.getMemId() %></b>의 방문을 환영합니다. <br><br>
+	            <div align="center">
+	                <a href="<%= contextPath %>/myPage.me">마이페이지</a>
+	                <a href="<%= contextPath %>/logout.me">로그아웃</a>
+	            </div>
+	            <% } %>
         </div>
         <div id="navigator">
             <div id="cg-div" style="cursor: pointer;">
@@ -291,8 +303,8 @@
                     </ul>
             </div>
             </div>
-            <div><button>구매후기</button></div>   
-            <div><button>고객센터</button></div>  
+            <div><button >구매후기</button></div>   
+            <div><button onclick="location.href='<%= contextPath %>/listpage.no'">고객센터</button></div>  
         </div>
     </div>
 

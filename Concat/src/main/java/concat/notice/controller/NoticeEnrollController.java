@@ -33,6 +33,8 @@ public class NoticeEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		request.getRequestDispatcher("views/notice/noticeEnrollForm.jsp").forward(request, response);;
+		
 		request.setCharacterEncoding("UTF-8");
 		
 		String noticeTitle = request.getParameter("title");
@@ -49,6 +51,8 @@ public class NoticeEnrollController extends HttpServlet {
 		n.setNoticeWriter(String.valueOf(userNo));
 		
 		int result = new NoticeService().insertNotice(n);
+		
+		System.out.println(result);
 		
 		if(result>0) {
 			session.setAttribute("alertMsg", "성공적으로 공지사항이 등록되었습니다!");

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,9 +59,12 @@
         </form>
     
         <hr>
+       	 <!-- 관리자 아이디로 변경 -->
+         <% if(loginMember != null && loginMember.getMemId().equals("user01")){%>
         <div align="right">
-        <button class="btn1">작성하기 </button>
+        <button class="btn1" onclick = "Listwrite()">작성하기 </button>
         </div>
+        <% }%>
 
         <div align="center">
             <table>
@@ -78,66 +83,16 @@
                         <td>CREATEDATE</td>
                         <td>COUNT</td>
                     </tr>
-                    <tr>
-                        <td class="num">9</td>
-                        <td class="title">9번째 공지 입니다.</td>
-                        <td>2023-07-14</td>
-                        <td>81</td>
-                    </tr>
-                    <tr>
-                        <td class="num">8</td>
-                        <td class="title">8번째 공지 입니다.</td>
-                        <td>2023-07-07</td>
-                        <td>266</td>
-                    </tr>
-                    <tr>
-                        <td class="num">7</td>
-                        <td class="title">10번째 공지 입니다.</td>
-                        <td>2023-06-15</td>
-                        <td>98</td>
-                    </tr>
-                    <tr>
-                        <td class="num">6</td>
-                        <td class="title">6번째 공지 입니다.</td>
-                        <td>2023-05-15</td>
-                        <td>152</td>
-                    </tr>
-                    <tr>
-                        <td class="num">5</td>
-                        <td class="title">5번째 공지 입니다.</td>
-                        <td>2023-03-17</td>
-                        <td>1036</td>
-                    </tr>
-                    <tr>
-                        <td class="num">4</td>
-                        <td class="title">4번째 공지 입니다.</td>
-                        <td>2023-03-07</td>
-                        <td>1445</td>
-                    </tr>
-                    <tr>
-                        <td class="num">3</td>
-                        <td class="title">3번째 공지 입니다.</td>
-                        <td>2023-02-28</td>
-                        <td>139</td>
-                    </tr>
-                    <tr>
-                        <td class="num">2</td>
-                        <td class="title">2번째 공지 입니다.</td>
-                        <td>2023-02-01	</td>
-                        <td>4910</td>
-                    </tr>
-                    <tr>
-                        <td class="num">1</td>
-                        <td class="title">1번째 공지 입니다.</td>
-                        <td>2023-01-09	</td>
-                        <td>180</td>
-                    </tr>
-                    
                 </tbody>
                 
             </table>
         </div>
     </div>
 
-</body>
+    </body>
+    <script>
+        function Listwrite(){
+            location.href = "<%=contextPath%>/insertpage.no"
+        }
+    </script>
 </html>
