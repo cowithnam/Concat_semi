@@ -33,8 +33,10 @@ public class Member {
 		this.totalScore = totalScore;
 	}
 	
-	public Member(String memId, String memPwd) {
+	
+	public Member( String memId, String memPwd) {
 		super();
+		
 		this.memId = memId;
 		this.memPwd = memPwd;
 	}

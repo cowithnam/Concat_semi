@@ -1,6 +1,9 @@
+<%@page import="concat.notice.model.vo.Notice"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+
     
 
 <!DOCTYPE html>
@@ -76,14 +79,30 @@
                         <th>조회수</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="num" >n.getNO</td>
-                        <td class="title">NOTICETITLE</td>
-                        <td>CREATEDATE</td>
-                        <td>COUNT</td>
-                    </tr>
-                </tbody>
+               <tbody>
+				<!-- case1. 공지글이 없을 경우-->
+
+				<%if(list.isEmpty()){ %>
+				<tr>
+					<td colspan="5">존재하는 공지사항이 없습니다.</td>
+				</tr>
+				<%}else{%>
+
+				<!--case.2 공지글이 있는 경우  -->
+
+				<% for(Notice n : list){ %>
+
+				<tr>
+					<td><%=n.getNoticeNo() %></td>
+					<td><%=n.getNoticeTitle() %></td>
+					<td><%=n.getNoticeWriter() %></td>
+					<td><%=n.getCount() %></td>
+					<td><%=n.getCreateDate() %></td>
+				</tr>
+
+				<%} %>
+				<%}%>
+			</tbody>
                 
             </table>
         </div>

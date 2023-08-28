@@ -22,4 +22,18 @@ SEQ_NNO.NEXTVAL
 
 
 </entry>
+
+
+<entry key="selectNotice">
+SELECT 
+NOTICE_NO
+,NOTICE_TITLE
+,CREATE_DATE
+,COUNT
+FROM
+NOTICE N
+JOIN MEMBER ON (MEM_NO = NOTICE_WRITER)
+WHERE N.STATUS ='Y'
+ORDER BY NOTICE_NO DESC
+</entry>
 </properties>

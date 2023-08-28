@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import static concat.common.JDBCTemplate.*;
@@ -36,16 +38,48 @@ public class NoticeDao {
 			
 			pstmt.setString(1, n.getNoticeTitle());
 			pstmt.setString(2, n.getNoticeContent());
-			pstmt.setString(3, n.getNoticeWriter());
+			pstmt.setInt(3, Integer.parseInt(n.getNoticeWriter()));
+			
 			
 			result = pstmt.executeUpdate();
+			
+			System.out.println(result);
+			
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}return result;
 		
+	}
+	
+	public ArrayList<Notice> selectNotice(Connection conn){
 		
+		ArrayList<Notice> list = new ArrayList<Notice>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectNotice");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			while(rset.next()) {
+				list.add(new Notice(rset.getInt("notice_no"),
+									rset.getString("notice_title"),
+									rset.getDate("create_date"),
+									rset.getInt("count")));
+			}
+			
+			System.out.println(list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}return list;
 		
 		
 		

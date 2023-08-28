@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +60,8 @@
         <h1>공지사항 작성하기</h1>
         <hr>
         <form action="<%= contextPath %>/insert.no" method="post" id="no-enroll">
-       
+        	
+        	
             제목 : <input type="text" placeholder="제목을 입력하세요" name ="title">
             <br> <br>
             내용  <br>

@@ -1,6 +1,7 @@
 package concat.notice.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import static concat.common.JDBCTemplate.*;
 
@@ -21,6 +22,15 @@ public class NoticeService {
 		}return result;
 	}
 	
-	
+	public ArrayList<Notice> selectNotice(){
+		Connection conn = getConnection();
+		
+		ArrayList<Notice> list = new NoticeDao().selectNotice(conn);
+		
+		close(conn);
+		
+		return list;
+		
+	}
 
 }

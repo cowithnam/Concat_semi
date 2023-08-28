@@ -17,7 +17,8 @@
             box-sizing: border-box;
         }
         #wrap{
-            width: 1300px;
+            width: 1400px;
+           
             margin: auto;
             
         }
@@ -141,7 +142,7 @@
         
         #cg-div{
             background-color: black;
-            height: 100%;
+            height: 50px;
             width: 150px;
             border-radius: 20px;
             margin-right: 15px;
@@ -280,13 +281,12 @@
             <% }else{ %>
            	<div id="header4">
            		<br><br><br>
-                <b>
-                <%= loginMember.getMemId() %></b>의 방문을 환영합니다. <br><br>
-	            <div align="center">
-	                <a href="<%= contextPath %>/myPage.me">마이페이지</a>
-	                <a href="<%= contextPath %>/logout.me">로그아웃</a>
-	            </div>
-	            <% } %>
+                <b style="color: orange;"><%= loginMember.getMemName() %></b>
+	            	<a href="#" style="text-decoration: none; color: black; font-size: medium;">판매하기</a>
+	                <a href="<%= contextPath %>/myPage.me" style="text-decoration: none; color: black;">마이페이지</a>
+	                <a href="<%= contextPath %>/logout.me" style="text-decoration: none; color: black;">로그아웃</a>
+            </div>
+            <% } %>
         </div>
         <div id="navigator">
             <div id="cg-div" style="cursor: pointer;">
@@ -303,8 +303,8 @@
                     </ul>
             </div>
             </div>
-            <div><button >구매후기</button></div>   
-            <div><button onclick="location.href='<%= contextPath %>/listpage.no'">고객센터</button></div>  
+            <div><button>구매후기</button></div>   
+             <div><button onclick="location.href='<%= contextPath %>/listpage.no'">고객센터</button></div>  
         </div>
     </div>
 

@@ -24,6 +24,18 @@ public class Notice {
 		this.createDate = createDate;
 		this.status = status;
 	}
+	
+	
+
+	public Notice(int noticeNo, String noticeTitle, Date createDate , int count) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.count = count;
+		this.createDate = createDate;
+	}
+
+	
 
 	public int getNoticeNo() {
 		return noticeNo;

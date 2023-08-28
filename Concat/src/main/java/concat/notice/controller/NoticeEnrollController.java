@@ -40,23 +40,24 @@ public class NoticeEnrollController extends HttpServlet {
 		String noticeTitle = request.getParameter("title");
 		String noticeContent = request.getParameter("content");
 		
-		
 		HttpSession session = request.getSession();
 		int userNo =((Member)session.getAttribute("loginMember")).getMemNo();
+		
+	
 		
 		Notice n = new Notice();
 		n.setNoticeTitle(noticeTitle);
 		n.setNoticeContent(noticeContent);
-		
 		n.setNoticeWriter(String.valueOf(userNo));
 		
 		int result = new NoticeService().insertNotice(n);
 		
-		System.out.println(result);
+		
 		
 		if(result>0) {
 			session.setAttribute("alertMsg", "성공적으로 공지사항이 등록되었습니다!");
-			response.sendRedirect(request.getContextPath()+"/list.no");
+			response.sendRedirect(request.getContextPath()+"/listpage.no");
+			return;
 		}else {
 			request.setAttribute("errorMsg", "공지사항 등록에 실패 했습니다" );
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
@@ -64,7 +65,7 @@ public class NoticeEnrollController extends HttpServlet {
 			
 		}
 		
-		request.getRequestDispatcher("views/notice/noticeEnrollForm.jsp").forward(request, response);
+		
 	}
 
 	/**
