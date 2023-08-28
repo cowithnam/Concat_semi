@@ -65,6 +65,7 @@ public class NoticeDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				list.add(new Notice(rset.getInt("notice_no"),

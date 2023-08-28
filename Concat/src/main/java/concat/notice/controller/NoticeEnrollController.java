@@ -52,6 +52,7 @@ public class NoticeEnrollController extends HttpServlet {
 		
 		int result = new NoticeService().insertNotice(n);
 		
+		System.out.println(result);
 		
 		
 		if(result>0) {

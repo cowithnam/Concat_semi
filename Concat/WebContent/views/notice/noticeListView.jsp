@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
 
 
-    
+<%ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list"); %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,8 +45,18 @@
 
         table td{width: 140px; height: 41px; border: 1px solid black;}
 		
-        .btn1{height: 26px; background-color: black; color: white; font-weight: bold;
-            
+       
+        
+         .enroll-btn{
+            width: 80px;
+            height: 40px;
+            background-color: black;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-right: 2px;
         }
     </style>
 </head>
@@ -62,13 +72,7 @@
         </form>
     
         <hr>
-       	 <!-- 관리자 아이디로 변경 -->
-         <% if(loginMember != null && loginMember.getMemId().equals("user01")){%>
-        <div align="right">
-        <button class="btn1" onclick = "Listwrite()">작성하기 </button>
-        </div>
-        <% }%>
-
+       	
         <div align="center">
             <table>
                 <thead>
@@ -80,6 +84,7 @@
                     </tr>
                 </thead>
                <tbody>
+				
 				<!-- case1. 공지글이 없을 경우-->
 
 				<%if(list.isEmpty()){ %>
@@ -95,17 +100,28 @@
 				<tr>
 					<td><%=n.getNoticeNo() %></td>
 					<td><%=n.getNoticeTitle() %></td>
-					<td><%=n.getNoticeWriter() %></td>
-					<td><%=n.getCount() %></td>
 					<td><%=n.getCreateDate() %></td>
+					<td><%=n.getCount() %></td>
+					
 				</tr>
 
 				<%} %>
 				<%}%>
+			
+				
+
+				
 			</tbody>
                 
             </table>
         </div>
+         <!-- 관리자 아이디로 변경 -->
+         <% if(loginMember != null && loginMember.getMemId().equals("user01")){%>
+        <div align="right">
+        <button class="enroll-btn" onclick = "Listwrite()">작성하기 </button>
+        </div>
+        <% }%>
+        
     </div>
 
     </body>
