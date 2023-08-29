@@ -3,4 +3,63 @@
 <properties>
 <entry key="selectBoardList">
 </entry>
+<entry key="selectCategory">
+	SELECT
+	       CATEGORY_NO
+	     , CATEGORY_NAME
+	  FROM CATEGORY
+</entry>
+<entry key="selectBrand">
+	SELECT
+	       BRAND_NO
+	     , BRAND_NAME
+	  FROM BRAND
+	 WHERE CATEGORY_NO = ?
+</entry>
+<entry key="insertBoard">
+	INSERT
+	  INTO 
+	       BOARD
+	     ( 
+	       BOARD_NO
+	     , MEM_NO
+	     , CATEGORY_NO
+	     , BRAND
+	     , PRICE
+	     , DUE_DATE
+	     , OPEN_KAKAO
+	     , BOARD_CONTENT
+	     )
+	VALUES
+	     (
+	       SEQ_BNO.NEXTVAL
+	     , ?
+	     , ?
+	     , ?
+	     , ?
+	     , ?
+	     , ?
+	     , ?
+	     )
+</entry>
+<entry key="insertImage">
+	INSERT
+	  INTO 
+	       IMAGE
+	     ( 
+	       FILE_NO
+	     , BOARD_NO
+	     , ORIGIN_NAME
+	     , UPDATE_NAME
+	     , FILE_PATH
+	     )
+	VALUES
+	     (
+	       SEQ_FNO.NEXTVAL
+	     , SEQ_BNO.CURRVAL
+	     , ?
+	     , ?
+	     , ?
+	     )
+</entry>
 </properties>

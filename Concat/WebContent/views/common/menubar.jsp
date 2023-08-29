@@ -311,7 +311,7 @@
     <div class="minibar">
     	<div id="minibar">
         	<a href="<%= contextPath %>/wishList.bo" id="zzim">찜 목록</a> <br>
-            <a href="#" id="sell-page">판매하기</a>
+            <a href="<%= contextPath %>/insert.bo" id="sell-page">판매하기</a>
         </div>
     </div>
 

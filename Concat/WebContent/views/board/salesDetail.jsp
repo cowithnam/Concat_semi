@@ -76,7 +76,7 @@
           <hr>
           <button style="width: 60px; height: 60px; font-size: 32px; background-color: white; color: gray;">♥</button>
           <button type="button" style="width: 360px; height: 60px; ">구매하기</button>
-          <a href="#" style="font-size: 16px;" >신고 여부 확인</a>
+          <a href="https://ecrm.police.go.kr/sci/pcc_V3_send" style="font-size: 16px;" >신고 여부 확인</a>
           <hr>
       </div>
       
