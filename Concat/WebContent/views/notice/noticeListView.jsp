@@ -89,7 +89,7 @@
 
 				<%if(list.isEmpty()){ %>
 				<tr>
-					<td colspan="5">존재하는 공지사항이 없습니다.</td>
+					<td colspan="4">존재하는 공지사항이 없습니다.</td>
 				</tr>
 				<%}else{%>
 
@@ -101,7 +101,7 @@
 					<td><%=n.getNoticeNo() %></td>
 					<td><%=n.getNoticeTitle() %></td>
 					<td><%=n.getCreateDate() %></td>
-					<td><%=n.getCount() %></td>
+					<td><%=n.getCount()%></td>
 				</tr>
 
 				<%} %>
