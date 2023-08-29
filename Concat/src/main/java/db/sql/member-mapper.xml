@@ -20,27 +20,73 @@
 	AND STATUS = 'U'
 </entry>
 
-<entry key="insertMember">
-		INSERT
-			 INTO MEMBER
-			 (
-			   MEM_NO
-			 , MEM_ID
-			 , MEM_PWD
-			 , MEM_NAME
-			 , NICKNAME
-			 , PHONE
-			 , EMAIL
-			 )
-			 VALUES
-			 (
-			   SEQ_MNO.NEXTVAL
-			 , ?
-			 , ?
-			 , ?
-			 , ?
-			 , ?
-			 , ?
-			 )
+	<entry key="insertMember">
+			INSERT
+				 INTO MEMBER
+				 (
+				   MEM_NO
+				 , MEM_ID
+				 , MEM_PWD
+				 , MEM_NAME
+				 , NICKNAME
+				 , EMAIL
+				 , PHONE
+				 )
+				 VALUES
+				 (
+				   SEQ_MNO.NEXTVAL
+				 , ?
+				 , ?
+				 , ?
+				 , ?
+				 , ?
+				 , ?
+				 )
+</entry>
+
+<entry key="updateMember">
+	UPDATE MEMBER
+	   SET MEM_NAME = ?
+         , NICKNAME = ?
+	     , EMAIL = ?
+	     , PHONE = ?
+	     , ENROLL_DATE = SYSDATE
+	 WHERE MEM_ID = ?
+</entry>
+<entry key="selectMember">
+			SELECT
+			       MEM_NO
+			     , MEM_ID
+			     , MEM_PWD
+			     , MEM_NAME
+			     , NICKNAME
+			     , EMAIL
+			     , PHONE
+			     , ENROLL_DATE
+			     , STATUS
+			     , GRADE_NO
+			     , TOTAL_SCORE
+			  FROM MEMBER
+			 WHERE MEM_ID = ?
+			 AND STATUS = 'U'
+</entry>
+
+<entry key="updatePwd">
+			UPDATE MEMBER
+			   SET MEM_PWD = ?
+			     , ENROLL_DATE = SYSDATE
+			 WHERE MEM_ID = ?
+			   AND MEM_PWD = ?
+</entry>
+
+<entry key="deleteMember">
+	<!-- UPDATE MEMBER
+   	   SET ENROLL_DATE = SYSDATE
+   	 WHERE MEM_ID = ?
+   	   AND MEM_PWD = ? -->
+   	   DELETE
+		  FROM MEMBER
+		 WHERE MEM_ID = ?
+		   AND MEM_PWD = ?
 </entry>
 </properties>

@@ -79,10 +79,10 @@ private Properties prop = new Properties();
 			
 			pstmt.setString(1, loginMember.getMemId());
 			pstmt.setString(2, loginMember.getMemPwd());
-			pstmt.setString(3, loginMember.getPhone());
-			pstmt.setString(4, loginMember.getMemName());
-			pstmt.setString(5, loginMember.getNickname());
-			pstmt.setString(6, loginMember.getEmail());
+			pstmt.setString(3, loginMember.getMemName());
+			pstmt.setString(4, loginMember.getNickname());
+			pstmt.setString(5, loginMember.getEmail());
+			pstmt.setString(6, loginMember.getPhone());
 			//pstmt.setInt(7, m.getTotalScore());
 			
 			result = pstmt.executeUpdate();
@@ -105,12 +105,11 @@ private Properties prop = new Properties();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, m.getMemId());
-			pstmt.setString(2, m.getMemPwd());
-			pstmt.setString(3, m.getMemName());
-			pstmt.setString(4, m.getNickname());
-			pstmt.setString(5, m.getPhone());
-			pstmt.setString(6, m.getEmail());
+			pstmt.setString(1, m.getMemName());
+			pstmt.setString(2, m.getNickname());
+			pstmt.setString(3, m.getEmail());
+			pstmt.setString(4, m.getPhone());
+			pstmt.setString(5, m.getMemId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -121,4 +120,91 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
+	
+	public Member selectMember(Connection conn, String getMemId) {
+		
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, getMemId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("mem_no"),
+							   rset.getString("mem_id"),
+							   rset.getString("mem_pwd"),
+							   rset.getString("mem_name"),
+							   rset.getString("nickname"),
+							   rset.getString("email"),
+							   rset.getString("phone"),
+							   rset.getDate("enroll_date"),
+							   rset.getString("status"),
+							   rset.getString("grade_no"),
+							   rset.getInt("total_score"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	public int updatePwd(Connection conn,String memId,String memPwd,String updatePwd) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, updatePwd);
+			pstmt.setString(2, memId);
+			pstmt.setString(3, memPwd);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;	
+	}
+	
+	public int deleteMember(Connection conn, String userPwd, String userId) {
+		// update문 => 처리된 행 수 => 트랜젝션 처리
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userPwd);
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
 }
+
+

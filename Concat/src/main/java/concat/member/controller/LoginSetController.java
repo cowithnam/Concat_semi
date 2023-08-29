@@ -6,6 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import concat.member.model.service.MemberService;
 import concat.member.model.vo.Member;
@@ -35,8 +37,12 @@ public class LoginSetController extends HttpServlet {
 		
 			Member loginMember = new MemberService().loginMember(memId, memPwd);
 			
+			String message = "";
+			
 			if(loginMember == null) {
-				//실패로
+				//request.getSession().setAttribute("alertMsg", "없는 아이디입니다.");
+				message = "<script>alret('없는 아이디입니다.회원가입이나 로그인을 다시해주세요.')</script>";
+				response.sendRedirect(request.getContextPath() + "/login.me");
 			}else {
 				request.getSession().setAttribute("loginMember", loginMember);
 				response.sendRedirect(request.getContextPath());

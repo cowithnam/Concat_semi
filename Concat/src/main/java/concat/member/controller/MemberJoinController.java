@@ -38,29 +38,30 @@ public class MemberJoinController extends HttpServlet {
 		
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
-		
-		String phone = request.getParameter("phone");
 		String memName = request.getParameter("memName");
 		String nickName = request.getParameter("nickName");
 		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		
 		//int totalScore = Integer.parseInt(request.getParameter("totalScore"));
 		
-		Member loginMember = new Member(memId, memPwd, phone, memName, nickName, email);
+		Member loginMember = new Member(memId, memPwd, memName, nickName, email, phone);
 		
 		
 		int result = new MemberService().insertMember(loginMember);
 		
+		String message = "";
+		
 		if(result > 0) { // 성공
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다."); 
-			
-			
+			//request.getSession().setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다."); 
+			message = "<script>alret('성공적으로 회원가입이 되었습니다.')</script>";
 			response.sendRedirect(request.getContextPath());
 			
 		}else { // 실패
-			request.setAttribute("errorMsg", "회원가입에 실패했습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("views/comon/errorPage.jsp");
-			view.forward(request, response);
+			System.out.println("실패");
+			//request.setAttribute("errorMsg", "회원가입에 실패했습니다.");
+			//RequestDispatcher view = request.getRequestDispatcher("views/comon/errorPage.jsp");
+			//view.forward(request, response);
 		}
 		
 	

@@ -5,6 +5,7 @@
 	String filepath = request.getSession().getServletContext().getRealPath("/WebContent/resources/image/");
 	String contextPath = request.getContextPath();
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -32,7 +33,7 @@
             height: 100%; float: left;
         }
 
-        #header1{width: 20%;}
+        #header1{width: 15%;}
 
         #header1>img{
             width: 350px;
@@ -89,7 +90,7 @@
         #search button:hover{cursor: pointer;}
 
         #header3{
-            width: 20%;
+            width: 25%;
             padding-top: 10px;
             padding-right: 20px;
             text-align: right;
@@ -102,7 +103,7 @@
             font-weight: bolder;
             margin-left: 10px;
         }
-
+    
         #navigator{
             width: 100%;
             height: 45px; 
@@ -142,7 +143,7 @@
         
         #cg-div{
             background-color: black;
-            height: 50px;
+            height: 40px;
             width: 150px;
             border-radius: 20px;
             margin-right: 15px;
@@ -177,7 +178,9 @@
             color: white;
             position: relative;
             left: 18px;
-            bottom: 5px;
+	        top: 6px;
+	        bottom : 3px;
+            line-height: 40px;
         }
 
         #content{
@@ -279,7 +282,7 @@
                 <a href="<%= contextPath %>/login.me">로그인</a>
             </div>
             <% }else{ %>
-           	<div id="header4">
+           	<div>
            		<br><br><br>
                 <b style="color: orange;"><%= loginMember.getMemName() %></b>
 	            	<a href="#" style="text-decoration: none; color: black; font-size: medium;">판매하기</a>

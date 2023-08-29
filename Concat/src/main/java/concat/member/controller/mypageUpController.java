@@ -1,5 +1,6 @@
 package concat.member.controller;
 
+import java.io.Console;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -35,27 +36,27 @@ public class mypageUpController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
+		
 		String memId = request.getParameter("memId");
-		String memPwd = request.getParameter("memPwd");
 		String memName = request.getParameter("memName");
-		String nickName = request.getParameter("niceName");
-		String phone = request.getParameter("phone");
+		String nickName = request.getParameter("nickName");
 		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
 		
-		Member m = new Member(memId, memPwd, memName, nickName, phone, email);
+		Member m = new Member(memId, memName, nickName, email, phone);
 		
-		Member up = MemberService.updateMember(m);
+		Member up = new MemberService().updateMember(m);
+		
+		String message = "";
 		
 		if(up != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("loginMember", up);
-			session.setAttribute("alertMsg", "성공적으로 회원정보를 수정했습니다.");
+			request.getSession().setAttribute("loginMember", up);
+			//request.getSession().setAttribute("alertMsg", "성공적으로 회원정보를 수정했습니다.");
+			message = "<script>alret('회원정보를 수정하였습니다. 로그아웃후 시도해주시길바랍니다.')</script>";
 			
 			response.sendRedirect(request.getContextPath()+ "/myPage.me");
 		}else {
-			request.setAttribute("errorMsg", "회원정보 수정에 실패했습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("views/comon/errorPage.jsp");
-			view.forward(request, response);
+			System.out.println("실패다 이자식아");
 		}
 		
 	}

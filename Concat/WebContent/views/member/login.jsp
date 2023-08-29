@@ -309,7 +309,7 @@ a.link-copy {
         <!-- 로그인폼 -->
         <div class="organize-form form-area-signup">
           <h2>로그인</h2>
-          <form class="form" action="<%=request.getContextPath()%>/loginset.me" method="post">
+          <form class="form" action="<%= request.getContextPath() %>/loginset.me" method="post">
             <div class="form-field" style="width: 350px; margin: auto;">
               <label for="id">아이디</label>
               <input type="text" id="id" name="memId" required/>
@@ -347,9 +347,6 @@ a.link-copy {
               <input type="password" name="memPwd"  placeholder="비밀번호를 한번더 입력해주세요" required /> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="phone"  placeholder="핸드폰 번호를 입력해주세요" required/> <br>
-            </div>
-            <div class="form-field">
               <input type="text" name="memName"  placeholder="이름를 입력해주세요" required/> <br>
             </div>
             <div class="form-field">
@@ -358,12 +355,15 @@ a.link-copy {
             <div class="form-field">
               <input type="email" name="email"  placeholder="이메일를 입력해주세요" required/> <br>
             </div>
+            <div class="form-field">
+              <input type="text" name="phone"  placeholder="핸드폰 번호를 입력해주세요" required/> <br>
+            </div>
     
             <button type="submit" class="btn-sign btn-up">회원가입</button>
             <br>
             <div>
               <br>
-              <input type="checkbox"> Concat마켓의 이용약관 및 정보이용에 동의합니다.(필수)
+              <input type="checkbox" required> Concat마켓의 이용약관 및 정보이용에 동의합니다.(필수)
             </div>
           </form>
           <p>아이디가 있으신가요 ? <a href="#" class="link-up">로그인</a></p>
