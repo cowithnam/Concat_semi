@@ -32,7 +32,7 @@
             height: 100%; float: left;
         }
 
-        #header1{width: 20%;}
+        #header1{width: 15%;}
 
         #header1>img{
             width: 350px;
@@ -89,7 +89,7 @@
         #search button:hover{cursor: pointer;}
 
         #header3{
-            width: 20%;
+            width: 25%;
             padding-top: 10px;
             padding-right: 20px;
             text-align: right;

@@ -1,5 +1,8 @@
+<%@page import="concat.notice.model.vo.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%Notice n = (Notice)request.getAttribute("n");  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +26,7 @@
         }
 
         hr{
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         h3{display: inline; position: relative; left: 15px;}
@@ -41,11 +44,11 @@
         }
 
         textarea{
-            width: 900px;
-            height: 500px;
+            width: 1000px;
+            
         }
 
-        button{
+         #button1{
             width: 140px;
             height: 50px;
             background-color: black;
@@ -54,8 +57,9 @@
             font-weight: bold;
             border-radius: 10px;
             position: relative;
-            left: 400px;
-        }
+           
+         }
+        
 
         #content{
             color: gray;
@@ -66,6 +70,10 @@
             font-size: 15px;
             font-weight: lighter;
         }
+        #tit1{
+            float: left;
+            height: 10px;
+        }
     </style>
 </head>
 <body>
@@ -73,23 +81,46 @@
     <div id="outer">
         <h1>공지사항</h1>
         <hr>
-        <form action="#">
-            <h3>공지사항 제목</h3> 
-            <h6>조회 : 조회수</h6> 
-            <h6>날짜 : 작성일</h6>
+        <div>
+            <h3><%=n.getNoticeTitle() %></h3>
+        </div>
+        <div>
+            <h6>조회수 : <%=n.getCount() %> </h6><h6>작성일 : <%=n.getCreateDate() %></h6>
+        </div>
+           
+            
             <div id="content">
-                여기는 공지사항의 내용이 나오는 칸입니다 <br>
-                여러가지 내용의 공지사항을 적으시면 됩니다. <br>
-                여러줄도 됩니다 <br>
-                신기하죠? <br><br>
-                감사합니다. <br>
-                오늘도 좋은하루 되세요
+            <strong><%=n.getNoticeContent() %></strong>
             </div>
             <br>
-            <button>목록보기</button>
-        </form>
+            
+            <div align="center">
+            <%if(loginMember != null && n.getNoticeWriter().equals(loginMember.getMemNo()+"")) {%>
+       		<button id="button1" onclick = "location.href='<%=contextPath %>/updateform.no?num=<%=n.getNoticeNo()%>'">수정하기</button>
+            <button id="button1" onclick = "deleteno();">삭제하기</button>
+          
+<%} %>
+            <button id="button1" onclick = "nolist();">목록보기</button>
+                <br><br>
+            </div>
     </div>
 </body>
-</html>
-</body>
+<script >
+//목록보기이동
+ function nolist(){
+		 location.href = '<%=contextPath%>/listpage.no'
+	
+ }
+ 
+ function deleteno(){
+
+	 if(confirm("정말 해당글을 삭제하시겠습니까?")){
+		 location.href = '<%=contextPath%>/deletenotice.no?num=<%=n.getNoticeNo()%>'
+	 		
+	 }else{
+		 location.href = '<%=contextPath%>/detail.no?num=<%=n.getNoticeNo()%>'
+	 }
+ }
+
+</script>
 </html>

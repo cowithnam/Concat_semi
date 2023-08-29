@@ -10,17 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import concat.notice.model.service.NoticeService;
 import concat.notice.model.vo.Notice;
 
+
 /**
- * Servlet implementation class NoticeDetailController
+ * Servlet implementation class NoticeUpdatePage
  */
-@WebServlet("/detail.no")
-public class NoticeDetailController extends HttpServlet {
+@WebServlet("/updateform.no")
+public class NoticeUpdatePage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeDetailController() {
+    public NoticeUpdatePage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,23 +30,14 @@ public class NoticeDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			int noticeNo = Integer.parseInt(request.getParameter("num"));
+			System.out.println(noticeNo);
 		
-		int noticeNo = Integer.parseInt(request.getParameter("num"));
+			Notice n = new NoticeService().selectedNotice(noticeNo);
 		
-		int result = new NoticeService().increaseCount(noticeNo);
-			
-		if(result > 0){
-			Notice n  = new NoticeService().selectNoticeDetail(noticeNo);
 			request.setAttribute("n", n);
-			request.getRequestDispatcher("views/notice/noticeDetailView.jsp").forward(request, response);
-			
-		}else {
-			
-		}
 		
-		
-		
-		
+			request.getRequestDispatcher("views/notice/noticeUpdateForm.jsp").forward(request, response);;
 	}
 
 	/**

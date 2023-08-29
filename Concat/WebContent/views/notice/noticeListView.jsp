@@ -62,7 +62,7 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	
+	<br><br>
     <div id="outer">
         <h1>공지사항</h1>
     
@@ -74,13 +74,13 @@
         <hr>
        	
         <div align="center">
-            <table>
+            <table class="area-no">
                 <thead>
                     <tr>
-                        <th class="num">NO</th>
-                        <th>제목</th>
-                        <th>작성일</th>
-                        <th>조회수</th>
+                        <th class="num" width="15%">NO</th>
+                        <th  width="60%">제목</th>
+                        <th  width="15%">작성일</th>
+                        <th  width="15%">조회수</th>
                     </tr>
                 </thead>
                <tbody>
@@ -102,7 +102,6 @@
 					<td><%=n.getNoticeTitle() %></td>
 					<td><%=n.getCreateDate() %></td>
 					<td><%=n.getCount() %></td>
-					
 				</tr>
 
 				<%} %>
@@ -119,6 +118,7 @@
          <% if(loginMember != null && loginMember.getMemId().equals("user01")){%>
         <div align="right">
         <button class="enroll-btn" onclick = "Listwrite()">작성하기 </button>
+
         </div>
         <% }%>
         
@@ -126,8 +126,21 @@
 
     </body>
     <script>
-        function Listwrite(){
+   //공지사항 작성하기    
+    function Listwrite(){
             location.href = "<%=contextPath%>/insertpage.no"
         }
+        
+   //공지사항 글번호 
+    $(function(){
+      $(".area-no > tbody > tr").click(function(){
+      	const num =$(this).children().eq(0).text();
+        	
+        location.href = '<%=contextPath %>/detail.no?num='+num;
+        
+        })
+       })
+   
     </script>
+    
 </html>
