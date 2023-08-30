@@ -1,5 +1,7 @@
+<%@page import="concat.image.model.vo.Profile"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- <% Profile profile = (Profile)request.getAttribute("profile"); %> -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,6 +90,10 @@
             height: 50px;
         }
         
+        #cg-span{
+        	top:8px;
+        }
+        
 
     </style>
     
@@ -113,13 +119,14 @@
 		String nickName = (loginMember.getNickname() == null)? "": loginMember.getNickname();
 		String phone = (loginMember.getPhone() == null)? "" : loginMember.getPhone();
 		String email = (loginMember.getEmail() == null)? "" : loginMember.getEmail();
+		
 	%>
 	
 	<div class="wrap">
         <div id="header_1">
             <img src="resources/image/concatlo.png" style="width: 300px; height: 100px;">
             <div id="header_2">
-                <img id="profileimg" style="height: 100px; width: 100px;" onclick="profile();">
+                <img  id="profileimg" style="height: 100px; width: 100px;" onclick="profile();">
             </div>
         </div>
 
@@ -132,7 +139,7 @@
         </div>
         <div id="main" class="cont" align="center" >
             <p style="font-size: 30px; margin: 30px;">My page</p>
-			<form id="myPage-form" action="<%= contextPath %>/update.me" method="post">
+			<form id="myPage-form" action="<%= contextPath %>/update.me" method="post" enctype="multipart/form-data">
                 <table>
                     <tr>
                         <th style="height: 50px; width: 300px;">※ 등급 </th>
@@ -152,7 +159,7 @@
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 전화번호 </th>
-                        <td><input type="text" name="phone" value="<%= phone %>" placeholder="- 포함해서 입력"></td>
+                        <td><input type="text" name="phone" onKeyup = "addHypen(this);" value="<%= phone %>"></td>
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 이메일 </th>
@@ -165,30 +172,33 @@
                     <button type="button" class="chenge" data-toggle="modal" data-target="#updatePwdModal" >비밀번호변경</button>
                     <button type="button" class="exit" data-toggle="modal" data-target="#exitModal">회원탈퇴</button>
                 </div>  
+		        <input type="file" name="file1" id="file" style="display:none" onchange="loadimg(this)">
                 </form>
         </div>
     </div>
-        <input type="file" name="file1" id="file1" onclick="loadimg(this, 1);" style="display: none;" required>
     <script>
         function sujung_1(){
             if(confirm("회원정보를 수정하시겠습니까 ?") == false){
             	return false;
             }
         }
+        
         function profile(){
             $("#file").click();
         }
-        function loadimg(inputFile,profile){
+        
+        function loadimg(inputFile){
+        	
             if(inputFile.files.length == 1){
+            	
                 const reader = new FileReader();
 
-                reader.readAsDataURL(inputFile.files);
+                reader.readAsDataURL(inputFile.files[0]);
 
                 reader.onload = function(e){
-                    $("#profileimg").attr("src", e.target.result);
+                	$("#profileimg").attr("src", e.target.result);
+                	
                 }
-            }else{
-                $("#profileimg").attr("src". null);
             }
         }
     </script>
@@ -264,6 +274,34 @@
         </div>
       </div>
     </div>
+    
+    <script>
+	    function addHypen(obj) {
+		    var number = obj.value.replace(/[^0-9]/g, "");
+		    var phone = "";
+	
+		    if(number.length < 4) {
+		        return number;
+		    } else if(number.length < 7) {
+		        phone += number.substr(0, 3);
+		        phone += "-";
+		        phone += number.substr(3);
+		    } else if(number.length < 11) {
+		        phone += number.substr(0, 3);
+		        phone += "-";
+		        phone += number.substr(3, 3);
+		        phone += "-";
+		        phone += number.substr(6);
+		    } else {
+		        phone += number.substr(0, 3);
+		        phone += "-";
+		        phone += number.substr(3, 4);
+		        phone += "-";
+		        phone += number.substr(7);
+		    }
+		    obj.value = phone;
+		}
+    </script>
     
 </body>
 </html>

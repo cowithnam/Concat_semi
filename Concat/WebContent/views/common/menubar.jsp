@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
-	String filepath = request.getSession().getServletContext().getRealPath("/WebContent/resources/image/");
+	//String filepath = request.getSession().getServletContext().getRealPath("/WebContent/resources/image/");
 	String contextPath = request.getContextPath();
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	String alertMsg = (String)session.getAttribute("alertMsg");
@@ -90,7 +90,7 @@
         #search button:hover{cursor: pointer;}
 
         #header3{
-            width: 25%;
+            width: 18%;
             padding-top: 10px;
             padding-right: 20px;
             text-align: right;
@@ -178,9 +178,9 @@
             color: white;
             position: relative;
             left: 18px;
-	        top: 6px;
+
 	        bottom : 3px;
-            line-height: 40px;
+
         }
 
         #content{
@@ -285,7 +285,6 @@
            	<div>
            		<br><br><br>
                 <b style="color: orange;"><%= loginMember.getMemName() %></b>
-	            	<a href="#" style="text-decoration: none; color: black; font-size: medium;">판매하기</a>
 	                <a href="<%= contextPath %>/myPage.me" style="text-decoration: none; color: black;">마이페이지</a>
 	                <a href="<%= contextPath %>/logout.me" style="text-decoration: none; color: black;">로그아웃</a>
             </div>

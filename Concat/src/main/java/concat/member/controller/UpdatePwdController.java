@@ -1,6 +1,8 @@
 package concat.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +38,6 @@ public class UpdatePwdController extends HttpServlet {
 		
 		Member upPwd = new MemberService().updatePwd(memId, memPwd, updatePwd);
 		
-		String message = "";
 		
 		if(upPwd == null) { // 실패
 			System.out.println("실패");
@@ -44,9 +45,20 @@ public class UpdatePwdController extends HttpServlet {
 		}else { // 성공
 			request.getSession().setAttribute("loginMember", upPwd);
 			//request.getSession().setAttribute("alertMsg", "성공적으로 비밀번호 변경됐습니다.");
-			message = "<script>alret('비밀번호가 변경되었습니다. 로그아웃 후 확인해주시길 바랍니다.')</script>";
+			
+			 response.setContentType("text/html; charset=utf-8");
+
+				PrintWriter out = response.getWriter();
+
+				out.println("<script>");
+
+				out.println("alert('비밀번호가 변경되었습니다. 로그아웃 후 확인해주시길 바랍니다.');");
+
+				out.println("history.back();");
+
+				out.println("</script>");
 		}
-		response.sendRedirect(request.getContextPath() + "/myPage.me");
+		//response.sendRedirect(request.getContextPath() + "/myPage.me");
 	}
 		
 		

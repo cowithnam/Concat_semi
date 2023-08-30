@@ -1,7 +1,6 @@
 package concat.member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,19 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class MypageEnrollController
+ * Servlet implementation class SeachIdController
  */
-@WebServlet("/myPage.me")
-public class MypageEnrollController extends HttpServlet {
+@WebServlet("/seachid.me")
+public class SeachIdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageEnrollController() {
+    public SeachIdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,29 +29,9 @@ public class MypageEnrollController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
 		
-		
-		if(session.getAttribute("loginMember") == null) { 
-			// session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-			//response.sendRedirect(request.getContextPath());
-			
-			 response.setContentType("text/html; charset=utf-8");
-
-				PrintWriter out = response.getWriter();
-
-				out.println("<script>");
-
-				out.println("alert('로그인 후 이용가능한 서비스입니다. ㅠ_ㅠ');");
-
-				out.println("history.back();");
-
-				out.println("</script>");
-		}else { 
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/member/mypage.jsp");
-			view.forward(request, response);
-		}
+		RequestDispatcher view = request.getRequestDispatcher("views/member/seachidpwd.jsp");
+		view.forward(request, response);
 	}
 
 	/**

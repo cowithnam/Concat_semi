@@ -1,6 +1,8 @@
 package concat.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,21 +33,43 @@ public class LoginSetController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+			
 			String memId = request.getParameter("memId");
 			String memPwd = request.getParameter("memPwd");
 		
 			Member loginMember = new MemberService().loginMember(memId, memPwd);
 			
-			String message = "";
 			
 			if(loginMember == null) {
 				//request.getSession().setAttribute("alertMsg", "없는 아이디입니다.");
-				message = "<script>alret('없는 아이디입니다.회원가입이나 로그인을 다시해주세요.')</script>";
-				response.sendRedirect(request.getContextPath() + "/login.me");
+				//response.sendRedirect(request.getContextPath() + "/login.me");
+				 response.setContentType("text/html; charset=utf-8");
+
+					PrintWriter out = response.getWriter();
+
+					out.println("<script>");
+
+					out.println("alert('아이디 또는 비밀번호를 잘못 입력했습니다.\r\n"
+							+ "입력하신 내용을 다시 확인해주세요.');");
+
+					out.println("history.back();");
+
+					out.println("</script>");
+				
 			}else {
 				request.getSession().setAttribute("loginMember", loginMember);
+				
+				response.setContentType("text/html; charset=utf-8");
+
+				PrintWriter out = response.getWriter();
+
+				out.println("<script>");
+
+				out.println("alert('로그인이 완료되었습니다.^_^');");
+				
 				response.sendRedirect(request.getContextPath());
+
+				out.println("</script>");
 			}
 	
 	}

@@ -4,6 +4,8 @@ import java.sql.Connection;
 
 import static concat.common.JDBCTemplate.*;
 
+import concat.image.model.vo.Image;
+import concat.image.model.vo.Profile;
 import concat.member.model.dao.MemberDao;
 import concat.member.model.vo.Member;
 
@@ -31,13 +33,14 @@ public class MemberService {
 		
 	}
 	
-	public Member updateMember(Member m) {
+	public int updateMember(Member m, Profile profile ) {
 		Connection conn = getConnection();
-		int result = new MemberDao().updateMember(m, conn); 
+		int result1 = new MemberDao().updateMember(m, conn);
+		int result2 = new MemberDao().updateImageM(conn , profile);
 		
 		Member up = null;
 		
-		if(result > 0) {
+		if(result1 > 0) {
 			commit(conn);
 			
 			up = new MemberDao().selectMember(conn, m.getMemId());
@@ -46,7 +49,7 @@ public class MemberService {
 			rollback(conn);
 		}
 		close(conn);
-		return up;
+		return result1 * result2;
 	}
 	
 	public Member updatePwd(String memId, String memPwd, String updatePwd) {
@@ -76,6 +79,24 @@ public class MemberService {
 		}
 		close(conn);
 		return result;
+	}
+	
+	public int selectImg(Profile profile) {
+		Connection conn = getConnection();
+		int img = new MemberDao().selectImg(conn, profile);
+		
+		close(conn);
+		
+		return img;
+		
+	}
+	
+	public String findId(String memName,String phone) {
+		Connection conn = getConnection();
+		String memId = new MemberDao().findId(conn, memName, phone);
+		
+		close(conn);
+		return memId;
 	}
 	
 }

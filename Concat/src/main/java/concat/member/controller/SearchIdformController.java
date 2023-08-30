@@ -1,7 +1,6 @@
 package concat.member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,17 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import concat.member.model.service.MemberService;
+import concat.member.model.vo.Member;
+
 /**
- * Servlet implementation class MypageEnrollController
+ * Servlet implementation class SearchIdformController
  */
-@WebServlet("/myPage.me")
-public class MypageEnrollController extends HttpServlet {
+@WebServlet("/seachidform.me")
+public class SearchIdformController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageEnrollController() {
+    public SearchIdformController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,29 +33,24 @@ public class MypageEnrollController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
+		String memName = request.getParameter("memName");
+		String phone = request.getParameter("phone");
 		
+		String memId = new MemberService().findId(memName, phone);
 		
-		if(session.getAttribute("loginMember") == null) { 
-			// session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-			//response.sendRedirect(request.getContextPath());
-			
-			 response.setContentType("text/html; charset=utf-8");
-
-				PrintWriter out = response.getWriter();
-
-				out.println("<script>");
-
-				out.println("alert('로그인 후 이용가능한 서비스입니다. ㅠ_ㅠ');");
-
-				out.println("history.back();");
-
-				out.println("</script>");
-		}else { 
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/member/mypage.jsp");
+		if(memId == null) {
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
+		}else {
+			request.getSession().setAttribute("memName", memName);
+			request.getSession().setAttribute("phone", phone);
+			request.getSession().setAttribute("memId", memId);
+			response.sendRedirect(request.getContextPath());
+			
 		}
+		
+		
+		
 	}
 
 	/**

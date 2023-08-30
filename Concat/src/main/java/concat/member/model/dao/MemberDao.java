@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import static concat.common.JDBCTemplate.*;
+
+import concat.image.model.vo.Image;
+import concat.image.model.vo.Profile;
 import concat.member.model.vo.Member;
 
 public class MemberDao {
@@ -203,6 +206,94 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		return result;
+		
+	}
+	
+	public int updateImageM(Connection conn,Profile profile) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateImageM");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, profile.getOriginName());
+			pstmt.setString(2, profile.getUpdateName());
+			pstmt.setString(3, profile.getFilePath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	public int selectImg(Connection conn,Profile profile) {
+		int img = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectImg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, profile.getMemNo());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				profile = new Profile(rset.getInt("file_no"),
+								  rset.getInt("mem_no"),
+								  rset.getString("origin_name"),
+								  rset.getString("update_name"),
+								  rset.getString("file_path"),
+								  rset.getDate("issue_date"));	
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return img;
+		
+	}
+	
+	public String findId(Connection conn,String memName,String phone) {
+		String memId = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memName);
+			pstmt.setString(2, phone);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				memId = rset.getString("memId");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return memId;
+		
+		
 		
 	}
 }

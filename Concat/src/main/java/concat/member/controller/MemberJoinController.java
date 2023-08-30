@@ -1,6 +1,7 @@
 package concat.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -50,12 +51,22 @@ public class MemberJoinController extends HttpServlet {
 		
 		int result = new MemberService().insertMember(loginMember);
 		
-		String message = "";
 		
 		if(result > 0) { // 성공
 			//request.getSession().setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다."); 
-			message = "<script>alret('성공적으로 회원가입이 되었습니다.')</script>";
-			response.sendRedirect(request.getContextPath());
+			//response.sendRedirect(request.getContextPath());
+			
+			 response.setContentType("text/html; charset=utf-8");
+
+				PrintWriter out = response.getWriter();
+
+				out.println("<script>");
+
+				out.println("alert('성공적으로 회원가입이 완료되었습니다.^_^');");
+
+				out.println("history.back();");
+
+				out.println("</script>");
 			
 		}else { // 실패
 			System.out.println("실패");

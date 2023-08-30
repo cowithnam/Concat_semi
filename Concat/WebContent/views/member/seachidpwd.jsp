@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인/회원가입</title>
+<title>아디찾기/비번찾기</title>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Abril+Fatface|Open+Sans:400,700&display=swap");
 
@@ -287,8 +287,8 @@ a.link-copy {
 	<main class="main">
     <section class="home">
       <img src="resources/image/concat.png" style="width: 300px; height: 300px;">
-      <button id="sign-up" class="btn">로그인</button>
-      <button id="sign-in" class="btn">회원가입</button>
+      <button id="sign-up" class="btn">아이디찾기</button>
+      <button id="sign-in" class="btn">비밀번호찾기</button>
       <p><a class="link-copy" href="http://localhost:8001/Concat/#" target="_blank">메인페이지로</a></p>
     </section>
   
@@ -297,7 +297,7 @@ a.link-copy {
         <h1>ConCat</h1>
         <div class="wc_message">
           <h3>ConCat 마켓</h3>
-          <p>에 오신걸 환영합니다.</p>
+          <p>아이디 비번을 입력해주세요.</p>
         </div>
         <div class="btn-back">
           <i class="fas fa-2x fa-angle-left angle-left-color"></i>
@@ -306,67 +306,51 @@ a.link-copy {
       </article>
   
       <article class="form-area">
-        <!-- 로그인폼 -->
+        <!-- 아이디찾기 폼 -->
         <div class="organize-form form-area-signup">
-          <h2>로그인</h2>
-          <form class="form" action="<%= request.getContextPath() %>/loginset.me" method="post" name="idfindscreen">
+          <h2>아이디찾기</h2>
+          <form class="form" action="<%= request.getContextPath() %>/seachidform.me" method="post" name="idfindscreen">
             <div class="form-field" style="width: 350px; margin: auto;">
-              <label for="id">아이디</label>
-              <input type="text" id="id" name="memId" required/>
+              <label for="name">이름</label>
+              <input type="text" id="name" name="memName" required/>
             </div>
             <br>
   
             <div class="form-field" style="width: 350px; margin: auto;">
-              <label for="password">비밀번호</label>
-              <input type="password" id="password" name="memPwd" required/>
+              <label for="phone">전화번호(-빼고 입력해주세요)</label>
+              <input type="text" id="phone" name="phone" onKeyup = "addHypen(this);" required/>
             </div>
             <br>
-  
-            <button type="submit" class="btn-sign">로그인</button>
+  			
+           	<!-- <button type="button" class="btn-sign btn-up">아이디찾기</button> -->
+           	<div class ="btnSearch">
+           	<input type="button" name="enter" value="아이디찾기"  onClick="id_search()">
+           	<input type="button" name="cancle" value="취소" onClick="history.back()">
+           	</div>
           </form>
-          <p>아이디가 없으신가요 ? <a href="#" class="link-in">회원가입</a></p>
-          <p>아이디를 잊어버리셨나요 ? <a href="<%=request.getContextPath() %>/seachid.me" class="idfind">아이디찾기</a></p>
-          <p>비밀번호를 잊어버리셨나요 ? <a href="<%=request.getContextPath() %>/seachpwd.me" class="pwdfind">비밀번호찾기</a></p>
-  
+          <p>비밀번호를 잊어버리셨나요 ? <a href="#" class="link-in">비밀번호찾기</a></p>
+          <p>아이디가 없으신가요 ? <a href="#" class="http://localhost:8001/Concat/login.me">회원가입</a></p>
+ 	
         </div>
   
-        <!-- 회원가입폼 -->
+        <!-- 비밀번호 폼 -->
         <div class="organize-form form-area-signin">
-          <h2>회원가입</h2>
-          <form class="form" action="<%=request.getContextPath()%>/memberjoin.me" method="post">
+          <h2>비밀번호</h2>
+          <form class="form" action="<%=request.getContextPath()%>/seachpwdform.me" method="post">
+            
             <div class="form-field">
-              <input type="text" name="memId" placeholder="아이디를 입력해주세요" maxlength="12" required/>
-              <!-- <button type="button" onclick="idCheck();">중복확인</button> -->
-              <br>
-            </div>
-  
-            <div class="form-field">
-              <input type="password" name="memPwd"  placeholder="비밀번호를 입력해주세요" required /> <br>
-            </div>
-            <div class="form-field">
-              <input type="password" name="memPwd"  placeholder="비밀번호를 한번더 입력해주세요" required /> <br>
+              <input type="text" name="memId" placeholder="아이디를 입력해주세요" maxlength="12" required/> <br>
             </div>
             <div class="form-field">
               <input type="text" name="memName"  placeholder="이름를 입력해주세요" required/> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="nickName"  placeholder="닉네임를 입력해주세요" required/> <br>
-            </div>
-            <div class="form-field">
-              <input type="email" name="email"  placeholder="이메일를 입력해주세요" required/> <br>
-            </div>
-            <div class="form-field">
-              <input type="text" name="phone" onKeyup = "addHypen(this);" placeholder="핸드폰 번호를 입력해주세요" required/> <br>
+              <input type="text" name="phone"  placeholder="핸드폰 번호를 -빼고 입력해주세요" onKeyup = "addHypen(this);" required/> <br>
             </div>
     
-            <button type="submit" class="btn-sign btn-up">회원가입</button>
-            <br>
-            <div>
-              <br>
-              <input type="checkbox" required> Concat마켓의 이용약관 및 정보이용에 동의합니다.(필수)
-            </div>
+            <button type="submit" class="btn-sign btn-up">비밀번호 찾기</button> <br>
           </form>
-          <p>아이디가 있으신가요 ? <a href="#" class="link-up">로그인</a></p>
+          <p>아이디를 잊어버리셨나요 ? <a href="#" class="link-up">아이디찾기</a></p>
         </div>
       </article>
   
@@ -377,6 +361,25 @@ a.link-copy {
       </article>
     </section>
   </main>
+  
+  <script>
+	  function id_search() { 
+		 	var frm = document.idfindscreen;
+	
+		 	if (frm.memName.value.length < 1) {
+		        alert("이름을 입력해주세요!");
+		        return;
+		        }
+
+		        if (frm.phone.value.length != 13) {
+		            alert("핸드폰번호를 정확하게 입력해주세요!");
+		            return;
+		        }
+		        frm.method = "post";
+		        frm.action = "findIdResult.jsp"; //넘어간화면
+		        frm.submit();  
+		    }
+  </script>
 
       <script>
         // Elements
