@@ -1,6 +1,8 @@
 package concat.board.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,13 +50,13 @@ public class SalesInsertController extends HttpServlet {
 			b.setCategoryNo(mr.getParameter("category"));
 			b.setBrand(mr.getParameter("brand"));
 			b.setPrice(Integer.parseInt(mr.getParameter("price")));
-			b.setDueDate(mr.getParameter("dueDate"));
+			b.setDueDate(Date.valueOf(mr.getParameter("dueDate")));
 			b.setOpenkakao(mr.getParameter("open"));
-			b.setBoardContent(mr.getParameter("cotent"));
+			b.setBoardContent(mr.getParameter("content"));
 			
 			Image ig = new Image();
-			ig.setOriginName(mr.getParameter("file"));
-			ig.setUpdateName(mr.getParameter("file"));
+			ig.setOriginName(mr.getOriginalFileName("file"));
+			ig.setUpdateName(mr.getFilesystemName("file"));
 			ig.setFilePath("resources/board_upfiles");
 			
 			int result = new BoardService().insertBoard(b,ig);

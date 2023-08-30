@@ -27,9 +27,45 @@ public class BlackList {
 		this.status = status;
 	}
 
+	// insertBlackList 메소드
+	public BlackList(int blNo, String blTitle, String blContent, String blWriter, String blackId, int count,
+			Date blDate) {
+		super();
+		this.blNo = blNo;
+		this.blTitle = blTitle;
+		this.blContent = blContent;
+		this.blWriter = blWriter;
+		this.blackId = blackId;
+		this.count = count;
+		this.blDate = blDate;
+	}
+
+	// selectBlacklist 메소드
+	public BlackList(int blNo, String blTitle, String blContent, String blWriter, String blackId, int count) {
+		super();
+		this.blNo = blNo;
+		this.blTitle = blTitle;
+		this.blContent = blContent;
+		this.blWriter = blWriter;
+		this.blackId = blackId;
+		this.count = count;
+	}
+	
+	// selectlist 메소드
+	public BlackList(int blNo, String blTitle, String blWriter, int count, Date blDate) {
+		super();
+		this.blNo = blNo;
+		this.blTitle = blTitle;
+		this.blWriter = blWriter;
+		this.count = count;
+		this.blDate = blDate;
+	}
+	
+	
 	public int getBlNo() {
 		return blNo;
 	}
+
 
 	public void setBlNo(int blNo) {
 		this.blNo = blNo;

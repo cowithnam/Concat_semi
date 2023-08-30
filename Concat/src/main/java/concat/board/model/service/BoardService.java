@@ -8,6 +8,7 @@ import concat.board.model.vo.Board;
 import concat.brand.model.vo.Brand;
 import concat.category.model.vo.Category;
 import concat.image.model.vo.Image;
+import concat.wish.model.vo.Wish;
 
 import static concat.common.JDBCTemplate.*;
 
@@ -64,6 +65,51 @@ public class BoardService {
 			rollback(conn);
 		}
 		return result1 * result2;
+	}
+	
+	public Board selectBoard(int bno) {
+		Connection conn = getConnection();
+		
+		Board b = new BoardDao().selectBoard(bno, conn);
+		
+		close(conn);
+		
+		return b;
+	}
+	
+	public Image selectImage(int bno) {
+		Connection conn = getConnection();
+		
+		Image img = new BoardDao().selectImage(bno, conn);
+		
+		close(conn);
+		
+		return img;
+	}
+	
+	public int increaseCount(int bno) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().increaseCount(bno,conn);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+	
+	public Wish selectWish(int bno,int mno) {
+		Connection conn = getConnection();
+		
+		Wish wish = new BoardDao().selectWish(bno ,mno ,conn);
+		
+		close(conn);
+		
+		return wish;
 	}
 
 }

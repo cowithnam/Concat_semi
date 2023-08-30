@@ -1,7 +1,10 @@
+<%@page import="concat.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
     String contextPath = request.getContextPath();
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -13,9 +16,6 @@
             box-sizing: border-box;
         }
         
-        body{
-        	margin: 8px;
-        }
         #wrap{
             width: 1280px;
  			height: 225px;
@@ -23,8 +23,8 @@
         }
         
         #header{
-            height: 180px;
             width: 1400px;
+            height: 180px;
         }
 
         #header>div{
@@ -95,7 +95,7 @@
             line-height: 180px;
         }
 
-        #header3>a{
+        #header3 a{
             text-decoration: none;
             color: black;
             font-weight: bolder;
@@ -137,6 +137,7 @@
         #navigator>div{
             float: left;
             height: 100%;
+            ba
         }
         
         #cg-div{
@@ -267,10 +268,17 @@
                 </div>
             </div>
             <div id="header3">
-            	<!-- 로그인 전 -->
-                <a href="#">로그인</a>
-                <a href="#">회원가입</a>
-                <!-- 로그인 후 -->
+             <% if(loginMember == null){ %>
+            	<div>
+                	<a href="<%= contextPath %>/login.me">로그인</a>
+            	</div>
+            <% }else{ %>
+           		<div>
+               		<b style="color: orange;"><%= loginMember.getMemName() %></b>
+	                <a href="<%= contextPath %>/myPage.me" style="text-decoration: none; color: black;">마이페이지</a>
+	                <a href="<%= contextPath %>/logout.me" style="text-decoration: none; color: black;">로그아웃</a>
+           		</div>
+            <% } %>
             </div>
         </div>
         <div id="navigator">
@@ -288,8 +296,8 @@
                     </ul>
             </div>
             </div>
-            <div><button>구매후기</button></div>   
-            <div><button>고객센터</button></div>  
+            <div><button type="button" onclick="reivew();">구매후기</button></div>   
+            <div><button type="button" onclick="notice()">고객센터</button></div>  
         </div>
     </div>
 
@@ -305,7 +313,14 @@
         		location.href="<%=contextPath %>"
         	});
         })
-        	
+        
+        function reivew(){
+            location.href="<%=contextPath%>/list.re?cpage=1";
+        }
+        
+        function notice(){
+            location.href="<%=contextPath%>/listpage.no?cpage=1";
+        }
     </script>
     
     <div class="minibar">

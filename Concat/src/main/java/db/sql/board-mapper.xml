@@ -1,7 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+<entry key="increaseCount">
+	UPDATE
+	       BOARD
+	   SET COUNT = COUNT + 1
+	 WHERE BOARD_NO = ?
+	   AND STATUS = 'Y'
+</entry>
 <entry key="selectBoardList">
+	SELECT
+	       BOARD_NO
+	     , BOARD_TITLE
+	     , BRAND_NAME
+	     , PRICE
+	     , FILE_PATH || '/' || UPDATE_NAME "THUMBNAIL"
+	  FROM BOARD B
+	  JOIN IMAGE USING (BOARD_NO)
+      JOIN BRAND ON (BRAND = BRAND_NO)
+	 WHERE B.BOARD_TYPE = 1
+	   AND B.STATUS = 'Y'
+	 ORDER
+	    BY BOARD_NO DESC
+</entry>
+<entry key="selectBoard">
+	SELECT
+	       BOARD_NO
+	     , BOARD_TITLE
+	     , BRAND_NAME
+	     , PRICE
+	     , MEM_ID
+	     , NICKNAME
+	     , DUE_DATE
+	     , BOARD_CONTENT
+	  FROM BOARD
+	  JOIN MEMBER USING (MEM_NO)
+	  JOIN BRAND ON (BRAND = BRAND_NO)
+	 WHERE BOARD_NO = ?
+</entry>
+<entry key="selectImage">
+    SELECT
+	       FILE_NO
+	     , ORIGIN_NAME
+	     , UPDATE_NAME
+	     , FILE_PATH
+	  FROM IMAGE
+	 WHERE BOARD_NO = ?
 </entry>
 <entry key="selectCategory">
 	SELECT
@@ -23,6 +67,7 @@
 	     ( 
 	       BOARD_NO
 	     , MEM_NO
+	     , BOARD_TITLE
 	     , CATEGORY_NO
 	     , BRAND
 	     , PRICE
@@ -33,6 +78,7 @@
 	VALUES
 	     (
 	       SEQ_BNO.NEXTVAL
+	     , ?
 	     , ?
 	     , ?
 	     , ?
@@ -61,5 +107,13 @@
 	     , ?
 	     , ?
 	     )
+</entry>
+<entry key="selectWish">
+	SELECT
+	       MEM_NO
+	     , BOARD_NO
+	  FROM WISH_LIST
+	 WHERE BOARD_NO = ?
+	   AND MEM_NO = ?
 </entry>
 </properties>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="selectBlacklistList">
+	SELECT 
+	       BL_NO
+	     , BL_TITLE
+	     , BL_CONTENT
+	     , MEM_ID
+	     , BLACK_ID
+	     , COUNT
+	     , BL_DATE
+	  FROM BLACKLIST B
+	  JOIN MEMBER ON (BL_WRITER = MEM_NO)
+	 WHERE B.STATUS = 'Y'
+	 ORDER 
+	    BY BL_NO DESC
+</entry>
+
+<entry key="increaseCount">
+	UPDATE BLACKLIST
+	   SET COUNT = COUNT + 1
+	 WHERE BL_NO = ?
+	   AND STATUS = 'Y'
+</entry>
+
+<entry key="selectBlackList">
+	SELECT
+	       BL_NO
+	     , BL_TITLE
+	     , BL_CONTENT
+	     , MEM_ID
+	     , BLACK_ID
+	     , COUNT
+	  FROM BLACKLIST
+	  JOIN MEMBER ON (BL_WRITER = MEM_NO) 
+	 WHERE BL_NO = ?
+</entry>
+
+<entry key="insertBlacklist">
+	INSERT
+	  INTO BLACKLIST
+	     (
+	       BL_NO
+	     , BL_TITLE
+	     , BL_CONTENT
+	     , BL_WRITER
+	     , BLACK_ID
+	     , BOARD_TYPE
+	     )
+	VALUES
+	     (
+	       SEQ_BLNO.NEXTVAL
+	     , ?
+	     , ?
+	     , ?
+	     , ?
+	     , 3
+	     )
+</entry>
+
+<entry key="insertImage">
+	INSERT
+	  INTO IMAGE
+	     (
+	       FILE_NO
+	     , BOARD_NO 
+	     , ORIGIN_NAME
+	     , UPDATE_NAME
+	     , FILE_PATH
+	     , BOARD_TYPE
+	     )
+	VALUES
+	     (
+	       SEQ_INO.NEXTVAL
+	     , SEQ_BLNO.CURRVAL
+	     , ?
+	     , ?
+	     , ?
+	     , 3
+	     )
+</entry>
+
+<entry key="selectImage">
+	SELECT
+	       FILE_NO
+	     , ORIGIN_NAME
+	     , UPDATE_NAME
+	     , FILE_PATH
+	  FROM IMAGE
+	 WHERE BOARD_NO = ?
+	   AND BOARD_TYPE = 3
+</entry>
+
+<entry key="selectListCount">
+SELECT 
+       COUNT(*) count
+  FROM BLACKLIST
+ WHERE STATUS = 'Y'
+</entry>
+
+<entry key="selectList">
+SELECT *
+  FROM (
+    SELECT ROWNUM RNUM, A.*
+  FROM (
+    SELECT
+           BL_NO
+         , BL_TITLE
+         , MEM_ID
+         , COUNT
+         , BL_DATE
+      FROM BLACKLIST BL
+      JOIN MEMBER ON (BL_WRITER = MEM_NO)
+     WHERE BL.STATUS = 'Y'
+     ORDER 
+        BY BL_NO DESC
+        ) A
+    )
+    WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="deletelist">
+	UPDATE BLACKLIST
+	   SET STATUS = 'N'
+	 WHERE BL_NO = ?
+</entry>
+
+<entry key="">
+
+</entry>
+
+<entry key="">
+
+</entry>
+</properties>

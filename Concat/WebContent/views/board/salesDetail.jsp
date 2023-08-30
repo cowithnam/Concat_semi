@@ -1,5 +1,13 @@
+<%@page import="concat.wish.model.vo.Wish"%>
+<%@page import="concat.image.model.vo.Image"%>
+<%@page import="concat.board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	Board b = (Board)request.getAttribute("b");
+	Image img = (Image)request.getAttribute("img");
+	Wish wish = (Wish)request.getAttribute("wish");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +34,7 @@
       height: 60%;
     }
 
-    .area2>button{
+    .area2>button:not(#noneWish,#wantWish){
       background-color: black;
       color: white;
       font-size: 25px;
@@ -58,6 +66,24 @@
       width: 240px;
       height: 180px;
     }
+    
+    .noneWish{
+    	background-color: white;
+    	color: gray;
+    }
+    .wantWish{
+    	background-color: white;
+    	color: red;
+    }
+    
+    .wish{
+    	width: 60px;
+    	height: 60px;
+    	font-size: 32px;
+    	font-weight: bolder;  
+    	border-radius: 10px;
+    	margin: 30px 0px 20px;
+    }
   </style>
 </head>
 <body>
@@ -65,16 +91,24 @@
 <br><br><br>
   <div class="outer">
       <div class="area1">
-        <img src="#" width="500" height="480" style="border: 1px solid black; border-radius: 20px;">
+        <img src="<%= img.getFilePath()+"/"+img.getUpdateName() %>" width="500" height="480" style="border: 1px solid black; border-radius: 20px;">
       </div>
       <div class="area2" style="padding-left: 40px; padding-right: 20px;">
-          <h1 style="margin-top: 30px;">상품명</h1>
-          <h3 style="margin-top: 30px;">브랜드명</h3>
-          <h3 style="margin-top: 30px;">가격</h3>
-          <h4 style="margin: 30px 0px 30px; ">판매자 아이디</h4>
-          <h4>유효기간</h4>
+          <h1 style="margin-top: 30px;"><%=b.getBoardTitle() %></h1>
+          <h3 style="margin-top: 30px;"><%=b.getBrand() %></h3>
+          <h3 style="margin-top: 30px;"><%=b.getPrice() %>원</h3>
+          <h4 style="margin: 30px 0px 30px; ">판매자 : <% if(b.getNickName() != null){ %>
+          									  		<%= b.getNickName() %>
+          									  <% }else{ %>
+          									  		<%= b.getMemNo() %>
+          									  <% } %></h4>
+          <h4>유효기간 : <%=b.getDueDate() %></h4>
           <hr>
-          <button style="width: 60px; height: 60px; font-size: 32px; background-color: white; color: gray;">♥</button>
+          <% if(wish == null){ %>
+          	<button id="noneWish" class="noneWish wish">♥</button>
+          <% }else{ %>
+          	<button id="wantWish" class="wantWish wish">♥</button>
+          <% } %>
           <button type="button" style="width: 360px; height: 60px; ">구매하기</button>
           <a href="https://ecrm.police.go.kr/sci/pcc_V3_send" style="font-size: 16px;" >신고 여부 확인</a>
           <hr>
@@ -85,8 +119,8 @@
         <h3>상품정보</h3>
         <hr style="margin-bottom: 15px;">
 
-          <div class="content-area">
-
+          <div class="content-area" style="padding-left: 10px; font-size: 18px;">
+		  		<%=b.getBoardContent() %>
           </div>
           <div class="content-caution" align="center">
             <h4 style="margin-top: 10px;"><img src="resources/image/about.png" width="25" height="25" style="position: relative; top: 5px;"> 거래 주의 사항</h4>

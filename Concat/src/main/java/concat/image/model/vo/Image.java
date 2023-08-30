@@ -9,10 +9,20 @@ public class Image {
 	private String updateName;
 	private String filePath;
 	private Date issueDate;
+	private String titleimg;
 	
 	public Image() {}
+	
+	public Image(int fileNo, String originName, String updateName, String filePath) {
+		super();
+		this.fileNo = fileNo;
+		this.originName = originName;
+		this.updateName = updateName;
+		this.filePath = filePath;
+	}
 
-	public Image(int fileNo, int boardNo, String originName, String updateName, String filePath, Date issueDate) {
+	public Image(int fileNo, int boardNo, String originName, String updateName, String filePath, Date issueDate,
+			String titleimg) {
 		super();
 		this.fileNo = fileNo;
 		this.boardNo = boardNo;
@@ -20,6 +30,7 @@ public class Image {
 		this.updateName = updateName;
 		this.filePath = filePath;
 		this.issueDate = issueDate;
+		this.titleimg = titleimg;
 	}
 
 	public int getFileNo() {
@@ -70,10 +81,18 @@ public class Image {
 		this.issueDate = issueDate;
 	}
 
+	public String getTitleimg() {
+		return titleimg;
+	}
+
+	public void setTitleimg(String titleimg) {
+		this.titleimg = titleimg;
+	}
+
 	@Override
 	public String toString() {
 		return "Image [fileNo=" + fileNo + ", boardNo=" + boardNo + ", originName=" + originName + ", updateName="
-				+ updateName + ", filePath=" + filePath + ", issueDate=" + issueDate + "]";
+				+ updateName + ", filePath=" + filePath + ", issueDate=" + issueDate + ", titleimg=" + titleimg + "]";
 	}
 	
 }

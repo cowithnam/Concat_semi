@@ -1,8 +1,11 @@
 package concat.board.model.vo;
 
+import java.sql.Date;
+
 public class Board {
 	private int boardNo;
 	private String memNo;
+	private String nickName;
 	private String categoryNo;
 	private String brand;
 	private String boardTitle;
@@ -11,16 +14,19 @@ public class Board {
 	private String issueDate;
 	private String status;
 	private int price;
-	private String dueDate;
+	private Date dueDate;
 	private String openkakao;
+	private String thumbnail;
 	
 	public Board() {}
 
-	public Board(int boardNo, String memNo, String categoryNo, String brand, String boardTitle, String boardContent,
-			int count, String issueDate, String status, int price, String dueDate, String openkakao) {
+	public Board(int boardNo, String memNo, String nickName, String categoryNo, String brand, String boardTitle,
+			String boardContent, int count, String issueDate, String status, int price, Date dueDate, String openkakao,
+			String thumbnail) {
 		super();
 		this.boardNo = boardNo;
 		this.memNo = memNo;
+		this.nickName = nickName;
 		this.categoryNo = categoryNo;
 		this.brand = brand;
 		this.boardTitle = boardTitle;
@@ -31,6 +37,7 @@ public class Board {
 		this.price = price;
 		this.dueDate = dueDate;
 		this.openkakao = openkakao;
+		this.thumbnail = thumbnail;
 	}
 
 	public int getBoardNo() {
@@ -47,6 +54,14 @@ public class Board {
 
 	public void setMemNo(String memNo) {
 		this.memNo = memNo;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public String getCategoryNo() {
@@ -113,11 +128,11 @@ public class Board {
 		this.price = price;
 	}
 
-	public String getDueDate() {
+	public Date getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(String dueDate) {
+	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
 
@@ -129,12 +144,20 @@ public class Board {
 		this.openkakao = openkakao;
 	}
 
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", memNo=" + memNo + ", categoryNo=" + categoryNo + ", brand=" + brand
-				+ ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", count=" + count + ", issueDate="
-				+ issueDate + ", status=" + status + ", price=" + price + ", dueDate=" + dueDate + ", openkakao="
-				+ openkakao + "]";
+		return "Board [boardNo=" + boardNo + ", memNo=" + memNo + ", nickName=" + nickName + ", categoryNo="
+				+ categoryNo + ", brand=" + brand + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
+				+ ", count=" + count + ", issueDate=" + issueDate + ", status=" + status + ", price=" + price
+				+ ", dueDate=" + dueDate + ", openkakao=" + openkakao + ", thumbnail=" + thumbnail + "]";
 	}
 
 }

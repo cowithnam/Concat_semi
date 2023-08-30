@@ -1,5 +1,10 @@
+<%@page import="concat.board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,61 +160,22 @@
       </div>
 
       <div class="list-area">
-          <div class="thumbnail" align="center">
-            <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-            <span style="font-size: 11px;">[브랜드명]</span> <br>
-            <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-            <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-          </div>
-          <div class="thumbnail" align="center">
-            <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-            <span style="font-size: 11px;">[브랜드명]</span> <br>
-            <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-            <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-          </div>
-          <div class="thumbnail" align="center">
-            <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-            <span style="font-size: 11px;">[브랜드명]</span> <br>
-            <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-            <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-          </div>
-          <div class="thumbnail" align="center">
-            <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-            <span style="font-size: 11px;">[브랜드명]</span> <br>
-            <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-            <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-          </div>
-          <div class="thumbnail" align="center">
-            <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-            <span style="font-size: 11px;">[브랜드명]</span> <br>
-            <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-            <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-          </div>
-          <div class="thumbnail" align="center">
-            <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-            <span style="font-size: 11px;">[브랜드명]</span> <br>
-            <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-            <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-          </div>
-          <div class="thumbnail" align="center">
-            <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-            <span style="font-size: 11px;">[브랜드명]</span> <br>
-            <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-            <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-          </div>
-          <div class="thumbnail" align="center">
-            <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-            <span style="font-size: 11px;">[브랜드명]</span> <br>
-            <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-            <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-          </div>
+      	  <% for(Board b : list){ %>
+	          <div class="thumbnail" align="center">
+	          	<input type="hidden" value="<%=b.getBoardNo() %>">
+	            <img src="<%= b.getThumbnail() %>" width="200" height="180" style="border-radius: 5px;"> 
+	            <span style="font-size: 11px;">[<%= b.getBrand() %>]</span> <br>
+	            <span style="font-size: 20px; font-weight: bolder;"><%=b.getBoardTitle() %></span> <br>
+	            <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;"><%= b.getPrice() %></span>
+	          </div>
+		  <% } %>
       </div>
   </div>
 
   <script>
     $(function(){
       $(".thumbnail").click(function(){
-        location.href="<%=contextPath %>/detail.bo";
+        location.href="<%=contextPath %>/detail.bo?bno="+$(this).children("input").val();
       });
     })
   </script>

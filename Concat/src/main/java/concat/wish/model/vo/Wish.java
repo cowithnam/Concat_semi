@@ -3,24 +3,24 @@ package concat.wish.model.vo;
 import java.sql.Date;
 
 public class Wish {
-	private String memNo;
+	private int memNo;
 	private int boardNo;
 	private Date wishDate;
 	
 	public Wish() {}
 
-	public Wish(String memNo, int boardNo, Date wishDate) {
+	public Wish(int memNo, int boardNo, Date wishDate) {
 		super();
 		this.memNo = memNo;
 		this.boardNo = boardNo;
 		this.wishDate = wishDate;
 	}
 
-	public String getMemNo() {
+	public int getMemNo() {
 		return memNo;
 	}
 
-	public void setMemNo(String memNo) {
+	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
 
@@ -44,5 +44,5 @@ public class Wish {
 	public String toString() {
 		return "Wish [memNo=" + memNo + ", boardNo=" + boardNo + ", wishDate=" + wishDate + "]";
 	}
-	
+
 }

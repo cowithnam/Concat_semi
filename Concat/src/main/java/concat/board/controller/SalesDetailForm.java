@@ -7,6 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import concat.board.model.service.BoardService;
+import concat.board.model.vo.Board;
+import concat.image.model.vo.Image;
+import concat.member.model.vo.Member;
+import concat.wish.model.vo.Wish;
+
 /**
  * Servlet implementation class SalesDetailForm
  */
@@ -19,14 +25,31 @@ public class SalesDetailForm extends HttpServlet {
      */
     public SalesDetailForm() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/board/salesDetail.jsp").forward(request, response);
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		
+		int mno = 0;
+		if(request.getSession().getAttribute("loginMember") != null) {
+			mno = ((Member)request.getSession().getAttribute("loginMember")).getMemNo();
+		}
+		
+		int result = new BoardService().increaseCount(bno);
+		
+		if(result >0) {
+			Board b = new BoardService().selectBoard(bno);
+			Image img = new BoardService().selectImage(bno);
+			Wish wish = new BoardService().selectWish(bno,mno);
+			
+			request.setAttribute("b", b);
+			request.setAttribute("img", img);
+			request.setAttribute("wish", wish);
+			request.getRequestDispatcher("views/board/salesDetail.jsp").forward(request, response);
+		}
 	}
 
 	/**

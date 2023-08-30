@@ -41,6 +41,7 @@ public class JDBCTemplate {
 	public static void commit(Connection conn) {
 		try {
 			if(!conn.isClosed() && conn != null) {
+				conn.setAutoCommit(false);
 				conn.commit();
 			}
 		} catch (SQLException e) {
@@ -51,6 +52,7 @@ public class JDBCTemplate {
 	public static void rollback(Connection conn) {
 		try {
 			if(!conn.isClosed() && conn != null) {
+				conn.setAutoCommit(false);
 				conn.rollback();
 			}
 		} catch (SQLException e) {

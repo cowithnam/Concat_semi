@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="selectListCount">
+	SELECT 
+	       COUNT(*) count
+	  FROM REVIEW
+	 WHERE STATUS = 'Y'
+</entry>
+
+<entry key="selectList">
+	SELECT *
+	  FROM (
+	    SELECT ROWNUM RNUM, A.*
+	  FROM (
+	    SELECT
+	           REVIEW_NO
+	         , MEM_ID
+	         , REVIEW_TITLE
+	         , COUNT
+	         , CREATE_DATE
+             , SCORE
+             , FILE_PATH || '/' || UPDATE_NAME "TITLEIMG"
+	      FROM REVIEW R
+          JOIN IMAGE I ON (R.REVIEW_NO = I.BOARD_NO)
+          JOIN MEMBER USING (MEM_NO)
+	     WHERE R.STATUS = 'Y'
+	     ORDER 
+	        BY REVIEW_NO DESC
+	        ) A
+	    )
+	    WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="insertReview">
+	INSERT
+	  INTO REVIEW
+	     (
+	       REVIEW_NO
+	     , MEM_NO
+         , CELL_ID
+         , REVIEW_TITLE
+         , REVIEW_CONTENT
+	     , SCORE
+         , BOARD_TYPE
+	     )
+	VALUES
+	     (
+	       SEQ_RNO.NEXTVAL
+	     , ?
+         , ?
+         , ?
+	     , ?
+	     , ?
+	     , 2
+	     )
+</entry>
+
+<entry key="insertImage">
+	INSERT
+	  INTO IMAGE
+	     (
+	       FILE_NO
+	     , BOARD_NO 
+	     , ORIGIN_NAME
+	     , UPDATE_NAME
+	     , FILE_PATH
+	     , BOARD_TYPE
+	     )
+	VALUES
+	     (
+	       SEQ_INO.NEXTVAL
+	     , SEQ_RNO.CURRVAL
+	     , ?
+	     , ?
+	     , ?
+	     , 2
+	     )
+</entry>
+
+<entry key="increaseCount">
+	UPDATE REVIEW
+	   SET COUNT = COUNT + 1
+	 WHERE REVIEW_NO = ?
+	   AND STATUS = 'Y'
+</entry>
+
+<entry key="selectReview">
+	SELECT
+           REVIEW_NO
+         , MEM_ID
+	     , REVIEW_TITLE
+	     , REVIEW_CONTENT
+	     , COUNT
+	     , CREATE_DATE
+	     , SCORE
+         , IMG_PATH1
+	  FROM REVIEW
+      JOIN MEMBER USING (MEM_NO)
+	 WHERE REVIEW_NO = ?
+</entry>
+
+<entry key="selectImage">
+	SELECT
+	       FILE_NO
+	     , ORIGIN_NAME
+	     , UPDATE_NAME
+	     , FILE_PATH || '/' || UPDATE_NAME "TITLEIMG"
+	  FROM IMAGE I
+      JOIN REVIEW R ON (R.REVIEW_NO = I.BOARD_NO)
+     WHERE I.BOARD_NO = ?
+	   AND I.BOARD_TYPE = 2
+</entry>
+
+<entry key="">
+
+</entry>
+
+<entry key="">
+
+</entry>
+
+<entry key="">
+
+</entry>
+
+<entry key="">
+
+</entry>
+
+<entry key="">
+
+</entry>
+</properties>

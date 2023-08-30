@@ -107,7 +107,7 @@
                 </tr>
                 <tr>
                     <th height="50">유효기간</th>
-                    <td><input type="text" name="dueDate" placeholder="YY/MM/DD" required></td>
+                    <td><input type="date" name="dueDate" placeholder="YY/MM/DD" required></td>
                 </tr>
                 <tr>
                     <th height="50">오픈 카카오톡</th>
@@ -116,7 +116,7 @@
                 <tr>
                     <th height="175">설명</th>
                     <td>
-                        <textarea name="content" cols="110" rows="10" style="resize: none;"></textarea>
+                        <textarea name="content" cols="110" rows="10" style="resize: none;" required></textarea>
                     </td>
                 </tr>
             </table>

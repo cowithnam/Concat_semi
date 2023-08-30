@@ -12,7 +12,36 @@ public class Notice {
 	private String status;
 	
 	public Notice() {}
-
+	
+	public Notice(int noticeNo, String noticeTitle, Date createDate , int count) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.createDate = createDate;
+		this.count = count;;
+	}
+	
+	public Notice(int noticeNo, String noticeTitle, String noticeContent,  Date createDate ,int count) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.createDate = createDate;
+		this.count = count;
+		
+	}
+	
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, int count,
+			Date createDate) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeWriter = noticeWriter;
+		this.count = count;
+		this.createDate = createDate;
+	}
+	
 	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, int count,
 			Date createDate, String status) {
 		super();
