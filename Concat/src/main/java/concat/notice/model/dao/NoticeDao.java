@@ -9,8 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+
+
+
 import static concat.common.JDBCTemplate.*;
 import concat.notice.model.vo.Notice;
+import concat.notice.model.vo.PageInfo;
 
 public class NoticeDao {
 	private Properties prop = new Properties();
@@ -62,8 +66,10 @@ public class NoticeDao {
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
-				list.add(new Notice(rset.getInt("notice_no"), rset.getString("notice_title"),
-						rset.getDate("create_date"), rset.getInt("count")));
+				list.add(new Notice(rset.getInt("notice_no"), 
+						rset.getString("notice_title"),
+						rset.getDate("create_date"), 
+						rset.getInt("count")));
 			}
 
 			
@@ -198,4 +204,71 @@ public class NoticeDao {
 		}return result;
 	}
 
+	public int noticeCount(Connection conn) {
+		int noticeCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("noticeCount");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			rset= pstmt.executeQuery();
+			
+			if(rset.next()) {
+				noticeCount = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}return noticeCount;
+		
+		
+	}
+	
+	public ArrayList<Notice> selectList(Connection conn , PageInfo pi){
+		ArrayList<Notice> list =  new ArrayList<Notice>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectList");
+		
+		int startRow = (pi.getCurrentPage() - 1)* pi.getBoardLimit() +1;
+		
+		int endRow= startRow + pi.getBoardLimit() -1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, startRow);
+			
+			pstmt.setInt(2 , endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Notice(rset.getInt("notice_no"),
+						rset.getString("notice_title"),
+						rset.getDate("create_date"),
+						rset.getInt("count")));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+			
+			
+		}return list;
+		
+		
+		
+		
+		
+	}
 }

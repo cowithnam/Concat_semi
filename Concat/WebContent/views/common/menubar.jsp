@@ -304,7 +304,7 @@
             </div>
             </div>
             <div><button>구매후기</button></div>   
-             <div><button onclick="location.href='<%= contextPath %>/listpage.no'">고객센터</button></div>  
+             <div><button onclick="location.href='<%= contextPath %>/listpage.no?cpage=1'">고객센터</button></div>  
         </div>
     </div>
 

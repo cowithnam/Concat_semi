@@ -74,4 +74,29 @@ UPDATE NOTICE
 SET STATUS = 'N'
 WHERE NOTICE_NO = ?
 </entry>
+
+<entry key="noticeCount">
+SELECT 
+	COUNT(*) count
+	FROM NOTICE
+  WHERE  STATUS = 'Y'
+	
+</entry>
+
+<entry key="selectList">
+SELECT *
+  FROM
+    (SELECT ROWNUM RNUM , A.*
+        FROM 
+            (SELECT 
+               NOTICE_NO
+              ,NOTICE_TITLE
+              ,CREATE_DATE
+              ,COUNT
+            FROM NOTICE N
+            JOIN MEMBER ON (NOTICE_WRITER = MEM_NO)
+            WHERE N.STATUS = 'Y'
+            ORDER BY NOTICE_NO DESC) A
+            )
+          WHERE RNUM BETWEEN ? AND ? </entry>
 </properties>

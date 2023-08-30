@@ -1,10 +1,19 @@
+<%@page import="concat.notice.model.vo.PageInfo"%>
 <%@page import="concat.notice.model.vo.Notice"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 
-<%ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list"); %>
+<%
+ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+PageInfo pi = (PageInfo)request.getAttribute("pi");
+int currentPage = pi.getCurrentPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage();
+int maxPage = pi.getMaxPage();
+
+	%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +24,7 @@
     <style>
         #outer{
             width: 1100px;
-            height: 800px;
+            height: 600px;
             margin: auto;
         }	
         
@@ -58,13 +67,24 @@
             margin-top: 5px;
             margin-right: 2px;
         }
+        #custom-menu{
+            position: fixed;
+            left: -5px;
+            top: 400px;
+
+        }
+        #custom-menu>div{
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
 	<br><br>
+    
     <div id="outer">
         <h1>공지사항</h1>
+        
     
         <form action="" id="no-search">
             <input type="text"> 
@@ -72,7 +92,15 @@
         </form>
     
         <hr>
-       	
+        <div id="custom-menu">
+            <ul>
+                <li><a href=""></a>공지사항</li>
+                <li><a href=""></a>QnA</li>
+                <li><a href=""></a>FAQ</li>
+                <li><a href=""></a>블랙리스트</li>
+            </ul>
+        
+        </div>
         <div align="center">
             <table class="area-no">
                 <thead>
@@ -123,12 +151,34 @@
         <% }%>
         
     </div>
+    
+  	<div class="paging=area" align="center">
+            	
+            	<%if(currentPage != 1){ %>
+                <button onclick="location.href='<%=contextPath %>/listpage.no?cpage=<%=currentPage-1%> '"> &lt; </button>
+                <% }%>
+                
+                <% for(int p = startPage; p<=endPage; p++){ %>
+                	<%if(p == currentPage){ %>
+                		<button disabled><%= p %></button>
+                	<%}else {%>
+                <button onclick="location.href='<%=contextPath%>/listpage.no?cpage=<%=p%>'"><%= p %></button>
+                	<%} %>
+                <%} %>
+                
+                <%if(currentPage != maxPage){ %>
+                <button onclick="location.href='<%=contextPath %>/listpage.no?cpage=<%=currentPage+1%>'"> &gt; </button>
+                <% }%>
+               
+                
+            </div>
+          
 
     </body>
     <script>
    //공지사항 작성하기    
     function Listwrite(){
-            location.href = "<%=contextPath%>/insertpage.no"
+            location.href = "<%=contextPath%>/insertpage.no?cpage=1"
         }
         
    //공지사항 글번호 

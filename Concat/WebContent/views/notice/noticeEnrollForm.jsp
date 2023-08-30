@@ -75,7 +75,7 @@
 
 <script>
     function backno(){
-        location.href = '<%=contextPath%>/listpage.no'
+        location.href = '<%=contextPath%>/listpage.no?cpage=1'
 
     }
 </script>

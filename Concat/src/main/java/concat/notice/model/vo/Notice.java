@@ -11,8 +11,8 @@ public class Notice {
 	private Date createDate;
 	private String status;
 	
+
 	public Notice() {}
-	
 	
 
 	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, int count,
@@ -40,19 +40,16 @@ public class Notice {
 		this.status = status;
 	}
 	
-	
 
 	public Notice(int noticeNo, String noticeTitle, Date createDate , int count) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
-		this.count = count;
 		this.createDate = createDate;
+		this.count = count;;
 	}
 
-	
 
-	
 
 	public Notice(int noticeNo, String noticeTitle, String noticeContent,  Date createDate ,int count) {
 		super();
@@ -63,6 +60,13 @@ public class Notice {
 		this.count = count;
 		
 	}
+	
+	
+
+
+
+	
+
 
 	public int getNoticeNo() {
 		return noticeNo;

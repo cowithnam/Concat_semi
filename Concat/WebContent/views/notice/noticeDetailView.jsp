@@ -108,7 +108,7 @@
 <script >
 //목록보기이동
  function nolist(){
-		 location.href = '<%=contextPath%>/listpage.no'
+		 location.href = '<%=contextPath%>/listpage.no?cpage=1'
 	
  }
  

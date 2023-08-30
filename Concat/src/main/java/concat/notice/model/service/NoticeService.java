@@ -3,10 +3,12 @@ package concat.notice.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+
 import static concat.common.JDBCTemplate.*;
 
 import concat.notice.model.dao.NoticeDao;
 import concat.notice.model.vo.Notice;
+import concat.notice.model.vo.PageInfo;
 
 public class NoticeService {
 	
@@ -22,7 +24,7 @@ public class NoticeService {
 		}return result;
 	}
 	
-	public ArrayList<Notice> selectNotice(){
+	public ArrayList<Notice> selectNotice(PageInfo pi){
 		Connection conn = getConnection();
 		
 		ArrayList<Notice> list = new NoticeDao().selectNotice(conn);
@@ -83,6 +85,21 @@ public class NoticeService {
 			rollback(conn);
 		}close(conn);
 		return result;
+	}
+	public int noticeCount() {
+		Connection conn = getConnection();
+		int noticeCount = new NoticeDao().noticeCount(conn);
+		
+		
+		close(conn);
+		return noticeCount;
+	}
+	public ArrayList<Notice> selectList(PageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<Notice> list = new NoticeDao().selectList(conn , pi);
+		
+		close(conn);
+		return list;
 	}
 
 }

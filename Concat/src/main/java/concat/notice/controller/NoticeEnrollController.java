@@ -52,12 +52,12 @@ public class NoticeEnrollController extends HttpServlet {
 		
 		int result = new NoticeService().insertNotice(n);
 		
-		System.out.println(result);
+	
 		
 		
 		if(result>0) {
 			session.setAttribute("alertMsg", "성공적으로 공지사항이 등록되었습니다!");
-			response.sendRedirect(request.getContextPath()+"/listpage.no");
+			response.sendRedirect(request.getContextPath()+"/listpage.no?cpage=1");
 			return;
 		}else {
 			request.setAttribute("errorMsg", "공지사항 등록에 실패 했습니다" );
