@@ -76,6 +76,45 @@ int maxPage = pi.getMaxPage();
         #custom-menu>div{
             border: 1px solid black;
         }
+         .minibar{    
+            position: absolute;
+            top: 580px;
+            right: 9%;
+        }
+
+        #minibar{
+            position: fixed;
+            background-image: url(resources/image/minibar.png);
+            background-repeat: no-repeat;
+            background-size: 250px 2000px;
+            width: 200px;
+            height: 200px;
+        }
+
+        #minibar>a{
+            font-size: 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bolder;
+            color: ivory;
+        }
+
+        #zzim{
+            position: relative;
+            top: 38px;
+            left: 38px;
+        }
+
+        #sell-page{
+            position: relative;
+            top: 42px;
+            left: 35px;
+        }
+
+        #minibar>a:hover{
+            text-decoration: 2px underline;
+            color: lightgray;
+        }
     </style>
 </head>
 <body>
@@ -172,6 +211,14 @@ int maxPage = pi.getMaxPage();
                
                 
             </div>
+             <div class="minibar">
+    	<div id="minibar">
+        	<a href="<%= contextPath %>//list.qa" id="zzim">QNA</a> <br>
+            <a href="<%= contextPath %>/insert.bo" id="sell-page">FAQ</a> <br>
+            <a href="<%= contextPath %>/insert.bo" id="sell-page">FAQ</a>
+            
+        </div>
+    </div>
           
 
     </body>

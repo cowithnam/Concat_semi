@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="insertQna">
+INSERT 
+INTO QNA
+(
+ QNA_NO
+,QNAE_TITLE
+,QNA_CONTENT
+,QNA_WRITER
+)
+VALUES
+(
+SEQ_QNO.NEXTVAL
+,?
+,?
+,?
+)
+
+
+
+</entry>
+</properties>
