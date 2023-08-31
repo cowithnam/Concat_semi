@@ -80,37 +80,29 @@
 </entry>
 
 <entry key="deleteMember">
-	<!-- UPDATE MEMBER
-   	   SET ENROLL_DATE = SYSDATE
+	UPDATE MEMBER
+   	   SET STATUS = 'N'
    	 WHERE MEM_ID = ?
-   	   AND MEM_PWD = ? -->
-   	   DELETE
+   	   AND MEM_PWD = ?
+   	   
+   	   <!-- DELETE
 		  FROM MEMBER
 		 WHERE MEM_ID = ?
-		   AND MEM_PWD = ?
+		   AND MEM_PWD = ? -->
 </entry>
 
-<entry key="updateImageM">
-		INSERT
-		  INTO PROFILE
-		  (
-		    FILE_NO
-		  , ORIGIN_NAME
-		  , UPDATE_NAME
-		  , FILE_PATH
-		  )
-		  VALUES
-		  (
-		    SEQ_FNO.NEXTVAL
-		  , ?
-		  , ?
-		  , ?
-		  )
+<entry key="updateProfile">
+UPDATE 
+       PROFILE 
+   SET ORIGIN_NAME = ? , 
+       UPDATE_NAME = ? , 
+       FILE_PATH = ? 
+ WHERE MEM_NO = ?
 </entry>
 
-<entry key="selectImg">
+<entry key="selectProfile">
 	SELECT
-	       *
+	       FILE_PATH|| '/' ||UPDATE_NAME "FILE_PATH"
 	  FROM PROFILE
 	 WHERE MEM_NO = ?
 </entry>
@@ -121,5 +113,21 @@
 	  FROM MEMBER
 	 WHERE MEM_NAME = ?
 	   AND PHONE = ?
+</entry>
+
+<entry key="findPWd">
+		SELECT 
+		       MEM_PWD
+		  FROM MEMBER
+		 WHERE MEM_ID = ?
+		   AND MEM_NAME = ?
+	       AND PHONE = ?
+</entry>
+
+<entry key="idCheck">
+			SELECT 
+			       COUNT(*) "COUNT"
+			  FROM MEMBER
+			 WHERE USER_ID = ?
 </entry>
 </properties>

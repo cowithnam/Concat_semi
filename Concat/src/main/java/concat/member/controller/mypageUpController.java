@@ -45,41 +45,6 @@ public class mypageUpController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-//		request.setCharacterEncoding("UTF-8");
-//		
-//		
-//		String memId = request.getParameter("memId");
-//		String memName = request.getParameter("memName");
-//		String nickName = request.getParameter("nickName");
-//		String email = request.getParameter("email");
-//		String phone = request.getParameter("phone");
-//		
-//		Member m = new Member(memId, memName, nickName, email, phone);
-//		
-//		Member up = new MemberService().updateMember(m);
-//		
-//		
-//		if(up != null) {
-//			request.getSession().setAttribute("loginMember", up);
-//			//request.getSession().setAttribute("alertMsg", "성공적으로 회원정보를 수정했습니다.");
-//			response.sendRedirect(request.getContextPath()+ "/myPage.me");
-//			
-//			 response.setContentType("text/html; charset=utf-8");
-//
-//				PrintWriter out = response.getWriter();
-//
-//				out.println("<script>");
-//
-//				out.println("alert('성공적으로 회원정보를 수정하였습니다.^_^');");
-//
-//				//out.println("history.back();");
-//
-//				out.println("</script>");
-//		}else {
-//			System.out.println("실패다 이자식아");
-//		}
-//		
-
 		if (ServletFileUpload.isMultipartContent(request)) {
 			// 1-1. 전송용량 제한
 			int maxSize = 10 * 1024 * 1024;
@@ -88,8 +53,7 @@ public class mypageUpController extends HttpServlet {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/member_upfiles/");
 
 			// 2. 전달된 파일 업로드
-			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
-					new MemberRenamPolicy());
+			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",new MemberRenamPolicy());
 
 			// 3. db에 기록할 값 뽑기
 			Member m = new Member();
@@ -98,43 +62,31 @@ public class mypageUpController extends HttpServlet {
 			m.setNickname(multiRequest.getParameter("nickName"));
 			m.setEmail(multiRequest.getParameter("email"));
 			m.setPhone(multiRequest.getParameter("phone"));
+			m.setMemNo(Integer.parseInt(multiRequest.getParameter("memNo")));
 
 			// Attachment에 여러번 insert할 데이터 뽑기
-			Profile profile = new Profile();
-
-			if (multiRequest.getOriginalFileName("file") != null) {
-				// 첨부파일이 존재할 경우
-				Profile pro = new Profile();
-				pro.setOriginName(multiRequest.getOriginalFileName("file"));
-				pro.setUpdateName(multiRequest.getFilesystemName("file"));
+			
+			Profile profile = null;
+			if(multiRequest.getOriginalFileName("file") !=null){
+				profile = new Profile();
+				profile.setOriginName(multiRequest.getOriginalFileName("file"));
+				profile.setUpdateName(multiRequest.getFilesystemName("file"));
 				// 이게 오리지널 파일네임일시 원본파일명으로 들어가기에 엑박 // 파일시스템네임이여야 제대로된 사진으로 나옴
-				pro.setFilePath("resources/member_upfiles");
-
+				profile.setFilePath("resources/member_upfiles");
+				profile.setMemNo(m.getMemNo());
 			}
 
-			int result = new MemberService().updateMember(m, profile);
-
-			if (result > 0) {
-				// 성공 => /jsp/list.th url 재요청
-				// response.sendRedirect(request.getContextPath() + "/list.th");
-				//int memNo = Integer.parseInt(request.getParameter("memNo"));
-				//int img = new MemberService().selectImg(profile);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-				response.setContentType("text/html; charset=utf-8");
-
-				PrintWriter out = response.getWriter();
-
-				out.println("<script>");
-
-				out.println("alert('성공적으로 회원정보를 수정하였습니다.^_^');");
-
-				out.println("history.back();");
-
-				out.println("</script>");
+				Member up = new MemberService().updateMember(m, profile);
 				
-			} else {
-				System.out.println("실패다 이자식아");
-
-			}
+				if (up != null) {
+					
+					request.getSession().setAttribute("loginMember", up);
+					response.sendRedirect(request.getContextPath()+"/myPage.me");
+					
+				} else {
+					System.out.println("실패다 이자식아");
+					
+				}
 		}
 
 	}

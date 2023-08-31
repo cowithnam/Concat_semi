@@ -33,14 +33,18 @@ public class MemberService {
 		
 	}
 	
-	public int updateMember(Member m, Profile profile ) {
+	public Member updateMember(Member m, Profile profile ) {
 		Connection conn = getConnection();
 		int result1 = new MemberDao().updateMember(m, conn);
-		int result2 = new MemberDao().updateImageM(conn , profile);
+		
+		int result2 = 1;
+		if(profile != null) {
+			result2 = new MemberDao().updateProfile(conn , profile);
+		}
 		
 		Member up = null;
 		
-		if(result1 > 0) {
+		if(result1 > 0 && result2> 0) {
 			commit(conn);
 			
 			up = new MemberDao().selectMember(conn, m.getMemId());
@@ -49,7 +53,7 @@ public class MemberService {
 			rollback(conn);
 		}
 		close(conn);
-		return result1 * result2;
+		return up;
 	}
 	
 	public Member updatePwd(String memId, String memPwd, String updatePwd) {
@@ -81,23 +85,41 @@ public class MemberService {
 		return result;
 	}
 	
-	public int selectImg(Profile profile) {
+	public Profile selectProfile(int memNo) {
 		Connection conn = getConnection();
-		int img = new MemberDao().selectImg(conn, profile);
+		
+		Profile pro = new MemberDao().selectProfile(memNo, conn);
 		
 		close(conn);
 		
-		return img;
-		
+		return pro;
 	}
 	
-	public String findId(String memName,String phone) {
+	public String findId(Member m) {
 		Connection conn = getConnection();
-		String memId = new MemberDao().findId(conn, memName, phone);
+		String id = new MemberDao().findId(conn, m);
 		
 		close(conn);
-		return memId;
+		return id;
 	}
+	
+	public String findPwd(Member m) {
+		Connection conn = getConnection();
+		String pwd = new MemberDao().findPwd(conn, m);
+		
+		close(conn);
+		return pwd;
+	}
+	
+	public int idCheck(String checkId) {
+		Connection conn = getConnection();
+		
+		int count = new MemberDao().idCheck(checkId, conn);
+		
+		close(conn);
+		return count;
+	}
+	
 	
 }
 	

@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import concat.image.model.vo.Profile;
+import concat.member.model.service.MemberService;
+import concat.member.model.vo.Member;
+
 /**
  * Servlet implementation class MypageEnrollController
  */
@@ -50,7 +54,9 @@ public class MypageEnrollController extends HttpServlet {
 
 				out.println("</script>");
 		}else { 
+			Profile pro = new MemberService().selectProfile(((Member)session.getAttribute("loginMember")).getMemNo());
 			
+			request.setAttribute("pro", pro);
 			RequestDispatcher view = request.getRequestDispatcher("views/member/mypage.jsp");
 			view.forward(request, response);
 		}

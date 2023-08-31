@@ -33,6 +33,13 @@ public class Member {
 		this.totalScore = totalScore;
 	}
 
+	public Member(String memId, String memName, String phone) {
+		super();
+		this.memId = memId;
+		this.memName = memName;
+		this.phone = phone;
+	}
+
 	public Member(String memId, String memPwd, String memName, String nickname, String email, String phone) {
 		super();
 		this.memId = memId;

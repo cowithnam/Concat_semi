@@ -333,10 +333,10 @@ a.link-copy {
         <!-- 회원가입폼 -->
         <div class="organize-form form-area-signin">
           <h2>회원가입</h2>
-          <form class="form" action="<%=request.getContextPath()%>/memberjoin.me" method="post">
+          <form class="form" action="<%=request.getContextPath()%>/memberjoin.me" method="post" id="enroll-form">
             <div class="form-field">
               <input type="text" name="memId" placeholder="아이디를 입력해주세요" maxlength="12" required/>
-              <!-- <button type="button" onclick="idCheck();">중복확인</button> -->
+              <button type="button" onclick="idCheck();">중복확인</button>
               <br>
             </div>
   
@@ -539,6 +539,38 @@ a.link-copy {
 		    }
 		    obj.value = phone;
 		}
+    </script>
+    
+    <script>
+    	function idCheck(){
+    		function idCheck(){
+    			const $idInput = $("#enroll-form input[name=memId]");
+    			
+    			$.ajax({
+    				url:"idCheck.me",
+    				data:{checkId:$idInput.val()},
+    				success:function(result){
+    					//console.log(result)
+    					if(result == 'NNNNN'){ //실패
+    						alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
+    						$idInput.focus();
+    					}else{ // 성공
+    						if(confirm("사용가능한 아이디입니다. 사용하시겠습니까 ? ")){
+    							$("#enroll-form :submit").removeAttr("disabled");
+    							$idInput.attr("readonly", true);
+    						}else{
+    							$idInput.focus();
+    						}
+    					}
+    				},
+    				error:function(){
+    					console.log("실패야 이자식아")
+    				}
+    				
+    			})
+        	}
+    		
+    	}
     </script>
 	
 </body>

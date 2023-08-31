@@ -209,11 +209,11 @@ private Properties prop = new Properties();
 		
 	}
 	
-	public int updateImageM(Connection conn,Profile profile) {
+	public int updateProfile(Connection conn,Profile profile) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("updateImageM");
+		String sql = prop.getProperty("updateProfile");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -221,6 +221,7 @@ private Properties prop = new Properties();
 			pstmt.setString(1, profile.getOriginName());
 			pstmt.setString(2, profile.getUpdateName());
 			pstmt.setString(3, profile.getFilePath());
+			pstmt.setInt(4, profile.getMemNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -233,27 +234,23 @@ private Properties prop = new Properties();
 		
 	}
 	
-	public int selectImg(Connection conn,Profile profile) {
-		int img = 0;
+	public Profile selectProfile(int memNo,Connection conn) {
+		Profile pro = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectImg");
+		String sql = prop.getProperty("selectProfile");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, profile.getMemNo());
+			pstmt.setInt(1, memNo);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				profile = new Profile(rset.getInt("file_no"),
-								  rset.getInt("mem_no"),
-								  rset.getString("origin_name"),
-								  rset.getString("update_name"),
-								  rset.getString("file_path"),
-								  rset.getDate("issue_date"));	
+				pro = new Profile();
+				pro.setFilePath(rset.getString("file_path"));
 			}
 			
 		} catch (SQLException e) {
@@ -262,12 +259,12 @@ private Properties prop = new Properties();
 			close(rset);
 			close(pstmt);
 		}
-		return img;
+		return pro;
 		
 	}
 	
-	public String findId(Connection conn,String memName,String phone) {
-		String memId = null;
+	public String findId(Connection conn,Member m) {
+		String id = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -276,24 +273,83 @@ private Properties prop = new Properties();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, memName);
-			pstmt.setString(2, phone);
+			pstmt.setString(1, m.getMemName());
+			pstmt.setString(2, m.getPhone());
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				memId = rset.getString("memId");
+				id = rset.getString("mem_id");
 			}
-			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
+			close(rset);
 			close(pstmt);
 		}
-		return memId;
+		return id;
 		
 		
+		
+	}
+	
+	public String findPwd(Connection conn,Member m) {
+		String pwd = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findPWd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemId());
+			pstmt.setString(2, m.getMemName());
+			pstmt.setString(3, m.getPhone());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				pwd = rset.getString("mem_pwd");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return pwd;
+		
+	}
+	
+	public int idCheck(String checkId,Connection conn) {
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("idCheck");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, checkId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(count);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
 		
 	}
 }

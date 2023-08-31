@@ -1,7 +1,10 @@
 <%@page import="concat.image.model.vo.Profile"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- <% Profile profile = (Profile)request.getAttribute("profile"); %> -->
+<%
+		Member m = ((Member)request.getSession().getAttribute("loginMember"));
+		Profile pro = (Profile)request.getAttribute("pro");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +18,7 @@
             color: white;
             border-radius: 30px ;
             width: 1000px;
-            height: 650px;
+            height: 700px;
             margin: auto;
             margin-top: 100px;
         }   
@@ -94,7 +97,9 @@
         	top:8px;
         }
         
-
+		#profileimg{
+			border-radius: 80px;
+		}
     </style>
     
 <!-- Latest compiled and minified CSS -->
@@ -112,21 +117,17 @@
 </head>
 <body>
 	<%@ include file ="../common/menubar.jsp" %>
-	
-	<%
-		String memId = loginMember.getMemId();
-		String memName = loginMember.getMemName();
-		String nickName = (loginMember.getNickname() == null)? "": loginMember.getNickname();
-		String phone = (loginMember.getPhone() == null)? "" : loginMember.getPhone();
-		String email = (loginMember.getEmail() == null)? "" : loginMember.getEmail();
-		
-	%>
-	
 	<div class="wrap">
         <div id="header_1">
             <img src="resources/image/concatlo.png" style="width: 300px; height: 100px;">
             <div id="header_2">
-                <img  id="profileimg" style="height: 100px; width: 100px;" onclick="profile();">
+            	<% if(pro == null){ %>
+            	<!-- 프로필 사진이 없을경우  -->
+                <img src="resources/image/sayoungja.png" id="profileimg" style="height: 150px; width: 150px;" onclick="profile();">
+                <% }else { %>
+                <!-- 프로필 사진이 있을경우  -->
+                <img src="<%=contextPath %>/<%=pro.getFilePath() %>" id="profileimg" style="height: 150px; width: 150px;" onclick="profile();">
+                <% } %>
             </div>
         </div>
 
@@ -147,37 +148,38 @@
                     </tr>
                     <tr>
                         <th style="height: 50px; width: 300px;" >※ 아이디 </th>
-                        <td><input type="text" name="memId" value="<%= memId %>" maxlength="12" readonly></td>
+                        <td><input type="text" name="memId" value="<%= m.getMemId() %>" maxlength="12" readonly></td>
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 이름</th>
-                        <td><input type="text" name="memName" value="<%= memName %>" maxlength="6" required></td>
+                        <td><input type="text" name="memName" value="<%= m.getMemName() %>" maxlength="6" required></td>
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 닉네임</th>
-                        <td><input type="text" name="nickName" value="<%= nickName %>" maxlength="6"></td>
+                        <td><input type="text" name="nickName" value="<%= m.getNickname() %>" maxlength="6"></td>
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 전화번호 </th>
-                        <td><input type="text" name="phone" onKeyup = "addHypen(this);" value="<%= phone %>"></td>
+                        <td><input type="text" name="phone" onKeyup = "addHypen(this);" value="<%= m.getPhone() %>"></td>
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 이메일 </th>
-                        <td><input type="email" name="email" value="<%= email %>" placeholder="@ 포함해서 입력"></td>
+                        <td><input type="email" name="email" value="<%= m.getEmail() %>" placeholder="@ 포함해서 입력"></td>
                     </tr>
-                </table>  
+                </table> 
+                <input type="hidden" name="memNo" value="<%=m.getMemNo()%>"> 
+		        <input type="file" name="file" id="file" style="display:none" onchange="loadimg(this)">
                 <br>
                 <div>
-                    <button type="submit" class="sujung" onclick="return sujung_1();">정보수정</button>
+                    <button type="submit" class="sujung" onclick="return update();">정보수정</button>
                     <button type="button" class="chenge" data-toggle="modal" data-target="#updatePwdModal" >비밀번호변경</button>
                     <button type="button" class="exit" data-toggle="modal" data-target="#exitModal">회원탈퇴</button>
                 </div>  
-		        <input type="file" name="file1" id="file" style="display:none" onchange="loadimg(this)">
                 </form>
         </div>
     </div>
     <script>
-        function sujung_1(){
+        function update(){
             if(confirm("회원정보를 수정하시겠습니까 ?") == false){
             	return false;
             }
@@ -197,8 +199,9 @@
 
                 reader.onload = function(e){
                 	$("#profileimg").attr("src", e.target.result);
-                	
                 }
+            }else{
+            	$("#profileimg").attr("src", "resources/image/sayoungja.png");
             }
         }
     </script>
@@ -212,7 +215,7 @@
                 </div>
                 <div class="modal-body" align="center">
                     <form action="<%= contextPath %>/updatePwd.me" method="post">
-                    <input type="hidden" name="memId" value="<%= memId %>">
+                    <input type="hidden" name="memId" value="<%= m.getMemId() %>">
                         <table>
                             <tr>
                                 <td>현재 비밀번호</td>
@@ -263,10 +266,10 @@
           <div class="modal-body" align="center">
             <form action="<%= contextPath %>/exit.me" method="post">
                 <b>탈퇴 후 복구가 불가능합니다.<br> 정말로 탈퇴하시겠습니까 ? </b> <br><br>
-				<input type="hidden" name="memId" value="<%= memId %>">
+				<input type="hidden" name="memId" value="<%= m.getMemId() %>">
 				
                 비밀번호 : <input type="password" name="memPwd" required> <br><br>
-                <button type="submit" id="exit_1")>탈퇴하기</button>
+                <button type="submit" id="exit_1">탈퇴하기</button>
              
             </form>
           </div>
