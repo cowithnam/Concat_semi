@@ -5,6 +5,8 @@
 	String filepath = request.getSession().getServletContext().getRealPath("/WebContent/resources/image/");
 	String contextPath = request.getContextPath();
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	Member m = (Member)request.getAttribute("loginMember");
+	
 %>
 <!DOCTYPE html>
 <html>

@@ -58,7 +58,7 @@
     <%@ include file ="../common/menubar.jsp" %>
    
     <div id="outer">
-        <h1>공지사항 작성하기</h1>
+        <h1>공지사항 수정하기</h1>
         <hr>
         <form action="<%= contextPath %>/update.no" method="post" id="no-enroll">
         	<input type="hidden" name ="num" value="<%=n.getNoticeNo()%>">

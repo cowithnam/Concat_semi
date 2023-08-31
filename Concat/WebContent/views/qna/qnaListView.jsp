@@ -1,5 +1,19 @@
+<%@page import="concat.qna.model.vo.QnaInfo"%>
+<%@page import="concat.qna.model.vo.Qna"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("list");
+ QnaInfo qi = (QnaInfo)request.getAttribute("qi");
+
+
+ int currentPage = qi.getCurrentPage();
+ int startPage = qi.getStartPage();
+ int endPage = qi.getEndPage();
+ int maxPage = qi.getMaxPage();
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,49 +137,65 @@
                     <tr>
                         <th class="num" width="15%">NO</th>
                         <th  width="60%">제목</th>
+                        <th  width="15%">작성자</th>
                         <th  width="15%">작성일</th>
-                        <th  width="15%">조회수</th>
                     </tr>
                 </thead>
                <tbody>
-				
-				<!-- case1. 공지글이 없을 경우-->
-
-				<%if(list.isEmpty()){ %>
+               
+               <%if(list.isEmpty()){ %>
 				<tr>
-					<td colspan="4">존재하는 QNA게시글이 없습니다.</td>
+					<td colspan="4">존재하는 QNA 게시글이 없습니다.</td>
 				</tr>
 				<%}else{%>
 
-				<!--case.2 공지글이 있는 경우  -->
+				
 
-				<% for(Notice n : list){ %>
+				<% for(Qna q : list){ %>
 
 				<tr>
-					<td><%=n.getNoticeNo() %></td>
-					<td><%=n.getNoticeTitle() %></td>
-					<td><%=n.getCreateDate() %></td>
-					<td><%=n.getCount()%></td>
+					<td><%=q.getQnaNo() %></td>
+					<td><%=q.getQnaTitle() %></td>
+					<td><%=q.getQnaWriterNick() %></td>
+					<td><%=q.getCreateDate() %></td>
 				</tr>
 
 				<%} %>
 				<%}%>
-			
-				
-
 				
 			</tbody>
                 
             </table>
         </div>
-        
-        <div align="right">
-        <button class="enroll-btn" onclick = "Listwrite()">작성하기 </button>
+        <%if(loginMember != null ){%>
+        	   <div align="right">
+        <button class="enroll-btn" onclick = "qnawrite()">작성하기 </button>
 
         </div>
-       
+       <% } %>
         
     </div>
+    <div class="paging=area" align="center">
+            	
+            	<%if(currentPage != 1){ %>
+                <button onclick="location.href='<%=contextPath %>/list.qa?qpage=<%=currentPage-1%> '"> &lt; </button>
+                <% }%>
+                
+                <% for(int p = startPage; p<=endPage; p++){ %>
+                	<%if(p == currentPage){ %>
+                		<button disabled><%= p %></button>
+                	<%}else {%>
+                <button onclick="location.href='<%=contextPath%>/list.qa?qpage=<%=p%>'"><%= p %></button>
+                	<%} %>
+                <%} %>
+                
+                <%if(currentPage != maxPage){ %>
+                <button onclick="location.href='<%=contextPath %>/list.qa?qpage=<%=currentPage+1%>'"> &gt; </button>
+                <% }%>
+               
+                
+            </div>
+    
     
   	
              <div class="minibar">
@@ -179,6 +209,22 @@
           
 
     </body>
+
+    <script>
+        function qnawrite(){
+        	location.href="<%= contextPath%>/insert.qa"
+        }
+        
+        $(function(){
+            $(".area-no > tbody > tr").click(function(){
+            	const num =$(this).children().eq(0).text();
+              	
+              location.href = '<%=contextPath %>/detail.qa?num='+num;
+              
+              })
+             })
+
+    </script>
    
     
 </html>

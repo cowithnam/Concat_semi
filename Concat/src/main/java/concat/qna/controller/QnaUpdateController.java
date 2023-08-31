@@ -10,22 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import concat.member.model.vo.Member;
-import concat.notice.model.service.NoticeService;
+
 import concat.qna.model.service.QnaService;
 import concat.qna.model.vo.Qna;
 
 /**
- * Servlet implementation class QnaEnrollController
+ * Servlet implementation class QnaUpdateController
  */
-@WebServlet("/enroll.qa")
-public class QnaEnrollController extends HttpServlet {
+@WebServlet("/update.qa")
+public class QnaUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaEnrollController() {
+    public QnaUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,40 +34,29 @@ public class QnaEnrollController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		int qnaNo = Integer.parseInt(request.getParameter("num")); 
 		String qnaTitle = request.getParameter("title");
 		String qnaContent = request.getParameter("content");
-		String nickname = request.getParameter("nickname");
-		
-		
-		HttpSession session = request.getSession();
-		int userNo =((Member)session.getAttribute("loginMember")).getMemNo();
 		
 		Qna q = new Qna();
+		
+		q.setQnaNo(qnaNo);
 		q.setQnaTitle(qnaTitle);
 		q.setQnaContent(qnaContent);
-		q.setQnaWriter(String.valueOf(userNo));
-		q.setQnaWriterNick(nickname);
 		
-		System.out.println(nickname);
+		int result =  new QnaService().updateQna(q);
 		
 		
 		
-		
-		
-		
-		int result = new QnaService().insertQna(q);
-		
-	
-		
-		if(result>0) {
-			session.setAttribute("alertMsg", "성공적으로 QNA가 등록되었습니다!");
-			response.sendRedirect(request.getContextPath()+"/list.qa?qpage=1");
-			return;
+		if(result >0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg","성공적으로 공지사항 수정 되었습니다");
+			response.sendRedirect(request.getContextPath() + "/detail.qa?num="+q.getQnaNo());
+			
 		}else {
-			request.setAttribute("errorMsg", "QNA 등록에 실패 했습니다" );
+			request.setAttribute("errorMsg", "공지사항 수정에 실패 했습니다");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
-			
 		}
 	}
 

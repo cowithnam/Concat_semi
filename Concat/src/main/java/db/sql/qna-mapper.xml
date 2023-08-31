@@ -7,19 +7,90 @@ INSERT
 INTO QNA
 (
  QNA_NO
-,QNAE_TITLE
+,QNA_TITLE
 ,QNA_CONTENT
 ,QNA_WRITER
+,QNA_WRITER_NICK
 )
 VALUES
-(
-SEQ_QNO.NEXTVAL
+(SEQ_QNO.NEXTVAL
+,?
 ,?
 ,?
 ,?
 )
+</entry>
 
 
+<entry key="qnaCount">
+SELECT 
+	COUNT(*) count
+	FROM QNA
+  WHERE  STATUS = 'Y'
 
 </entry>
+
+<entry key="qnaselectList">
+SELECT *
+  FROM
+    (SELECT ROWNUM RNUM , A.*
+        FROM 
+            (SELECT 
+               QNA_NO
+              ,QNA_TITLE
+              ,CREATE_DATE
+              ,QNA_WRITER_NICK
+            FROM QNA Q
+            JOIN MEMBER ON (QNA_WRITER = MEM_NO)
+            WHERE Q.STATUS = 'Y'
+            ORDER BY QNA_NO DESC) A
+            )
+          WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="increaseCount">
+UPDATE QNA
+SET COUNT = COUNT+1
+WHERE QNA_NO = ?
+AND STATUS = 'Y'
+
+</entry>
+
+<entry key="selectQnaDetail">
+SELECT 
+QNA_NO
+,QNA_TITLE
+,QNA_CONTENT
+,QNA_WRITER
+,CREATE_DATE
+,QNA_WRITER_NICK
+FROM
+QNA Q
+JOIN MEMBER ON (MEM_NO = QNA_WRITER)
+WHERE QNA_NO = ?
+
+</entry>
+
+<entry key = "updateQna">
+UPDATE QNA
+SET QNA_TITLE = ?
+    ,QNA_CONTENT = ?
+    WHERE QNA_NO = ?
+</entry>
+
+<entry key="selectedQna">
+SELECT 
+QNA_NO
+,QNA_TITLE
+,QNA_CONTENT
+,QNA_WRITER
+,CREATE_DATE
+,QNA_WRITER_NICK
+FROM
+QNA 
+JOIN MEMBER ON (MEM_NO = QNA_WRITER)
+WHERE QNA_NO = ?
+</entry>
+
+
 </properties>

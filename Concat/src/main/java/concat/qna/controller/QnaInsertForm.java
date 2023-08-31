@@ -1,4 +1,4 @@
-package concat.member.controller;
+package concat.qna.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import concat.member.model.service.MemberService;
-import concat.member.model.vo.Member;
-
 /**
- * Servlet implementation class LoginSetController
+ * Servlet implementation class QnaInsertForm
  */
-@WebServlet("/loginset.me")
-public class LoginSetController extends HttpServlet {
+@WebServlet("/insert.qa")
+public class QnaInsertForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginSetController() {
+    public QnaInsertForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,19 +26,7 @@ public class LoginSetController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memId = request.getParameter("memId");
-		String memPwd = request.getParameter("memPwd");
-		
-	
-		Member loginMember = new MemberService().loginMember(memId, memPwd);
-		
-		
-		if(loginMember == null) {
-			//실패로
-		}else {
-			request.getSession().setAttribute("loginMember", loginMember);
-			response.sendRedirect(request.getContextPath());
-		}
+		request.getRequestDispatcher("views/qna/qnaEnrollForm.jsp").forward(request, response);
 	}
 
 	/**

@@ -213,7 +213,7 @@ int maxPage = pi.getMaxPage();
             </div>
              <div class="minibar">
     	<div id="minibar">
-        	<a href="<%= contextPath %>//list.qa" id="zzim">QNA</a> <br>
+        	<a href="<%= contextPath %>/list.qa?qpage=1" id="zzim">QNA</a> <br>
             <a href="<%= contextPath %>/insert.bo" id="sell-page">FAQ</a> <br>
             <a href="<%= contextPath %>/insert.bo" id="sell-page">FAQ</a>
             
