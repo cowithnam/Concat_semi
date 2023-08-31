@@ -3,7 +3,6 @@ package concat.board.model.dao;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -213,6 +212,7 @@ public class BoardDao {
 				b.setNickName(rset.getString("nickname"));
 				b.setDueDate(rset.getDate("due_date"));
 				b.setBoardContent(rset.getString("board_content"));
+				b.setOpenkakao(rset.getString("open_kakao"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -275,8 +275,6 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectWish");
-		System.out.println(bno);
-		System.out.println(mno);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bno);
@@ -289,7 +287,6 @@ public class BoardDao {
 				wish.setBoardNo(rset.getInt("board_no"));
 				wish.setMemNo(rset.getInt("mem_no"));
 			}
-			System.out.println(wish);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -298,4 +295,102 @@ public class BoardDao {
 		}
 		return wish;
 	}
+	
+	public int deleteWish(Wish w, Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteWish");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, w.getMemNo());
+			pstmt.setInt(2, w.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertWish(Wish w, Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertWish");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, w.getMemNo());
+			pstmt.setInt(2, w.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Wish> selectWishList(int memNo,Connection conn){
+		ArrayList<Wish> list = new ArrayList<Wish>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectWishList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Wish w = new Wish();
+				w.setBoardNo(rset.getInt("board_no"));
+				w.setMemNo(rset.getInt("mem_no"));
+				
+				list.add(w);
+			}
+			
+			for(Wish w:list) {
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public Board selectWishBoard(int bno,Connection conn) {
+		Board b = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectWishBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				b = new Board();
+				b.setBoardNo(rset.getInt("board_no"));
+				b.setBoardTitle(rset.getString("board_title"));
+				b.setBrand(rset.getString("brand_name"));
+				b.setPrice(rset.getInt("price"));
+				b.setThumbnail(rset.getString("thumbnail"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return b;
+	}
+	
 }

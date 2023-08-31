@@ -67,14 +67,7 @@
       height: 180px;
     }
     
-    .noneWish{
-    	background-color: white;
-    	color: gray;
-    }
-    .wantWish{
-    	background-color: white;
-    	color: red;
-    }
+ 
     
     .wish{
     	width: 60px;
@@ -83,7 +76,30 @@
     	font-weight: bolder;  
     	border-radius: 10px;
     	margin: 30px 0px 20px;
+    	background-color: white;
+    	color: gray;
     }
+    
+    .wantWish{
+    	background-color: white;
+    	color: red;
+    }
+    
+    .modal{
+    	width: 460px;
+    	height: 300px;
+    	background: white;
+      color: black;
+    	display:none;
+    	position:absolute;
+    	top:300px;
+    	left:980px;
+      border-radius: 15px;
+    }
+    
+    .modal_content{
+      
+	  }
   </style>
 </head>
 <body>
@@ -105,11 +121,11 @@
           <h4>유효기간 : <%=b.getDueDate() %></h4>
           <hr>
           <% if(wish == null){ %>
-          	<button id="noneWish" class="noneWish wish">♥</button>
+          	<button type="button" id="noneWish" class="wish" onclick="wish();">♥</button>
           <% }else{ %>
-          	<button id="wantWish" class="wantWish wish">♥</button>
+          	<button type="button" id="wantWish" class="wish wantWish" onclick="wish();">♥</button>
           <% } %>
-          <button type="button" style="width: 360px; height: 60px; ">구매하기</button>
+          <button type="button" style="width: 360px; height: 60px;" id="sell">구매하기</button>
           <a href="https://ecrm.police.go.kr/sci/pcc_V3_send" style="font-size: 16px;" >신고 여부 확인</a>
           <hr>
       </div>
@@ -134,6 +150,67 @@
           </div>
       </div>
   </div>
+  
+  <div class="modal">
+    <div class="modal-header">
+      <h1>판매자 오픈 카카오 안내</h1>
+      <hr>
+      <h4 style="margin: 6px 0px 6px;">콘캣마켓은 상품 판매와 직접적인 관련이 없으며,</h4>
+      <h4 style="margin: 6px 0px 6px;">모든 상거래의 책임은 구매자와 판매자에게 있습니다.</h4>
+  	  <h4 style="margin: 6px 0px 6px;">거래시 유효기간을 확인시길 바랍니다.</h4>
+    </div>
+  	<div class="modal-content">
+        <h3 style="margin: 30px 0px 30px;">판매자 : <% if(b.getNickName() != null){ %>
+          									  			<%= b.getNickName() %>
+          									  	   <% }else{ %>
+          									  			<%= b.getMemNo() %>
+          									  	   <% } %></h3>
+       	<h3 style="margin: 30px 0px 30px;">오픈카카오 : <%= b.getOpenkakao() %></h3>
+  	</div>
+  </div>
+  
+  <script>
+	  function wish(){
+		  if($(".wish").hasClass("wantWish")){
+	    	$.ajax({
+	    		url:"removeWish",
+	     		data:{bNo:<%=b.getBoardNo() %>},
+	      		success:function(result){
+	      			if(result>0){
+	      				$(".wish").removeClass("wantWish");
+	      			}
+	      		},	
+	      		error:function(){
+	        		console.log("삭제 오류발생")
+	      		}
+	     	 })
+	  	  }else{
+	   		$.ajax({
+	      		url:"addWish",
+	      		data:{bNo:<%=b.getBoardNo() %>},
+	      		success:function(result){
+	        		if(result>0){
+	        			$(".wish").addClass("wantWish");
+	        		}
+	      		},
+	      		error:function(){
+	       		 console.log("추가 오류발생") 
+	      		}
+	    	})
+	  	  }
+	  }  
+	  $(function(){ 
 
+		  $("#sell").click(function(){
+		    $(".modal").fadeIn();
+		  });
+		  
+		  $(".modal").click(function(){
+		    $(".modal").fadeOut();
+		  });
+		  
+		});
+  </script>
+  
 </body>
 </html>

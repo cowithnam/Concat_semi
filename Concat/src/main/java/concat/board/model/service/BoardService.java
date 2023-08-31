@@ -111,5 +111,55 @@ public class BoardService {
 		
 		return wish;
 	}
+	
+	public int deleteWish(Wish w) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteWish(w,conn);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+	
+	public int insertWish(Wish w) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().insertWish(w,conn);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+	
+	public ArrayList<Wish> selectWishList(int memNo){
+		Connection conn = getConnection();
+		
+		ArrayList<Wish> list = new BoardDao().selectWishList(memNo,conn);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	public Board selectWishBoard(int bno) {
+		Connection conn = getConnection();
+		
+		Board b = new BoardDao().selectWishBoard(bno,conn);
+		
+		close(conn);
+		
+		return b;
+	}
 
 }

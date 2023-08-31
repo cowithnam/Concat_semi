@@ -306,10 +306,8 @@
             $("#cg-span").click(function(){
                 location.href="<%=contextPath %>/shop.do"
             });
-        })
-        
-        $(function(){
-        	$("#concatLogo").click(function(){
+            
+            $("#concatLogo").click(function(){
         		location.href="<%=contextPath %>"
         	});
         })

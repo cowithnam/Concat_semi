@@ -33,6 +33,7 @@
 	     , NICKNAME
 	     , DUE_DATE
 	     , BOARD_CONTENT
+	     , OPEN_KAKAO
 	  FROM BOARD
 	  JOIN MEMBER USING (MEM_NO)
 	  JOIN BRAND ON (BRAND = BRAND_NO)
@@ -115,5 +116,47 @@
 	  FROM WISH_LIST
 	 WHERE BOARD_NO = ?
 	   AND MEM_NO = ?
+</entry>
+<entry key="deleteWish">
+	DELETE 
+	  FROM WISH_LIST 
+	 WHERE MEM_NO = ?
+	   AND BOARD_NO = ?
+</entry>
+<entry key="insertWish">
+	INSERT
+	  INTO WISH_LIST
+	     (
+	       MEM_NO
+	     , BOARD_NO
+	     )
+	VALUES 
+	     (
+	       ?
+	     , ?
+	     )
+</entry>
+<entry key="selectWishList">
+	SELECT
+	       MEM_NO
+	     , BOARD_NO
+	  FROM WISH_LIST
+	 WHERE MEM_NO = ?
+</entry>
+<entry key="selectWishBoard">
+	SELECT
+	       BOARD_NO
+	     , BOARD_TITLE
+	     , BRAND_NAME
+	     , PRICE
+	     , FILE_PATH || '/' || UPDATE_NAME "THUMBNAIL"
+	  FROM BOARD B
+	  JOIN IMAGE USING (BOARD_NO)
+      JOIN BRAND ON (BRAND = BRAND_NO)
+	 WHERE B.BOARD_TYPE = 1
+       AND BOARD_NO = ?
+	   AND B.STATUS = 'Y'
+	 ORDER
+	    BY BOARD_NO DESC
 </entry>
 </properties>
