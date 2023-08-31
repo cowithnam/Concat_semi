@@ -20,6 +20,12 @@ VALUES
 ,?
 )
 </entry>
+<entry key="answerQna">
+UPDATE QNA
+SET QNA_ANSWER = ?
+WHERE QNA_NO = ?
+
+</entry>
 
 
 <entry key="qnaCount">
@@ -89,6 +95,11 @@ QNA_NO
 FROM
 QNA 
 JOIN MEMBER ON (MEM_NO = QNA_WRITER)
+WHERE QNA_NO = ?
+</entry>
+<entry key="deleteqna">
+UPDATE QNA
+SET STATUS = 'N'
 WHERE QNA_NO = ?
 </entry>
 

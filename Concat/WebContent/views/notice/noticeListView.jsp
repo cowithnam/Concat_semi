@@ -115,6 +115,9 @@ int maxPage = pi.getMaxPage();
             text-decoration: 2px underline;
             color: lightgray;
         }
+        table, td, th {
+            border-collapse : collapse;
+        }
     </style>
 </head>
 <body>
@@ -131,15 +134,7 @@ int maxPage = pi.getMaxPage();
         </form>
     
         <hr>
-        <div id="custom-menu">
-            <ul>
-                <li><a href=""></a>공지사항</li>
-                <li><a href=""></a>QnA</li>
-                <li><a href=""></a>FAQ</li>
-                <li><a href=""></a>블랙리스트</li>
-            </ul>
-        
-        </div>
+       
         <div align="center">
             <table class="area-no">
                 <thead>

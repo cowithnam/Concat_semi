@@ -10,22 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import concat.member.model.vo.Member;
 import concat.notice.model.service.NoticeService;
+import concat.notice.model.vo.Notice;
 import concat.qna.model.service.QnaService;
 import concat.qna.model.vo.Qna;
 
 /**
- * Servlet implementation class QnaEnrollController
+ * Servlet implementation class QnaDeleteController
  */
-@WebServlet("/enroll.qa")
-public class QnaEnrollController extends HttpServlet {
+@WebServlet("/deleteqna.qa")
+public class QnaDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaEnrollController() {
+    public QnaDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,42 +34,28 @@ public class QnaEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String qnaTitle = request.getParameter("title");
-		String qnaContent = request.getParameter("content");
-		String nickname = request.getParameter("nickname");
+		int qnaNo = Integer.parseInt(request.getParameter("num")); 
+		
+		Qna  q = new Qna();
+		
+		q.setQnaNo(qnaNo);
+		
+		int result = new QnaService().deleteqna(q);
 		
 		
-		HttpSession session = request.getSession();
-		int userNo =((Member)session.getAttribute("loginMember")).getMemNo();
-		
-		Qna q = new Qna();
-		q.setQnaTitle(qnaTitle);
-		q.setQnaContent(qnaContent);
-		q.setQnaWriter(String.valueOf(userNo));
-		q.setQnaWriterNick(nickname);
-		
-		
-		
-		
-		
-		
-		
-		
-		int result = new QnaService().insertQna(q);
-		
-	
-		
-		if(result>0) {
-			session.setAttribute("alertMsg", "성공적으로 QNA가 등록되었습니다!");
-			response.sendRedirect(request.getContextPath()+"/list.qa?qpage=1");
+		if(result > 0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "성공적으로 글 삭제가 완료되었습니다!");
+			response.sendRedirect(request.getContextPath()+">/list.qa?qpage=1");
 			return;
+			
 		}else {
-			request.setAttribute("errorMsg", "QNA 등록에 실패 했습니다" );
+			request.setAttribute("errorMsg", "글삭제에 실패 했습니다");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 			
 		}
+		
 	}
 
 	/**

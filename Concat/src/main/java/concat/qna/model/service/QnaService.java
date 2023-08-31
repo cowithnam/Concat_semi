@@ -82,4 +82,28 @@ public class QnaService {
 		return result;
 		
 	}
+	public int answerQna(Qna q) {
+		Connection conn = getConnection();
+
+		int result = new QnaDao().answerQna(conn, q);
+
+		System.out.println(result);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+	public int deleteqna(Qna q) {
+		Connection conn= getConnection();
+		int result  = new QnaDao().deleteqna(conn,q);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}close(conn);
+		return result;
+	}
 }

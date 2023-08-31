@@ -102,7 +102,7 @@
 
 <script>
     function backno(){
-        location.href = '<%=contextPath%>/update.qa?num=<%=q.getQnaNo()%>'
+    	location.href = '<%=contextPath %>/detail.qa?num=<%=q.getQnaNo()%>'
 
     }
 

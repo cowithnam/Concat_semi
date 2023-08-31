@@ -16,7 +16,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항상세</title>
+    <title>QNA상세</title>
     <style>
         #outer{
             width: 1000px;
@@ -75,6 +75,11 @@
             float: left;
             height: 10px;
         }
+        #answer{
+        font-size: 19px;
+            font-weight: bold;
+        
+        }
     </style>
 </head>
 <body>
@@ -94,30 +99,30 @@
             <strong><%=q.getQnaContent() %></strong>
             </div>
             <br>
+             <%if((loginMember != null && loginMember.getMemId().equals("user01")) || (loginMember != null &&q.getQnaWriter().equals(loginMember.getMemNo()+""))){ %>
+             <div id="answer">
+          
+            댓글  <br>
+           
             
-            <%if(loginMember != null && loginMember.getMemId().equals("user01")){ %>
-            답변  <br>
-            <form action="">
-            <textarea  name="content" cols="30" rows="10" style="resize: none;" ></textarea>
-             </form>
-            <br><% }%>
-            
+            <textarea  name="content" cols="30" rows="10" style="resize: none;" placeholder="댓글을입력하세요" ></textarea>
+             
+            <br>
+            </div>
+            <% }%>
            
             <br>
             
             <div align="center">
-            <%if(loginMember != null && q.getQnaWriter().equals(loginMember.getMemNo()+"") && !loginMember.getMemId().equals("user01")) {%>
+            <%if(loginMember != null && loginMember.getMemId().equals("user01")){%>
+            <button id="button1" onclick = "asnwer();">댓글달기</button>
+            <%}else if (loginMember != null &&q.getQnaWriter().equals(loginMember.getMemNo()+"") && ! loginMember.getMemId().equals("user01") ){ %>
+       		<button id="button1" onclick = "answer();">댓글달기</button>
        		<button id="button1" onclick = "location.href='<%=contextPath %>/updateform.qa?num=<%=q.getQnaNo()%>'">수정하기</button>
-            <button id="button1" onclick = "deleteno();">삭제하기</button>
-          
+            <button id="button1" onclick = "location.href = '<%=contextPath%>/deleteqna.qa?num=<%=q.getQnaNo()%>">삭제하기</button>
 			<%}%>
 			
-			 <%if(loginMember != null && loginMember.getMemId().equals("user01")){ %>
-			 <button id="button1" onclick = "location.href='<%=contextPath %>/updateform.qa?num=<%=q.getQnaNo()%>'">답변하기</button>
-            <button id="button1" onclick = "deleteno();">삭제하기</button>
-			 <%} %>
-			 
-            <button id="button1" onclick = "nolist();">목록보기</button>
+            <button id="button1" onclick = "location.href = '<%=contextPath%>/list.qa?qpage=1'">목록보기</button>
                 <br><br>
             </div>
     </div>
@@ -128,6 +133,15 @@
 		 location.href = '<%=contextPath%>/list.qa?qpage=1'
 			
 	
+ }
+ 
+ function deleteno(){
+	 if(confirm("정말 해당글을 삭제하시겠습니까?")){
+		 location.href = '<%=contextPath%>/deleteqna.qa?num=<%=q.getQnaNo()%>'
+	 		
+	 }else{
+		 location.href = '<%=contextPath %>/detail.qa?num=<%=q.getQnaNo()%>'
+	 
  }
  
 

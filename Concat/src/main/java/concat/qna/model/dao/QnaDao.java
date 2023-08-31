@@ -56,6 +56,34 @@ public class QnaDao {
 		return result;
 		
 	}
+	public int answerQna(Connection conn , Qna q) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("answerQna");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+
+			
+			pstmt.setString(1, q.getQnaContent());
+			pstmt.setInt(2, q.getQnaNo());
+			
+			
+			
+			
+			
+			result = pstmt.executeUpdate();
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
 	
 	public int qnaCount(Connection conn) {
 		int qnaCount = 0;
@@ -215,6 +243,25 @@ public class QnaDao {
 			close(pstmt);
 		}
 		return result;
+		
+	}
+	
+	public int deleteqna(Connection conn, Qna q){
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteqna");
+		
+		try {
+			pstmt= conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, q.getQnaNo());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
 		
 	}
 }
