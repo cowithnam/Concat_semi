@@ -14,7 +14,7 @@ import concat.review.model.vo.Review;
 /**
  * Servlet implementation class ReviewDetailController
  */
-@WebServlet("/listDetail.br")
+@WebServlet("/listDetail.re")
 public class ReviewDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,7 +29,7 @@ public class ReviewDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo = Integer.parseInt(request.getParameter("num")); 
+int rNo = Integer.parseInt(request.getParameter("num")); 
 		
 		int result = new ReviewService().increaseCount(rNo);
 		
@@ -39,9 +39,9 @@ public class ReviewDetailController extends HttpServlet {
 
 			request.setAttribute("image", image);
 			request.setAttribute("r", r);
-			request.getRequestDispatcher("views/review/reviewinformation.jsp").forward(request, response);
+			request.getRequestDispatcher("views/review/reviewDetail.jsp").forward(request, response);
 		}else {
-			request.setAttribute("alertMsg", "상세페이지 조회에 실패했습니다.");
+			
 		}
 	}
 

@@ -22,10 +22,11 @@
     .btn_confirm write_div{
         margin: auto;
         text-align: center;
-        
-        
     }
 
+    textarea{
+       text-align: left;
+    }
 </style>
 
 </head>
@@ -45,9 +46,9 @@
             		<input type="hidden" name="userNo" value="<%= loginMember.getMemNo() %>">
             
                     <div>
-                        <label class="bo_w_title" for="wr_1"><h1><b>제목</b></h1></label>
+                        <label class="bo_w_title" for="wr_1"><h1><b>신고 제목</b></h1></label>
                         <br><br>
-                        <input type="text" name="title" id="wr_1" class="frm_input required" required>
+                        <input type="text" name="title" id="wr_1" class="frm_input required" placeholder="신고제목" required>
                     </div>
                     
                     <br>
@@ -63,9 +64,7 @@
                     <div class="wr_content ">
                     	신고내용
                     	<br> 
-                        <textarea id="wr_content" name="content" style="width:100%; height:300px; resize: none;" placeholder="신고내용">
-                        
-                        </textarea>                        
+                        <textarea id="wr_content" name="content" style="width:100%; height:300px; resize: none;" placeholder="신고내용" required></textarea>                        
                     </div>
 
 					<div>

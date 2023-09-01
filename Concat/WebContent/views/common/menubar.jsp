@@ -274,8 +274,7 @@
             	</div>
             <% }else{ %>
            		<div>
-               		<b style="color: orange;"><%= loginMember.getMemName() %></b>
-	                <a href="<%= contextPath %>/myPage.me" style="text-decoration: none; color: black;">마이페이지</a>
+               		<a href="<%= contextPath %>/myPage.me" style="color: orange; text-decoration: none; font-size: 20px;"><%= loginMember.getMemName() %></a>
 	                <a href="<%= contextPath %>/logout.me" style="text-decoration: none; color: black;">로그아웃</a>
            		</div>
             <% } %>
@@ -287,12 +286,16 @@
                 <span id="cg-span" class="enter">카테고리</span>
                 <div id="category">
                     <ul>
-                        <li><a href="#"><img src="resources/image/coffee.png"></a></li>
-                        <li><a href="#"><img src="resources/image/pizza.png"></a></li>
-                        <li><a href="#"><img src="resources/image/burger.png"></a></li>
-                        <li><a href="#"><img src="resources/image/chicken.png"></a></li>
-                        <li><a href="#"><img src="resources/image/bread.png"></a></li>
-                        <li><a href="#"><img src="resources/image/icecon.png"></a></li>
+                        <li><a href="<%=contextPath %>/shop.do?cNo=10"><img src="resources/image/coffee.png"></a></li>
+                        <li><a href="<%=contextPath %>/shop.do?cNo=20"><img src="resources/image/pizza.png"></a></li>
+                        <li><a href="<%=contextPath %>/shop.do?cNo=30"><img src="resources/image/burger.png"></a></li>
+                        <li><a href="<%=contextPath %>/shop.do?cNo=40"><img src="resources/image/chicken.png"></a></li>
+                        <li><a href="<%=contextPath %>/shop.do?cNo=50"><img src="resources/image/bread.png"></a></li>
+                        <li><a href="<%=contextPath %>/shop.do?cNo=60"><img src="resources/image/icecon.png"></a></li>
+                        <li><a href="<%=contextPath %>/shop.do?cNo=70"><img src="resources/image/giftcard.png"></a></li>
+                        <li><a href="<%=contextPath %>/shop.do?cNo=80"><img src="resources/image/discount.png"></a></li>
+                        <li><a href="<%=contextPath %>/shop.do?cNo=90"><img src="resources/image/musical.png"></a></li>
+                        <li><a href="<%=contextPath %>/shop.do?cNo=100"><img src="resources/image/movie	.png"></a></li>
                     </ul>
             </div>
             </div>
@@ -304,7 +307,7 @@
     <script>
         $(function(){
             $("#cg-span").click(function(){
-                location.href="<%=contextPath %>/shop.do"
+                location.href="<%=contextPath %>/shop.do?cNo=0"
             });
             
             $("#concatLogo").click(function(){

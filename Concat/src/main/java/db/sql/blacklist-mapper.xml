@@ -126,6 +126,67 @@ SELECT *
 	 WHERE BL_NO = ?
 </entry>
 
+<entry key="updateBlacklist">
+	UPDATE 
+	       BLACKLIST
+	   SET BL_TITLE = ?
+	     , BL_CONTENT = ?
+	     , BLACK_ID = ?
+	 WHERE BL_NO = ?
+</entry>
+
+<entry key="updateImage">
+	UPDATE
+	       IMAGE
+	   SET ORIGIN_NAME = ?
+	     , UPDATE_NAME = ?
+	     , FILE_PATH = ?
+	 WHERE FILE_NO = ?
+</entry>
+
+<entry key="insertNewImage">
+	INSERT
+	  INTO IMAGE
+	     (
+	       FILE_NO
+	     , BOARD_NO 
+	     , ORIGIN_NAME
+	     , UPDATE_NAME
+	     , FILE_PATH
+	     , BOARD_TYPE
+	     )
+	VALUES
+	     (
+	       SEQ_INO.NEXTVAL
+	     , ?
+	     , ?
+	     , ?
+	     , ?
+	     , 3
+	     )
+</entry>
+
+<entry key="searchList">
+	SELECT 
+		   BL_NO
+         , BL_TITLE
+         , MEM_ID
+         , COUNT
+         , BL_DATE
+	  FROM BLACKLIST
+      JOIN MEMBER ON (BL_WRITER = MEM_NO)
+	 WHERE BL_TITLE LIKE ?
+	    OR BL_CONTENT LIKE ?
+	    OR BL_WRITER LIKE ?
+	    OR BLACK_ID LIKE ?
+	 ORDER 
+	    BY BL_NO
+</entry>
+
+<entry key="">
+
+</entry>
+
 <entry key="">
 
 </entry>

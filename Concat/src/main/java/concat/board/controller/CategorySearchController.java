@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import concat.board.model.service.BoardService;
 import concat.board.model.vo.Board;
 
 /**
- * Servlet implementation class MySellList
+ * Servlet implementation class CategorySearchController
  */
-@WebServlet("/mySellList.bo")
-public class MySellList extends HttpServlet {
+@WebServlet("/searchCategory.bo")
+public class CategorySearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MySellList() {
+    public CategorySearchController() {
         super();
     }
 
@@ -30,13 +32,12 @@ public class MySellList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memNo = Integer.parseInt(request.getParameter("mNo"));
+		int cNo = Integer.parseInt(request.getParameter("cNo"));
 		
-		ArrayList<Board> list = new BoardService().selectCellList(memNo);
+		ArrayList<Board> list = new BoardService().selectFromCategory(cNo);
 		
-		request.setAttribute("list", list);
-		
-		request.getRequestDispatcher("views/board/mySalesList.jsp").forward(request, response);
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

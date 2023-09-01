@@ -27,6 +27,9 @@ public class BlackListDao {
 		}
 	}
 	
+	/**
+	 * @return 블랙리스트 전체 조회
+	 */
 	public ArrayList<BlackList> selectBlacklistList(Connection conn){
 		ArrayList<BlackList> list = new ArrayList<BlackList>();
 		PreparedStatement pstmt = null;
@@ -57,6 +60,9 @@ public class BlackListDao {
 		return list;
 	}
 	
+	/**
+	 * @return 조회수 증가
+	 */
 	public int increaseCount(Connection conn, int blNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -77,6 +83,9 @@ public class BlackListDao {
 		return result;
 	}
 	
+	/**
+	 * @return 블랙리스트상세 조회
+	 */
 	public BlackList selectBlackList(Connection conn, int blNo) {
 		BlackList b = null;
 		PreparedStatement pstmt = null;
@@ -108,6 +117,9 @@ public class BlackListDao {
 		return b;
 	}
 	
+	/**
+	 * @return 블랙리스트 작성글 추가
+	 */
 	public int insertBlacklist(Connection conn, BlackList bl) {
 		int result =0;
 		PreparedStatement pstmt = null;
@@ -131,6 +143,9 @@ public class BlackListDao {
 		return result;
 	}
 	
+	/**
+	 * @return 블랙리스트 이미지 추가
+	 */
 	public int insertImage(Connection conn, Image image) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -154,6 +169,9 @@ public class BlackListDao {
 		return result;
 	}
 	
+	/**
+	 * @return 블랙리스트 이미지 조회
+	 */
 	public Image selectImage(Connection conn, int blNo) {
 		Image image = null;
 		PreparedStatement pstmt = null;
@@ -184,6 +202,9 @@ public class BlackListDao {
 		return image;
 	}
 	
+	/**
+	 * @return 블랙리스트 조회수 조회
+	 */
 	public int selectListCount(Connection conn) {
 		int listCount = 0;
 		PreparedStatement pstmt = null;
@@ -207,6 +228,9 @@ public class BlackListDao {
 		return listCount;
 	}
 	
+	/**
+	 * @return 블랙리스트 리스트 전체글 조회
+	 */
 	public ArrayList<BlackList> selectList(Connection conn, PageInfo pi) {
 		ArrayList<BlackList> list = new ArrayList<BlackList>();
 		PreparedStatement pstmt = null;
@@ -243,6 +267,9 @@ public class BlackListDao {
 		return list;
 	}
 	
+	/**
+	 * @return  블랙리스트 작성글 삭제
+	 */
 	public int deletelist(Connection conn, int num) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -250,8 +277,6 @@ public class BlackListDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			System.out.println(num);
 			
 			pstmt.setInt(1, num);
 			
@@ -263,5 +288,113 @@ public class BlackListDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public int updateBlacklist(Connection conn, BlackList bl) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateBlacklist");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, bl.getBlTitle());
+			pstmt.setString(2, bl.getBlContent());
+			pstmt.setString(3, bl.getBlackId());
+			pstmt.setInt(4, bl.getBlNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateImage(Connection conn, Image i) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateImage");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, i.getOriginName());
+			pstmt.setString(2, i.getUpdateName());
+			pstmt.setString(3, i.getFilePath());
+			pstmt.setInt(4, i.getFileNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertNewImage(Connection conn, Image i) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		
+		String sql = prop.getProperty("insertNewImage");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, i.getBoardNo());
+			pstmt.setString(2, i.getOriginName());
+			pstmt.setString(3, i.getUpdateName());
+			pstmt.setString(4, i.getFilePath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<BlackList> searchList(Connection conn, String key){
+		ArrayList<BlackList> list = new ArrayList<BlackList>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchList");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, "%" + key + "%");
+			pstmt.setString(2, "%" + key + "%");
+			pstmt.setString(3, "%" + key + "%");
+			pstmt.setString(4, "%" + key + "%");
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new BlackList(rset.getInt("bl_no"),
+									   rset.getString("bl_title"),
+									   rset.getString("mem_id"),
+									   rset.getInt("count"),
+									   rset.getDate("bl_date")
+									   ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 }

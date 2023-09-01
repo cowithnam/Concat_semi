@@ -3,7 +3,7 @@
 <properties>
 <entry key="selectListCount">
 	SELECT 
-	       COUNT(*) count
+	       COUNT(*) "count"
 	  FROM REVIEW
 	 WHERE STATUS = 'Y'
 </entry>
@@ -11,10 +11,10 @@
 <entry key="selectList">
 	SELECT *
 	  FROM (
-	    SELECT ROWNUM RNUM, A.*
+	    SELECT ROWNUM "RNUM", A.*
 	  FROM (
 	    SELECT
-	           REVIEW_NO
+	           R.REVIEW_NO
 	         , MEM_ID
 	         , REVIEW_TITLE
 	         , COUNT
@@ -25,6 +25,7 @@
           JOIN IMAGE I ON (R.REVIEW_NO = I.BOARD_NO)
           JOIN MEMBER USING (MEM_NO)
 	     WHERE R.STATUS = 'Y'
+	       AND I.BOARD_TYPE = 2
 	     ORDER 
 	        BY REVIEW_NO DESC
 	        ) A
@@ -112,23 +113,137 @@
 	   AND I.BOARD_TYPE = 2
 </entry>
 
-<entry key="">
-
+<entry key="deletelist">
+	UPDATE REVIEW
+	   SET STATUS = 'N'
+	 WHERE REVIEW_NO = ?
 </entry>
 
-<entry key="">
-
+<entry key="updateReview">
+	UPDATE 
+	       REVIEW
+	   SET REVIEW_TITLE = ?
+	     , REVIEW_CONTENT = ?
+	 WHERE REVIEW_NO = ?
 </entry>
 
-<entry key="">
-
+<entry key="updateImage">
+	UPDATE
+	       IMAGE
+	   SET ORIGIN_NAME = ?
+	     , UPDATE_NAME = ?
+	     , FILE_PATH = ?
+	 WHERE FILE_NO = ?
 </entry>
 
-<entry key="">
-
+<entry key="insertNewImage">
+	INSERT
+	  INTO IMAGE
+	     (
+	       FILE_NO
+	     , BOARD_NO 
+	     , ORIGIN_NAME
+	     , UPDATE_NAME
+	     , FILE_PATH
+	     , BOARD_TYPE
+	     )
+	VALUES
+	     (
+	       SEQ_INO.NEXTVAL
+	     , ?
+	     , ?
+	     , ?
+	     , ?
+	     , 2
+	     )
 </entry>
 
-<entry key="">
+<entry key="updateScore">
+UPDATE
+       MEMBER
+   SET TOTAL_SCORE = TOTAL_SCORE + ?
+WHERE MEM_ID = ?
+</entry>
 
+<entry key="countList">
+	SELECT *
+	  FROM (
+	    SELECT ROWNUM RNUM, A.*
+	  FROM (
+	    SELECT
+	           REVIEW_NO
+	         , MEM_ID
+	         , REVIEW_TITLE
+	         , COUNT
+	         , CREATE_DATE
+             , SCORE
+             , FILE_PATH || '/' || UPDATE_NAME "TITLEIMG"
+	      FROM REVIEW R
+          JOIN IMAGE I ON (R.REVIEW_NO = I.BOARD_NO)
+          JOIN MEMBER USING (MEM_NO)
+	     WHERE R.STATUS = 'Y'
+	       AND I.BOARD_TYPE = 2
+	     ORDER 
+	        BY COUNT DESC
+	        ) A
+	    )
+	    WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="scoreList">
+	SELECT *
+	  FROM (
+	    SELECT ROWNUM RNUM, A.*
+	  FROM (
+	    SELECT
+	           REVIEW_NO
+	         , MEM_ID
+	         , REVIEW_TITLE
+	         , COUNT
+	         , CREATE_DATE
+             , SCORE
+             , FILE_PATH || '/' || UPDATE_NAME "TITLEIMG"
+	      FROM REVIEW R
+          JOIN IMAGE I ON (R.REVIEW_NO = I.BOARD_NO)
+          JOIN MEMBER USING (MEM_NO)
+	     WHERE R.STATUS = 'Y'
+	       AND I.BOARD_TYPE = 2
+	     ORDER 
+	        BY SCORE DESC
+	        ) A
+	    )
+	    WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="selectReplyList">
+	SELECT 
+	       REPLY_NO
+	     , REPLY_CONTENT
+	     , MEM_ID
+	     , TO_CHAR(CREATE_DATE, 'YY/MM/DD HH:MI') "CREATE_DATE"
+	  FROM REPLY R
+	  JOIN MEMBER ON (REPLY_WRITER = MEM_NO)
+	 WHERE R.STATUS = 'Y'
+	   AND REF_BNO = ?
+	 ORDER
+	    BY REPLY_NO DESC
+</entry>
+
+<entry key="insertReply">
+	INSERT
+	  INTO REPLY
+	     (
+	       REPLY_NO
+	     , REPLY_CONTENT
+	     , REF_BNO
+	     , REPLY_WRITER
+	     )
+	VALUES
+	     (
+	       SEQ_RENO.NEXTVAL
+	     , ?
+	     , ?
+	     , ?
+	     )
 </entry>
 </properties>

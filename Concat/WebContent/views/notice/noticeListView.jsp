@@ -94,7 +94,7 @@
                 <li><a href="">공지사항</a></li>
                 <li><a href="">QnA</a></li>
                 <li><a href="">FAQ</a></li>
-                <li><a href="">블랙리스트</a></li>
+                <li><a href="<%= contextPath %>//list.bl?cpage=1">블랙리스트</a></li>
             </ul>
         </div>
         <div align="center">

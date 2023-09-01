@@ -76,7 +76,7 @@
 	<%@ include file="../common/menubar.jsp" %>
 	
 	<div class="wrap" align="center">
-
+		<form action="<%= contextPath %>/updateForm.re?rNo=<%= r.getReviewNo() %>" method="post" enctype="multipart/form-data">
         <div class="img">
         	<img src="<%= contextPath %>/<%= i.getFilePath() %>">
         </div>
@@ -87,7 +87,7 @@
                     <img src="" style="width: 20px; height: 20px;">            
                 </div>
                 <div>
-                    <h3 style="margin: 0px;"><%= r.getMemId() %></h3>
+                    <h3 style="margin: 0px;"><%= r.getMemNo() %></h3>
                 </div>
             </div>
             <div class="point">
@@ -108,23 +108,121 @@
             </div>
             
             <div class="review-recontent">
-                <h3>댓글 4</h3>
+                <h3>댓글 제목</h3>
                 <div class="review">
                     <div class="review-user">
-                        <div style="width: 30px;">
-                            <img src="../../icons8-사용자-30.png" style="width: 20px; height: 20px;">            
-                        </div>
                         <div>
-                            <h4 style="margin: 0px;">사용자1</h4>
+                            <h4 style="margin: 0px;">유저</h4>
                         </div>
                     </div>
 
                     <div style="padding-left: 15px; width: 550px;" >
-                        후기잘봤습니다
+                       <textarea id="content" rows="" cols="" placeholder="댓글작성란">댓글내용</textarea>
                     </div>
+                    
+                    <% if(loginMember != null) {%>
+                    	<button type="button" onclick="insertReply();">댓글등록</button>
+                    <% }else { %>
+                    	<button type="button" disabled>댓글등록</button>
+                    <% } %>
                 </div> 
+                
+                <div id="reply">
+                	
+                </div>
             </div>
+            
+            <div align="center">
+            <% if(loginMember != null && r.getMemNo().equals(loginMember.getMemId())) {%>
+            <!-- 로그인한 사람이 당사자일 경우 -->
+                <button type="submit">수정</button>
+                <button type="button" id="delete">삭제</button>
+            <% } %>
+			    <button type="button" onclick="history.back();">뒤로가기</button>   
+            </div>
+            </form>
         </div>
     </div>
+    	
+ 	    <script>
+        	$(function(){
+        		$("#delete").click(function(){
+	        		location.href='<%= contextPath %>/delete.re?num=<%= r.getReviewNo() %>'
+        		})
+        	})
+        	
+    	    $(function(){ 
+           		selectReplyList();
+           		
+           		setInterval(selectReplyList, 4000);
+           	})
+        	
+        	function insertReply() {
+        		$.ajax({
+        			url:"replyInsert.re",
+        			data:{
+        				content:$("#content").val(),
+        				rNo:<%= r.getReviewNo() %>,
+        			},
+        			type:"post",
+        			success:function(result){
+        				if(result > 0){
+        					selectReplyList();
+        					$("#content").val("");
+        				}
+        				
+        			},
+        			error:function(){
+        				console.log("댓글작성에 실패했습니다.")
+        			}
+        		})
+        	}
+        	
+        	
+        	function selectReplyList(){
+        		$.ajax({
+        			url:"replyList.re",
+        			data:{
+        				rNo:<%= r.getReviewNo() %>
+        			},
+        			success:function(list){
+        				console.log(list);
+        				
+        				let result ="";
+        				
+           				for(let i=0; i<list.length; i++){
+        					result += "<div class='review-recontent'>"
+        							+ "<div class='review'>"
+        							+ "<div class='review-user'>"
+        							+ "<div>"
+        							+ "<h4 style='margin:0px;'>"
+        							+ list[i].replyWriter
+        							+ "</h4>"
+        							+ "</div>"
+        							+ "</div>"
+									+ "<div style='padding-left: 15px; width: 550px;'>"
+									+ "<textarea id='content' rows='3' cols='50' placeholder='댓글작성란'>"
+									+ list[i].replyContent
+									+ "</textarea>"
+									+ "<br>"
+									+ "<div style='text-align: right; padding-right:40px;'>"
+									+ "작성일 : "
+									+ list[i].createDate 
+									+ "</div>"
+									+ "</div>"
+									+ "</div>"
+									+ "</div>";
+        				}
+           				
+        				$("#reply").html(result);
+        				
+        			},
+        			error:function(){
+        				console.log("댓글조회에 실패했습니다.")
+        			}
+        		})
+        	}
+        </script>	
+    
 </body>
 </html>

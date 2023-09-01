@@ -16,10 +16,44 @@
 	     , PRICE
 	     , FILE_PATH || '/' || UPDATE_NAME "THUMBNAIL"
 	  FROM BOARD B
+	  JOIN IMAGE I USING (BOARD_NO)
+      JOIN BRAND ON (BRAND = BRAND_NO)
+	 WHERE I.BOARD_TYPE = 1
+	   AND B.STATUS = 'Y'
+	 ORDER
+	    BY BOARD_NO DESC
+</entry>
+<entry key="selectFromCategory">
+	SELECT
+	       BOARD_NO
+	     , BOARD_TITLE
+	     , BRAND_NAME
+	     , PRICE
+	     , FILE_PATH || '/' || UPDATE_NAME "THUMBNAIL"
+	  FROM BOARD B
 	  JOIN IMAGE USING (BOARD_NO)
       JOIN BRAND ON (BRAND = BRAND_NO)
 	 WHERE B.BOARD_TYPE = 1
 	   AND B.STATUS = 'Y'
+	   AND B.CATEGORY_NO = ?
+	 ORDER
+	    BY BOARD_NO DESC
+</entry>
+<entry key="selectCellList">
+	SELECT
+	       BOARD_NO
+	     , BOARD_TITLE
+	     , BRAND_NAME
+	     , PRICE
+	     , FILE_PATH || '/' || UPDATE_NAME "THUMBNAIL"
+	     , T_NAME
+	  FROM BOARD B
+	  JOIN IMAGE USING (BOARD_NO)
+      JOIN BRAND ON (BRAND = BRAND_NO)
+      JOIN TRADE USING (T_STATUS)
+	 WHERE B.BOARD_TYPE = 1
+	   AND B.STATUS = 'Y'
+	   AND MEM_NO = ?
 	 ORDER
 	    BY BOARD_NO DESC
 </entry>
@@ -34,10 +68,11 @@
 	     , DUE_DATE
 	     , BOARD_CONTENT
 	     , OPEN_KAKAO
-	  FROM BOARD
+	  FROM BOARD B
 	  JOIN MEMBER USING (MEM_NO)
 	  JOIN BRAND ON (BRAND = BRAND_NO)
 	 WHERE BOARD_NO = ?
+	   AND B.STATUS = 'Y'
 </entry>
 <entry key="selectImage">
     SELECT
@@ -47,6 +82,7 @@
 	     , FILE_PATH
 	  FROM IMAGE
 	 WHERE BOARD_NO = ?
+	   AND BOARD_TYPE = 1
 </entry>
 <entry key="selectCategory">
 	SELECT
@@ -102,7 +138,7 @@
 	     )
 	VALUES
 	     (
-	       SEQ_FNO.NEXTVAL
+	       SEQ_INO.NEXTVAL
 	     , SEQ_BNO.CURRVAL
 	     , ?
 	     , ?

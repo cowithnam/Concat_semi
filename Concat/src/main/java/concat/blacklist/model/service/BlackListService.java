@@ -93,4 +93,36 @@ public class BlackListService {
 		close(conn);
 		return result;
 	}
+	
+	public int updateBoard(BlackList bl, Image i) {
+		Connection conn = getConnection();
+		
+		int result1 = new BlackListDao().updateBlacklist(conn, bl);
+		int result2 = 1;
+		
+		if(i != null) { 
+			
+			if(i.getFileNo() != 0) {
+				result2 = new BlackListDao().updateImage(conn, i);
+			}else { 
+				result2 = new BlackListDao().insertNewImage(conn, i);
+			}
+		} 
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1 * result2; 
+	}
+	
+	public ArrayList<BlackList> searchList(String key){
+		Connection conn = getConnection();
+		ArrayList<BlackList> list = new BlackListDao().searchList(conn, key);
+		close(conn);
+		return list;
+	}
 }

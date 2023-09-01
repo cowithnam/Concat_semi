@@ -14,24 +14,24 @@ import concat.review.model.service.ReviewService;
 import concat.review.model.vo.Review;
 
 /**
- * Servlet implementation class ReviewListController
+ * Servlet implementation class ReviewListCountController
  */
-@WebServlet("/list.re")
-public class ReviewListController extends HttpServlet {
+@WebServlet("/listCount.re")
+public class ReviewListCountController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewListController() {
+    public ReviewListCountController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int listCount; 		
 		int currentPage;	
 		int pageLimit;		
@@ -59,12 +59,13 @@ public class ReviewListController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Review> list = new ReviewService().selectList(pi);
+		ArrayList<Review> list = new ReviewService().countList(pi);
 
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("views/review/reviewList.jsp").forward(request, response);
+	
 	}
 
 	/**

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import concat.common.vo.PageInfo;
 import concat.image.model.vo.Image;
 import concat.review.model.dao.ReviewDao;
+import concat.review.model.vo.Reply;
 import concat.review.model.vo.Review;
 
 import static concat.common.JDBCTemplate.*;
@@ -71,6 +72,88 @@ public class ReviewService {
 		return image;
 	}
 	
+	public int deletelist(int rNo) {
+		Connection conn = getConnection();
+		int result = new ReviewDao().deletelist(conn, rNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 	
-	// 평점 추가
+	public int updateReview(Review r, Image i) {
+		Connection conn = getConnection();
+		
+		int result1 = new ReviewDao().updateReview(conn, r);
+		int result2 = 1;
+		
+		if(i != null) {
+			
+			if(i.getFileNo() != 0) { 
+				result2 = new ReviewDao().updateImage(conn, i);
+			}else { 
+				result2 = new ReviewDao().insertNewImage(conn, i);
+			}
+		} 
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1 * result2;  
+	}
+	
+	// 평점 ++
+	public int updateScore(Review r) {
+		Connection conn = getConnection();
+		int result = new ReviewDao().updateScore(conn, r);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<Review> countList(PageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<Review> list = new ReviewDao().countList(conn, pi);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Review> scoreList(PageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<Review> list = new ReviewDao().scoreList(conn, pi);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Reply> selectReplyList(int rNo){
+		Connection conn = getConnection();
+		ArrayList<Reply> list = new ReviewDao().selectReplyList(conn, rNo);
+		close(conn);
+		return list;
+	}
+	
+	public int insertReply(Reply r) {
+		Connection conn = getConnection();
+		int result = new ReviewDao().insertReply(conn, r);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }

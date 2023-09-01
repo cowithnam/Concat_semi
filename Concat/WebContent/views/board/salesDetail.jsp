@@ -110,10 +110,17 @@
         <img src="<%= img.getFilePath()+"/"+img.getUpdateName() %>" width="500" height="480" style="border: 1px solid black; border-radius: 20px;">
       </div>
       <div class="area2" style="padding-left: 40px; padding-right: 20px;">
-          <h1 style="margin-top: 30px;"><%=b.getBoardTitle() %></h1>
-          <h3 style="margin-top: 30px;"><%=b.getBrand() %></h3>
-          <h3 style="margin-top: 30px;"><%=b.getPrice() %>원</h3>
-          <h4 style="margin: 30px 0px 30px; ">판매자 : <% if(b.getNickName() != null){ %>
+        
+         <% if(loginMember != null && b.getMemNo().equals(loginMember.getMemId())) {%>
+        <div>
+          <button type="button" onclick="location.href=<%= contextPath %>/update.bo?bno=<%= b.getBoardNo() %>'" style="text-align: left;">수정하기</button>
+        </div>
+        <% } %>
+        
+        <h1 style="margin-top: 30px;"><%=b.getBoardTitle() %></h1>
+        <h3 style="margin-top: 30px;"><%=b.getBrand() %></h3>
+        <h3 style="margin-top: 30px;"><%=b.getPrice() %>원</h3>
+        <h4 style="margin: 30px 0px 30px; ">판매자 : <% if(b.getNickName() != null){ %>
           									  		<%= b.getNickName() %>
           									  <% }else{ %>
           									  		<%= b.getMemNo() %>

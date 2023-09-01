@@ -1,43 +1,48 @@
-package concat.board.controller;
+package concat.review.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import concat.board.model.service.BoardService;
-import concat.board.model.vo.Board;
+import concat.image.model.vo.Image;
+import concat.review.model.service.ReviewService;
+import concat.review.model.vo.Review;
 
 /**
- * Servlet implementation class MySellList
+ * Servlet implementation class ReviewUpdateFormController
  */
-@WebServlet("/mySellList.bo")
-public class MySellList extends HttpServlet {
+@WebServlet("/updateForm.re")
+public class ReviewUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MySellList() {
+    public ReviewUpdateFormController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memNo = Integer.parseInt(request.getParameter("mNo"));
+		int rNo = Integer.parseInt(request.getParameter("rNo")); 
 		
-		ArrayList<Board> list = new BoardService().selectCellList(memNo);
+		ReviewService rs = new ReviewService();
 		
-		request.setAttribute("list", list);
+		Review r = rs.selectReview(rNo);
+		Image image = rs.selectImage(rNo);
 		
-		request.getRequestDispatcher("views/board/mySalesList.jsp").forward(request, response);
+		request.setAttribute("r", r);
+		request.setAttribute("image", image);
+		
+		request.getRequestDispatcher("views/review/reviewUpdateForm.jsp").forward(request, response);
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

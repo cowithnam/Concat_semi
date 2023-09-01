@@ -35,7 +35,7 @@ public class ReviewInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int maxSize = 10*1024*1024;
+int maxSize = 10*1024*1024;
 		
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/board_upfiles/");
 		
@@ -66,15 +66,14 @@ public class ReviewInsertController extends HttpServlet {
 		
 		
 		int result = new ReviewService().insertReview(r, image);
-		
-		if(result > 0) {
+				
+		int result1 = new ReviewService().updateScore(r);
+		if(result > 0 && result1 > 0) {
+			
 			response.sendRedirect(request.getContextPath() + "/list.re?cpage=1");
 			
 		}else {
-			// 실패했을경우
-			request.setAttribute("errorMsg", "공지사항 등록에 실패했습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
+			
 		}
 	
 	}

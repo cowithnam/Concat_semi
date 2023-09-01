@@ -1,4 +1,4 @@
-package concat.board.controller;
+package concat.blacklist.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,34 +9,42 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import concat.board.model.service.BoardService;
-import concat.board.model.vo.Board;
+import concat.blacklist.model.service.BlackListService;
+import concat.blacklist.model.vo.BlackList;
 
 /**
- * Servlet implementation class MySellList
+ * Servlet implementation class BlackListSearchController
  */
-@WebServlet("/mySellList.bo")
-public class MySellList extends HttpServlet {
+@WebServlet("/search.bl")
+public class BlackListSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MySellList() {
+    public BlackListSearchController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memNo = Integer.parseInt(request.getParameter("mNo"));
 		
-		ArrayList<Board> list = new BoardService().selectCellList(memNo);
+		request.setCharacterEncoding("utf-8");
 		
-		request.setAttribute("list", list);
+		String key = request.getParameter("searchkey");
 		
-		request.getRequestDispatcher("views/board/mySalesList.jsp").forward(request, response);
+		ArrayList<BlackList> list2 = new BlackListService().searchList(key);
+		
+		if(list2 != null) {
+			
+			request.setAttribute("list2", list2);
+			request.getRequestDispatcher("views/blacklist/blackListSerachView.jsp").forward(request, response);
+		}else {
+			
+		}
 	}
 
 	/**

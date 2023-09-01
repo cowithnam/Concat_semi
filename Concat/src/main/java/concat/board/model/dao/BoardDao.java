@@ -57,6 +57,68 @@ public class BoardDao {
 		}
 		return list;
 	}
+
+	public ArrayList<Board> selectFromCategory(int categoryNo, Connection conn){
+		ArrayList<Board> list = new ArrayList<Board>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectFromCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, categoryNo);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Board b = new Board();
+				b.setBoardNo(rset.getInt("board_no"));
+				b.setBoardTitle(rset.getString("board_title"));
+				b.setBrand(rset.getString("brand_name"));
+				b.setPrice(rset.getInt("price"));
+				b.setThumbnail(rset.getString("thumbnail"));
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public ArrayList<Board> selectCellList(int memNo,Connection conn){
+		ArrayList<Board> list = new ArrayList<Board>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCellList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Board b = new Board();
+				b.setBoardNo(rset.getInt("board_no"));
+				b.setBoardTitle(rset.getString("board_title"));
+				b.setBrand(rset.getString("brand_name"));
+				b.setPrice(rset.getInt("price"));
+				b.setThumbnail(rset.getString("thumbnail"));
+				b.settStatus(rset.getString("t_name"));
+				list.add(b);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 	public ArrayList<Category> selectCategory(Connection conn){
 		ArrayList<Category> list = new ArrayList<Category>();

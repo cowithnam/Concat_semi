@@ -120,7 +120,7 @@
                     </td>
                 </tr>
             </table>
-            <input type="hidden" name="memNo" value="1">
+            <input type="hidden" name="memNo" value="<%=loginMember.getMemNo() %>">
             <div align="center" class="btn">
                 <button>등록하기</button>
             </div>

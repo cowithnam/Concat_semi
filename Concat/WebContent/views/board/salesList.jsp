@@ -111,43 +111,53 @@
         <div class="searchCate-area" align="center">
             <div class="searchCate2">
               <img src="resources/image/coffee.png" style="margin-top: 4px;"><br>
+              <input type="hidden" value="10">
               <span>커피</span>
             </div>
             <div class="searchCate2">
               <img src="resources/image/pizza.png" style="margin-top: 4px;"><br>
+              <input type="hidden" value="20">
               <span>피자</span>
             </div>
             <div class="searchCate2">
               <img src="resources/image/burger.png" style="margin-top: 4px;"><br>
+              <input type="hidden" value="30">
               <span>햄버거</span>
             </div>
             <div class="searchCate2">
               <img src="resources/image/chicken.png" style="margin-top: 4px;"><br>
+              <input type="hidden" value="40">
               <span>치킨</span>
             </div>
             <div class="searchCate2">
               <img src="resources/image/bread.png" style="margin-top: 4px;"><br>
+              <input type="hidden" value="50">
               <span>베이커리</span>
             </div>
             <div class="searchCate2">
               <img src="resources/image/icecon.png" style="margin-top: 4px;"><br>
+              <input type="hidden" value="60">
               <span>아이스크림</span>
             </div>
             <div class="searchCate2">
-              <img src="resources/image/pizza.png" style="margin-top: 4px;"><br>
-              <span>커피</span>
+              <img src="resources/image/giftcard.png" style="margin-top: 4px;"><br>
+              <input type="hidden" value="70">
+              <span>상품권</span>
             </div>
             <div class="searchCate2">
-              <img src="resources/image/pizza.png" style="margin-top: 4px;"><br>
-              <span>커피</span>
+              <img src="resources/image/discount.png" style="margin-top: 4px;"><br>
+              <input type="hidden" value="80">
+              <span>할인권</span>
             </div>
             <div class="searchCate2">
-              <img href="#"><img src="resources/image/pizza.png" style="margin-top: 4px;"><br>
-              <span>커피</span>
+              <img href="#"><img src="resources/image/musical.png" style="margin-top: 4px;"><br>
+              <input type="hidden" value="90">
+              <span>뮤지컬</span>
             </div>
             <div class="searchCate2">
-              <img src="resources/image/pizza.png" style="margin-top: 4px;"><br>
-              <span>커피</span>
+              <img src="resources/image/movie.png" style="margin-top: 4px;"><br>
+              <input type="hidden" value="100">
+              <span>영화</span>
             </div>
         </div>
       </div>
@@ -177,6 +187,33 @@
       $(".thumbnail").click(function(){
         location.href="<%=contextPath %>/detail.bo?bno="+$(this).children("input").val();
       });
+    })
+    
+    $(function(){
+    	$(".searchCate2").click(function(){
+    		$.ajax({
+    			url:"searchCategory.bo",
+    			data:{cNo:$(this).children("input").val()},
+    			success:function(list){
+    				$(".list-area").html("");
+    				 let div = "";
+    				 for(var i=0; i<list.length; i++){
+    	    				div += "<div class='thumbnail' align='center'><img src='"
+    	    					 + list[i].thumbnail + "' width='200' height='180' style='border-radius: 5px;'>"
+    	    					 + " <span style='font-size: 11px;'>[" + list[i].brand + "]</span> <br>"
+    	    					 + "<span style='font-size: 20px; font-weight: bolder;'>"
+    	    					 + list[i].boardTitle + "</span> <br>"
+    	    					 + "<span style='font-size: 15px; font-weight: bold; margin-bottom: 20px;'>"
+    	    					 + list[i].price + "</span></div>"
+    	    				$(".list-area").html(div);
+    			  	} 
+    				
+    			},
+    			error:function(){
+    				console.log("오류입니다")
+    			}
+    		})
+    	})
     })
   </script>
     

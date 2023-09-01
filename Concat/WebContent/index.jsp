@@ -49,69 +49,35 @@
                 <hr>
             </div>
             <div class="list-area">
-                <div class="thumbnail" align="center">
-                    <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-                    <span style="font-size: 11px;">[브랜드명]</span> <br>
-                    <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-                    <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-                </div>
-                <div class="thumbnail" align="center">
-                    <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-                    <span style="font-size: 11px;">[브랜드명]</span> <br>
-                    <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-                    <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-                </div>
-                <div class="thumbnail" align="center">
-                    <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-                    <span style="font-size: 11px;">[브랜드명]</span> <br>
-                    <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-                    <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-                </div>
-                <div class="thumbnail" align="center">
-                    <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-                    <span style="font-size: 11px;">[브랜드명]</span> <br>
-                    <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-                    <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-                </div>
-                <div class="thumbnail" align="center">
-                    <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-                    <span style="font-size: 11px;">[브랜드명]</span> <br>
-                    <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-                    <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-                </div>
-                <div class="thumbnail" align="center">
-                    <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-                    <span style="font-size: 11px;">[브랜드명]</span> <br>
-                    <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-                    <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-                </div>
-                <div class="thumbnail" align="center">
-                    <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-                    <span style="font-size: 11px;">[브랜드명]</span> <br>
-                    <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-                    <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-                </div>
-                <div class="thumbnail" align="center">
-                    <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-                    <span style="font-size: 11px;">[브랜드명]</span> <br>
-                    <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-                    <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-                </div>
-                <div class="thumbnail" align="center">
-                    <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-                    <span style="font-size: 11px;">[브랜드명]</span> <br>
-                    <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-                    <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-                </div>
-                <div class="thumbnail" align="center">
-                    <img src="#" width="200" height="180" style="border-radius: 5px;"> 
-                    <span style="font-size: 11px;">[브랜드명]</span> <br>
-                    <span style="font-size: 20px; font-weight: bolder;">상품명</span> <br>
-                    <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;">가격</span>
-                </div>
             </div>
         </div> 
     </div>
+    
+    <script>
+   		window.onload = function() {
+    		$.ajax({
+    			url:"main.bo",
+    			success:function(list){
+    				let div = "";
+    				if(!list.isEmpty()){
+	    				for(let i=0; i<5;i++){
+	    					div += "<div class='thumbnail' align='center'><img src='"
+	    					      + list[i].thumbnail + "' width='200' height='180' style='border-radius: 5px;'>"
+	    					      + " <span style='font-size: 11px;'>[" + list[i].brand + "]</span> <br>"
+	    					      + "<span style='font-size: 20px; font-weight: bolder;'>"
+	    					      + list[i].boardTitle + "</span> <br>"
+	    					      + "<span style='font-size: 15px; font-weight: bold; margin-bottom: 20px;'>"
+	    					      + list[i].price + "</span></div>"
+	    				}
+    				}
+    				$(".list-area").html(div);
+    			},
+    			error:function(){
+    				console.log("오류 났습니다")
+    			}
+    		})
+    	};
+    </script>
 	
 </body>
 </html>

@@ -1,5 +1,10 @@
+<%@page import="concat.board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,28 +56,19 @@
                 </tr>
             </thead>
             <tbody align="center">
-                <tr>
-                    <td height="100">80x80</td>
-                    <td style="font-size: 15px; font-weight: bold;">판매중</td>
-                    <td><h3>상품명</h3><h5>브랜드명</h5></td>
-                    <td style="color: #ff006c;"><h4>27,000원</h4></td>
-                </tr>
-                <tr>
-                    <td height="100">80x80</td>
-                    <td style="font-size: 15px; font-weight: bold;">판매중</td>
-                    <td><h3>상품명</h3><h5>브랜드명</h5></td>
-                    <td style="color: #ff006c;"><h4>27,000원</h4></td>
-                </tr>
-                <tr>
-                    <td height="100">80x80</td>
-                    <td style="font-size: 15px; font-weight: bold;">판매중</td>
-                    <td><h3>상품명</h3><h5>브랜드명</h5></td>
-                    <td style="color: #ff006c;"><h4>27,000원</h4></td>
-                </tr>
+            	<% for(Board b : list){ %>
+	                <tr>
+	                    <td><img src="<%=b.getThumbnail() %>" width="80" height="80"></td>
+                        <td><h4><%= b.gettStatus()%></h4></td>
+	                    <td><h3><%=b.getBoardTitle() %></h3><h5><%=b.getBrand() %></h5></td>
+	                    <td style="color: #ff006c;"><h4><%=b.getPrice() %></h4></td>
+	                	<input type="hidden" name="bno" value="<%=b.getBoardNo() %>">
+	                </tr>
+                <% } %>
             </tbody>
         </table>
         <div align="right" class="slist-button">
-            <button>뒤로가기</button>
+            <button id="page-back">뒤로가기</button>
         </div>
     </div>
     
@@ -80,13 +76,15 @@
         $(function(){
             $("selectAll").click(function(){
                 if($(this).is(':checked')){
-                    console.log("안되냐?");
                     $("input[name=bno]").prop("checked",true);
                 }else{
-                    console.log("안되냐고?");
                     $("input[name=bno]").prop("checked",false);
                 }
             })
+        })
+        
+        $("#page-back").click(function(){
+        		history.back();
         })
     </script>
 </body>

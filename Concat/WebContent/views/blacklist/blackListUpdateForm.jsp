@@ -53,6 +53,10 @@
         color: white;
         margin-top: 25px;
     }
+    
+    textarea{
+    	text-align: left;
+    }
 </style>
 </head>
 <body>
@@ -62,10 +66,10 @@
 	<div class="outer">
         <h1>블랙리스트</h1> 
         <hr>
-        <form id="title" action="#" method="post" enctype="multipart/form-data">
+        <form id="title" action="<%= contextPath %>/update.bl" method="post" enctype="multipart/form-data">
         	<input type="hidden" name="blNO" value="<%=bl.getBlNo() %>">
             <div id="head">
-	            제	목
+	            제	목 : 
                 <input type="text" name="title" value="<%= bl.getBlTitle() %>" style="width=100px; height=10px;">
             </div>
             
@@ -75,18 +79,26 @@
             </div>
             <br><br><br>
             <div id="content">
+            	신고 대상 : <input type="text" name="blackId" value="<%= bl.getBlackId() %>" required>
+            	<br><br>
+            	
             	내 용
-            	<br>
-                <textarea cols="100" rows="10" style="resize: none">
-                	<%= bl.getBlContent() %>
-                </textarea> 
+            	<br><br>
+                <textarea name="content" cols="100" rows="10" style="resize: none"><%= bl.getBlContent() %></textarea> 
                 <br><br>
 	            <div>
-	               <input type="file" name="file">
+                    <% if(image != null) { %>
+	                     <!-- 현재 이 게시글에 딸린 첨부파일이 있을 경우-->
+	                     <%= image.getOriginName() %>
+	                     <input type="hidden" name="originFileNo" value="<%= image.getFileNo() %>">
+                    <% } %>
+                      
+                      <input type="file" name="file">
 	       	    </div>
             </div>
             <div align="center">
                 <button type="submit">수정</button>
+                <button type="reset">취소하기</button>
                 <button type="button" onclick="history.back();">뒤로가기</button>
             </div>
         </form>

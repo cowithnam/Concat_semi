@@ -23,6 +23,26 @@ public class BoardService {
 		return list;
 	}
 	
+	public ArrayList<Board> selectFromCategory(int categoryNo){
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new BoardDao().selectFromCategory(categoryNo,conn);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	public ArrayList<Board> selectCellList(int memNo){
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new BoardDao().selectCellList(memNo, conn);
+		
+		close(conn);
+		
+		return list;
+	}
+	
 	public ArrayList<Category> selectCategory() {
 		Connection conn = getConnection();
 		

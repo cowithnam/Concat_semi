@@ -17,7 +17,6 @@
 	FROM MEMBER
 	WHERE MEM_ID = ?
 	AND MEM_PWD = ?
-	AND STATUS = 'U'
 </entry>
 
 	<entry key="insertMember">

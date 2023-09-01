@@ -17,12 +17,13 @@ public class Board {
 	private Date dueDate;
 	private String openkakao;
 	private String thumbnail;
+	private String tStatus;
 	
 	public Board() {}
 
 	public Board(int boardNo, String memNo, String nickName, String categoryNo, String brand, String boardTitle,
 			String boardContent, int count, String issueDate, String status, int price, Date dueDate, String openkakao,
-			String thumbnail) {
+			String thumbnail, String tStatus) {
 		super();
 		this.boardNo = boardNo;
 		this.memNo = memNo;
@@ -38,6 +39,7 @@ public class Board {
 		this.dueDate = dueDate;
 		this.openkakao = openkakao;
 		this.thumbnail = thumbnail;
+		this.tStatus = tStatus;
 	}
 
 	public int getBoardNo() {
@@ -152,12 +154,21 @@ public class Board {
 		this.thumbnail = thumbnail;
 	}
 
+	public String gettStatus() {
+		return tStatus;
+	}
+
+	public void settStatus(String tStatus) {
+		this.tStatus = tStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", memNo=" + memNo + ", nickName=" + nickName + ", categoryNo="
 				+ categoryNo + ", brand=" + brand + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", count=" + count + ", issueDate=" + issueDate + ", status=" + status + ", price=" + price
-				+ ", dueDate=" + dueDate + ", openkakao=" + openkakao + ", thumbnail=" + thumbnail + "]";
+				+ ", dueDate=" + dueDate + ", openkakao=" + openkakao + ", thumbnail=" + thumbnail + ", tStatus="
+				+ tStatus + "]";
 	}
 
 }

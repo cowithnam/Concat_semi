@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+      Member m = ((Member)request.getSession().getAttribute("loginMember"));
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,15 +112,6 @@
 <body>
 	<%@ include file ="../common/menubar.jsp" %>
 	
-	<%
-		String memId = loginMember.getMemId();
-		String memName = loginMember.getMemName();
-		String nickName = (loginMember.getNickname() == null)? "": loginMember.getNickname();
-		String phone = (loginMember.getPhone() == null)? "" : loginMember.getPhone();
-		String email = (loginMember.getEmail() == null)? "" : loginMember.getEmail();
-		
-	%>
-	
 	<div class="wrap">
         <div id="header_1">
             <img src="resources/image/concatlo.png" style="width: 300px; height: 100px;">
@@ -128,8 +122,8 @@
 
         <div id="navi" class="cont">
             <br><br><br><br><br>
-            <h3><a href="#">판매 목록 ▷</a></h3> <br><br>
-            <h3><a href="#">찜한 상품 ▷</a></h3> <br><br>
+            <h3><a href="<%=contextPath %>/mySellList.bo?mNo=<%= m.getMemNo() %>">판매 목록 ▷</a></h3> <br><br>
+            <h3><a href="<%=contextPath %>/wishList.bo?mNo=<%= m.getMemNo() %>">찜한 상품 ▷</a></h3> <br><br>
             <h3><a href="#">문의 목록 ▷</a></h3> <br><br>   
             <h3><a href="#">신고 목록 ▷</a></h3> <br>
         </div>
@@ -143,23 +137,23 @@
                     </tr>
                     <tr>
                         <th style="height: 50px; width: 300px;" >※ 아이디 </th>
-                        <td><input type="text" name="memId" value="<%= memId %>" maxlength="12" readonly></td>
+                        <td><input type="text" name="memId" value="<%= m.getMemId() %>" maxlength="12" readonly></td>
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 이름</th>
-                        <td><input type="text" name="memName" value="<%= memName %>" maxlength="6" required></td>
+                        <td><input type="text" name="memName" value="<%= m.getMemName() %>" maxlength="6" required></td>
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 닉네임</th>
-                        <td><input type="text" name="nickName" value="<%= nickName %>" maxlength="6"></td>
+                        <td><input type="text" name="nickName" value="<%= m.getNickname() %>" maxlength="6"></td>
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 전화번호 </th>
-                        <td><input type="text" name="phone" onKeyup = "addHypen(this);" value="<%= phone %>"></td>
+                        <td><input type="text" name="phone" onKeyup = "addHypen(this);" value="<%= m.getPhone() %>"></td>
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 이메일 </th>
-                        <td><input type="email" name="email" value="<%= email %>" placeholder="@ 포함해서 입력"></td>
+                        <td><input type="email" name="email" value="<%= m.getEmail() %>" placeholder="@ 포함해서 입력"></td>
                     </tr>
                 </table>  
                 <br>
@@ -210,7 +204,7 @@
                 </div>
                 <div class="modal-body" align="center">
                     <form action="<%= contextPath %>/updatePwd.me" method="post">
-                    <input type="hidden" name="memId" value="<%= memId %>">
+                    <input type="hidden" name="memId" value="<%= m.getMemId() %>">
                         <table>
                             <tr>
                                 <td>현재 비밀번호</td>
@@ -261,7 +255,7 @@
           <div class="modal-body" align="center">
             <form action="<%= contextPath %>/exit.me" method="post">
                 <b>탈퇴 후 복구가 불가능합니다.<br> 정말로 탈퇴하시겠습니까 ? </b> <br><br>
-				<input type="hidden" name="memId" value="<%= memId %>">
+				<input type="hidden" name="memId" value="<%= m.getMemId() %>">
 				
                 비밀번호 : <input type="password" name="memPwd" required> <br><br>
                 <button type="submit" id="exit_1")>탈퇴하기</button>

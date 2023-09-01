@@ -55,6 +55,11 @@
         color: white;
         margin-top: 25px;
     }
+    
+    img{
+    	width: 200px;
+    	height: 200px;
+    }
 </style>
 </head>
 <body>
@@ -75,7 +80,9 @@
             <div id="content">
             	<!-- 사진추가? -->
                 <p>
-                	<%= b.getBlContent() %>
+                	신고 대상 : <%= b.getBlackId() %>
+                	<br><br>
+                	신고 내용 : <%= b.getBlContent() %>
                 </p>
             </div>
             

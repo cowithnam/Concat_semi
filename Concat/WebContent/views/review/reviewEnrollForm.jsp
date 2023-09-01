@@ -10,7 +10,6 @@
 <title>Insert title here</title>
 <style>
     .head{
-        /* border: 1px solid black; */
         width: 1000px;
         height: 300px;
         margin: auto;
@@ -18,7 +17,6 @@
     
     .head1{
         text-align: center;
-        /* border: 1px solid black; */
         width: 300px;
         height: 300px;
         float: left;
@@ -26,7 +24,6 @@
     }
 
     .head2{
-        /* border: 1px solid red; */
         width: 600px;
         height: 100px;
         float: right;
@@ -105,7 +102,7 @@
 
     <div class="content">
         <form action="<%= contextPath %>/insert.re" method="post" enctype="multipart/form-data">
-            
+            	
             <div>
             	<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
                 거래 상대 아이디 :

@@ -30,8 +30,15 @@ public class SalesList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		ArrayList<Board> list = new BoardService().selectBoardList();
+		int categoryNo = 0;
+		categoryNo = Integer.parseInt(request.getParameter("cNo"));
+		
+		ArrayList<Board> list = new ArrayList<Board>();
+		if(categoryNo == 0) {
+			list = new BoardService().selectBoardList();
+		}else {
+			list = new BoardService().selectFromCategory(categoryNo);
+		}
 		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/board/salesList.jsp").forward(request, response);

@@ -1,42 +1,49 @@
-package concat.board.controller;
+package concat.review.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import concat.board.model.service.BoardService;
-import concat.board.model.vo.Board;
+import concat.member.model.vo.Member;
+import concat.review.model.service.ReviewService;
+import concat.review.model.vo.Reply;
 
 /**
- * Servlet implementation class MySellList
+ * Servlet implementation class ReplyInsertController
  */
-@WebServlet("/mySellList.bo")
-public class MySellList extends HttpServlet {
+@WebServlet("/replyInsert.re")
+public class ReplyInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MySellList() {
+    public ReplyInsertController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memNo = Integer.parseInt(request.getParameter("mNo"));
 		
-		ArrayList<Board> list = new BoardService().selectCellList(memNo);
+		String replyContent = request.getParameter("content");
+		int rNo = Integer.parseInt(request.getParameter("rNo"));
 		
-		request.setAttribute("list", list);
+		int memNo = ((Member)request.getSession().getAttribute("loginMember")).getMemNo();
 		
-		request.getRequestDispatcher("views/board/mySalesList.jsp").forward(request, response);
+		Reply r = new Reply();
+		r.setReplyContent(replyContent);
+		r.setRefBoardNo(rNo);
+		r.setReplyWriter(String.valueOf(memNo));
+		
+		int result = new ReviewService().insertReply(r);
+		
+		response.getWriter().print(result);
 	}
 
 	/**

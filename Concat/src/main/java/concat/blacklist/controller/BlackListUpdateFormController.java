@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import concat.blacklist.model.service.BlackListService;
 import concat.blacklist.model.vo.BlackList;
+import concat.board.model.service.BoardService;
+import concat.board.model.vo.Board;
 import concat.image.model.vo.Image;
 
 /**
@@ -30,6 +32,7 @@ public class BlackListUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int blNo = Integer.parseInt(request.getParameter("blno")); 
 		
 		BlackListService bls = new BlackListService();

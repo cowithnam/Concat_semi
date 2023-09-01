@@ -48,18 +48,8 @@ request.setCharacterEncoding("UTF-8");
 		
 		
 		if(result > 0) { // 성공
-			
-			 response.setContentType("text/html; charset=utf-8");
-
-				PrintWriter out = response.getWriter();
-
-				out.println("<script>");
-
-				out.println("alert('성공적으로 회원가입이 완료되었습니다.^_^');");
-
-				out.println("history.back();");
-
-				out.println("</script>");
+		
+			response.sendRedirect(request.getContextPath());
 			
 		}else { // 실패
 			System.out.println("실패");

@@ -26,12 +26,10 @@
 
     .head{
         height: 50px;
-        /* border: 1px solid black; */
     }
 
     .content{
         height: 600px;
-        /* border: 1px solid gray; */
         margin-top: 30px;
     }
 
@@ -65,6 +63,20 @@
     .EnrollForm>button{
         font-weight: 900;
     }
+    
+    a{
+    	text-decoration: none;
+    	color: black;
+    }
+    
+    a:hover{
+    	color: lightgray;
+    	cursor: pointer;
+    }
+    
+    button{
+    	cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -77,7 +89,9 @@
         </div>
         
         <div style="float: right;">
-            최신순 | 가격순 | 인기순
+           <a onclick="location.href='<%= contextPath %>/list.re?cpage=1';">최신순</a> |
+           <a onclick="count();">인기순</a> |
+           <a onclick="score();">평점순</a>
         </div> 
         <br>
         <hr>
@@ -107,7 +121,11 @@
            		<% for(Review r : list){ %>
         		<div class="reviewlist">
         			<input type="hidden" name="num" value="<%= r.getReviewNo() %>">
-             		<img src="<%=contextPath %>/<%= r.getImgPath1() %>">
+        			<% if(r.getTitleImg() == null){ %>
+        				<img src="#">
+        			<%}else{ %>
+             			<img src="<%= contextPath %>/<%= r.getTitleImg() %>">
+             		<% } %>
                 	<div>
                     	<%= r.getReviewTitle() %>
                     	<br>
@@ -126,7 +144,7 @@
 			$(function(){
 				$(".reviewlist").click(function(){
 					const num = $(this).children().eq(0).val();
-					location.href = '<%= contextPath %>/listDetail.br?num='+num;
+					location.href = '<%= contextPath %>/listDetail.re?num='+num;
 				})
 			})
 		</script>
@@ -149,5 +167,15 @@
             <% } %>
         </div>
     </div>
+    
+    <script>
+    	function count(){
+    		location.href="<%= contextPath %>/listCount.re?cpage=1";
+    	}
+    	
+		function score(){
+			location.href="<%= contextPath %>/listScore.re?cpage=1";
+    	}
+    </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package concat.board.controller;
+package concat.review.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,34 +9,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import concat.board.model.service.BoardService;
-import concat.board.model.vo.Board;
+import com.google.gson.Gson;
+
+import concat.review.model.service.ReviewService;
+import concat.review.model.vo.Reply;
 
 /**
- * Servlet implementation class MySellList
+ * Servlet implementation class ReplyListController
  */
-@WebServlet("/mySellList.bo")
-public class MySellList extends HttpServlet {
+@WebServlet("/replyList.re")
+public class ReplyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MySellList() {
+    public ReplyListController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memNo = Integer.parseInt(request.getParameter("mNo"));
+	
+		int rNo = Integer.parseInt(request.getParameter("rNo"));
 		
-		ArrayList<Board> list = new BoardService().selectCellList(memNo);
+		ArrayList<Reply> list = new ReviewService().selectReplyList(rNo);
 		
-		request.setAttribute("list", list);
-		
-		request.getRequestDispatcher("views/board/mySalesList.jsp").forward(request, response);
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**
