@@ -20,11 +20,36 @@ VALUES
 ,?
 )
 </entry>
-<entry key="insertAnswerQna">
-UPDATE QNA
-SET QNA_ANSWER = ?
-WHERE QNA_NO = ?
+<entry key="insertReply">
+INSERT
+INTO QNAREPLY
+(
+ REPLY_NO
+,REPLY_CONTENT
+,REP_QNO
+,REP_WRITER
+)
+VALUES
+(
+SEQ_QRNO.NEXTVAL
+,?
+,?
+,?
+)
+</entry>
 
+<entry key="selectReplyList">
+SELECT
+     REPLY_NO
+    ,REPLY_CONTENT
+    ,MEM_ID
+    ,TO_CHAR(CREATE_DATE,'YY/MM/DD HH:MI') "CREATE_DATE"    
+    FROM QNAREPLY R
+    JOIN MEMBER ON(MEM_NO = REP_WRITER)
+    WHERE R.STATUS = 'Y'
+    AND REP_QNO = ?
+    ORDER
+    BY REPLY_NO DESC
 </entry>
 
 

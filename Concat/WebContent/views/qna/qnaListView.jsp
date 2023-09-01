@@ -51,7 +51,7 @@
         
         .title{width: 660px; height: 41px; text-align: left; padding-left: 10px;}
 
-        table td{width: 140px; height: 41px; border: 1px solid black;}
+        table td{width: 130px; height: 50px; border: 1px solid black;}
 		
        
         
@@ -114,6 +114,9 @@
             text-decoration: 2px underline;
             color: lightgray;
         }
+        table, td, th {
+            border-collapse : collapse;
+        }
     </style>
 </head>
 <body>
@@ -135,10 +138,10 @@
             <table class="area-no">
                 <thead>
                     <tr>
-                        <th class="num" width="15%">NO</th>
-                        <th  width="60%">제목</th>
-                        <th  width="15%">작성자</th>
-                        <th  width="15%">작성일</th>
+                        <th width="100px" height="50" class="num">NO</th>
+                        <th  width="650">제목</th>
+                        <th  width="150">작성자</th>
+                        <th  width="150">작성일</th>
                     </tr>
                 </thead>
                <tbody>
@@ -154,10 +157,10 @@
 				<% for(Qna q : list){ %>
 
 				<tr>
-					<td><%=q.getQnaNo() %></td>
-					<td><%=q.getQnaTitle() %></td>
-					<td><%=q.getQnaWriterNick() %></td>
-					<td><%=q.getCreateDate() %></td>
+					<td ><%=q.getQnaNo() %></td>
+					<td ><%=q.getQnaTitle() %></td>
+					<td > <%=q.getQnaWriterNick() %></td>
+					<td ><%=q.getCreateDate() %></td>
 				</tr>
 
 				<%} %>

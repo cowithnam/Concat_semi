@@ -1,5 +1,7 @@
 package concat.qna.model.dao;
 
+
+
 import static concat.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
@@ -11,9 +13,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+
+
 import concat.notice.model.vo.Notice;
 import concat.qna.model.vo.Qna;
 import concat.qna.model.vo.QnaInfo;
+import concat.qna.model.vo.QnaReplay;
 
 public class QnaDao {
 	private Properties prop = new Properties();
@@ -56,30 +61,57 @@ public class QnaDao {
 		return result;
 		
 	}
-	public int insertAnswerQna(Connection conn , Qna q) {
-		int result = 0;
+	public int insertReply(Connection conn , QnaReplay qr) {
+		int result =0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertAnswerQna");
-
+		String sql = prop.getProperty("insertReply");
+		
 		try {
-			pstmt = conn.prepareStatement(sql);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, qr.getContent());
+			pstmt.setInt(2, qr.getRepQno());
+			pstmt.setInt(3, Integer.parseInt(qr.getRepWriter()));
 			
-
-			
-			pstmt.setString(1, q.getQnaAnswer());
-			pstmt.setInt(2, q.getQnaNo());
-			
-			System.out.println("두번째글번호"+q.getQnaNo());
 			result = pstmt.executeUpdate();
 			
-			System.out.println("dao"+result);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		}finally {
 			close(pstmt);
-		}
-		return result;
+			
+		}return result;
+		
+	}
+	
+	public ArrayList<QnaReplay> selectReplyList(Connection conn, int qnaNo){
+		ArrayList<QnaReplay> list = new ArrayList<QnaReplay>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReplyList");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, qnaNo);
+			
+			rset=pstmt.executeQuery();
+			
+			System.out.println(rset);
+			while(rset.next()) {
+				list.add(new QnaReplay(rset.getInt("reply_no"),
+									rset.getString("reply_content")
+									,rset.getString("mem_id")
+									,rset.getString("create_date")));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}return list;
 		
 	}
 	

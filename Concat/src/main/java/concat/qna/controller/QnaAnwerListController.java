@@ -1,32 +1,31 @@
 package concat.qna.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 
-import concat.member.model.vo.Member;
 import concat.qna.model.service.QnaService;
-import concat.qna.model.vo.Qna;
 import concat.qna.model.vo.QnaReplay;
 
 /**
- * Servlet implementation class QnaAnswerController
+ * Servlet implementation class QnaAnwerListController
  */
-@WebServlet("/answer.qa")
-public class QnaAnswerController extends HttpServlet {
+@WebServlet("/rlist.qa")
+public class QnaAnwerListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaAnswerController() {
+    public QnaAnwerListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,22 +34,12 @@ public class QnaAnswerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String replyContent = request.getParameter("content");
-		int boardNo = Integer.parseInt(request.getParameter("qno"));
+		int qnaNo = Integer.parseInt(request.getParameter("qno"));
 		
-		HttpSession session = request.getSession();
-		int userNo =((Member)session.getAttribute("loginMember")).getMemNo();
+		ArrayList<QnaReplay> list = new QnaService().selectReplyList(qnaNo);
 		
-		QnaReplay qr = new QnaReplay();
-		qr.setContent(replyContent);
-		qr.setRepQno(boardNo);
-		qr.setRepWriter(String.valueOf(userNo));
-		
-		int result = new QnaService().insertReply(qr);
-		
-		response.getWriter().print(result);
-	
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(list,response.getWriter());
 	}
 
 	/**

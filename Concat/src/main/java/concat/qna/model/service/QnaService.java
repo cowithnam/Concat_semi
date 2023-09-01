@@ -3,12 +3,16 @@ package concat.qna.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+
+
+
 import static concat.common.JDBCTemplate.*;
 
 import concat.notice.model.dao.NoticeDao;
 import concat.qna.model.dao.QnaDao;
 import concat.qna.model.vo.Qna;
 import concat.qna.model.vo.QnaInfo;
+import concat.qna.model.vo.QnaReplay;
 
 public class QnaService {
 	public int insertQna(Qna q) {
@@ -25,12 +29,12 @@ public class QnaService {
 		return result;
 	}
 	
-	public int insertAnswerQna(Qna q) {
+	public int insertReply(QnaReplay qr) {
 		Connection conn = getConnection();
 
-		int result = new QnaDao().insertAnswerQna(conn, q);
+		int result = new QnaDao().insertReply(conn, qr);
 
-		System.out.println("서비스"+q);
+		
 		
 		if (result > 0) {
 			commit(conn);
@@ -38,6 +42,14 @@ public class QnaService {
 			rollback(conn);
 		}
 		return result;
+	}
+	
+	public ArrayList<QnaReplay> selectReplyList(int qnaNo){
+		Connection conn = getConnection();
+		ArrayList<QnaReplay> list = new QnaDao().selectReplyList(conn,qnaNo); 
+		
+		close(conn);
+		return list;
 	}
 	
 	public int qnaCount () {
