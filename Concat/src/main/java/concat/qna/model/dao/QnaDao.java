@@ -56,25 +56,23 @@ public class QnaDao {
 		return result;
 		
 	}
-	public int answerQna(Connection conn , Qna q) {
+	public int insertAnswerQna(Connection conn , Qna q) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("answerQna");
+		String sql = prop.getProperty("insertAnswerQna");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 
 			
-			pstmt.setString(1, q.getQnaContent());
+			pstmt.setString(1, q.getQnaAnswer());
 			pstmt.setInt(2, q.getQnaNo());
 			
-			
-			
-			
-			
+			System.out.println("두번째글번호"+q.getQnaNo());
 			result = pstmt.executeUpdate();
 			
+			System.out.println("dao"+result);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

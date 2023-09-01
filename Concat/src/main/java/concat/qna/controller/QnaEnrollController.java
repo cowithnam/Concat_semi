@@ -50,12 +50,6 @@ public class QnaEnrollController extends HttpServlet {
 		q.setQnaWriterNick(nickname);
 		
 		
-		
-		
-		
-		
-		
-		
 		int result = new QnaService().insertQna(q);
 		
 	

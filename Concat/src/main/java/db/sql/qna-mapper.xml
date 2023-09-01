@@ -20,7 +20,7 @@ VALUES
 ,?
 )
 </entry>
-<entry key="answerQna">
+<entry key="insertAnswerQna">
 UPDATE QNA
 SET QNA_ANSWER = ?
 WHERE QNA_NO = ?

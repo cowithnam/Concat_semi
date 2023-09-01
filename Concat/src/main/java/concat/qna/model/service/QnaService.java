@@ -16,7 +16,22 @@ public class QnaService {
 
 		int result = new QnaDao().insertQna(conn, q);
 
-		System.out.println(result);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+	
+	public int insertAnswerQna(Qna q) {
+		Connection conn = getConnection();
+
+		int result = new QnaDao().insertAnswerQna(conn, q);
+
+		System.out.println("서비스"+q);
+		
 		if (result > 0) {
 			commit(conn);
 		} else {
@@ -82,19 +97,7 @@ public class QnaService {
 		return result;
 		
 	}
-	public int answerQna(Qna q) {
-		Connection conn = getConnection();
-
-		int result = new QnaDao().answerQna(conn, q);
-
-		System.out.println(result);
-		if (result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		return result;
-	}
+	
 	public int deleteqna(Qna q) {
 		Connection conn= getConnection();
 		int result  = new QnaDao().deleteqna(conn,q);
