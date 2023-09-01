@@ -11,7 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+
+import concat.common.MemberRenamPolicy;
 import concat.image.model.vo.Profile;
+import concat.mem_grade.model.vo.MemGrade;
+import concat.member.model.dao.MemberDao;
 import concat.member.model.service.MemberService;
 import concat.member.model.vo.Member;
 
@@ -55,11 +62,16 @@ public class MypageEnrollController extends HttpServlet {
 				out.println("</script>");
 		}else { 
 			Profile pro = new MemberService().selectProfile(((Member)session.getAttribute("loginMember")).getMemNo());
+			MemGrade mg = new MemberService().gradeimg(((Member)session.getAttribute("loginMember")).getMemNo());
 			
 			request.setAttribute("pro", pro);
+			request.setAttribute("mg", mg);
+
 			RequestDispatcher view = request.getRequestDispatcher("views/member/mypage.jsp");
 			view.forward(request, response);
 		}
+			
+		
 	}
 
 	/**

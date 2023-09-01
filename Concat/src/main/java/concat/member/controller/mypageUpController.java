@@ -71,7 +71,6 @@ public class mypageUpController extends HttpServlet {
 				profile = new Profile();
 				profile.setOriginName(multiRequest.getOriginalFileName("file"));
 				profile.setUpdateName(multiRequest.getFilesystemName("file"));
-				// 이게 오리지널 파일네임일시 원본파일명으로 들어가기에 엑박 // 파일시스템네임이여야 제대로된 사진으로 나옴
 				profile.setFilePath("resources/member_upfiles");
 				profile.setMemNo(m.getMemNo());
 			}

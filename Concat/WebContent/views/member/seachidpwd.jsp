@@ -356,7 +356,7 @@ a.link-copy {
           </form>
           <div id="idform"></div>
           <p>비밀번호를 잊어버리셨나요 ? <a href="#" class="link-in">비밀번호찾기</a></p>
-          <p>아이디가 없으신가요 ? <a href="http://localhost:8001/Concat/login.me" >회원가입 및 로그인</a></p>
+          <p>아이디가 없으신가요 ? <a href="http://localhost:8001/Concat/login.me#enrollform" >회원가입 및 로그인</a></p>
  	
         </div>
         

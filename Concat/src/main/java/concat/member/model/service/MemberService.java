@@ -6,6 +6,7 @@ import static concat.common.JDBCTemplate.*;
 
 import concat.image.model.vo.Image;
 import concat.image.model.vo.Profile;
+import concat.mem_grade.model.vo.MemGrade;
 import concat.member.model.dao.MemberDao;
 import concat.member.model.vo.Member;
 
@@ -41,6 +42,11 @@ public class MemberService {
 		if(profile != null) {
 			result2 = new MemberDao().updateProfile(conn , profile);
 		}
+		
+		if(result2 == 0) {
+			result2 = new MemberDao().insertProfile(conn,m.getMemNo() , profile);
+		}
+		
 		
 		Member up = null;
 		
@@ -120,6 +126,13 @@ public class MemberService {
 		return count;
 	}
 	
+	public MemGrade gradeimg(int memNo) {
+		Connection conn = getConnection();
+		MemGrade grade = new MemberDao().gradeimg(memNo, conn);
+		
+		close(conn);
+		return grade;
+	}
 	
 }
 	

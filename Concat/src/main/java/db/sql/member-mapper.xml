@@ -128,6 +128,33 @@ UPDATE
 			SELECT 
 			       COUNT(*) "COUNT"
 			  FROM MEMBER
-			 WHERE USER_ID = ?
+			 WHERE MEM_ID = ?
+</entry>
+
+<entry key="insertProfile">
+	INSERT 
+	  INTO PROFILE
+	  (
+	    FILE_NO
+	  , MEM_NO
+	  , ORIGIN_NAME
+	  , UPDATE_NAME
+	  , FILE_PATH
+	  )
+	  VALUES
+	  (
+	    SEQ_INO.NEXTVAL
+	  , ?  
+	  , ?
+	  , ?
+	  , ?
+  )
+</entry>
+
+<entry key="gradeimg">
+	SELECT GRADE_IMG
+	  FROM MEMBER
+	  JOIN MEM_GRADE USING(GRADE_NO)
+	 WHERE MEM_NO = ? 
 </entry>
 </properties>

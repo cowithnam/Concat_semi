@@ -1,9 +1,11 @@
+<%@page import="concat.mem_grade.model.vo.MemGrade"%>
 <%@page import="concat.image.model.vo.Profile"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 		Member m = ((Member)request.getSession().getAttribute("loginMember"));
 		Profile pro = (Profile)request.getAttribute("pro");
+		MemGrade grade = (MemGrade)request.getAttribute("mg");
 %>
 <!DOCTYPE html>
 <html>
@@ -111,7 +113,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> -->
 
 
 </head>
@@ -144,7 +146,8 @@
                 <table>
                     <tr>
                         <th style="height: 50px; width: 300px;">※ 등급 </th>
-                        <td><img src="resources/image/다이아.png"></td>
+                        <td><img src="<%=grade.getGrade_img() %>" id="gradeimg"></td>
+                       
                     </tr>
                     <tr>
                         <th style="height: 50px; width: 300px;" >※ 아이디 </th>

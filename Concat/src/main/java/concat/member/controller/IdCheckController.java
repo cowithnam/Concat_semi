@@ -28,10 +28,12 @@ public class IdCheckController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		System.out.println(request.getParameter("checkId"));
 		String checkId = request.getParameter("checkId");
 				
 				int count = new MemberService().idCheck(checkId);
+				
+				System.out.println(count);
 			
 				if(count > 0) { 
 					response.getWriter().print("NNNNN");

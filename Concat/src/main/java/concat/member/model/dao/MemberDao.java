@@ -12,6 +12,7 @@ import static concat.common.JDBCTemplate.*;
 
 import concat.image.model.vo.Image;
 import concat.image.model.vo.Profile;
+import concat.mem_grade.model.vo.MemGrade;
 import concat.member.model.vo.Member;
 
 public class MemberDao {
@@ -131,6 +132,7 @@ private Properties prop = new Properties();
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectMember");
+		
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -340,7 +342,7 @@ private Properties prop = new Properties();
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				count = rset.getInt(count);
+				count = rset.getInt("count");
 			}
 			
 		} catch (SQLException e) {
@@ -350,6 +352,60 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		return count;
+		
+	}public int insertProfile(Connection conn,int memNo ,Profile profile) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, profile.getOriginName());
+			pstmt.setString(3, profile.getUpdateName());
+			pstmt.setString(4, profile.getFilePath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	public MemGrade gradeimg(int memNo, Connection conn) {
+		MemGrade grade = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("gradeimg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				grade = new MemGrade();
+				grade.setGrade_img(rset.getString("grade_img"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return grade;
+		
+		
 		
 	}
 }
