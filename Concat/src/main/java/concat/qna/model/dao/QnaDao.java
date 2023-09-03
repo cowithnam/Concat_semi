@@ -97,14 +97,15 @@ public class QnaDao {
 			
 			rset=pstmt.executeQuery();
 			
-			System.out.println(rset);
+			
 			while(rset.next()) {
 				list.add(new QnaReplay(rset.getInt("reply_no"),
 									rset.getString("reply_content")
-									,rset.getString("mem_id")
+									,rset.getString("nickname")
 									,rset.getString("create_date")));
 				
 			}
+			System.out.println(list);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

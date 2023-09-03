@@ -10,6 +10,7 @@ Qna q = (Qna) request.getAttribute("q");
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -73,7 +74,7 @@ textarea {
 	border-top: 1px solid lightgray;
 	border-bottom: 1px solid lightgray;
 	margin-top: 20px;
-	padding: 20px 15px;
+	padding: 20px 10px;
 	font-size: 15px;
 	font-weight: lighter;
 	height: 200px;
@@ -95,6 +96,41 @@ textarea {
 	width: 100%;
 	border: 1px solid black;
 	width: 100%
+}
+#outer>#content2>table{
+color: gray;
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: lighter;
+    height: 50px;
+    width: 100%;
+    }
+
+table{
+	border-collapse: collapse}
+		
+table>tr{
+width: 100%;
+height: 100%;
+
+}
+tr>#td1{
+	width: 100%;
+	height: 100%;
+}
+tr>#td2{
+	width: 100%;
+	height: 100%;
+}
+#tr1{
+	border: 0;
+}
+#tr2{
+	border-bottom: 1px solid lightgray;
+}
+textarea{
+	border: 1px solid lightgray;
+	padding: 0;
 }
 </style>
 </head>
@@ -125,32 +161,57 @@ textarea {
 
 
 
-
-		<div align="center" id="content">
-
-			<div id="answer" align="left" style="width: 1100px;">
-				<div id="answer1"></div>
-
-			</div>
-
-			<br>
-			<br>
+		<h3>답변</h3>
+		<hr style="border: 1px solid lightgray;">
+		<div align="center" id="content2">
 			
-			<% if (loginMember != null && loginMember.getMemId().equals("user01")) { %>
-			<textarea name="content" cols="30" rows="10" id="replyContent"
+			<table id="answer99">
+				<tbody id = "inserttr">
+					
+			
+			
+		</tbody>
+			</table>
+			<br><br>
+			
+			
+			
+			
+			<% if (loginMember != null) { %>
+    			<% if (q.getQnaWriter().equals(loginMember.getMemNo() + "") || loginMember.getMemId().equals("user01")) { %>
+		
+				<textarea name="content" cols="30" rows="10" id="replyContent"
 				style="resize: none;" placeholder="댓글을 입력하세요"></textarea>
-			<button type="button" id="button1" onclick="insertReply();">답변 등록</button>
-			<button id="button1" type="button" onclick="location.href='<%=contextPath%>/list.qa?qpage=1'">목록가기</button>
+				<% }else{ %>	
+				<textarea name="content" cols="30" rows="10" id="replyContent"
+				style="resize: none;" placeholder="본인이 등록한 글 외에는 답변을 작성하실 수 없습니다"  readonly></textarea>	
+				</div>
+				<% }%>
+			<% } else { %>
+			
 			<% } %>
+
+			<br>
+			<br>
 			
-			<% if (loginMember != null && q.getQnaWriter().equals(loginMember.getMemNo()+"") && !loginMember.getMemId().equals("user01")) { %>
-			<button id="button1" type="button" onclick="confirmDelete()">삭제하기</button>
-			<button id="button1" type="button" onclick="location.href='<%=contextPath%>/list.qa?qpage=1'">목록가기</button>
-			<% }%>
-			
-			<% if (loginMember != null && !q.getQnaWriter().equals(loginMember.getMemNo()+"") && !loginMember.getMemId().equals("user01")) { %>
-			<button id="button1" type="button" onclick="location.href='<%=contextPath%>/list.qa?qpage=1'">목록가기</button>
-			<% }%>
+			<% if (loginMember != null) { %>
+    <% if (loginMember.getMemId().equals("user01")) { %>
+        
+        <button type="button" id="button1" onclick="insertReply();">답변 등록</button>
+        
+        <button id="button1" type="button" onclick="location.href='<%=contextPath%>/list.qa?qpage=1'">목록가기</button>
+    <% } else if (q.getQnaWriter().equals(loginMember.getMemNo() + "")) { %>
+        
+        <button type="button" id="button1" onclick="insertReply();">답변 등록</button>
+       
+        <button id="button1" type="button" onclick="confirmDelete()">삭제하기</button>
+       
+        <button id="button1" type="button" onclick="location.href='<%=contextPath%>/list.qa?qpage=1'">목록가기</button>
+    <% } else { %>
+        
+        <button id="button1" type="button" onclick="location.href='<%=contextPath%>/list.qa?qpage=1'">목록가기</button>
+    <% } %>
+<% } %>
 
 		</div>
 
@@ -178,50 +239,49 @@ function answer() {
     location.href = '<%=contextPath%>/answer.qa?num=<%=q.getQnaNo()%>';
 }
 
-function insertReply(){
-	$.ajax({
-		url:"answer.qa"
-		,data:{content:$("#replyContent").val(),
-				qno:<%=q.getQnaNo() %>}
-				,type:"post"
-				,success:function(result){
-					console.log(result)
-					if(result > 0 ){
-						$("#replyContent").val("")
-						$("#replyContent").attr("readonly")
-					}
-					
-				}
-				,error:function(){
-					console.log("댓글작성용 ajax 통신 실패");
-				}
-		
-			
-	})
+function insertReply() {
+    $.ajax({
+        url: "answer.qa",
+        data: {
+            content: $("#replyContent").val(),
+            qno: <%=q.getQnaNo() %>
+        },
+        type: "post",
+        success: function (result) {
+        	console.log(result)
+            
+            if (result > 0) {
+            	 selectReplyList()
+                $("#replyContent").val("");
+               
+                
+            }
+        },
+        error: function () {
+            console.log("댓글 작성용 ajax 통신 실패");
+        }
+    })
 }
 
-function selectReplyList(){
-		$.ajax({
-			url:"rlist.qa"
-			,data:{qno:<%=q.getQnaNo()%>}
-			,success:function(list){
-				let result = "";
-				for(let i = 0; i<list.length; i++){
-					result += "<strong> 작성자 :" +list[i].repWriter + "<strong>" +"</div>"
-							+ "<div><strong> 답&nbsp;&nbsp;변 :" +list[i].content + "<strong>" 
-							
-				}
-				
-				$("#answer>div").html(result);
-				
-			}
-			,error:function(){
-				console.log("댓글 조회용 ajax 통신 실패!")
-				
-			}
-		})
-	}
-	
+
+function selectReplyList() {
+    $.ajax({
+        url: "rlist.qa",
+        data: { qno: <%=q.getQnaNo()%> },
+        success: function (list) {
+            let result = "";
+            for (let i = 0; i < list.length; i++) {
+                result += "<tr>" + "<td id='td1'>" + list[i].repWriter + "</td>" + "</tr>"
+                        + "<tr id='tr2'>" + "<td id='td2'>" + list[i].content + "</td>" + "</tr>";
+            }
+			console.log(result)
+            $("#answer99>tbody").html(result);
+        },
+        error: function () {
+            console.log("댓글 조회용 ajax 통신 실패!");
+        }
+    });
+}
 
 </script>
 </html>

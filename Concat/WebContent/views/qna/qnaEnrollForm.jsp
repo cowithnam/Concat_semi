@@ -87,10 +87,7 @@
             내용  <br>
             <textarea  name="content" cols="30" rows="10" style="resize: none;" ></textarea>
             <br>
-            <%if(loginMember != null && loginMember.getMemId().equals("user01")){ %>
-            답변  <br>
-            <textarea  name="content" cols="30" rows="10" style="resize: none;" ></textarea>
-            <br><% }%>
+           
             
             <button type="submit" class="enroll-btn">작성하기</button>
             <button type="button" class = "enroll-btn" onclick = "backno();">뒤로가기</button>
