@@ -78,27 +78,30 @@
   top: 400px; 
   left: 150px;
   text-align: center;
-  
   background-color: white; 
 }
-#listbar>table{width: 150px;
-                    height: 210px;
-                    
-                    background-color: black;
-                    }
-#listbar>div{width: 150px;
-        height: 30px;
-        border: 1px solid black;}         
+
+#listbar>table {
+	width: 150px;
+	height: 210px;
+	background-color: black;
+}
 #listbar a{
-            text-decoration: none;
-            color: white;
-            
-            
-        }
-#listbar>td:hover{
-            text-decoration: 1px underline;
-            color: lightgray;
-        }
+	text-decoration: none;
+	color:white;
+}
+
+
+#listbar a:hover {
+	text-decoration: 1px underline;
+	color:white;
+}
+
+
+a:link {
+  color : white;
+}
+a:visited { color:white; }
            
 
         </style>
@@ -113,8 +116,8 @@
                 <h1>FAQ</h1>
                 <hr>
     <div class="layout">
-        <ul class="qna"><h3>거래/결재</h3>
-            <li>
+        <ul class="qna">
+            <li><h3>거래/결재</h3>
                 <input type="checkbox" id="qna-1">
                 <label for="qna-1">사이트에서 결재는 불가능한가요? </label>
                 <div>
@@ -126,8 +129,8 @@
                 <input type="checkbox" id="qna-2">
                 <label for="qna-2">거래는 어떻게 진행되나요?</label>
                 <div>
-                    <p>상품 선택 후 OOO버튼을 통해 판매자와 직접 컨텍 후 가능합니다</p>
-                    <p>주문 진행 상태가 '환불진행중' 또는 '환불완료' 에서는 환불계좌를 변경할 수 없습니다.</p>
+                    <p>구매 : 카테고리 메뉴에서 상품 선택 후  판매자와 직접 컨텍 가능합니다</p>
+                    <p>판매 : 화면 우측에 있는 판매하기를 통해 가능합니다 </p>
                 </div>
             </li>
             <li>
@@ -138,7 +141,7 @@
                     <p>반품철회 후 택배사에서 상품 수거가 된 것으로 확인될 경우 해당 주문은 반품처리한 것으로 재 변경됩니다.</p>
                 </div>
             </li>
-            <li>
+            <li><h3>회원</h3>
                 <input type="checkbox" id="qna-4">
                 <label for="qna-4">배송된 상품이 부재중으로 반송된 경우 어떻게 하나요?</label>
                 <div>
@@ -167,7 +170,7 @@
                     <p>2. "["마이페이지 > 1:1문의하기 > 문읜타입에서 판매자에게 문의하기"를 선택한 후 질의 내용 작성</p>
                 </div>
             </li>
-            <li>
+            <li><h3>고객센터</h3>
                 <input type="checkbox" id="qna-7">
                 <label for="qna-7">상품에 대해서 문의하려면 어떻게 해야 하나요?</label>
                 <div>

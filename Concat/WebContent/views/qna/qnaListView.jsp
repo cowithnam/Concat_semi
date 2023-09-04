@@ -170,22 +170,22 @@ table, td, th {
 	height: 210px;
 	background-color: black;
 }
-
-#listbar>div {
-	width: 150px;
-	height: 30px;
-	border: 1px solid black;
-}
-
-#listbar a {
+#listbar a{
 	text-decoration: none;
-	color: white;
+	color:white;
 }
 
-#listbar>td:hover {
+
+#listbar a:hover {
 	text-decoration: 1px underline;
-	color: lightgray;
+	color:white;
 }
+
+
+a:link {
+  color : white;
+}
+a:visited { color:white; }
 </style>
 </head>
 <body>

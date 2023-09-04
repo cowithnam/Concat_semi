@@ -33,7 +33,7 @@ public class QnaDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int QnaNo = Integer.parseInt(request.getParameter("num"));
 		
-		System.out.println(QnaNo);
+		
 		int result = new QnaService().increaseCount(QnaNo);
 			
 		if(result > 0){

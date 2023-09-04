@@ -8,9 +8,6 @@
 <style>
 @import url("https://fonts.googleapis.com/css?family=Abril+Fatface|Open+Sans:400,700&display=swap");
 
-/* font-family: 'Abril Fatface', cursive;
-font-family: 'Open Sans', sans-serif; */
-
 * {
   margin: 0;
   padding: 0;
@@ -26,26 +23,26 @@ body {
   display: flex;
 }
 .main {
-  width: 70%;
-  height: 75%;
+  width: 1300px;
+  height: 800px;
   margin: auto;
   border-radius: 10px;
-  /* display: flex; */
-  /* background: rgb(249, 63, 76); */
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   transition: all 0.1s ease-in 0.1s;
+  margin: auto;
 }
 /* PAGE HOME */
 .home {
-  width: 100%;
-  height: 100%;
+  width: 1300px;
+  height: 800px;
   border-radius: 10px;
   color: lightgray;
   background: black;
-  display: flex; /* flex or none */
+  display: flex; 
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
+  
 
   opacity: 1;
   transition: all 0.4s ease-in 0.2s;
@@ -74,10 +71,9 @@ a.link-copy {
   background: none;
   border: 2px solid white;
   border-radius: 150px;
-  align-self: center;
-  width: 200px;
+  width: 300px;
   padding: 8px 16px;
-  margin: 14px;
+  margin: 16px;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -90,14 +86,13 @@ a.link-copy {
 
 /* 회원가입 */
 .sign-up {
-  display: none; /*flex or none*/
+  display: none;
   opacity: 1;
   width: 100%;
   height: 100%;
 }
 .signup-left {
   width: 50%;
-  /* padding: 20px; */
   opacity: 0;
   display: flex;
   flex-flow: column wrap;
@@ -135,10 +130,10 @@ a.link-copy {
 }
 .form-area {
   position: absolute;
-  top: 20%;
-  left: 40%;
-  width: 20%;
-  height: 60%;
+  top: 10%;
+  left: 38%;
+  width: 25%;
+  height: 80%;
   padding: 20px 0;
   background: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -174,12 +169,10 @@ a.link-copy {
   font-weight: bold;
 }
 .form-area-signup {
-  /* display: none; */
   opacity: 0;
   transition: all 0.4s ease-in 0.2s;
 }
 .form-area-signin {
-  /* display: none; */
   opacity: 0;
   transition: all 0.4s ease-in 0.2s;
 }
@@ -235,7 +228,6 @@ a.link-copy {
   flex-flow: column wrap;
   justify-content: space-between;
   align-items: flex-end;
-  background-image: url("resources/image/거래사진.jpg"); 
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: 235% 50%;
@@ -267,7 +259,6 @@ a.link-copy {
     width: 60%;
   }
   .wc_message {
-/*     display: none; */
     opacity: 0;
     transition: opacity .1s;
   }
@@ -287,7 +278,7 @@ a.link-copy {
       <img src="resources/image/concat.png" style="width: 300px; height: 300px;">
       <button id="sign-up" class="btn">로그인</button>
       <button id="sign-in" class="btn">회원가입</button>
-      <p><a class="link-copy" href="#" target="_blank">메인페이지로</a></p>
+      <p><a class="link-copy" href="http://localhost:8001/Concat/#" target="_blank">메인페이지로</a></p>
     </section>
   
     <section class="sign-up">
@@ -307,55 +298,62 @@ a.link-copy {
         <!-- 로그인폼 -->
         <div class="organize-form form-area-signup">
           <h2>로그인</h2>
-          <form class="form" action="<%=request.getContextPath()%>/loginset.me" method="post">
-            <div class="form-field">
-              <label for="name">아이디</label>
-              <input type="text" id="name" name="memId" required/>
+          <form class="form" action="<%= request.getContextPath() %>/loginset.me" method="post">
+            <div class="form-field" style="width: 350px; margin: auto;">
+              <label for="id">아이디</label>
+              <input type="text" id="id" name="memId" required/>
             </div>
+            <br>
   
-            <div class="form-field">
+            <div class="form-field" style="width: 350px; margin: auto;">
               <label for="password">비밀번호</label>
-              <input type="text" id="password" name="memPwd" required/>
+              <input type="password" id="password" name="memPwd" required/>
             </div>
+            <br>
   
-            <button type="submit" class="btn-sign btn-up">로그인</button>
+            <button type="submit" class="btn-sign">로그인</button>
           </form>
           <p>아이디가 없으신가요 ? <a href="#" class="link-in">회원가입</a></p>
-          <p>아이디를 잊어버리셨나요? ? <a href="#" class="idfind">아이디찾기</a></p>
+          <p>아이디를 잊어버리셨나요 ? <a href="<%=request.getContextPath() %>/seachid.me" class="idfind">아이디찾기</a></p>
+          <p>비밀번호를 잊어버리셨나요 ? <a href="<%=request.getContextPath() %>/seachpwd.me" class="pwdfind">비밀번호찾기</a></p>
   
         </div>
   
         <!-- 회원가입폼 -->
         <div class="organize-form form-area-signin">
           <h2>회원가입</h2>
-          <form class="form">
+          <form class="form" action="<%=request.getContextPath()%>/memberjoin.me" method="post">
             <div class="form-field">
-              <label for="id"></label>
-              <input type="text" name="id_in" id="id-in" placeholder="아이디를 입력해주세요" required/>
+              <input type="text" name="memId" placeholder="아이디를 입력해주세요" maxlength="12" required/>
+              <!-- <button type="button" onclick="idCheck();">중복확인</button> -->
+              <br>
             </div>
   
             <div class="form-field">
-              <label for="password-in">비밀번호</label>
-              <input type="text" name="password_in" id="password-in" required />
+              <input type="password" name="memPwd"  placeholder="비밀번호를 입력해주세요" required /> <br>
             </div>
             <div class="form-field">
-              <label for="password1-in">비밀번호 확인</label>
-              <input type="text" name="password1_in" id="password1-in" required />
+              <input type="password" name="memPwd"  placeholder="비밀번호를 한번더 입력해주세요" required /> <br>
             </div>
             <div class="form-field">
-              <label for="phone">핸드폰번호</label>
-              <input type="text" name="phone" id="phone"  required/>
+              <input type="text" name="memName"  placeholder="이름를 입력해주세요" required/> <br>
             </div>
             <div class="form-field">
-              <label for="nickname">닉네임</label>
-              <input type="text" name="nickname" id="nickname" required/>
+              <input type="text" name="nickName"  placeholder="닉네임를 입력해주세요" required/> <br>
             </div>
             <div class="form-field">
-              <label for="email">이메일</label>
-              <input type="email" name="email" id="email" required/>
+              <input type="email" name="email"  placeholder="이메일를 입력해주세요" required/> <br>
             </div>
-  
-            <button class="btn-sign btn-in">회원가입</button>
+            <div class="form-field">
+              <input type="text" name="phone" onKeyup = "addHypen(this);" placeholder="핸드폰 번호를 입력해주세요" required/> <br>
+            </div>
+    
+            <button type="submit" class="btn-sign btn-up">회원가입</button>
+            <br>
+            <div>
+              <br>
+              <input type="checkbox" required> Concat마켓의 이용약관 및 정보이용에 동의합니다.(필수)
+            </div>
           </form>
           <p>아이디가 있으신가요 ? <a href="#" class="link-up">로그인</a></p>
         </div>
@@ -363,7 +361,7 @@ a.link-copy {
   
       <article class="signup-right">
         <i class="fas fa-2x fa-bars bars-style"></i>
-        <p><a class="link-copy" href="#" target="_blank">메인페이지로</a></p>
+        <p><a class="link-copy" href="http://localhost:8001/Concat/#" target="_blank">메인페이지로</a></p>
   
       </article>
     </section>
@@ -503,6 +501,34 @@ a.link-copy {
         
      
       </script>
+      
+      <script>
+	    function addHypen(obj) {
+		    var number = obj.value.replace(/[^0-9]/g, "");
+		    var phone = "";
+	
+		    if(number.length < 4) {
+		        return number;
+		    } else if(number.length < 7) {
+		        phone += number.substr(0, 3);
+		        phone += "-";
+		        phone += number.substr(3);
+		    } else if(number.length < 11) {
+		        phone += number.substr(0, 3);
+		        phone += "-";
+		        phone += number.substr(3, 3);
+		        phone += "-";
+		        phone += number.substr(6);
+		    } else {
+		        phone += number.substr(0, 3);
+		        phone += "-";
+		        phone += number.substr(3, 4);
+		        phone += "-";
+		        phone += number.substr(7);
+		    }
+		    obj.value = phone;
+		}
+    </script>
 	
 </body>
 </html>

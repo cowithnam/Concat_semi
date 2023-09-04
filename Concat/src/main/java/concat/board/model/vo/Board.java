@@ -5,23 +5,31 @@ import java.sql.Date;
 public class Board {
 	private int boardNo;
 	private String memNo;
+	private String nickName;
 	private String categoryNo;
+	private String brand;
 	private String boardTitle;
 	private String boardContent;
 	private int count;
-	private Date issueDate;
+	private String issueDate;
 	private String status;
 	private int price;
 	private Date dueDate;
+	private String openkakao;
+	private String thumbnail;
+	private String tStatus;
 	
 	public Board() {}
 
-	public Board(int boardNo, String memNo, String categoryNo, String boardTitle, String boardContent, int count,
-			Date issueDate, String status, int price, Date dueDate) {
+	public Board(int boardNo, String memNo, String nickName, String categoryNo, String brand, String boardTitle,
+			String boardContent, int count, String issueDate, String status, int price, Date dueDate, String openkakao,
+			String thumbnail, String tStatus) {
 		super();
 		this.boardNo = boardNo;
 		this.memNo = memNo;
+		this.nickName = nickName;
 		this.categoryNo = categoryNo;
+		this.brand = brand;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.count = count;
@@ -29,6 +37,9 @@ public class Board {
 		this.status = status;
 		this.price = price;
 		this.dueDate = dueDate;
+		this.openkakao = openkakao;
+		this.thumbnail = thumbnail;
+		this.tStatus = tStatus;
 	}
 
 	public int getBoardNo() {
@@ -47,12 +58,28 @@ public class Board {
 		this.memNo = memNo;
 	}
 
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
 	public String getCategoryNo() {
 		return categoryNo;
 	}
 
 	public void setCategoryNo(String categoryNo) {
 		this.categoryNo = categoryNo;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public String getBoardTitle() {
@@ -79,11 +106,11 @@ public class Board {
 		this.count = count;
 	}
 
-	public Date getIssueDate() {
+	public String getIssueDate() {
 		return issueDate;
 	}
 
-	public void setIssueDate(Date issueDate) {
+	public void setIssueDate(String issueDate) {
 		this.issueDate = issueDate;
 	}
 
@@ -111,11 +138,37 @@ public class Board {
 		this.dueDate = dueDate;
 	}
 
+	public String getOpenkakao() {
+		return openkakao;
+	}
+
+	public void setOpenkakao(String openkakao) {
+		this.openkakao = openkakao;
+	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
+	public String gettStatus() {
+		return tStatus;
+	}
+
+	public void settStatus(String tStatus) {
+		this.tStatus = tStatus;
+	}
+
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", memNo=" + memNo + ", categoryNo=" + categoryNo + ", boardTitle="
-				+ boardTitle + ", boardContent=" + boardContent + ", count=" + count + ", issueDate=" + issueDate
-				+ ", status=" + status + ", price=" + price + ", dueDate=" + dueDate + "]";
+		return "Board [boardNo=" + boardNo + ", memNo=" + memNo + ", nickName=" + nickName + ", categoryNo="
+				+ categoryNo + ", brand=" + brand + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
+				+ ", count=" + count + ", issueDate=" + issueDate + ", status=" + status + ", price=" + price
+				+ ", dueDate=" + dueDate + ", openkakao=" + openkakao + ", thumbnail=" + thumbnail + ", tStatus="
+				+ tStatus + "]";
 	}
-	
+
 }

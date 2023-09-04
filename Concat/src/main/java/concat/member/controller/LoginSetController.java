@@ -1,6 +1,8 @@
 package concat.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +24,6 @@ public class LoginSetController extends HttpServlet {
      */
     public LoginSetController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -31,13 +32,18 @@ public class LoginSetController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
-		
 	
 		Member loginMember = new MemberService().loginMember(memId, memPwd);
 		
 		
 		if(loginMember == null) {
-			//ì‹¤íŒ¨ë¡œ
+			response.setContentType("text/html; charset=utf-8");
+			
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+	        out.println("alert('¾ÆÀÌµð ¶Ç´Â ºñ¹Ð¹øÈ£¸¦ Àß¸ø ÀÔ·ÂÇß½À´Ï´Ù. ÀÔ·ÂÇÏ½Å ³»¿ëÀ» ´Ù½Ã È®ÀÎÇØÁÖ¼¼¿ä.');");
+	        out.println("history.back();");
+	        out.println("</script>"); 
 		}else {
 			request.getSession().setAttribute("loginMember", loginMember);
 			response.sendRedirect(request.getContextPath());
@@ -48,7 +54,6 @@ public class LoginSetController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
