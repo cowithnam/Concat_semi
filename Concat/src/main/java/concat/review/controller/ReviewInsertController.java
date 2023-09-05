@@ -35,7 +35,7 @@ public class ReviewInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-int maxSize = 10*1024*1024;
+		int maxSize = 10*1024*1024;
 		
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/board_upfiles/");
 		

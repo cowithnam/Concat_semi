@@ -45,7 +45,7 @@ public class BlackListUpdateController extends HttpServlet {
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
-			int blNo = Integer.parseInt(multiRequest.getParameter("blNO"));
+			int blNo = Integer.parseInt(multiRequest.getParameter("blNo"));
 			String title = multiRequest.getParameter("title");
 			String content = multiRequest.getParameter("content");
 			String blackId = multiRequest.getParameter("blackId");
@@ -75,10 +75,9 @@ public class BlackListUpdateController extends HttpServlet {
 			int result = new BlackListService().updateBoard(bl, image);
 			
 			if(result > 0) {
-				response.sendRedirect(request.getContextPath() + "/list.bl?cpage=1");
-				
+				response.sendRedirect(request.getContextPath() + "/DetailView.bl?num="+blNo);
 			}else {
-				request.setAttribute("errorMsg", "�������� ��Ͽ� �����߽��ϴ�.");
+				
 			}
 		}
 	}

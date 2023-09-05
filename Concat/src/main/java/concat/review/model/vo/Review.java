@@ -23,8 +23,19 @@ public class Review {
 	
 	public Review() {}
 	
-	
-	
+	public Review(int reviewNo, String memNo, String sellId, String reviewTitle, String reviewContent, int count,
+			Date createDate, int score, String imgPath1) {
+		super();
+		this.reviewNo = reviewNo;
+		this.memNo = memNo;
+		this.sellId = sellId;
+		this.reviewTitle = reviewTitle;
+		this.reviewContent = reviewContent;
+		this.count = count;
+		this.createDate = createDate;
+		this.score = score;
+		this.imgPath1 = imgPath1;
+	}
 
 	public Review(int reviewNo, String memNo, String reviewTitle, int count, Date createDate, int score,
 			String titleImg) {

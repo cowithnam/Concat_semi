@@ -76,7 +76,7 @@
     .EnrollForm{
         float: right;
         width: 100px;
-        height: 20px;
+        height: 50px;
     }
 
     .EnrollForm>button{
@@ -93,6 +93,21 @@
         background-color: black;
         color: white;
     }
+    
+    .btnn>button{
+      	width: 100px;
+        height: 40px;
+        margin-top: 10px;
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 17px;
+    }
+
+    button:hover{
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -106,9 +121,10 @@
             <button type="submit">검색</button>
         </form>
         <br><br>
+        
 		<% if(loginMember != null) { %>
         <!-- 로그인한 회원만 보이기-->
-        <div class="EnrollForm" style="margin-bottom: 10px;">
+        <div class="EnrollForm btnn" style="margin-bottom: 10px;">
             <button style="background-color: black; color: white;" id="EnrollForm">작성하기</button>
         </div>	      
         <% } %>
@@ -129,7 +145,7 @@
 	                <!-- case1. 공지글이 없을 경우 -->
 	               	<% if(list.isEmpty()) { %>
 		               	<tr>
-		                	<td colspan="5">존재하는 공지사항이 없습니다.</td>
+		                	<td colspan="5">존재하는 블랙리스트가 없습니다.</td>
 		           	    </tr>
 	                <% } else { %>
 		             	 <!-- case2. 공지글이 있을 경우-->
@@ -157,8 +173,8 @@
                      <script>
 				    	$(function(){
 				    		$(".listtr").click(function(){
-				    			const num = $(this).children().eq(0).text();
-								location.href = '<%= contextPath %>/DetailView.bl?num='+num;
+				    				const num = $(this).children().eq(0).text();
+									location.href = '<%= contextPath %>/DetailView.bl?num='+num;
 				    		})
 				    	})
 				    </script>
@@ -171,7 +187,7 @@
 		<!-- 페이징 바 -->
         <div class="btn" style="text-align: center;">
 			<% if(currentPage != 1) { %>
-            <button onclick="location.href='<%= contextPath %>/list.bl?cpage=<%= currentPage-1 %>'"> &lt; </button>
+            <button style="font-size: 12px; onclick="location.href='<%= contextPath %>/list.bl?cpage=<%= currentPage-1 %>'"> ◀ </button>
             <% } %>
             
             <% for(int p = startPage; p <= endPage; p++) { %>
@@ -183,7 +199,7 @@
             <% } %>
             
             <% if(currentPage != maxPage) {%>
-            <button onclick="location.href='<%= contextPath %>/list.bl?cpage=<%= currentPage+1 %>'"> &gt; </button>
+            <button style="font-size: 12px; onclick="location.href='<%= contextPath %>/list.bl?cpage=<%= currentPage+1 %>'"> ▶ </button>
             <% } %>
         </div>	
 </body>

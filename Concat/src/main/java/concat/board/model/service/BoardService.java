@@ -181,5 +181,37 @@ public class BoardService {
 		
 		return b;
 	}
+	
+	public int updateBoard(Board b) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().updateBoard(b,conn);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int deleteBoard(int bno) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteBoard(bno,conn);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 
 }

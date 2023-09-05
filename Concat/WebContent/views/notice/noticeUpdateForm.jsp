@@ -7,17 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항작성</title>
+<title>공지사항작성</title>
     <style>
         #outer{
             width: 1000px;
@@ -41,24 +31,27 @@
             height: 500px;
         }
 
-        .enroll-btn{
-            width: 80px;
-            height: 40px;
-            background-color: black;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            margin-top: 5px;
-            margin-right: 10px;
-        }
+        .btnn>button{
+	      	width: 100px;
+	        height: 40px;
+	        margin-top: 10px;
+	        background-color: black;
+	        color: white;
+	        border-radius: 10px;
+	        font-weight: bolder;
+	        font-size: 17px;
+	    }
+	
+	    button:hover{
+	        cursor: pointer;
+	    }
     </style>
 </head>
 <body>
     <%@ include file ="../common/menubar.jsp" %>
    
     <div id="outer">
-        <h1>공지사항 작성하기</h1>
+        <h1>공지사항 수정하기</h1>
         <hr>
         <form action="<%= contextPath %>/update.no" method="post" id="no-enroll">
         	<input type="hidden" name ="num" value="<%=n.getNoticeNo()%>">
@@ -68,8 +61,10 @@
             내용  <br>
             <textarea  name="content" cols="30" rows="10" style="resize: none;" required  ><%=n.getNoticeContent() %></textarea>
             <br>
-            <button type="submit" class="enroll-btn">수정하기</button>
-            <button type="button" class = "enroll-btn" onclick = "backno();">뒤로가기</button>
+            <div class="btnn">
+	            <button type="submit" class="enroll-btn">수정하기</button>
+    	        <button type="button" class = "enroll-btn" onclick = "backno();">뒤로가기</button>
+            </div>
         </form>
     </div>
 </body>

@@ -18,8 +18,8 @@
         margin: auto;
     }
 
-    img{
-        width: 550px;
+    .img>img{
+        width: 500px;
         height: 500px;
     }
 
@@ -49,26 +49,80 @@
         text-align: left;
     }
 
-    .review-recontent{
-        border-top: 1px solid lightgray;
-    }
-
     .review{
-        width: 550px;
-        height: 150px;
         border-bottom: 1px solid lightgray;
+        margin-top: 0px;
+        padding-bottom: 20px;
     }
 
     .review-user{
+        margin-top: 0px;
         width: 550px;
-        height: 50px;
+        height: 35px;
     }
 
     .review-user>div{
         height: 100%;
         float: left;
     }
+    
+    .btn{
+    	text-align: right;
+        padding-right: 20px;
+    }
 
+    #reply{
+        margin-top: 0px;
+        
+    }
+
+    #reply textarea:focus{
+        outline: none;
+    }
+
+    .btn>button, .btn2>button{
+        width: 100px;
+        height: 40px;
+        margin: auto;
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 17px;
+    }
+
+    .btn>button{
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 90px;
+        height: 35px;
+    }
+
+    .btn2{
+        margin: auto;
+        text-align: center;
+    }
+
+    button:hover{
+        cursor: pointer;
+    }
+
+    .delete{
+        text-align: right;
+        padding-right: 20px;
+    }
+
+    .delete>button{
+        margin-left: 10px;
+        width: 80px;
+        height: 30px;
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 15px;
+    }
+    
 </style>
 </head>
 <body>
@@ -76,6 +130,7 @@
 	<%@ include file="../common/menubar.jsp" %>
 	
 	<div class="wrap" align="center">
+		<br>
 		<form action="<%= contextPath %>/updateForm.re?rNo=<%= r.getReviewNo() %>" method="post" enctype="multipart/form-data">
         <div class="img">
         	<img src="<%= contextPath %>/<%= i.getFilePath() %>">
@@ -83,15 +138,12 @@
         
         <div class="profile">
             <div class="information">
-                <div style="width: 30px;">
-                    <img src="" style="width: 20px; height: 20px;">            
-                </div>
                 <div>
-                    <h3 style="margin: 0px;"><%= r.getMemNo() %></h3>
+                    <h3 style="margin: 0px;">작성자 : <%= r.getMemNo() %></h3>
                 </div>
             </div>
             <div class="point">
-                <h4 style="margin: 0px;"><%= r.getScore() %> 점</h4>
+                <h4 style="margin: 0px;">평점 : <%= r.getScore() %> 점</h4>
             </div>
         </div>
 
@@ -104,35 +156,34 @@
             </div>
 
             <div align="right">
-                <h5><%= r.getCount() %>회</h5>
+                <h5>조회수 : <%= r.getCount() %>회</h5>
             </div>
             
+            <div style="border-top: 1px solid lightgray;"></div>
+               
+            <div id="reply">
+            </div>
+            
+                            
             <div class="review-recontent">
-                <h3>댓글 제목</h3>
                 <div class="review">
-                    <div class="review-user">
-                        <div>
-                            <h4 style="margin: 0px;">유저</h4>
-                        </div>
-                    </div>
-
-                    <div style="padding-left: 15px; width: 550px;" >
-                       <textarea id="content" rows="" cols="" placeholder="댓글작성란">댓글내용</textarea>
+                    <div style="padding-left: 15px; width: 550px; margin-top: 15px; " >
+                        <textarea id="content" rows="4" cols="60" placeholder="댓글작성란" style="resize: none"></textarea>
                     </div>
                     
+                    <div class="btn">
                     <% if(loginMember != null) {%>
-                    	<button type="button" onclick="insertReply();">댓글등록</button>
+                        <button type="button" onclick="insertReply();">댓글등록</button>
                     <% }else { %>
-                    	<button type="button" disabled>댓글등록</button>
+                        <button type="button" disabled>댓글등록</button>
                     <% } %>
+                    </div>
                 </div> 
-                
-                <div id="reply">
-                	
-                </div>
             </div>
             
-            <div align="center">
+            <br>
+            
+            <div class="btn2">
             <% if(loginMember != null && r.getMemNo().equals(loginMember.getMemId())) {%>
             <!-- 로그인한 사람이 당사자일 경우 -->
                 <button type="submit">수정</button>
@@ -191,17 +242,18 @@
         				let result ="";
         				
            				for(let i=0; i<list.length; i++){
-        					result += "<div class='review-recontent'>"
+        					result += "<br>" + "<br>"
+                                    + "<div class='review-recontent' style='font-size: 14px;'>"
         							+ "<div class='review'>"
         							+ "<div class='review-user'>"
         							+ "<div>"
-        							+ "<h4 style='margin:0px;'>"
+        							+ "<h4 style='margin:0px; margin-top:0px; font-size: 18px; padding-left: 20px;'>"
         							+ list[i].replyWriter
         							+ "</h4>"
         							+ "</div>"
         							+ "</div>"
-									+ "<div style='padding-left: 15px; width: 550px;'>"
-									+ "<textarea id='content' rows='3' cols='50' placeholder='댓글작성란'>"
+									+ "<div style='padding-left: 50px; width: 550px;'>"
+									+ "<textarea id='content' rows='4' cols='50' style='resize: none; border: none; font-size: 15px;' readonly>"
 									+ list[i].replyContent
 									+ "</textarea>"
 									+ "<br>"
@@ -209,13 +261,12 @@
 									+ "작성일 : "
 									+ list[i].createDate 
 									+ "</div>"
+                                    + "<br>"
 									+ "</div>"
 									+ "</div>"
 									+ "</div>";
         				}
-           				
         				$("#reply").html(result);
-        				
         			},
         			error:function(){
         				console.log("댓글조회에 실패했습니다.")

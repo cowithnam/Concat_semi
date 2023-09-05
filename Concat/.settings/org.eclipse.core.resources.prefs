@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/views/member/login.jsp=UTF-8
 encoding//src/main/java/concat/blacklist/controller/BlackListUpdateController.java=UTF-8
 encoding//src/main/java/concat/review/controller/ReviewDeleteController.java=UTF-8
 encoding//src/main/java/concat/review/controller/ReviewDetailController.java=UTF-8

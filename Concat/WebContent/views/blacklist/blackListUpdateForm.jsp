@@ -12,50 +12,55 @@
 <meta charset="UTF-8">
 <title>blacklist Update Form</title>
 <style>
-    .outer{
-        width: 1000px;
-        height: 600px;
-        box-sizing: border-box;
+    .outer2{
+        width: 1100px;
         margin: auto;
     }
 
-    hr{
-        margin-bottom: 40px;
+    .insert-black{
+        margin: auto;
     }
 
-    h3{height: 29px;}
-
-    #head{display: block; 
-        width: 40%; 
-        float: left;
-    }
-    #head2{
-        display: block; 
-        width: 50%; 
-        float: left;
-        font-size: 12px;
+    .insert-black input{
+        width: 515px;
+        height: 30px;
+        font-size: 15px;
     }
 
-    #content{
-        width: 900px;
-        border-top: 1px solid lightgrey;
+    .insert-black,.insert-black td,.insert-black th {
+        border-collapse : collapse;
+    }
+
+    .insert-black tr{
         border-bottom: 1px solid lightgray;
-        padding: 25px;
     }
 
-    #title button{
-        width: 140px;
-        height: 50px;
-        font-size: 23px;
-        font-weight: bold;
-        border-radius: 5px;
+    .insert-black td,.insert-black th{
+        padding: 12px 0px;
+    }
+
+    .insert-black td{
+        width: 550px;
+    }
+
+    .insert-black th{
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    .btn>button{
+        width: 100px;
+        height: 40px;
+        margin-top: 10px;
         background-color: black;
         color: white;
-        margin-top: 25px;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 17px;
     }
-    
-    textarea{
-    	text-align: left;
+
+    button:hover{
+        cursor: pointer;
     }
 </style>
 </head>
@@ -63,46 +68,79 @@
 
 	<%@ include file="../common/menubar.jsp" %>
 	
-	<div class="outer">
-        <h1>블랙리스트</h1> 
-        <hr>
-        <form id="title" action="<%= contextPath %>/update.bl" method="post" enctype="multipart/form-data">
-        	<input type="hidden" name="blNO" value="<%=bl.getBlNo() %>">
-            <div id="head">
-	            제	목 : 
-                <input type="text" name="title" value="<%= bl.getBlTitle() %>" style="width=100px; height=10px;">
-            </div>
+    <div class="outer2">
+        <div>
+            <h1 align="center" class="title1"><b>블랙리스트 신고글 수정</b></h1>
+        </div>
+    
+        <form action="<%= contextPath %>/update.bl" method="post" enctype="multipart/form-data">
             
-            <div id="head2" align="right" style="padding-top: 30px;">
-                작성자 : <%= bl.getBlWriter() %> 
-                조회수 : <%= bl.getCount() %>
-            </div>
-            <br><br><br>
-            <div id="content">
-            	신고 대상 : <input type="text" name="blackId" value="<%= bl.getBlackId() %>" required>
-            	<br><br>
-            	
-            	내 용
-            	<br><br>
-                <textarea name="content" cols="100" rows="10" style="resize: none"><%= bl.getBlContent() %></textarea> 
-                <br><br>
-	            <div>
-                    <% if(image != null) { %>
-	                     <!-- 현재 이 게시글에 딸린 첨부파일이 있을 경우-->
-	                     <%= image.getOriginName() %>
-	                     <input type="hidden" name="originFileNo" value="<%= image.getFileNo() %>">
-                    <% } %>
-                      
-                      <input type="file" name="file">
-	       	    </div>
-            </div>
-            <div align="center">
-                <button type="submit">수정</button>
-                <button type="reset">취소하기</button>
-                <button type="button" onclick="history.back();">뒤로가기</button>
+            <input type="hidden" name="blNo" value="<%= bl.getBlNo() %>">
+            
+            <table class="insert-black">
+                <tr>
+                    <th height="50">신고제목</th>
+                    <td >
+                        <input type="text" name="title" value="<%= bl.getBlTitle() %>" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th height="50">신고아이디</th>
+                    <td>
+                        <input type="text" name="blackId" value="<%= bl.getBlackId() %>" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th height="175">신고내용</th>
+                    <td>
+                        <textarea name="content" cols="75" rows="10" style="resize: none"><%= bl.getBlContent() %></textarea> 
+                    </td>
+                </tr>
+                <tr>
+                    <th width="170" height="150">첨부이미지</th>
+                    <td width="830">
+                        <div class="img-area">
+                            <% if(image != null) { %>
+                            <img src="<%= contextPath %>/<%= image.getFilePath() %>/<%= image.getUpdateName() %>" width="200" height="200" id="productImg" onclick="chooseFile()">
+                            <div id="file-area" style="display: none;">
+                                <input id="file" type="file" name="file" onchange="loadImg(this);">
+                            </div>
+                            <% }else { %>
+                            <img src="resources/image/noneImg.png" width="200" height="200" id="productImg" required onclick="chooseFile()">
+                            <div id="file-area" style="display: none;">
+                            	<input id="file" type="file" name="file" onchange="loadImg(this);">
+                            </div>
+                            <% } %>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <input type="hidden" name="userNo" value="<%= loginMember.getMemNo() %>">
+            <div class="btn" style="text-align: center;">
+                <button type="submit">수정하기</button>
+                <button type="button" onclick="history.back();">뒤로가기</button>  
             </div>
         </form>
-        
     </div>
+    </div>
+    
+    <script>
+        function chooseFile(){
+           $("#file").click();
+       }
+        
+        function loadImg(inputFile){
+            if(inputFile.files.length == 1){
+                const reader = new FileReader();
+                reader.readAsDataURL(inputFile.files[0]);
+                reader.onload = function(e){
+                    $("#productImg").attr("src", e.target.result);
+                }
+            }else{
+                $("#productImg").attr("src", "resources/image/noneImg.png");
+            }
+        }
+   </script>   
 </body>
 </html>

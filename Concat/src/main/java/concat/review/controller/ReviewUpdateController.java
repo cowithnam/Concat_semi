@@ -48,12 +48,16 @@ request.setCharacterEncoding("utf-8");
 			int rNo = Integer.parseInt(multiRequest.getParameter("rNo"));
 			String title = multiRequest.getParameter("title");
 			String content = multiRequest.getParameter("content");
+			String cellId = multiRequest.getParameter("cellId");
+			int score = Integer.parseInt(multiRequest.getParameter("score"));
 			
 			Review r = new Review();
 			
 			r.setReviewNo(rNo);
 			r.setReviewTitle(title);
 			r.setReviewContent(content);
+			r.setSellId(cellId);
+			r.setScore(score);
 			
 			Image image = null;
 			
@@ -62,6 +66,7 @@ request.setCharacterEncoding("utf-8");
 				image.setOriginName(multiRequest.getOriginalFileName("file"));
 				image.setUpdateName(multiRequest.getFilesystemName("file"));
 				image.setFilePath("resources/board_upfiles");
+				image.setBoardNo(rNo);
 				
 				if(multiRequest.getParameter("originFileNo") != null) {
 					image.setFileNo(Integer.parseInt(multiRequest.getParameter("originFileNo"))); 
@@ -73,10 +78,10 @@ request.setCharacterEncoding("utf-8");
 			int result = new ReviewService().updateReview(r, image);
 			
 			if(result > 0) {
-				response.sendRedirect(request.getContextPath() + "/list.re?cpage=1");
+				response.sendRedirect(request.getContextPath() + "/listDetail.re?num="+rNo);
 				
 			}else {
-				request.setAttribute("errorMsg", "�������� ��Ͽ� �����߽��ϴ�.");
+				
 			}
 			
 		}

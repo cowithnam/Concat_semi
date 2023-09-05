@@ -10,6 +10,8 @@ import java.util.Properties;
 
 import static concat.common.JDBCTemplate.*;
 
+import concat.image.model.vo.Profile;
+import concat.mem_grade.model.vo.MemGrade;
 import concat.member.model.vo.Member;
 
 public class MemberDao {
@@ -130,6 +132,7 @@ private Properties prop = new Properties();
 		
 		String sql = prop.getProperty("selectMember");
 		
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -204,6 +207,205 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		return result;
+		
+	}
+	
+	public int updateProfile(Connection conn,Profile profile) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, profile.getOriginName());
+			pstmt.setString(2, profile.getUpdateName());
+			pstmt.setString(3, profile.getFilePath());
+			pstmt.setInt(4, profile.getMemNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	public Profile selectProfile(int memNo,Connection conn) {
+		Profile pro = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				pro = new Profile();
+				pro.setFilePath(rset.getString("file_path"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return pro;
+		
+	}
+	
+	public String findId(Connection conn,Member m) {
+		String id = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemName());
+			pstmt.setString(2, m.getPhone());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				id = rset.getString("mem_id");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return id;
+		
+		
+		
+	}
+	
+	public String findPwd(Connection conn,Member m) {
+		String pwd = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findPWd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemId());
+			pstmt.setString(2, m.getMemName());
+			pstmt.setString(3, m.getPhone());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				pwd = rset.getString("mem_pwd");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return pwd;
+		
+	}
+	
+	public int idCheck(String checkId,Connection conn) {
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("idCheck");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, checkId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+		
+	}public int insertProfile(Connection conn,int memNo ,Profile profile) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, profile.getOriginName());
+			pstmt.setString(3, profile.getUpdateName());
+			pstmt.setString(4, profile.getFilePath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	public MemGrade gradeimg(int memNo, Connection conn) {
+		MemGrade grade = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("gradeimg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				grade = new MemGrade();
+				grade.setGrade_img(rset.getString("grade_img"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return grade;
+		
+		
+		
 	}
 }
 

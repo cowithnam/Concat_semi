@@ -58,9 +58,10 @@
     		$.ajax({
     			url:"main.bo",
     			success:function(list){
+    				console.log(list);
     				let div = "";
-    				if(!list.isEmpty()){
-	    				for(let i=0; i<5;i++){
+    				if(!list.isEmpty){
+	    				for(let i=0; i<list.length;i++){
 	    					div += "<div class='thumbnail' align='center'><img src='"
 	    					      + list[i].thumbnail + "' width='200' height='180' style='border-radius: 5px;'>"
 	    					      + " <span style='font-size: 11px;'>[" + list[i].brand + "]</span> <br>"

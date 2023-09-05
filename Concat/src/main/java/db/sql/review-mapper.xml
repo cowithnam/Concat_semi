@@ -90,6 +90,7 @@
 	SELECT
            REVIEW_NO
          , MEM_ID
+         , CELL_ID
 	     , REVIEW_TITLE
 	     , REVIEW_CONTENT
 	     , COUNT
@@ -124,6 +125,8 @@
 	       REVIEW
 	   SET REVIEW_TITLE = ?
 	     , REVIEW_CONTENT = ?
+	     , CELL_ID = ?
+	     , SCORE = ?
 	 WHERE REVIEW_NO = ?
 </entry>
 
@@ -133,7 +136,7 @@
 	   SET ORIGIN_NAME = ?
 	     , UPDATE_NAME = ?
 	     , FILE_PATH = ?
-	 WHERE FILE_NO = ?
+	 WHERE BOARD_NO = ?
 </entry>
 
 <entry key="insertNewImage">
@@ -163,6 +166,31 @@ UPDATE
        MEMBER
    SET TOTAL_SCORE = TOTAL_SCORE + ?
 WHERE MEM_ID = ?
+</entry>
+
+<entry key="dateList">
+	SELECT *
+	  FROM (
+	    SELECT ROWNUM RNUM, A.*
+	  FROM (
+	    SELECT
+	           REVIEW_NO
+	         , MEM_ID
+	         , REVIEW_TITLE
+	         , COUNT
+	         , CREATE_DATE
+             , SCORE
+             , FILE_PATH || '/' || UPDATE_NAME "TITLEIMG"
+	      FROM REVIEW R
+          JOIN IMAGE I ON (R.REVIEW_NO = I.BOARD_NO)
+          JOIN MEMBER USING (MEM_NO)
+	     WHERE R.STATUS = 'Y'
+	       AND I.BOARD_TYPE = 2
+	     ORDER 
+	        BY CREATE_DATE DESC
+	        ) A
+	    )
+	    WHERE RNUM BETWEEN ? AND ?
 </entry>
 
 <entry key="countList">

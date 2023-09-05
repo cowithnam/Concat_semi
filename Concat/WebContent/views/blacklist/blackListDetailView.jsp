@@ -23,6 +23,7 @@
 
     hr{
         margin-bottom: 40px;
+        border: 1px solid lightgray;
     }
 
     h3{height: 29px;}
@@ -35,30 +36,46 @@
         display: block; 
         width: 50%; 
         float: left;
-        font-size: 12px;
+        font-size: 13px;
     }
 
     #content{
         width: 900px;
         border-top: 1px solid lightgrey;
-        border-bottom: 1px solid lightgray;
         padding: 25px;
     }
 
-    #title button{
-        width: 140px;
-        height: 50px;
-        font-size: 23px;
-        font-weight: bold;
-        border-radius: 5px;
+    .btn>button{
+        width: 100px;
+        height: 40px;
+        margin-top: 10px;
         background-color: black;
         color: white;
-        margin-top: 25px;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 17px;
+    }
+
+    button:hover{
+        cursor: pointer;
     }
     
-    img{
+    .img{
     	width: 200px;
     	height: 200px;
+    }
+
+    textarea:focus{
+        outline: none;
+    }
+    
+    #content>p{
+    	font-size: 18px;
+    	font-weight: 900;
+    }
+    .content{
+    	font-size: 15px;
+    	font-weight: 500;
     }
 </style>
 </head>
@@ -66,47 +83,50 @@
 	<%@ include file="../common/menubar.jsp" %>
 
 	<div class="outer">
-        <h1>블랙리스트</h1> 
+
+        <h1>블랙리스트 상세정보</h1> 
+        
         <hr>
+        
         <form id="title" action="<%= contextPath %>/updateform.bl?blno=<%= b.getBlNo() %>" method="post" enctype="multipart/form-data">
             <div id="head">
                 <h3><%= b.getBlTitle() %></h3>
             </div>
-            <div id="head2" align="right" style="padding-top: 30px;">
-                작성자 : <%= b.getBlWriter() %> 
-                조회수 : <%= b.getCount() %>
+            <div id="head2" align="right">
+                <p style="font-size: larger; margin-top: 0px;">
+                작성자 : <%= b.getBlWriter() %> <br>
+                조회수 : <%= b.getCount() %> | 작성일 : <%= b.getBlDate() %>
+                </p>
             </div>
             <br><br><br>
             <div id="content">
-            	<!-- 사진추가? -->
                 <p>
-                	신고 대상 : <%= b.getBlackId() %>
+                	▶ 신고 대상 : <%= b.getBlackId() %>
                 	<br><br>
-                	신고 내용 : <%= b.getBlContent() %>
+                	▶ 신고 내용 : <br><br>
+                    <textarea class="content" cols="70" rows="10" style="border: 0px; resize: none;" readonly><%= b.getBlContent() %></textarea>
+                    <br>
+                    <% if(image == null) { %>
+                        <!-- case1. 첨부파일이 없을 경우 -->
+                        첨부파일이 없습니다.
+                       <% }else { %>
+                        <!-- case2. 첨부파일이 있을 경우 -->
+                       <img class="img" src="<%= contextPath %>/<%= image.getFilePath() %>/<%= image.getUpdateName() %>" width="250" height="250">
+                   <% } %>
                 </p>
             </div>
-            
-			<div>
-				<% if(image == null) { %>
-	                 <!-- case1. 첨부파일이 없을 경우 -->
-	                 첨부파일이 없습니다.
-					<% }else { %>
-	                 <!-- case2. 첨부파일이 있을 경우 -->
-	                 <div>
-	                 	<img src="<%= contextPath %>/<%= image.getFilePath() %>/<%= image.getUpdateName() %>" width="500" height="300">
-	                 </div>
-	                 <a download="<%= image.getOriginName() %>" href="<%= contextPath %>/<%= image.getFilePath() %>/<%= image.getUpdateName() %>"><%= image.getOriginName() %></a>
-				<% } %>
-       	    </div>
-            
+
             <div align="center">
             
-            <% if(loginMember != null && b.getBlWriter().equals(loginMember.getMemId())) {%>
-            <!-- 로그인한 사람이 당사자일 경우 -->
-                <button type="submit">수정</button>
-                <button type="button" id="delete">삭제</button>
-            <% } %>
-			    <button type="button" onclick="history.back();">뒤로가기</button>   
+            <div class="btn">
+	            <% if(loginMember != null && b.getBlWriter().equals(loginMember.getMemId())) {%>
+	            <!-- 로그인한 사람이 당사자일 경우 -->
+	                <button type="submit">수정하기</button>
+	                <button type="button" id="delete">삭제하기</button>
+	            <% } %>
+				    <button type="button" onclick="location.href='<%=contextPath %>/list.bl?cpage=1'">뒤로가기</button>   
+            </div>
+            <br>
             </div>
         </form>
     </div>

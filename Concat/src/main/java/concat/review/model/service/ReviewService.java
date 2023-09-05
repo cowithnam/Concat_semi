@@ -92,12 +92,15 @@ public class ReviewService {
 		
 		if(i != null) {
 			
-			if(i.getFileNo() != 0) { 
+			Image img = new ReviewDao().selectImage(conn, r.getReviewNo());
+			
+			if(img != null) { 
 				result2 = new ReviewDao().updateImage(conn, i);
 			}else { 
 				result2 = new ReviewDao().insertNewImage(conn, i);
 			}
 		} 
+		
 		
 		if(result1 > 0 && result2 > 0) {
 			commit(conn);

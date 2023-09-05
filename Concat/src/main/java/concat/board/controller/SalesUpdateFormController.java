@@ -33,7 +33,7 @@ public class SalesUpdateFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int bNo = Integer.parseInt(request.getParameter("bNo")); 
+		int bNo = Integer.parseInt(request.getParameter("bno")); 
 		
 		BoardService bs = new BoardService();
 		
@@ -43,7 +43,7 @@ public class SalesUpdateFormController extends HttpServlet {
 		request.setAttribute("b", b);
 		request.setAttribute("i", i);
 		
-		request.getRequestDispatcher("views/Board/판매게시판수정화면.jsp").forward(request, response);
+		request.getRequestDispatcher("views/board/updateBoard.jsp").forward(request, response);
 	}
 
 	/**

@@ -29,20 +29,26 @@
     }
 
     .content{
-        height: 600px;
         margin-top: 30px;
     }
 
 
     .content>div{
-        border: 1px solid red;
-        width: 200px;
-        height: 280px;
+        border: 1px solid lightgray;
+        padding-top: 7px;
+        width: 225px;
+        height: 320px;
         display: inline-block;
-        margin-left: 35px;
-        margin-top: 5px;
+        margin: 10px;
         text-align: center;
+        border-radius: 5px;
     }
+
+    .reviewlist:hover{
+        cursor: pointer;
+        opacity: 0.7;
+    }
+
 
     div>img{
         width: 200px;
@@ -51,6 +57,13 @@
 
     .listnumber{
         text-align: center;
+    }
+    .listnumber>button{
+    	width: 30px;
+    	height: 30px;
+    	background-color: black;
+    	color: white;
+    	font-size: 14px;
     }
     
     .EnrollForm{
@@ -77,6 +90,18 @@
     button{
     	cursor: pointer;
     }
+    
+    .btn>button{
+        width: 100px;
+        height: 40px;
+        margin-top: 10px;
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 17px;
+    }
+
 </style>
 </head>
 <body>
@@ -99,7 +124,7 @@
             
 		<% if(loginMember != null) { %>
         <!-- 로그인한 회원만 보이기-->
-	        <div class="EnrollForm" style="margin-bottom: 0px; width:100px; height:40px; border:0px; margin-top:0px; margin-right:10px;">
+	        <div class="EnrollForm btn" style="margin-bottom: 0px; width:100px; height:40px; border:0px; margin-top:0px; margin-right:10px;">
 	            <button style="background-color: black; color: white; width:100px; height:40px;" id="EnrollForm">작성하기</button>
 	        </div>	      
         <% } %>
@@ -115,7 +140,7 @@
             
            	<% if(list.isEmpty()){ %>
 	            <div>
-                   조회된 게시글이 없습니다.
+                   조회된 후기가 없습니다.
                 </div>
            	<% }else {%>
            		<% for(Review r : list){ %>
@@ -124,34 +149,27 @@
         			<% if(r.getTitleImg() == null){ %>
         				<img src="#">
         			<%}else{ %>
-             			<img src="<%= contextPath %>/<%= r.getTitleImg() %>">
+             			<img src="<%= contextPath %>/<%= r.getTitleImg() %>" width="200" height="180" style="border-radius: 5px;">
              		<% } %>
-                	<div>
-                    	<%= r.getReviewTitle() %>
-                    	<br>
+                	<div style="margin-top: 5px">
+                    	<span style="font-size: 18px; font-weight: bolder;"><%= r.getReviewTitle() %></span> <br>
                 	</div>
-	                <div style="float: right; margin-right:5px;">
-	                    <%= r.getCreateDate() %>
+	                <div style="float: right; margin-right:5px; margin-top: 5px">
+	                    <span style="font-size: 14px; font-weight: bold;">평점 : <%= r.getScore() %>점</span>
 	                    <br>
-	                    평점 : <%= r.getScore() %>점
+	                    <span style="font-size: 14px; font-weight: bold;">조회수 : <%= r.getCount() %></span>
+	                    <br>
+	                    <span style="font-size: 14px; font-weight: bold;"><%= r.getCreateDate() %></span>
                	 	</div>
             	</div>
 				<% } %>
 			<% } %>
         </div>
-	
-		<script>
-			$(function(){
-				$(".reviewlist").click(function(){
-					const num = $(this).children().eq(0).val();
-					location.href = '<%= contextPath %>/listDetail.re?num='+num;
-				})
-			})
-		</script>
-		
-        <div class="listnumber" style="margin-top: 60px;">
+    </div>
+
+        <div class="listnumber" style="margin-top: 30px;">
 			<% if(currentPage != 1) { %>
-            <button onclick="location.href='<%= contextPath %>/list.re?cpage=<%= currentPage-1 %>'"> &lt; </button>
+            <button style="font-size: 12px;" onclick="location.href='<%= contextPath %>/list.re?cpage=<%= currentPage-1 %>'"> ◀ </button>
             <% } %>
             
             <% for(int p = startPage; p <= endPage; p++) { %>
@@ -163,10 +181,18 @@
             <% } %>
             
             <% if(currentPage != maxPage) {%>
-            <button onclick="location.href='<%= contextPath %>/list.re?cpage=<%= currentPage+1 %>'"> &gt; </button>
+            <button style="font-size: 12px;" onclick="location.href='<%= contextPath %>/list.re?cpage=<%= currentPage+1 %>'"> ▶ </button>
             <% } %>
         </div>
-    </div>
+	  
+	<script>
+		$(function(){
+			$(".reviewlist").click(function(){
+				const num = $(this).children().eq(0).val();
+				location.href = '<%= contextPath %>/listDetail.re?num='+num;
+			})
+		})
+	</script>
     
     <script>
     	function count(){

@@ -29,7 +29,7 @@ public class ReviewDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-int rNo = Integer.parseInt(request.getParameter("num")); 
+		int rNo = Integer.parseInt(request.getParameter("num")); 
 		
 		int result = new ReviewService().increaseCount(rNo);
 		

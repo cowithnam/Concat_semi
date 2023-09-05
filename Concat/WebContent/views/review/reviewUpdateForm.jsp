@@ -12,134 +12,180 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    .wrap{
-        width: 1000px;
-        box-sizing: border-box;
+    .outer2{
+        width: 1100px;
         margin: auto;
     }
 
-    img{
-        width: 550px;
-        height: 500px;
+    .head2{
+        text-align: center;
     }
 
-    .profile{
-        width: 550px;
-        padding: 20px;
-        box-sizing: border-box;
-        background-color: black;
-        color: white;
-        border-radius: 10px;
+    .insert-black{
+        margin: auto;
     }
 
-    .information{
-        text-align: left;
+    .insert-black input{
+        width: 515px;
+        height: 30px;
+        font-size: 15px;
     }
 
-    .information>div{
-        float: left;
+    .insert-black,.insert-black td,.insert-black th {
+        border-collapse : collapse;
     }
 
-    .point{
-        text-align: right;
-    }
-
-    .content{
-        width: 550px;
-        text-align: left;
-    }
-
-    .review-recontent{
-        border-top: 1px solid lightgray;
-    }
-
-    .review{
-        width: 550px;
-        height: 150px;
+    .insert-black tr{
         border-bottom: 1px solid lightgray;
     }
 
-    .review-user{
+    .insert-black td,.insert-black th{
+        padding: 12px 0px;
+    }
+
+    .insert-black td{
         width: 550px;
+    }
+
+    .insert-black th{
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    input[type=radio]{
+	    display: none;
+	}
+
+	label{
+        font-size: 3em;
+        color: transparent;
+        text-shadow: 0 0 0 #f0f0f0;
+	}
+	label:hover{
+	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+	}
+	label:hover ~ label{
+	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+	}
+	input[type=radio]:checked ~ label{
+	    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+	}
+	#score{
+        direction: rtl;
+        text-align: left;
+	}
+
+    .btn>button{
+        width: 120px;
         height: 50px;
+        margin-top: 10px;
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 17px;
     }
 
-    .review-user>div{
-        height: 100%;
-        float: left;
+    button:hover{
+        cursor: pointer;
     }
-
 </style>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	
-	<div class="wrap" align="center">
-		<form action="<%= contextPath %>/update.re" method="post" enctype="multipart/form-data">
-        <div class="img">
-        	<% if(i != null) { %>
-                <!-- 현재 이 게시글에 딸린 첨부파일이 있을 경우-->
-                <%= i.getOriginName() %>
-                <input type="hidden" name="originFileNo" value="<%= i.getFileNo() %>">
-            <% } %>
-        
-        	<img src="<%= contextPath %>/<%= i.getFilePath() %>">
-        	<input type="file" name="file">
-        </div>
-        
-        <div class="profile">
-            <div class="information">
-                <div style="width: 30px;">
-                    <img src="프로필" style="width: 20px; height: 20px;">            
-                </div>
-                <div>
-                	<input type="hidden" name="rNo" value="<%= r.getReviewNo() %>">
-                    <h3 style="margin: 0px;"><%= r.getMemNo() %></h3>
-                </div>
-            </div>
-            <div class="point">
-                <h4 style="margin: 0px;"><%= r.getScore() %> 점</h4>
-            </div>
+    
+    <div class="outer2">
+        <div class="head">
+            <h1 style="text-align: center;">후기 수정</h1>
+            <hr style="width: 720px;">
         </div>
 
-        <div class="content">
-            <div class="review-title">
-            	<input type="text" name="title" value="<%= r.getReviewTitle() %>" required>
-                
-            </div>
-            <div class="review-content" style="padding-left: 10px;">
-            	<textarea name=content cols="100" rows="5" required><%= r.getReviewContent() %></textarea>
-            </div>
+        <form action="<%= contextPath %>/update.re" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="rNo" value="<%= r.getReviewNo() %>">
+            <table class="insert-black">
+                <tr>
+                    <th height="50">리뷰제목</th>
+                    <td >
+                        <input type="text" name="title" placeholder="리뷰제목" value="<%= r.getReviewTitle() %>" required maxlength="12">
+                    </td>
+                </tr>
+                <tr>
+                    <th height="50">판매자 아이디</th>
+                    <td>
+                        <input type="text" name="cellId" placeholder="판매자 아이디" value="<%= r.getSellId() %>" required maxlength="10">    
+                    </td>
+                </tr>
+                <tr>
+                    <th height="175">리뷰 내용</th>
+                    <td>
+                        <textarea name="content" cols="75" rows="10" style="resize: none;" placeholder="리뷰내용" required><%= r.getReviewContent() %></textarea>
+                    </td>
+                </tr>
 
-            <div align="right">
-                <h5><%= r.getCount() %>회</h5>
-            </div>
-            
-            <div class="review-recontent">
-                <h3>댓글 4</h3>
-                <div class="review">
-                    <div class="review-user">
-                        <div style="width: 30px;">
-                            <img src="../../icons8-사용자-30.png" style="width: 20px; height: 20px;">            
+                <tr>
+                    <th height="50">평점 : <%= r.getScore() %></th>
+                    <td>
+                        <div style="font-size: large; font-weight: 600;" id="score">
+                            <input type="radio" name="score" value="5" id="rate1" required><label
+                                for="rate1">★</label>
+                            <input type="radio" name="score" value="4" id="rate2"><label
+                                for="rate2">★</label>
+                            <input type="radio" name="score" value="3" id="rate3"><label
+                                for="rate3">★</label>
+                            <input type="radio" name="score" value="2" id="rate4"><label
+                                for="rate4">★</label>
+                            <input type="radio" name="score" value="1" id="rate5"><label
+                                for="rate5">★</label>
                         </div>
-                        <div>
-                            <h4 style="margin: 0px;">사용자1</h4>
-                        </div>
-                    </div>
+                    </td>
+                </tr>
 
-                    <div style="padding-left: 15px; width: 550px;" >
-                        후기잘봤습니다
-                    </div>
-                </div>
+                <tr>
+                    <th width="170" height="150">첨부이미지</th>
+                    <td width="830">
+                        <div class="img-area">
+                            <% if(i != null) { %>
+                                <img src="<%= contextPath %>/<%= i.getFilePath() %>" width="200" height="200" id="productImg" onclick="chooseFile()">
+                            <div id="file-area" style="display: none;">
+                                <input id="file" type="file" name="file" onchange="loadImg(this);">
+                            </div>
+                            <% }else { %>
+                            <img src="resources/image/noneImg.png" width="200" height="200" id="productImg" required onclick="chooseFile()">
+                            <div id="file-area" style="display: none;">
+                            	<input id="file" type="file" name="file" onchange="loadImg(this);">
+                            </div>
+                            <% } %>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
+            <div class="btn" style="text-align: center;">
+                <button type="submit" style="width: 100px; height: 40px; background-color: black; color: white;" >작성하기</button>
+                <button type="button" style="width: 100px; height: 40px; background-color: black; color: white;" onclick="history.back();">뒤로가기</button>  
             </div>
-            
-            <div align="center">
-                <button type="submit">수정</button>
-                <button type="reset">취소하기</button>
-                <button type="button" onclick="history.back();">뒤로가기</button>
-            </div>
-        </div>
         </form>
     </div>
+    </div>
+
+    <script>
+        function chooseFile(){
+        $("#file").click();
+    }
+        
+        function loadImg(inputFile){
+            if(inputFile.files.length == 1){
+                const reader = new FileReader();
+                reader.readAsDataURL(inputFile.files[0]);
+                reader.onload = function(e){
+                    $("#productImg").attr("src", e.target.result);
+                }
+            }else{
+                $("#productImg").attr("src", "resources/image/noneImg.png");
+            }
+        }
+    </script>
 </body>
 </html>

@@ -13,16 +13,16 @@ import concat.member.model.service.MemberService;
 import concat.member.model.vo.Member;
 
 /**
- * Servlet implementation class InsertMember
+ * Servlet implementation class MemberJoinController
  */
 @WebServlet("/memberjoin.me")
-public class InsertMember extends HttpServlet {
+public class MemberJoinController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertMember() {
+    public MemberJoinController() {
         super();
     }
 
@@ -48,9 +48,8 @@ request.setCharacterEncoding("UTF-8");
 		
 		
 		if(result > 0) { // 성공
-		
+			request.getSession().setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다."); 
 			response.sendRedirect(request.getContextPath());
-			
 		}else { // 실패
 			System.out.println("실패");
 			//request.setAttribute("errorMsg", "회원가입에 실패했습니다.");

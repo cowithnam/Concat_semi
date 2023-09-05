@@ -1,7 +1,11 @@
+<%@page import="concat.mem_grade.model.vo.MemGrade"%>
+<%@page import="concat.image.model.vo.Profile"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-      Member m = ((Member)request.getSession().getAttribute("loginMember"));
+		Member m = ((Member)request.getSession().getAttribute("loginMember"));
+		Profile pro = (Profile)request.getAttribute("pro");
+		MemGrade grade = (MemGrade)request.getAttribute("mg");
 %>
 <!DOCTYPE html>
 <html>
@@ -11,12 +15,11 @@
  <style>
         .wrap{
             box-sizing: border-box;
-            border: 1px solid black;
             background-color: black;
             color: white;
             border-radius: 30px ;
             width: 1000px;
-            height: 650px;
+            height: 700px;
             margin: auto;
             margin-top: 100px;
         }   
@@ -93,6 +96,31 @@
         	top:8px;
         }
         
+		#profileimg{
+			border-radius: 80px;
+		}
+		
+		.gradedetail2{
+		  display: none;
+		  position: relative;
+		  width: 100px;
+		  padding: -30px;
+		  left: 150;
+		  -webkit-border-radius: 8px;
+		  -moz-border-radius: 8px;
+		  border-radius: 8px;
+		  background: #333;
+		  color: #fff;
+		  font-size: 14px;
+		}
+
+        .gradedetail1{
+            cursor: pointer;
+        }
+
+        .gradedetail1:hover + .gradedetail2 {
+        	display: block;
+        }
 
     </style>
     
@@ -111,19 +139,24 @@
 </head>
 <body>
 	<%@ include file ="../common/menubar.jsp" %>
-	
 	<div class="wrap">
         <div id="header_1">
             <img src="resources/image/concatlo.png" style="width: 300px; height: 100px;">
             <div id="header_2">
-                <img  id="profileimg" style="height: 100px; width: 100px;" onclick="profile();">
+            	<% if(pro == null){ %>
+            	<!-- 프로필 사진이 없을경우  -->
+                <img src="resources/image/sayoungja.png" id="profileimg" style="height: 150px; width: 150px;" onclick="profile();">
+                <% }else { %>
+                <!-- 프로필 사진이 있을경우  -->
+                <img src="<%=contextPath %>/<%=pro.getFilePath() %>" id="profileimg" style="height: 150px; width: 150px;" onclick="profile();">
+                <% } %>
             </div>
         </div>
 
         <div id="navi" class="cont">
             <br><br><br><br><br>
-            <h3><a href="<%=contextPath %>/mySellList.bo?mNo=<%= m.getMemNo() %>">판매 목록 ▷</a></h3> <br><br>
-            <h3><a href="<%=contextPath %>/wishList.bo?mNo=<%= m.getMemNo() %>">찜한 상품 ▷</a></h3> <br><br>
+            <h3><a href="#">판매 목록 ▷</a></h3> <br><br>
+            <h3><a href="#">찜한 상품 ▷</a></h3> <br><br>
             <h3><a href="#">문의 목록 ▷</a></h3> <br><br>   
             <h3><a href="#">신고 목록 ▷</a></h3> <br>
         </div>
@@ -132,8 +165,14 @@
 			<form id="myPage-form" action="<%= contextPath %>/update.me" method="post" enctype="multipart/form-data">
                 <table>
                     <tr>
-                        <th style="height: 50px; width: 300px;">※ 등급 </th>
-                        <td><img src="resources/image/다이아.png"></td>
+                        <th style="height: 50px; width: 300px;" >※ 등급 </th>
+                        <td><img src="<%=grade.getGrade_img() %>" id="gradeimg" class="gradedetail1"></td>
+                        <div class="gradedetail2"> 0 ~ 29	B <br>
+                            30 ~ 99	S <br>
+                            100 ~ 199 G <br>
+                            200 ~ 99999 D
+                        </div>
+                       
                     </tr>
                     <tr>
                         <th style="height: 50px; width: 300px;" >※ 아이디 </th>
@@ -155,31 +194,30 @@
                         <th style="height: 50px;">※ 이메일 </th>
                         <td><input type="email" name="email" value="<%= m.getEmail() %>" placeholder="@ 포함해서 입력"></td>
                     </tr>
-                </table>  
+                </table> 
+                <input type="hidden" name="memNo" value="<%=m.getMemNo()%>"> 
+		        <input type="file" name="file" id="file" style="display:none" onchange="loadimg(this)">
                 <br>
                 <div>
-                    <button type="submit" class="sujung" onclick="return sujung_1();">정보수정</button>
+                    <button type="submit" class="sujung" onclick="return update();">정보수정</button>
                     <button type="button" class="chenge" data-toggle="modal" data-target="#updatePwdModal" >비밀번호변경</button>
                     <button type="button" class="exit" data-toggle="modal" data-target="#exitModal">회원탈퇴</button>
                 </div>  
-		        <input type="file" name="file1" id="file" style="display:none" onchange="loadimg(this)">
                 </form>
         </div>
     </div>
     <script>
-        function sujung_1(){
+        function update(){
             if(confirm("회원정보를 수정하시겠습니까 ?") == false){
             	return false;
             }
         }
         
         function profile(){
-            console.log("profile 펑션");
             $("#file").click();
         }
         
         function loadimg(inputFile){
-        	console.log("loadimg 펑션");
         	
             if(inputFile.files.length == 1){
             	
@@ -189,8 +227,9 @@
 
                 reader.onload = function(e){
                 	$("#profileimg").attr("src", e.target.result);
-                	
                 }
+            }else{
+            	$("#profileimg").attr("src", "resources/image/sayoungja.png");
             }
         }
     </script>
@@ -258,7 +297,7 @@
 				<input type="hidden" name="memId" value="<%= m.getMemId() %>">
 				
                 비밀번호 : <input type="password" name="memPwd" required> <br><br>
-                <button type="submit" id="exit_1")>탈퇴하기</button>
+                <button type="submit" id="exit_1">탈퇴하기</button>
              
             </form>
           </div>
@@ -294,6 +333,5 @@
 		    obj.value = phone;
 		}
     </script>
-    
 </body>
 </html>

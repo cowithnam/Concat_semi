@@ -69,7 +69,7 @@
     .EnrollForm{
         float: right;
         width: 100px;
-        height: 20px;
+        height: 50px;
     }
 
     .EnrollForm>button{
@@ -86,6 +86,23 @@
         background-color: black;
         color: white;
     }
+    
+   	.btnn>button{
+      	width: 100px;
+        height: 40px;
+        margin-top: 10px;
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 17px;
+    }
+
+    button:hover{
+        cursor: pointer;
+    }
+    
+    
 </style>
 </head>
 <body>
@@ -95,14 +112,13 @@
         <h1>블랙리스트</h1>
     
         <form action="<%= contextPath %>/search.bl" id="bl-saerch">
-            <input type="text" name="searchkey" value> 
+            <input type="text" name="searchkey"> 
             <button type="submit">검색</button>
         </form>
-    
-        <hr>
+   		<br><br>
 		<% if(loginMember != null) { %>
         <!-- 로그인한 회원만 보이기-->
-        <div class="EnrollForm" style="margin-bottom: 10px;">
+        <div class="EnrollForm btnn" style="margin-bottom: 10px;">
             <button style="background-color: black; color: white;" id="EnrollForm">작성하기</button>
         </div>	      
         <% } %>
@@ -122,7 +138,7 @@
 	                <!-- case1. 공지글이 없을 경우 -->
 	               	<% if(list2.isEmpty()) { %>
 		               	<tr>
-		                	<td colspan="5">존재하는 공지사항이 없습니다.</td>
+		                	<td colspan="5">존재하는 블랙리스트가 없습니다.</td>
 		           	    </tr>
 	                <% } else { %>
 		             	 <!-- case2. 공지글이 있을 경우-->

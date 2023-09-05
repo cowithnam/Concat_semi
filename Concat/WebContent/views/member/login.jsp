@@ -8,13 +8,16 @@
 <style>
 @import url("https://fonts.googleapis.com/css?family=Abril+Fatface|Open+Sans:400,700&display=swap");
 
+/* font-family: 'Abril Fatface', cursive;
+font-family: 'Open Sans', sans-serif; */
+
 * {
   margin: 0;
   padding: 0;
   outline: none;
   box-sizing: border-box;
   line-height: 1.5em;
-  color: lightgray;
+  color: black;
   font-family: "Open Sans", sans-serif;
   font-size: 15px;
 }
@@ -27,6 +30,8 @@ body {
   height: 800px;
   margin: auto;
   border-radius: 10px;
+  /* display: flex; */
+  /* background: rgb(249, 63, 76); */
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   transition: all 0.1s ease-in 0.1s;
   margin: auto;
@@ -38,7 +43,7 @@ body {
   border-radius: 10px;
   color: lightgray;
   background: black;
-  display: flex; 
+  display: flex; /* flex or none */
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
@@ -71,6 +76,7 @@ a.link-copy {
   background: none;
   border: 2px solid white;
   border-radius: 150px;
+  /* align-self: center; */
   width: 300px;
   padding: 8px 16px;
   margin: 16px;
@@ -86,13 +92,14 @@ a.link-copy {
 
 /* 회원가입 */
 .sign-up {
-  display: none;
+  display: none; /*flex or none*/
   opacity: 1;
   width: 100%;
   height: 100%;
 }
 .signup-left {
   width: 50%;
+  /* padding: 20px; */
   opacity: 0;
   display: flex;
   flex-flow: column wrap;
@@ -169,10 +176,12 @@ a.link-copy {
   font-weight: bold;
 }
 .form-area-signup {
+  /* display: none; */
   opacity: 0;
   transition: all 0.4s ease-in 0.2s;
 }
 .form-area-signin {
+  /* display: none; */
   opacity: 0;
   transition: all 0.4s ease-in 0.2s;
 }
@@ -228,6 +237,7 @@ a.link-copy {
   flex-flow: column wrap;
   justify-content: space-between;
   align-items: flex-end;
+  background-image: url("resources/image/거래사진.jpg"); 
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: 235% 50%;
@@ -259,6 +269,7 @@ a.link-copy {
     width: 60%;
   }
   .wc_message {
+/*     display: none; */
     opacity: 0;
     transition: opacity .1s;
   }
@@ -270,13 +281,20 @@ a.link-copy {
     width: 80%;
   }
 }
+
+::placeholder{
+  color: lightgray;
+}
     </style>
+    
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
 <body>
 	<main class="main">
     <section class="home">
       <img src="resources/image/concat.png" style="width: 300px; height: 300px;">
-      <button id="sign-up" class="btn">로그인</button>
+      <button id="sign-up" class="btn" >로그인</button>
       <button id="sign-in" class="btn">회원가입</button>
       <p><a class="link-copy" href="http://localhost:8001/Concat/#" target="_blank">메인페이지로</a></p>
     </section>
@@ -298,20 +316,20 @@ a.link-copy {
         <!-- 로그인폼 -->
         <div class="organize-form form-area-signup">
           <h2>로그인</h2>
-          <form class="form" action="<%= request.getContextPath() %>/loginset.me" method="post">
+          <form class="form" action="<%= request.getContextPath() %>/loginset.me" method="post" name="idfindscreen">
             <div class="form-field" style="width: 350px; margin: auto;">
               <label for="id">아이디</label>
-              <input type="text" id="id" name="memId" required/>
+              <input type="text" id="id" name="memId" minlength="4" maxlength="12" required/>
             </div>
             <br>
   
             <div class="form-field" style="width: 350px; margin: auto;">
               <label for="password">비밀번호</label>
-              <input type="password" id="password" name="memPwd" required/>
+              <input type="password" id="password" name="memPwd" minlength="6" maxlength="15" required/>
             </div>
             <br>
   
-            <button type="submit" class="btn-sign">로그인</button>
+            <button type="submit" class="btn-sign" onclick="loginclick();">로그인</button>
           </form>
           <p>아이디가 없으신가요 ? <a href="#" class="link-in">회원가입</a></p>
           <p>아이디를 잊어버리셨나요 ? <a href="<%=request.getContextPath() %>/seachid.me" class="idfind">아이디찾기</a></p>
@@ -320,39 +338,39 @@ a.link-copy {
         </div>
   
         <!-- 회원가입폼 -->
-        <div class="organize-form form-area-signin">
+        <div class="organize-form form-area-signin" id="test">
           <h2>회원가입</h2>
-          <form class="form" action="<%=request.getContextPath()%>/memberjoin.me" method="post">
+          <form class="form" action="<%=request.getContextPath()%>/memberjoin.me" method="post" id="enrollform" >
             <div class="form-field">
-              <input type="text" name="memId" placeholder="아이디를 입력해주세요" maxlength="12" required/>
-              <!-- <button type="button" onclick="idCheck();">중복확인</button> -->
+              <input type="text" name="memId" id="memId" placeholder="첫글자 영문자로, 그 후 영문자,숫자 포함 4~12자 입력" minlength="4" maxlength="12" required/>
+              <button type="button" onclick="idCheck();">중복확인</button>
               <br>
             </div>
   
             <div class="form-field">
-              <input type="password" name="memPwd"  placeholder="비밀번호를 입력해주세요" required /> <br>
+              <input type="password" name="memPwd1" id="memPwd1" placeholder="영문자,숫자,특수문자 포함 8자~15자 입력" minlength="6" maxlength="15" required /> <br>
             </div>
             <div class="form-field">
-              <input type="password" name="memPwd"  placeholder="비밀번호를 한번더 입력해주세요" required /> <br>
+              <input type="password" name="memPwd" id="memPwd2" placeholder="위의 비밀번호와 일치되게 입력" minlength="6" maxlength="15" required /> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="memName"  placeholder="이름를 입력해주세요" required/> <br>
+              <input type="text" name="memName" id="memName" placeholder="한글로만 이뤄져야하며 2글자 ~ 5글자로 입력" minlength="2" maxlength="15" required/> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="nickName"  placeholder="닉네임를 입력해주세요" required/> <br>
+              <input type="text" name="nickName" id="nickName" placeholder="한글은 2 ~ 5글자, 영어,숫자 15글자로 입력" minlength="2" maxlength="15" required/> <br>
             </div>
             <div class="form-field">
-              <input type="email" name="email"  placeholder="이메일를 입력해주세요" required/> <br>
+              <input type="email" name="email" id="email" placeholder="이메일형식에 맞게 입력" required/> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="phone" onKeyup = "addHypen(this);" placeholder="핸드폰 번호를 입력해주세요" required/> <br>
+              <input type="text" name="phone" id="phone" onKeyup = "addHypen(this);" placeholder="전화번호를 -빼고 입력" maxlength="13" required/>
             </div>
     
-            <button type="submit" class="btn-sign btn-up">회원가입</button>
+            <button type="submit" class="btn-sign btn-up" onclick="joinClick();">회원가입</button>
             <br>
             <div>
               <br>
-              <input type="checkbox" required> Concat마켓의 이용약관 및 정보이용에 동의합니다.(필수)
+              <input type="checkbox" required>  Concat마켓의 이용약관 및 정보이용에 동의합니다.(필수)
             </div>
           </form>
           <p>아이디가 있으신가요 ? <a href="#" class="link-up">로그인</a></p>
@@ -488,7 +506,7 @@ a.link-copy {
 
         // Behavior of the inputs and labels
         for (input of el.inputs) {
-        console.log(input)
+
         input.addEventListener('keydown', function() {
             this.labels[0].style.top = '10px';
         });
@@ -528,6 +546,125 @@ a.link-copy {
 		    }
 		    obj.value = phone;
 		}
+    </script>
+    
+    <script>
+    		function idCheck(){
+    			
+    			const $idInput1 = $("#enrollform input[name=memId]");
+    			
+    			
+    			$.ajax({
+    				url:"idCheck.me",
+    				data:{checkId:$idInput1.val()},
+    				success:function(result){
+    					if(result == 'NNNNN'){ //실패
+                alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
+    						$idInput1.focus();
+    					}else{ // 성공
+    						if(confirm("사용가능한 아이디입니다. 사용하시겠습니까 ? ")){
+    							$("#enrollform :submit").removeAttr("disabled");
+    							$idInput1.attr("readonly", true);
+    						}else{
+    							$idInput1.focus();
+    						}
+    					}
+    				},
+    				error:function(){
+    					console.log("실패야 이자식아")
+    				}
+    				
+    			})	
+        	}
+    		
+    </script>
+    
+    <script>
+    	function joinClick(){
+    		const idInput = document.querySelector("memId");
+        	const pwdInput1 = document.querySelector("memPwd1");
+    		const pwdInput2 = document.querySelector("memPwd2");
+        	const nameInput = document.querySelector("memName");
+        	const nickInput = document.querySelector("nickName");
+        	const emailInput = document.querySelector("email");
+        	const phoneInput = document.querySelector("phone");
+
+	        // 1) 아이디 검사
+	        let regExp = /^[a-z][a-z\d]{3,11}$/;
+	        if(!regExp.test(idInput.value)){
+	            alert("맞는 형식의 아이디를 입력해주세요.");
+	            idInput.select();
+	            return false;
+	        }
+	        
+	        // 2) 비밀번호 검사
+	        regExp =/^[a-z\d!@#$%^&*]{6,15}$/i;
+	        if(!regExp.test(pwdInput1.value)){
+	            alert("맞는 형식의 비밀번호를 입력해주세요.");
+	            pwdInput1.value = "";
+	            pwdInput1.focus();
+	            return false;
+	        }
+	
+	        // 3) 비밀번호 일치여부 확인
+	        if(pwdInput1.value != pwdInput2.value){
+	            alert("비밀번호가 일치하지 않습니다.");
+	            pwdInput2.value="";
+	            pwdInput2.focus();
+	            return false;
+	        }
+	
+	        // 4) 이름
+	        regExp =/[가-힣]{2,}/;
+	        if(!regExp.test(NameInput.value)){
+	            alert("맞는 형식의 이름을 입력해주세요.");
+	            NameInput.select();
+	            return false;
+	        }
+	
+	        // 5) 닉네임
+	        regExp =/^[가-힣\w!@#$%^&*]{2,15}$/i{
+	        if(!regExp.test(nickInput.value)){
+	          alert("맞는 형식의 닉네임을 입력해주세요.");
+	          pwdInput2.value="";
+	          pwdInput2.focus();;
+	          return false;
+	        }
+	
+	        // 6) 전화번호
+	        regExp = /^[\d]{,13}$i/{
+	          if(!regExp.test(phoneInput.value)){
+	            alert("맞는 형식의 전화번호를 입력해주세요.");
+	            phoneInput.value = "";
+	            phoneInput.focus();
+	            return false;
+	        }
+	        }
+	
+	    	}
+
+      function loginclick() {
+        const login1 = document.querySelector("id");
+        const login2 = document.querySelector("password");
+
+         // 1) 아이디 검사
+        let regExp = /^[a-z][a-z\d]{3,11}$/;
+        if(!regExp.test(login1.value)){
+            alert("맞는 형식의 아이디를 입력해주세요.");
+            login1.select();
+            return false;
+        }
+        
+        // 2) 비밀번호 검사
+        regExp =/^[a-z\d!@#$%^&*]{8,15}$/i;
+        if(!regExp.test(login2.value)){
+            alert("맞는 형식의 비밀번호를 입력해주세요.");
+            login2.value = "";
+            login2.focus();
+            return false;
+        }
+        
+      }
     </script>
 	
 </body>

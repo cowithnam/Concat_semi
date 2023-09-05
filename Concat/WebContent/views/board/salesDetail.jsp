@@ -97,25 +97,39 @@
       border-radius: 15px;
     }
     
-    .modal_content{
-      
-	  }
+    .btn{
+    	position: relative;
+      left: 408px;
+      bottom: 780px;     	
+    }
+    
+    .btn *:hover{
+    	cursor: pointer;
+    }
+    .btn button{
+      width: 35px;
+      height: 70px;
+      margin-bottom: 5px;
+      background-color: white;
+      border: 1px solid lightgray;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
 <%@ include file="../common/menubar.jsp" %>
 <br><br><br>
   <div class="outer">
+  <% if(b != null){ %>
       <div class="area1">
-        <img src="<%= img.getFilePath()+"/"+img.getUpdateName() %>" width="500" height="480" style="border: 1px solid black; border-radius: 20px;">
+      	<% if(img != null){ %>
+        	<img src="<%= img.getFilePath()+"/"+img.getUpdateName() %>" width="500" height="480" style="border: 1px solid black; border-radius: 20px;">
+        <% } %>
       </div>
       <div class="area2" style="padding-left: 40px; padding-right: 20px;">
-        
-         <% if(loginMember != null && b.getMemNo().equals(loginMember.getMemId())) {%>
-        <div>
-          <button type="button" onclick="location.href=<%= contextPath %>/update.bo?bno=<%= b.getBoardNo() %>'" style="text-align: left;">수정하기</button>
-        </div>
-        <% } %>
         
         <h1 style="margin-top: 30px;"><%=b.getBoardTitle() %></h1>
         <h3 style="margin-top: 30px;"><%=b.getBrand() %></h3>
@@ -158,6 +172,17 @@
       </div>
   </div>
   
+  <% if(loginMember != null && b.getMemNo().equals(loginMember.getMemId())) {%>
+	<div class="btn">
+		<div>
+			<button type="button" onclick="location.href='<%= contextPath %>/update.bo?bno=<%= b.getBoardNo() %>'">수정</button>
+		</div>
+		<div>
+			<button type="button" onclick="location.href='<%= contextPath %>/delete.bo?bno=<%= b.getBoardNo() %>'">삭제</button>
+		</div>
+	</div>
+  <% } %>
+  
   <div class="modal">
     <div class="modal-header">
       <h1>판매자 오픈 카카오 안내</h1>
@@ -174,6 +199,7 @@
           									  	   <% } %></h3>
        	<h3 style="margin: 30px 0px 30px;">오픈카카오 : <%= b.getOpenkakao() %></h3>
   	</div>
+  	<% } %>
   </div>
   
   <script>

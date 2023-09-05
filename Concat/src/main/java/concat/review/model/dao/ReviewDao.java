@@ -20,8 +20,6 @@ public class ReviewDao {
 
 	private Properties prop = new Properties();
 	
-
-		
 	public ReviewDao() {
 		try {
 			prop.loadFromXML(new FileInputStream(ReviewDao.class.getResource("/db/sql/review-mapper.xml").getPath()));
@@ -170,6 +168,7 @@ public class ReviewDao {
 			if(rset.next()) {
 				r = new Review(rset.getInt("review_no"),
 							   rset.getString("mem_id"),
+							   rset.getString("cell_id"),
 							   rset.getString("review_title"),
 							   rset.getString("review_content"),
 							   rset.getInt("count"),
@@ -247,7 +246,9 @@ public class ReviewDao {
 			
 			pstmt.setString(1, r.getReviewTitle());
 			pstmt.setString(2, r.getReviewContent());
-			pstmt.setInt(3, r.getReviewNo());
+			pstmt.setString(3, r.getSellId());
+			pstmt.setInt(4, r.getScore());
+			pstmt.setInt(5, r.getReviewNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -272,7 +273,7 @@ public class ReviewDao {
 			pstmt.setString(1, i.getOriginName());
 			pstmt.setString(2, i.getUpdateName());
 			pstmt.setString(3, i.getFilePath());
-			pstmt.setInt(4, i.getFileNo());
+			pstmt.setInt(4, i.getBoardNo());
 			
 			result = pstmt.executeUpdate();
 			

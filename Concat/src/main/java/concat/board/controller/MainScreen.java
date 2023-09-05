@@ -37,6 +37,7 @@ public class MainScreen extends HttpServlet {
 		
 		ArrayList<Board> list = new BoardService().selectBoardList();
 
+			
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());
 	}

@@ -1,5 +1,7 @@
+<%@page import="concat.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,7 @@
 <title>아디찾기/비번찾기</title>
 <style>
 @import url("https://fonts.googleapis.com/css?family=Abril+Fatface|Open+Sans:400,700&display=swap");
+
 
 * {
   margin: 0;
@@ -84,9 +87,28 @@ a.link-copy {
   color: black;
 }
 
+#idbtn{
+	background: black;
+  color: white;
+  border-radius: 150px;
+  width: 150px; 
+  float: left;
+}
+#idbtn:hover{
+  background: lightgray;
+
+}
+
+#pwdbtn{
+	background: black;
+  color: white;
+  width: 400px;
+  margin-left: 3px;
+}
+
 /* 회원가입 */
 .sign-up {
-  display: none;
+  display: none; 
   opacity: 1;
   width: 100%;
   height: 100%;
@@ -271,9 +293,16 @@ a.link-copy {
     width: 80%;
   }
 }
-    </style>
+
+
+</style>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    
 </head>
 <body>
+
 	<main class="main">
     <section class="home">
       <img src="resources/image/concat.png" style="width: 300px; height: 300px;">
@@ -299,47 +328,50 @@ a.link-copy {
         <!-- 아이디찾기 폼 -->
         <div class="organize-form form-area-signup">
           <h2>아이디찾기</h2>
-          <form class="form" action="<%= request.getContextPath() %>/seachid.me" method="post" name="idfindscreen">
+          <form class="form" action="#" method="post" id="idformscreen">
             <div class="form-field" style="width: 350px; margin: auto;">
-              <label for="name">이름</label>
-              <input type="text" id="name" name="memName" required/>
+              <input type="text" id="name" name="memName" required maxlength="12" placeholder="이름를 입력해주세요"/>
             </div>
             <br>
   
             <div class="form-field" style="width: 350px; margin: auto;">
-              <label for="phone">전화번호(-빼고 입력해주세요)</label>
-              <input type="text" id="phone" name="phone" onKeyup = "addHypen(this);" required/>
+              <input type="text" id="phone" name="phone" onKeyup = "addHypen(this);" required maxlength="13" placeholder="핸드폰 번호를 -빼고 입력해주세요"/>
             </div>
             <br>
   			
            	<div class ="btnSearch">
-           	<input type="button" name="enter" value="아이디찾기"  onClick="id_search()">
-           	<input type="button" name="cancle" value="취소" onClick="history.back()">
+           	<button type="button" onclick="searchId();" id="idbtn" class="btn">아이디찾기</button>
+           	<button type="button" id="idbtn" class="btn">뒤로가기</button>
+           	
            	</div>
           </form>
+          <div id="idform"></div>
           <p>비밀번호를 잊어버리셨나요 ? <a href="#" class="link-in">비밀번호찾기</a></p>
-          <p>아이디가 없으신가요 ? <a href="#" class="http://localhost:8001/Concat/login.me">회원가입</a></p>
+          <p>아이디가 없으신가요 ? <a href="http://localhost:8001/Concat/login.me#enrollform" >회원가입 및 로그인</a></p>
  	
         </div>
-  
+        
+        
         <!-- 비밀번호 폼 -->
         <div class="organize-form form-area-signin">
           <h2>비밀번호</h2>
-          <form class="form" action="<%=request.getContextPath()%>/seachpwd.me" method="post">
+          <form class="form" action="#" method="post" id="pwdformscreen">
             
             <div class="form-field">
-              <input type="text" name="memId" placeholder="아이디를 입력해주세요" maxlength="12" required/> <br>
+              <input type="text" name="memId" id="id1" placeholder="아이디를 입력해주세요" maxlength="12" required/> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="memName"  placeholder="이름를 입력해주세요" required/> <br>
+              <input type="text" name="memName" id="name1"  placeholder="이름를 입력해주세요" required maxlength="12"/> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="phone"  placeholder="핸드폰 번호를 -빼고 입력해주세요" onKeyup = "addHypen(this);" required/> <br>
+              <input type="text" name="phone" id="phone1" placeholder="핸드폰 번호를 -빼고 입력해주세요" onKeyup = "addHypen(this);" required maxlength="13"/> <br>
             </div>
     
-            <button type="submit" class="btn-sign btn-up">비밀번호 찾기</button> <br>
+            <button type="button" onclick="searchPwd();" id="pwdbtn" class="btn">비밀번호찾기</button>
           </form>
+          <div id="pwdform"></div>
           <p>아이디를 잊어버리셨나요 ? <a href="#" class="link-up">아이디찾기</a></p>
+          <p>로그인을 하실건가요 ? <a href="http://localhost:8001/Concat/login.me" >로그인 및 회원가입</a></p>
         </div>
       </article>
   
@@ -351,25 +383,7 @@ a.link-copy {
     </section>
   </main>
   
-  <script>
-	  function id_search() { 
-		 	var frm = document.idfindscreen;
-	
-		 	if (frm.memName.value.length < 1) {
-		        alert("이름을 입력해주세요!");
-		        return;
-		        }
-
-		        if (frm.phone.value.length != 13) {
-		            alert("핸드폰번호를 정확하게 입력해주세요!");
-		            return;
-		        }
-		        frm.method = "post";
-		        frm.action = "findIdResult.jsp"; //넘어간화면
-		        frm.submit();  
-		    }
-  </script>
-
+  
       <script>
         // Elements
         const el = {
@@ -533,5 +547,58 @@ a.link-copy {
 		}
     </script>
 	
+	<script>
+	function searchId(){
+		$.ajax({
+	        url:"ajaxid.me",
+	        data:{memName:$("#name").val(),
+	              phone:$("#phone").val()
+	              },
+	        success:function(id){
+	            if (id != null) {
+	                $("#idform").html("찾으시는 아이디는 "+ id + "입니다. ");
+	                return id;
+	            } else {
+	                $("#idform").html("해당정보가 없습니다.");
+	            }
+	            
+	        }, error:function(){
+	            const value = "등록되지 않은 아이디입니다. 다시입력해주세요.";
+	            
+	            $("#idform").html(value);
+	        }
+	    })
+		
+	}
+
+	</script>
+	
+	<script>
+		function searchPwd(){
+		    $.ajax({
+		      url:"ajaxpwd.me",
+		      data:{memId:$("#id1").val(),
+		        	memName:$("#name1").val(),
+		        	phone:$("#phone1").val()
+		      },
+		      success:function(pwd){
+		    	  console.log(pwd)
+		        if(pwd != null){
+		          $("#pwdform").html("비밀번호는 " + pwd + " 입니다." );
+		          return pwd;
+		        }else{
+		          $("#pwdform").html("비밀번호를 찾을 수가 없습니다.");
+		        }
+		      }, error:function(){
+		          const value = "찾을 수 있는 비밀번호가 없습니다.";
+	
+		          $("#pwdform").html(value);
+		      }
+	
+		    })
+	
+		  }
+	</script>
+  
 </body>
 </html>

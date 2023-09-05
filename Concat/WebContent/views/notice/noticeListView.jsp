@@ -1,173 +1,239 @@
-<%@page import="concat.common.vo.PageInfo"%>
+<%@page import="concat.notice.model.vo.PageInfo"%>
 <%@page import="concat.notice.model.vo.Notice"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 
 <%
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-%>
+ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+PageInfo pi = (PageInfo)request.getAttribute("pi");
+int currentPage = pi.getCurrentPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage();
+int maxPage = pi.getMaxPage();
+
+	%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항</title>
-    <style>
-        #outer{
-            width: 1100px;
-            height: 600px;
-            margin: auto;
-        }	
-        
-        h1{display: inline;}
-        #no-search{
-            float: right;
-            position: relative;
-            top: 20px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>공지사항</title>
+<style>
+    #outer{
+        width: 1100px;
+        height: 700px;
+        margin: auto;
+    }
+    
+    h1{display: inline;}
+    
+    #bl-saerch{
+        float: right;
+        position: relative;
+        top: 20px;
+    }
 
-        #no-search>input{width: 200px; height: 20px; position: relative; bottom: 2px;} 
+    #bl-saerch>input{
+        width: 200px; 
+        height: 22px; 
+        position: relative; 
+        bottom: 1px;} 
 
-        #no-search>button{height: 26px; background-color: black; color: white; font-weight: bold;}
+    #bl-saerch>button{
+        height: 28px; 
+        background-color: black; 
+        color: white; 
+        font-weight: bold;}
 
-        table{
-            width: 1100px;
-            height: 500px;
-        }
+    table{
+        width: 1100px;
+    }
 
-        table *{text-align: center; padding: 0px;}
+    table>*{text-align: center;}
 
-        thead{background-color: black; color: white;}
+    thead th{
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
 
-        .num{width: 110px; height: 41px;}
-        
-        .title{width: 660px; height: 41px; text-align: left; padding-left: 10px;}
+    .num{
+        width: 110px; 
+        height: 41px;
+    }
+    
+    .title{
+        width: 420px; 
+        height: 50px; 
+        text-align: left; 
+        padding-left: 10px;
+    }
 
-        table td{width: 140px; height: 41px; border: 1px solid black;}
-        
-         .enroll-btn{
-            width: 80px;
-            height: 40px;
-            background-color: black;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            margin-top: 5px;
-            margin-right: 2px;
-        }
-        #custom-menu{
-            position: fixed;
-            left: -5px;
-            top: 400px;
+    table td{
+        width: 140px;
+        height: 50px; 
+        border-bottom: 1px solid lightgray;
+    }
+    
+    .EnrollForm{
+        float: right;
+        width: 100px;
+        height: 50px;
+    }
 
-        }
-        #custom-menu>div{
-            border: 1px solid black;
-        }
-    </style>
+    .EnrollForm>button{
+        font-weight: 900;
+    }
+    
+    table, td, th {
+        border-collapse : collapse;
+    }
+
+    .btn button{
+        width: 30px;
+        height: 30px;
+        background-color: black;
+        color: white;
+    }
+    
+    .btnn>button{
+      	width: 100px;
+        height: 40px;
+        margin-top: 10px;
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 17px;
+    }
+
+    button:hover{
+        cursor: pointer;
+    }
+
+#listbar {
+  width: 150px;
+  height: 210px;
+  border: 1px solid white;
+  position: fixed;
+  top: 400px; 
+  left: 150px;
+  text-align: center;
+  background-color: white; 
+}
+
+#listbar>table {
+	width: 150px;
+	height: 210px;
+	background-color: black;
+}
+#listbar a{
+	text-decoration: none;
+	color:white;
+}
+
+
+#listbar a:hover {
+	text-decoration: 1px underline;
+	color:white;
+}
+
+
+a:link {
+  color : white;
+}
+a:visited { color:white; }
+
+</style>
 </head>
 <body>
-	<%@ include file="../common/menubar.jsp" %>
-	<br><br>
+	<%@ include file="../common/menubar.jsp"%>
+	<br>
+
+	<div id="outer">
+		<h1>공지사항</h1>
+		<br><br><br>
+		<div align="center">
+			<table class="area-no">
+				<thead>
+					<tr>
+						<th width="100px" class="num">NO</th>
+						<th width="650">제목</th>
+						<th width="150">작성일</th>
+						<th width="150">조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%if(list.isEmpty()){ %>
+					<tr>
+						<td colspan="4">존재하는 공지사항이 없습니다.</td>
+					</tr>
+					<%}else{%>
+						<% for(Notice n : list){ %>
+						<tr id="selectr">
+							<td><%=n.getNoticeNo() %></td>
+							<td><%=n.getNoticeTitle() %></td>
+							<td><%=n.getCreateDate() %></td>
+							<td><%=n.getCount()%></td>
+						</tr>
+						<%} %>
+					<%}%>
+				</tbody>
+			</table>
+		</div>
+		<!-- 관리자 아이디로 변경 -->
+		<% if(loginMember != null && loginMember.getMemId().equals("admin")){%>
+		<div class="btnn" align="right">
+			<button class="enroll-btn" onclick="Listwrite()">작성하기</button>
+		</div>
+		<% }%>
+
+	</div>
+<br>
+	<div class="paging=area" align="center">
+
+		<%if(currentPage != 1){ %>
+		<button
+			onclick="location.href='<%=contextPath %>/listpage.no?cpage=<%=currentPage-1%> '">
+			&lt;</button>
+		<% }%>
+
+		<% for(int p = startPage; p<=endPage; p++){ %>
+		<%if(p == currentPage){ %>
+		<button disabled><%= p %></button>
+		<%}else {%>
+		<button
+			onclick="location.href='<%=contextPath%>/listpage.no?cpage=<%=p%>'"><%= p %></button>
+		<%} %>
+		<%} %>
+
+		<%if(currentPage != maxPage){ %>
+		<button
+			onclick="location.href='<%=contextPath %>/listpage.no?cpage=<%=currentPage+1%>'">
+			&gt;</button>
+		<% }%>
+
+
+	</div>
+	
+
+
+	<div id="listbar" align="center" style="border: 1px solid black;">
     
-    <div id="outer">
-        <h1>공지사항</h1>
-        
-    
-        <form action="" id="no-search">
-            <input type="text"> 
-            <button type="submit">검색</button>
-        </form>
-    
-        <hr>
-        <div id="custom-menu">
-            <ul>
-                <li><a href="">공지사항</a></li>
-                <li><a href="">QnA</a></li>
-                <li><a href="">FAQ</a></li>
-                <li><a href="<%= contextPath %>//list.bl?cpage=1">블랙리스트</a></li>
-            </ul>
-        </div>
-        <div align="center">
-            <table class="area-no">
-                <thead>
-                    <tr>
-                        <th class="num" width="100">NO</th>
-                        <th  width="500">제목</th>
-                        <th  width="160">작성일</th>
-                        <th  width="50">조회수</th>
-                    </tr>
-                </thead>
-               <tbody>
-				
-				<!-- case1. 공지글이 없을 경우-->
-
-				<%if(list.isEmpty()){ %>
-				<tr>
-					<td colspan="4">존재하는 공지사항이 없습니다.</td>
-				</tr>
-				<%}else{%>
-
-				<!--case.2 공지글이 있는 경우  -->
-
-				<% for(Notice n : list){ %>
-
-				<tr>
-					<td><%=n.getNoticeNo() %></td>
-					<td><%=n.getNoticeTitle() %></td>
-					<td><%=n.getCreateDate() %></td>
-					<td><%=n.getCount()%></td>
-				</tr>
-
-				<%} %>
-				<%}%>
-			
-				
-
-				
-			</tbody>
-                
-            </table>
-        </div>
-         <!-- 관리자 아이디로 변경 -->
-         <% if(loginMember != null && loginMember.getMemId().equals("user01")){%>
-        <div align="right">
-        <button class="enroll-btn" onclick = "Listwrite()">작성하기 </button>
-
-        </div>
-        <% }%>
-        
-    </div>
-    
-  	<div class="paging=area" align="center">
-            	
-            	<%if(currentPage != 1){ %>
-                <button onclick="location.href='<%=contextPath %>/listpage.no?cpage=<%=currentPage-1%> '"> &lt; </button>
-                <% }%>
-                
-                <% for(int p = startPage; p<=endPage; p++){ %>
-                	<%if(p == currentPage){ %>
-                		<button disabled><%= p %></button>
-                	<%}else {%>
-                <button onclick="location.href='<%=contextPath%>/listpage.no?cpage=<%=p%>'"><%= p %></button>
-                	<%} %>
-                <%} %>
-                
-                <%if(currentPage != maxPage){ %>
-                <button onclick="location.href='<%=contextPath %>/listpage.no?cpage=<%=currentPage+1%>'"> &gt; </button>
-                <% }%>
-            </div>
-    </body>
-    <script>
+    <table align="center">
+        <thead>
+        <tr align="center" style="border: 1px solid black;"><b>MENU</b></tr></thead>
+    <tbody>
+        <tr><td><a href="<%= contextPath %>/list.qa?qpage=1"><b>QNA</b></a></td></tr>
+    <tr><td><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></td></tr>
+    <tr><td><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></td></tr>
+</tbody>
+    </table>
+	</div>
+</body>
+<script>
    //공지사항 작성하기    
     function Listwrite(){
             location.href = "<%=contextPath%>/insertpage.no?cpage=1"
@@ -175,7 +241,7 @@
         
    //공지사항 글번호 
     $(function(){
-      $(".area-no > tbody > tr").click(function(){
+      $(".area-no > tbody > #selectr").click(function(){
       	const num =$(this).children().eq(0).text();
         	
         location.href = '<%=contextPath %>/detail.no?num='+num;
@@ -184,5 +250,5 @@
        })
    
     </script>
-    
+
 </html>

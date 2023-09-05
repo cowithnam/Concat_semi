@@ -105,7 +105,8 @@ public class BlackListDao {
 								  rset.getString("bl_content"),
 								  rset.getString("mem_id"),
 								  rset.getString("black_id"),
-								  rset.getInt("count"));
+								  rset.getInt("count"),
+								  rset.getDate("bl_date"));
 			}
 			
 		} catch (SQLException e) {
@@ -326,7 +327,7 @@ public class BlackListDao {
 			pstmt.setString(1, i.getOriginName());
 			pstmt.setString(2, i.getUpdateName());
 			pstmt.setString(3, i.getFilePath());
-			pstmt.setInt(4, i.getFileNo());
+			pstmt.setInt(4, i.getBoardNo());
 			
 			result = pstmt.executeUpdate();
 			

@@ -101,8 +101,9 @@ public class BlackListService {
 		int result2 = 1;
 		
 		if(i != null) { 
+			Image img = new BlackListDao().selectImage(conn, bl.getBlNo());
 			
-			if(i.getFileNo() != 0) {
+			if(img != null) {
 				result2 = new BlackListDao().updateImage(conn, i);
 			}else { 
 				result2 = new BlackListDao().insertNewImage(conn, i);

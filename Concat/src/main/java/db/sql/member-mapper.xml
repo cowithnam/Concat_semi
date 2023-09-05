@@ -17,6 +17,8 @@
 	FROM MEMBER
 	WHERE MEM_ID = ?
 	AND MEM_PWD = ?
+	AND STATUS = 'U'
+	 OR STATUS = 'A'
 </entry>
 
 	<entry key="insertMember">
@@ -68,6 +70,7 @@
 			  FROM MEMBER
 			 WHERE MEM_ID = ?
 			 AND STATUS = 'U'
+			  OR STATUS = 'A'
 </entry>
 
 <entry key="updatePwd">
@@ -79,9 +82,81 @@
 </entry>
 
 <entry key="deleteMember">
-   	   DELETE
+	UPDATE MEMBER
+   	   SET STATUS = 'N'
+   	 WHERE MEM_ID = ?
+   	   AND MEM_PWD = ?
+   	   
+   	   <!-- DELETE
 		  FROM MEMBER
 		 WHERE MEM_ID = ?
-		   AND MEM_PWD = ?
+		   AND MEM_PWD = ? -->
+</entry>
+
+<entry key="updateProfile">
+UPDATE 
+       PROFILE 
+   SET ORIGIN_NAME = ? , 
+       UPDATE_NAME = ? , 
+       FILE_PATH = ? 
+ WHERE MEM_NO = ?
+</entry>
+
+<entry key="selectProfile">
+	SELECT
+	       FILE_PATH|| '/' ||UPDATE_NAME "FILE_PATH"
+	  FROM PROFILE
+	 WHERE MEM_NO = ?
+</entry>
+
+<entry key="findId">
+	SELECT 
+	       MEM_ID
+	  FROM MEMBER
+	 WHERE MEM_NAME = ?
+	   AND PHONE = ?
+</entry>
+
+<entry key="findPWd">
+		SELECT 
+		       MEM_PWD
+		  FROM MEMBER
+		 WHERE MEM_ID = ?
+		   AND MEM_NAME = ?
+	       AND PHONE = ?
+</entry>
+
+<entry key="idCheck">
+			SELECT 
+			       COUNT(*) "COUNT"
+			  FROM MEMBER
+			 WHERE MEM_ID = ?
+</entry>
+
+<entry key="insertProfile">
+	INSERT 
+	  INTO PROFILE
+	  (
+	    FILE_NO
+	  , MEM_NO
+	  , ORIGIN_NAME
+	  , UPDATE_NAME
+	  , FILE_PATH
+	  )
+	  VALUES
+	  (
+	    SEQ_PNO.NEXTVAL
+	  , ?  
+	  , ?
+	  , ?
+	  , ?
+  )
+</entry>
+
+<entry key="gradeimg">
+	SELECT GRADE_IMG
+	  FROM MEMBER
+	  JOIN MEM_GRADE USING(GRADE_NO)
+	 WHERE MEM_NO = ? 
 </entry>
 </properties>

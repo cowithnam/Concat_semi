@@ -32,6 +32,7 @@
 	     , MEM_ID
 	     , BLACK_ID
 	     , COUNT
+	     , BL_DATE
 	  FROM BLACKLIST
 	  JOIN MEMBER ON (BL_WRITER = MEM_NO) 
 	 WHERE BL_NO = ?
@@ -141,7 +142,7 @@ SELECT *
 	   SET ORIGIN_NAME = ?
 	     , UPDATE_NAME = ?
 	     , FILE_PATH = ?
-	 WHERE FILE_NO = ?
+	 WHERE BOARD_NO = ?
 </entry>
 
 <entry key="insertNewImage">
@@ -173,12 +174,13 @@ SELECT *
          , MEM_ID
          , COUNT
          , BL_DATE
-	  FROM BLACKLIST
+	  FROM BLACKLIST B
       JOIN MEMBER ON (BL_WRITER = MEM_NO)
 	 WHERE BL_TITLE LIKE ?
 	    OR BL_CONTENT LIKE ?
 	    OR BL_WRITER LIKE ?
 	    OR BLACK_ID LIKE ?
+       AND B.STATUS = 'Y'
 	 ORDER 
 	    BY BL_NO
 </entry>
