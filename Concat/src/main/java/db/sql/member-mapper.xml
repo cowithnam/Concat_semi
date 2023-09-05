@@ -157,4 +157,11 @@ UPDATE
 	  JOIN MEM_GRADE USING(GRADE_NO)
 	 WHERE MEM_NO = ? 
 </entry>
+
+<entry key="nickCheck">
+	SELECT 
+	       COUNT(*) "NICK"
+	  FROM MEMBER
+	 WHERE NICKNAME = ?
+</entry>
 </properties>

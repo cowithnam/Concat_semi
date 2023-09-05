@@ -405,8 +405,34 @@ private Properties prop = new Properties();
 		}
 		return grade;
 		
-		
-		
+	}
+	
+	public int nickCheck(Connection conn,String checkNick) {
+		 int nick = 0;
+		 PreparedStatement pstmt = null;
+		 ResultSet rset = null;
+		 
+		 String sql = prop.getProperty("nickCheck");
+		 
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, checkNick);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				nick = rset.getInt(nick);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		 
+		 return nick;
 	}
 }
 

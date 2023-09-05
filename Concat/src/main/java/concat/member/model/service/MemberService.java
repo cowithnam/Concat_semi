@@ -134,6 +134,15 @@ public class MemberService {
 		return grade;
 	}
 	
+	public int nickCheck(String checkNick) {
+		Connection conn = getConnection();
+		
+		int nick = new MemberDao().nickCheck(conn, checkNick);
+		
+		close(conn);
+		return nick;
+	}
+	
 }
 	
 

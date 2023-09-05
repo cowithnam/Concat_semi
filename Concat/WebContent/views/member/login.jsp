@@ -354,10 +354,10 @@ a.link-copy {
               <input type="password" name="memPwd" id="memPwd2" placeholder="위의 비밀번호와 일치되게 입력" minlength="6" maxlength="15" required /> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="memName" id="memName" placeholder="한글로만 이뤄져야하며 2글자 ~ 5글자로 입력" minlength="2" maxlength="15" required/> <br>
+              <input type="text" name="memName" id="memName" placeholder="이름은 한글로만 이뤄져야하며 2글자 ~ 5글자로 입력" minlength="2" maxlength="15" required/> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="nickName" id="nickName" placeholder="한글은 2 ~ 5글자, 영어,숫자 15글자로 입력" minlength="2" maxlength="15" required/> <br>
+              <input type="text" name="nickName" id="nickName" placeholder="닉네임은 한글은 2 ~ 5글자, 영어,숫자 15글자로 입력" minlength="2" maxlength="15" required/> <br>
             </div>
             <div class="form-field">
               <input type="email" name="email" id="email" placeholder="이메일형식에 맞게 입력" required/> <br>
