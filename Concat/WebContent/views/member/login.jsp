@@ -8,8 +8,6 @@
 <style>
 @import url("https://fonts.googleapis.com/css?family=Abril+Fatface|Open+Sans:400,700&display=swap");
 
-/* font-family: 'Abril Fatface', cursive;
-font-family: 'Open Sans', sans-serif; */
 
 * {
   margin: 0;
@@ -30,8 +28,6 @@ body {
   height: 800px;
   margin: auto;
   border-radius: 10px;
-  /* display: flex; */
-  /* background: rgb(249, 63, 76); */
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   transition: all 0.1s ease-in 0.1s;
   margin: auto;
@@ -43,7 +39,7 @@ body {
   border-radius: 10px;
   color: lightgray;
   background: black;
-  display: flex; /* flex or none */
+  display: flex; 
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
@@ -76,7 +72,6 @@ a.link-copy {
   background: none;
   border: 2px solid white;
   border-radius: 150px;
-  /* align-self: center; */
   width: 300px;
   padding: 8px 16px;
   margin: 16px;
@@ -92,14 +87,13 @@ a.link-copy {
 
 /* 회원가입 */
 .sign-up {
-  display: none; /*flex or none*/
+  display: none;
   opacity: 1;
   width: 100%;
   height: 100%;
 }
 .signup-left {
   width: 50%;
-  /* padding: 20px; */
   opacity: 0;
   display: flex;
   flex-flow: column wrap;
@@ -176,12 +170,10 @@ a.link-copy {
   font-weight: bold;
 }
 .form-area-signup {
-  /* display: none; */
   opacity: 0;
   transition: all 0.4s ease-in 0.2s;
 }
 .form-area-signin {
-  /* display: none; */
   opacity: 0;
   transition: all 0.4s ease-in 0.2s;
 }
@@ -269,7 +261,6 @@ a.link-copy {
     width: 60%;
   }
   .wc_message {
-/*     display: none; */
     opacity: 0;
     transition: opacity .1s;
   }

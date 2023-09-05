@@ -15,6 +15,7 @@
  <style>
         .wrap{
             box-sizing: border-box;
+            /* border: 1px solid black; */
             background-color: black;
             color: white;
             border-radius: 30px ;
@@ -34,11 +35,13 @@
             margin-top: 8px;
         }
         #navi{
+            /* border: 1px solid white; */
             box-sizing: border-box;
             width: 300px;
             margin-left: 30px;
         }
         #main{
+            /* border: 1px solid white; */
             box-sizing: border-box;
             width: 400px;
         }
@@ -101,14 +104,11 @@
 		}
 		
 		.gradedetail2{
-		  display: none;
-		  position: relative;
+		  position: absolute;
 		  width: 100px;
-		  padding: -30px;
-		  left: 150;
 		  -webkit-border-radius: 8px;
 		  -moz-border-radius: 8px;
-		  border-radius: 8px;
+		  border-radius: 10px;
 		  background: #333;
 		  color: #fff;
 		  font-size: 14px;
@@ -118,9 +118,6 @@
             cursor: pointer;
         }
 
-        .gradedetail1:hover + .gradedetail2 {
-        	display: block;
-        }
 
     </style>
     
@@ -161,17 +158,22 @@
             <h3><a href="#">신고 목록 ▷</a></h3> <br>
         </div>
         <div id="main" class="cont" align="center" >
-            <p style="font-size: 30px; margin: 30px;">My page</p>
-			<form id="myPage-form" action="<%= contextPath %>/update.me" method="post" enctype="multipart/form-data">
+            <p style="font-size: 30px; margin: 30px;" >My page</p>
+			<form id="myPage-form" action="<%= contextPath %>/update.me" method="post" enctype="multipart/form-data" id="mypageform">
                 <table>
                     <tr>
                         <th style="height: 50px; width: 300px;" >※ 등급 </th>
-                        <td><img src="<%=grade.getGrade_img() %>" id="gradeimg" class="gradedetail1"></td>
-                        <div class="gradedetail2"> 0 ~ 29	B <br>
-                            30 ~ 99	S <br>
-                            100 ~ 199 G <br>
-                            200 ~ 99999 D
-                        </div>
+                        <% if(grade != null){ %>
+                        <td><img src="<%=grade.getGrade_img() %>" id="gradeimg" ></td>
+                        <% } %>
+                        <td class="gradedetail2" style="display:none">
+                    	    <div> 
+                    	    	0 ~ 29	B <br>
+	                            30 ~ 99	S <br>
+	                            100 ~ 199 G <br>
+	                            200 ~ 99999 D
+                        	</div>
+                        </td>
                        
                     </tr>
                     <tr>
@@ -184,7 +186,8 @@
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 닉네임</th>
-                        <td><input type="text" name="nickName" value="<%= m.getNickname() %>" maxlength="6"></td>
+                        <td><input type="text" id="nickName" name="nickName" value="<%= m.getNickname() %>" maxlength="6">></td>
+                        <td><span class="error_next_box" id="nickMsg"><br></span></td>
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 전화번호 </th>
@@ -332,6 +335,36 @@
 		    }
 		    obj.value = phone;
 		}
+	    
+    </script>
+    
+    <script>
+
+    
+    $(function() {
+        $("#nickName").keyup(function(){
+                const nickName = $(this).val();
+                
+                $.ajax({
+                    type: "POST"
+                    ,url: "nickNameModify.me"
+                    ,dataType:"text"
+                    ,data: {checkNick:nickName}
+                    ,success:function(nick){
+                    	 console.log(nickName);
+
+                        if(nick == 'NNNNN'){
+                            $("#nickMsg").html("<b>닉네임 사용가능합니다 사용하시겠습니까?</b>");
+                        }else{
+                            $("#nickMsg").html("<b>중복된 닉네임입니다.!</b>");
+                        }
+                    }
+                    ,error:function(){
+                        console.log("통신 실패!");
+                    }
+                })	
+            })
+    })
     </script>
 </body>
 </html>
