@@ -13,8 +13,9 @@
             margin: auto;
         }	
         
-        h1{display: inline;}
-        #no-search{
+h1{display: inline;}
+
+#no-search{
             float: right;
             position: relative;
             top: 20px;
@@ -70,10 +71,10 @@
   display: block;
 }
 
-#listbar {
+.listbar {
   width: 150px;
-  height: 210px;
-  border: 1px solid white;
+  height: 220px;
+  border: 1px solid black;
   position: fixed;
   top: 400px; 
   left: 150px;
@@ -81,27 +82,33 @@
   background-color: white; 
 }
 
-#listbar>table {
-	width: 150px;
-	height: 210px;
+.listbar>div {
+	color: white;
+	width: 100%;
+	height: 48px;
 	background-color: black;
+	text-align: center;
+	line-height: 44px;
+	
 }
-#listbar a{
+#firdiv{
+	background-color: white;
+	color: black;
+	width: 100%;
+	height: 28px;
+	text-align: center;
+	line-height: 28px;
+}
+.listbar a{
 	text-decoration: none;
 	color:white;
 }
 
 
-#listbar a:hover {
+.listbar a:hover {
 	text-decoration: 1px underline;
 	color:white;
 }
-
-
-a:link {
-  color : white;
-}
-a:visited { color:white; }
            
 
         </style>
@@ -135,50 +142,44 @@ a:visited { color:white; }
             </li>
             <li>
                 <input type="checkbox" id="qna-3">
-                <label for="qna-3">반품 신청을 철회하고 싶어요.</label>
+                <label for="qna-3">상대방과 거래 도중 문제 발생시</label>
                 <div>
-                    <p>반품할 상품을 아직 보내지 않은 경우, 마이페이지에서 반품철회를 하실 수 있습니다.</p>
-                    <p>반품철회 후 택배사에서 상품 수거가 된 것으로 확인될 경우 해당 주문은 반품처리한 것으로 재 변경됩니다.</p>
+                    <p>고객센터 > QNA or 블랙리스트 페이지</p>
+                    <p>1:1 문의 또는 블랙리스트 신고페이지로 접수 부탁드립니다</p>
+                    
                 </div>
             </li>
             <li><h3>회원</h3>
                 <input type="checkbox" id="qna-4">
-                <label for="qna-4">배송된 상품이 부재중으로 반송된 경우 어떻게 하나요?</label>
+                <label for="qna-4">판매내역을 알 수 있을까요?</label>
                 <div>
-                    <p>부재 등의 사유로 반송된 상품은 "마이페이지 > 주문 조회"]"에서 택배사 영업소, 또는 배송 담당 택배원 연락처를 통해 재배송 요청을 할 수 있습니다. 상품이 이미 반송되어 해당 업체로 입고된 경우, 왕복 배송비를 추가 부담하셔야 합니다.</p>
+                    <p>네. 로그인 후 우측 상단 > 마이페이지로 이동 후 판매 내역에 대해 확인할 수 있습니다.</p>
                 </div>
             </li>
             <li>
                 <input type="checkbox" id="qna-5">
-                <label for="qna-5">상품에 대해서 문의하려면 어떻게 해야 하나요?</label>
+                <label for="qna-5">회원탈퇴는 어떻게 하나요?</label>
                 <div>
-                    <p>상품에 관한 내용은 상품상세 화면에 자세히 안내되어 있습니다. 마이페이지 > 주문내역에서 주문한 상품을 선택하면 상세페이지로 이동합니다.</p>
-                    <p>상품 상세 내용에 표시되어 있지 않은 내용은 판매자에게 문의해 주십시오.</p>
-                    <p>> 판매자에게 문의</p>
-                    <p>1. "마이페이지 > 주문내역에서 상품 선택 > 배송/교환/반품 안내"에 표기된 판매자 연락처로 문의</p>
-                    <p>2. "["마이페이지 > 1:1문의하기 > 문읜타입에서 판매자에게 문의하기"를 선택한 후 질의 내용 작성</p>
+                    <p>로그인 후 우측 상단 > 마이페이지로 이동 후 내정보 화면 하단에서 회원탈퇴 가능합니다.</p>
                 </div>
             </li>
             <li>
                 <input type="checkbox" id="qna-6">
-                <label for="qna-6">상품에 대해서 문의하려면 어떻게 해야 하나요?</label>
+                <label for="qna-6">아이디 비밀번호를 잊어 버렸어요</label>
                 <div>
-                    <p>상품에 관한 내용은 상품상세 화면에 자세히 안내되어 있습니다. 마이페이지 > 주문내역에서 주문한 상품을 선택하면 상세페이지로 이동합니다.</p>
-                    <p>상품 상세 내용에 표시되어 있지 않은 내용은 판매자에게 문의해 주십시오.</p>
-                    <p>> 판매자에게 문의</p>
-                    <p>1. "마이페이지 > 주문내역에서 상품 선택 > 배송/교환/반품 안내"에 표기된 판매자 연락처로 문의</p>
-                    <p>2. "["마이페이지 > 1:1문의하기 > 문읜타입에서 판매자에게 문의하기"를 선택한 후 질의 내용 작성</p>
+                    <p>아이디 찾기 : 로그인페이지에서 이름/핸드폰 번호로 찾기 가능합니다. </p>
+                    <p>비밀번호 찾기 : 로그인페이지에서 아이디/이름/핸드폰 번호로 찾기 가능합니다.</p>
+                    
                 </div>
             </li>
-            <li><h3>고객센터</h3>
+            <li><h3>기타</h3>
                 <input type="checkbox" id="qna-7">
                 <label for="qna-7">상품에 대해서 문의하려면 어떻게 해야 하나요?</label>
                 <div>
-                    <p>상품에 관한 내용은 상품상세 화면에 자세히 안내되어 있습니다. 마이페이지 > 주문내역에서 주문한 상품을 선택하면 상세페이지로 이동합니다.</p>
+                    <p>상품에 관한 내용은 상품상세 화면에 자세히 안내되어 있으며</p>
                     <p>상품 상세 내용에 표시되어 있지 않은 내용은 판매자에게 문의해 주십시오.</p>
-                    <p>> 판매자에게 문의</p>
-                    <p>1. "마이페이지 > 주문내역에서 상품 선택 > 배송/교환/반품 안내"에 표기된 판매자 연락처로 문의</p>
-                    <p>2. "["마이페이지 > 1:1문의하기 > 문읜타입에서 판매자에게 문의하기"를 선택한 후 질의 내용 작성</p>
+                    <p>> 판매자에1게 문의</p>
+                    <p>>상품 상세 페이지 > 구매하기 버튼 클릭 > 상대방 카카오톡 아이디</p>
                 </div>
             </li>
             <li>
@@ -206,20 +207,14 @@ a:visited { color:white; }
         </ul>
     </div>
   </div>
- <div id="listbar" align="center" style="border: 1px solid black;">
-    
-    <table align="center">
-        <thead>
-        <tr align="center" style="border: 1px solid black;"><b>MENU</b></tr></thead>
-    <tbody>
-     	<tr><td><a href="<%= contextPath %>/listpage.no?cpage=1"><b>공지사항</b></a></td></tr>
-        <tr><td><a href="<%= contextPath %>/list.qa?qpage=1"><b>QNA</b></a></td></tr>
-    	<tr><td><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></td></tr>
-    	<tr><td><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></td></tr>
-</tbody>
-    </table>
+ <div class="listbar" align="center">
+		<div id="firdiv"><b>MENU</b></div>
+		<div><a href="<%= contextPath %>/listpage.no?cpage=1"><b>공지사항</b></a></div>
+		<div><a href="<%= contextPath %>/list.qa?qpage=1"><b>QNA</b></a></div>
+		<div><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></div>
+		<div><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></div>
 </div>
 </body>
-</html></p>
+</html>
 
-    </html>
+  
