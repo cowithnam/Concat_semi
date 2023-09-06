@@ -162,8 +162,6 @@
         </div>
       </div>
 
-	  <br>
-
       <div class="list-area">
       	  <% if(!list.isEmpty()){ %>
 	      	  <% for(Board b : list){ %>

@@ -135,6 +135,7 @@
 	     , ORIGIN_NAME
 	     , UPDATE_NAME
 	     , FILE_PATH
+	     , BOARD_TYPE
 	     )
 	VALUES
 	     (
@@ -143,6 +144,7 @@
 	     , ?
 	     , ?
 	     , ?
+	     , 1
 	     )
 </entry>
 <entry key="selectWish">
