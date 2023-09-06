@@ -237,7 +237,7 @@ WHERE MEM_ID = ?
 	     WHERE R.STATUS = 'Y'
 	       AND I.BOARD_TYPE = 2
 	     ORDER 
-	        BY SCORE DESC
+	        BY SCORE DESC, CREATE_DATE DESC
 	        ) A
 	    )
 	    WHERE RNUM BETWEEN ? AND ?

@@ -261,8 +261,8 @@
             <div id="header2">
                 <div id="search">
                     <span style="font-size: 33px; font-weight: bolder;">C</span>
-                    <form action="#">
-                        <input type="text" name="search" placeholder="검색어를 입력해 주세요">
+                    <form action="<%= contextPath %>/search.co">
+                        <input type="text" name="search" placeholder="검색어를 입력해 주세요" >
                         <button type="submit"></button>
                     </form>
                 </div>

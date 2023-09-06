@@ -1,4 +1,4 @@
-package concat.blacklist.controller;
+package concat.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import concat.blacklist.model.service.BlackListService;
-import concat.blacklist.model.vo.BlackList;
+import concat.board.model.service.BoardService;
+import concat.board.model.vo.Board;
 
 /**
- * Servlet implementation class BlackListSearchController
+ * Servlet implementation class SearchController
  */
-@WebServlet("/search.bl")
-public class BlackListSearchController extends HttpServlet {
+@WebServlet("/search.co")
+public class SearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BlackListSearchController() {
+    public SearchController() {
         super();
     }
 
@@ -33,17 +33,17 @@ public class BlackListSearchController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		String key = request.getParameter("searchkey");
+		String key = request.getParameter("search");
 		
-		ArrayList<BlackList> list2 = new BlackListService().searchList(key);
+		ArrayList<Board> list = new BoardService().searchList(key);
 		
-		if(list2 != null) {
-			
-			request.setAttribute("list2", list2);
-			request.getRequestDispatcher("views/blacklist/blackListSerachView.jsp").forward(request, response);
+		if(list != null) {
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("views/board/salesList.jsp").forward(request, response);
 		}else {
 			
 		}
+		
 	}
 
 	/**

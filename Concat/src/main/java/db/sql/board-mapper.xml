@@ -209,4 +209,23 @@
 	   SET STATUS = 'N'
 	 WHERE BOARD_NO = ?
 </entry>
+<entry key="searchList">
+	SELECT
+	       BOARD_NO
+	     , BOARD_TITLE
+	     , BRAND_NAME
+	     , PRICE
+	     , FILE_PATH || '/' || UPDATE_NAME "THUMBNAIL"
+	  FROM BOARD B
+	  JOIN IMAGE I USING (BOARD_NO)
+      JOIN BRAND ON (BRAND = BRAND_NO)
+	 WHERE I.BOARD_TYPE = 1
+	   AND B.STATUS = 'Y'
+        OR BOARD_TITLE LIKE ?
+        OR BRAND_NAME LIKE ?
+        OR BOARD_CONTENT LIKE ?
+        OR OPEN_KAKAO LIKE ?
+	 ORDER
+	    BY BOARD_NO DESC
+</entry>
 </properties>

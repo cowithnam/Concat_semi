@@ -213,5 +213,11 @@ public class BoardService {
 		
 		return result;
 	}
-
+	
+	public ArrayList<Board> searchList(String key){
+		Connection conn = getConnection();
+		ArrayList<Board> list = new BoardDao().searchList(conn, key);
+		close(conn);
+		return list;
+	}
 }

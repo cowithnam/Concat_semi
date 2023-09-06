@@ -203,5 +203,7 @@
 			location.href="<%= contextPath %>/listScore.re?cpage=1";
     	}
     </script>
+
+    <%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>
