@@ -37,9 +37,9 @@ public class UpdatePwdController extends HttpServlet {
 		Member upPwd = new MemberService().updatePwd(memId, memPwd, updatePwd);
 		
 		
-		if(upPwd == null) { // 실패
-			System.out.println("실패");
-		}else { // 성공
+		if(upPwd == null) {
+			
+		}else {
 			request.getSession().setAttribute("loginMember", upPwd);
 			
 			 response.setContentType("text/html; charset=utf-8");
@@ -48,7 +48,7 @@ public class UpdatePwdController extends HttpServlet {
 
 				out.println("<script>");
 
-				out.println("alert('비밀번호가 변경되었습니다. 로그아웃 후 확인해주시길 바랍니다.');");
+				out.println("alert();");
 
 				out.println("history.back();");
 

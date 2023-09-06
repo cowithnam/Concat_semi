@@ -37,17 +37,17 @@ public class MyPageUpdateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (ServletFileUpload.isMultipartContent(request)) {
-			// 1-1. Àü¼Û¿ë·® Á¦ÇÑ
+			// 1-1. ï¿½ï¿½ï¿½Û¿ë·® ï¿½ï¿½ï¿½ï¿½
 			int maxSize = 10 * 1024 * 1024;
 
-			// 1-2. ÀúÀå½ÃÅ³ Æú´õÀÇ ¹°¸®ÀûÀÎ °æ·Î
+			// 1-2. ï¿½ï¿½ï¿½ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/member_upfiles/");
 
-			// 2. Àü´ÞµÈ ÆÄÀÏ ¾÷·Îµå
+			// 2. ï¿½ï¿½ï¿½Þµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
 					new MyFileRenamePolicy());
 
-			// 3. db¿¡ ±â·ÏÇÒ °ª »Ì±â
+			// 3. dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì±ï¿½
 			Member m = new Member();
 			m.setMemId(multiRequest.getParameter("memId"));
 			m.setMemName(multiRequest.getParameter("memName"));
@@ -56,7 +56,7 @@ public class MyPageUpdateController extends HttpServlet {
 			m.setPhone(multiRequest.getParameter("phone"));
 			m.setMemNo(Integer.parseInt(multiRequest.getParameter("memNo")));
 
-			// Attachment¿¡ ¿©·¯¹ø insertÇÒ µ¥ÀÌÅÍ »Ì±â
+			// Attachmentï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ insertï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½
 			
 			Profile profile = null;
 			if(multiRequest.getOriginalFileName("file") !=null){
@@ -75,7 +75,6 @@ public class MyPageUpdateController extends HttpServlet {
 					response.sendRedirect(request.getContextPath()+"/myPage.me");
 					
 				} else {
-					System.out.println("½ÇÆÐ´Ù ÀÌÀÚ½Ä¾Æ");
 					
 				}
 		}

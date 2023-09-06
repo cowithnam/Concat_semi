@@ -65,7 +65,7 @@ public class SalesInsertController extends HttpServlet {
 			ArrayList<Board> list = new BoardService().selectBoardList();
 			
 			if(result > 0) {
-				request.getSession().setAttribute("alertMsg", "성공적으로 등록을 완료했습니다.");
+				request.getSession().setAttribute("alertMsg", "");
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("views/board/salesList.jsp").forward(request, response);
 			}

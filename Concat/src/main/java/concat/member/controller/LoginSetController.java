@@ -41,7 +41,7 @@ public class LoginSetController extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-	        out.println("alert('아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.');");
+	        out.println("alert('');");
 	        out.println("history.back();");
 	        out.println("</script>"); 
 		}else {

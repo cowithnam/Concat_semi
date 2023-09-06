@@ -79,7 +79,7 @@
                 </tr>
                 <tr>
                     <th height="50">상품명</th>
-                    <td ><input type="text" name="title" placeholder="상품 이름을 입력해주세요" required></td>
+                    <td ><input type="text" name="title" placeholder="상품 이름을 입력해주세요" required maxlength="10"></td>
                 </tr>
                 <tr>
                     <th height="50">카테고리</th>

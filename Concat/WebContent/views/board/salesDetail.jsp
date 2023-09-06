@@ -204,33 +204,33 @@
   
   <script>
 	  function wish(){
-		  if($(".wish").hasClass("wantWish")){
-	    	$.ajax({
-	    		url:"removeWish",
-	     		data:{bNo:<%=b.getBoardNo() %>},
-	      		success:function(result){
-	      			if(result>0){
-	      				$(".wish").removeClass("wantWish");
-	      			}
-	      		},	
-	      		error:function(){
-	        		console.log("삭제 오류발생")
-	      		}
-	     	 })
-	  	  }else{
-	   		$.ajax({
-	      		url:"addWish",
-	      		data:{bNo:<%=b.getBoardNo() %>},
-	      		success:function(result){
-	        		if(result>0){
-	        			$(".wish").addClass("wantWish");
-	        		}
-	      		},
-	      		error:function(){
-	       		 console.log("추가 오류발생") 
-	      		}
-	    	})
-	  	  }
+			  if($(".wish").hasClass("wantWish")){
+			    	$.ajax({
+			    		url:"removeWish",
+			     		data:{bNo:<%=b.getBoardNo() %>},
+			      		success:function(result){
+			      			if(result>0){
+			      				$(".wish").removeClass("wantWish");
+			      			}
+			      		},	
+			      		error:function(){
+			        		console.log("삭제 오류발생")
+			      		}
+			     	 })
+			  	  }else{
+			   		$.ajax({
+			      		url:"addWish",
+			      		data:{bNo:<%=b.getBoardNo() %>},
+			      		success:function(result){
+			        		if(result>0){
+			        			$(".wish").addClass("wantWish");
+			        		}
+			      		},
+			      		error:function(){
+			       		 console.log("추가 오류발생") 
+			      		}
+			    	})
+			  	  }
 	  }  
 	  $(function(){ 
 

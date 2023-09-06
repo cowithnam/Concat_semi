@@ -33,12 +33,12 @@ public class ReviewDeleteController extends HttpServlet {
 		int result = new ReviewService().deletelist(rNo);
 		
 		if(result > 0) { // ����
-			request.getSession().setAttribute("alertMsg", "���������� �������� ���� �Ǿ����ϴ�");
+			request.getSession().setAttribute("alertMsg", "");
 			
 			response.sendRedirect(request.getContextPath() + "/list.re?cpage=1");
 			
 		}else { // ����
-			request.setAttribute("errorMsg", "�������� ������ �����߽��ϴ�.");
+			request.setAttribute("errorMsg", "");
 
 		}
 	}

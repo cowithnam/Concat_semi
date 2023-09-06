@@ -35,10 +35,10 @@ public class ExitController extends HttpServlet {
 		int result = new MemberService().deleteMember(memPwd ,memId);
 		if(result > 0) {
 			request.getSession().removeAttribute("loginMember");
-			request.getSession().setAttribute("alertMsg", "성공적으로 회원탈퇴 되었습니다. 그동안 이용해주셔서 감사합니다.");
+			request.getSession().setAttribute("alertMsg", "");
 			response.sendRedirect(request.getContextPath());
 		}else {
-			//session.setAttribute("alertMsg", "회원탈퇴 실패");
+			//session.setAttribute("alertMsg", "");
 			response.sendRedirect(request.getContextPath() + "/myPage.me");
 		}
 	}

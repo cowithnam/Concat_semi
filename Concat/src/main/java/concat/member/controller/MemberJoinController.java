@@ -46,12 +46,12 @@ request.setCharacterEncoding("UTF-8");
 		int result = new MemberService().insertMember(loginMember);
 		
 		
-		if(result > 0) { // ¼º°ø
-			request.getSession().setAttribute("alertMsg", "¼º°øÀûÀ¸·Î È¸¿ø°¡ÀÔÀÌ µÇ¾ú½À´Ï´Ù."); 
+		if(result > 0) { // ï¿½ï¿½ï¿½ï¿½
+			request.getSession().setAttribute("alertMsg", ""); 
 			response.sendRedirect(request.getContextPath());
-		}else { // ½ÇÆÐ
-			System.out.println("½ÇÆÐ");
-			//request.setAttribute("errorMsg", "È¸¿ø°¡ÀÔ¿¡ ½ÇÆÐÇß½À´Ï´Ù.");
+		}else { // ï¿½ï¿½ï¿½ï¿½
+			System.out.println("");
+			//request.setAttribute("errorMsg", "È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½.");
 			//RequestDispatcher view = request.getRequestDispatcher("views/comon/errorPage.jsp");
 			//view.forward(request, response);
 		}
