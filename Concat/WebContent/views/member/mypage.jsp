@@ -349,9 +349,9 @@
                     	 console.log(nickName);
 
                         if(nick == 'NNNNN'){
-                            $("#nickMsg").html("<b>닉네임 사용가능합니다 사용하시겠습니까?</b>");
+                        	 $("#nickMsg").html("<b>중복된 닉네임입니다.!</b>");
                         }else{
-                            $("#nickMsg").html("<b>중복된 닉네임입니다.!</b>");
+                            $("#nickMsg").html("<b>닉네임 사용가능합니다 사용하시겠습니까?</b>");
                         }
                     }
                     ,error:function(){
