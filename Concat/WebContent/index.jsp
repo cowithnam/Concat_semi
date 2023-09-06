@@ -87,5 +87,6 @@
     	
     </script>
 	
+	    <%@ include file="views/common/footerbar.jsp" %>
 </body>
 </html>

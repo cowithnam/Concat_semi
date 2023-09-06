@@ -171,6 +171,6 @@
 		</div>
 	</div>
   </form>
-  
+      <%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>

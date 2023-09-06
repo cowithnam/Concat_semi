@@ -249,5 +249,6 @@
             <button style="font-size: 12px; onclick="location.href='<%= contextPath %>/list.bl?cpage=<%= currentPage+1 %>'"> ▶ </button>
             <% } %>
         </div>	
+            <%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>

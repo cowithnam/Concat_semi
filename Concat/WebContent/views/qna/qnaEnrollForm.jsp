@@ -94,15 +94,16 @@
         </form>
         <br><br><br>
     </div>
+	<script>
+	    function backno(){
+	        location.href = '<%=contextPath%>/list.qa?qpage=1'
+	
+	    }
+	</script>
+  	<%@ include file="../common/footerbar.jsp" %>
 </body>
 
 
 
 
-<script>
-    function backno(){
-        location.href = '<%=contextPath%>/list.qa?qpage=1'
-
-    }
-</script>
 </html>

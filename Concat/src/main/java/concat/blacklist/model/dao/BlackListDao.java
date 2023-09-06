@@ -28,7 +28,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return ºí·¢¸®½ºÆ® ÀüÃ¼ Á¶È¸
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ã¼ ï¿½ï¿½È¸
 	 */
 	public ArrayList<BlackList> selectBlacklistList(Connection conn){
 		ArrayList<BlackList> list = new ArrayList<BlackList>();
@@ -61,7 +61,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return Á¶È¸¼ö Áõ°¡
+	 * @return ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 */
 	public int increaseCount(Connection conn, int blNo) {
 		int result = 0;
@@ -84,7 +84,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return ºí·¢¸®½ºÆ®»ó¼¼ Á¶È¸
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½È¸
 	 */
 	public BlackList selectBlackList(Connection conn, int blNo) {
 		BlackList b = null;
@@ -119,7 +119,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return ºí·¢¸®½ºÆ® ÀÛ¼º±Û Ãß°¡
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	 */
 	public int insertBlacklist(Connection conn, BlackList bl) {
 		int result =0;
@@ -145,7 +145,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return ºí·¢¸®½ºÆ® ÀÌ¹ÌÁö Ãß°¡
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	 */
 	public int insertImage(Connection conn, Image image) {
 		int result = 0;
@@ -171,7 +171,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return ºí·¢¸®½ºÆ® ÀÌ¹ÌÁö Á¶È¸
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	 */
 	public Image selectImage(Connection conn, int blNo) {
 		Image image = null;
@@ -204,7 +204,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return ºí·¢¸®½ºÆ® Á¶È¸¼ö Á¶È¸
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½È¸
 	 */
 	public int selectListCount(Connection conn) {
 		int listCount = 0;
@@ -230,7 +230,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return ºí·¢¸®½ºÆ® ¸®½ºÆ® ÀüÃ¼±Û Á¶È¸
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½È¸
 	 */
 	public ArrayList<BlackList> selectList(Connection conn, PageInfo pi) {
 		ArrayList<BlackList> list = new ArrayList<BlackList>();
@@ -269,7 +269,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return  ºí·¢¸®½ºÆ® ÀÛ¼º±Û »èÁ¦
+	 * @return  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 */
 	public int deletelist(Connection conn, int num) {
 		int result = 0;
@@ -377,7 +377,6 @@ public class BlackListDao {
 			pstmt.setString(1, "%" + key + "%");
 			pstmt.setString(2, "%" + key + "%");
 			pstmt.setString(3, "%" + key + "%");
-			pstmt.setString(4, "%" + key + "%");
 			
 			rset = pstmt.executeQuery();
 			

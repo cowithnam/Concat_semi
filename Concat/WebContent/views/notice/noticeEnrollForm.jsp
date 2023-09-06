@@ -67,7 +67,6 @@
             </div>
         </form>
     </div>
-</body>
 
 <script>
     function backno(){
@@ -75,7 +74,6 @@
 
     }
 </script>
-</html>
-
+    <%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>

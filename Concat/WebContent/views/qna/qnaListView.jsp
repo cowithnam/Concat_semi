@@ -290,9 +290,8 @@ button:hover {
 		<div><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></div>
 		<div><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></div>
   	</div>
-</body>
-
-<script>
+  	
+  	<script>
         function qnawrite(){
         	location.href="<%= contextPath%>/insert.qa"
         }
@@ -305,8 +304,12 @@ button:hover {
               
               })
              })
-
     </script>
+  	
+  	<%@ include file="../common/footerbar.jsp" %>
+</body>
+
+
 
 
 </html>

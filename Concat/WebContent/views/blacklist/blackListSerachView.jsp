@@ -160,10 +160,8 @@
                     			location.href="<%= contextPath %>/EnrollForm.bl";
                     		})
                     	})
-                    </script>
                     
                     <!-- 블랙리스트 상세보기 -->
-                     <script>
 				    	$(function(){
 				    		$("tbody>tr").click(function(){
 				    			const num = $(this).children().eq(0).text();
@@ -176,5 +174,8 @@
             </table>
         </div>
     </div>
+    
+       <%@ include file="../common/footerbar.jsp" %>
+       
 </body>
 </html>
