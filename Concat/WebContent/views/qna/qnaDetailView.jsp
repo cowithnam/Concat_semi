@@ -179,12 +179,14 @@ textarea{
 				<% }else{ %>	
 				<textarea name="content" cols="30" rows="10" id="replyContent"
 				style="resize: none;" placeholder="본인이 등록한 글 외에는 답변을 작성하실 수 없습니다"  readonly></textarea>	
-				</div>
+				
 				<% }%>
 			<% } else { %>
-			
+				<textarea name="content" cols="30" rows="10" id="replyContent"
+				style="resize: none;" placeholder="본인이 등록한 글 외에는 답변을 작성하실 수 없습니다"  readonly></textarea>	
+				
 			<% } %>
-
+				</div>
 			<br>
 			<br>
 			
