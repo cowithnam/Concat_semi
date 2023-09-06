@@ -2,6 +2,7 @@ package concat.board.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -61,8 +62,11 @@ public class SalesInsertController extends HttpServlet {
 			
 			int result = new BoardService().insertBoard(b,ig);
 			
+			ArrayList<Board> list = new BoardService().selectBoardList();
+			
 			if(result > 0) {
 				request.getSession().setAttribute("alertMsg", "성공적으로 등록을 완료했습니다.");
+				request.setAttribute("list", list);
 				request.getRequestDispatcher("views/board/salesList.jsp").forward(request, response);
 			}
 		}

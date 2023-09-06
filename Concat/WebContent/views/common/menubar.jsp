@@ -322,12 +322,21 @@
         function notice(){
             location.href="<%=contextPath%>/listpage.no?cpage=1";
         }
+        
+        function needLogin(){
+        	alert("로그인 후 이용가능합니다");
+        }
     </script>
     
     <div class="minibar">
     	<div id="minibar">
-        	<a href="<%= contextPath %>/wishList.bo" id="zzim">찜 목록</a> <br>
-            <a href="<%= contextPath %>/insert.bo" id="sell-page">판매하기</a>
+    		<% if(loginMember != null){ %>
+	        	<a href="<%= contextPath %>/wishList.bo" id="zzim">찜 목록</a> <br>
+	            <a href="<%= contextPath %>/insert.bo" id="sell-page">판매하기</a>
+            <% }else{ %>
+            	<a onclick="needLogin()" id="zzim">찜 목록</a> <br>
+	            <a onclick="needLogin()" id="sell-page">판매하기</a>
+            <% } %>
         </div>
     </div>
 

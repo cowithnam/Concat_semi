@@ -113,38 +113,44 @@ int maxPage = pi.getMaxPage();
         cursor: pointer;
     }
 
-#listbar {
-  width: 150px;
-  height: 210px;
-  border: 1px solid white;
-  position: fixed;
-  top: 400px; 
-  left: 150px;
-  text-align: center;
-  background-color: white; 
-}
-
-#listbar>table {
-	width: 150px;
-	height: 210px;
-	background-color: black;
-}
-#listbar a{
-	text-decoration: none;
-	color:white;
-}
-
-
-#listbar a:hover {
-	text-decoration: 1px underline;
-	color:white;
-}
-
-
-a:link {
-  color : white;
-}
-a:visited { color:white; }
+	.listbar {
+	  width: 150px;
+	  height: 220px;
+	  border: 1px solid black;
+	  position: fixed;
+	  top: 400px; 
+	  left: 150px;
+	  text-align: center;
+	  background-color: white; 
+	}
+	
+	.listbar>div {
+		color: white;
+		width: 100%;
+		height: 48px;
+		background-color: black;
+		text-align: center;
+		line-height: 44px;
+		
+	}
+	#firdiv{
+		background-color: white;
+		color: black;
+		width: 100%;
+		height: 28px;
+		text-align: center;
+		line-height: 28px;
+	}
+	.listbar a{
+		text-decoration: none;
+		color:white;
+	}
+	
+	
+	.listbar a:hover {
+		text-decoration: 1px underline;
+		color:white;
+	}
 
 </style>
 </head>
@@ -220,18 +226,13 @@ a:visited { color:white; }
 	
 
 
-	<div id="listbar" align="center" style="border: 1px solid black;">
-    
-    <table align="center">
-        <thead>
-        <tr align="center" style="border: 1px solid black;"><b>MENU</b></tr></thead>
-    <tbody>
-        <tr><td><a href="<%= contextPath %>/list.qa?qpage=1"><b>QNA</b></a></td></tr>
-    <tr><td><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></td></tr>
-    <tr><td><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></td></tr>
-</tbody>
-    </table>
-	</div>
+	  <div class="listbar" align="center">
+		<div id="firdiv"><b>MENU</b></div>
+		<div><a href="<%= contextPath %>/listpage.no?cpage=1"><b>공지사항</b></a></div>
+		<div><a href="<%= contextPath %>/list.qa?qpage=1"><b>QNA</b></a></div>
+		<div><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></div>
+		<div><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></div>
+      </div>
 </body>
 <script>
    //공지사항 작성하기    

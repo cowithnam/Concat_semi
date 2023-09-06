@@ -32,13 +32,13 @@ hr {
 	margin-bottom: 20px;
 }
 
-h3 {
+h2 {
 	display: inline;
 	position: relative;
 	left: 15px;
 }
 
-h6 {
+h4 {
 	display: inline;
 	position: relative;
 	left: 650px;
@@ -142,15 +142,12 @@ textarea{
 		<div>
 			<h3><%=q.getQnaTitle()%></h3>
 		</div>
-		<div>
-			<h6>
-				작성자 :
-				<%=q.getQnaWriterNick()%>
-			</h6>
-			<h6>
-				작성일 :
-				<%=q.getCreateDate()%></h6>
-		</div>
+		 <div>
+            <h4>작성자 :
+				<%=q.getQnaWriterNick()%> </h4><h4>작성일 :
+				<%=q.getCreateDate()%></h4>
+        </div>
+		
 
 
 		<div id="content1">
@@ -266,7 +263,7 @@ function selectReplyList() {
         success: function (list) {
             let result = "";
             for (let i = 0; i < list.length; i++) {
-                result += "<tr>" + "<td calss='td1'>" + list[i].repWriter + "</td>" + "</tr>"
+                result += "<tr>" + "<td class='td1'>" + list[i].repWriter + "</td>" + "</tr>"
                         + "<tr class='tr2'>" + "<td class='td2'>" + list[i].content + "</td>" + "</tr>";
             }
             $("#answer99>tbody").html(result);

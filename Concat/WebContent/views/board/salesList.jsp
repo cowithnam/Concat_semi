@@ -170,21 +170,23 @@
       </div>
 
       <div class="list-area">
-      	  <% for(Board b : list){ %>
-	          <div class="thumbnail" align="center">
-	          	<input type="hidden" value="<%=b.getBoardNo() %>">
-	            <img src="<%= b.getThumbnail() %>" width="200" height="180" style="border-radius: 5px;"> 
-	            <span style="font-size: 11px;">[<%= b.getBrand() %>]</span> <br>
-	            <span style="font-size: 20px; font-weight: bolder;"><%=b.getBoardTitle() %></span> <br>
-	            <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;"><%= b.getPrice() %></span>
-	          </div>
-		  <% } %>
+      	  <% if(!list.isEmpty()){ %>
+	      	  <% for(Board b : list){ %>
+		          <div class="thumbnail" align="center">
+		          	<input type="hidden" value="<%=b.getBoardNo() %>">
+		            <img src="<%= b.getThumbnail() %>" width="200" height="180" style="border-radius: 5px;"> 
+		            <span style="font-size: 11px;">[<%= b.getBrand() %>]</span> <br>
+		            <span style="font-size: 20px; font-weight: bolder;"><%=b.getBoardTitle() %></span> <br>
+		            <span style="font-size: 15px; font-weight: bold; margin-bottom: 20px;"><%= b.getPrice() %>원</span>
+		          </div>
+			  <% } %>
+		   <% } %>
       </div>
   </div>
 
   <script>
     $(function(){
-      $(".thumbnail").click(function(){
+      $(document).on("click",".thumbnail",function(){
         location.href="<%=contextPath %>/detail.bo?bno="+$(this).children("input").val();
       });
     })
@@ -196,17 +198,20 @@
     			data:{cNo:$(this).children("input").val()},
     			success:function(list){
     				$(".list-area").html("");
-    				 let div = "";
-    				 for(var i=0; i<list.length; i++){
-    	    				div += "<div class='thumbnail' align='center'><img src='"
-    	    					 + list[i].thumbnail + "' width='200' height='180' style='border-radius: 5px;'>"
-    	    					 + " <span style='font-size: 11px;'>[" + list[i].brand + "]</span> <br>"
-    	    					 + "<span style='font-size: 20px; font-weight: bolder;'>"
-    	    					 + list[i].boardTitle + "</span> <br>"
-    	    					 + "<span style='font-size: 15px; font-weight: bold; margin-bottom: 20px;'>"
-    	    					 + list[i].price + "</span></div>"
-    	    				$(".list-area").html(div);
-    			  	} 
+    				let div = "";
+    				if(!list.isEmpty){
+	    				 for(var i=0; i<list.length; i++){
+	    					 div += "<div class='thumbnail' align='center'><input type='hidden' value='"
+	    						  +	list[i].boardNo + "'><img src='"
+	    					      + list[i].thumbnail + "' width='200' height='180' style='border-radius: 5px;'>"
+	    					      + " <span style='font-size: 11px;'>[" + list[i].brand + "]</span> <br>"
+	    					      + "<span style='font-size: 20px; font-weight: bolder;'>"
+	    					      + list[i].boardTitle + "</span> <br>"
+	    					      + "<span style='font-size: 15px; font-weight: bold; margin-bottom: 20px;'>"
+	    					      + list[i].price + "</span></div>"
+	    			  	 } 
+	    	    		 $(".list-area").html(div);
+    				}
     				
     			},
     			error:function(){

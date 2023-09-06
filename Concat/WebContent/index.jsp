@@ -54,15 +54,15 @@
     </div>
     
     <script>
-   		window.onload = function() {
+   		$(function() {
     		$.ajax({
     			url:"main.bo",
     			success:function(list){
-    				console.log(list);
     				let div = "";
     				if(!list.isEmpty){
 	    				for(let i=0; i<list.length;i++){
-	    					div += "<div class='thumbnail' align='center'><img src='"
+	    					div += "<div class='thumbnail' align='center'><input type='hidden' value='"
+	    						  +	list[i].boardNo + "'><img src='"
 	    					      + list[i].thumbnail + "' width='200' height='180' style='border-radius: 5px;'>"
 	    					      + " <span style='font-size: 11px;'>[" + list[i].brand + "]</span> <br>"
 	    					      + "<span style='font-size: 20px; font-weight: bolder;'>"
@@ -77,7 +77,14 @@
     				console.log("오류 났습니다")
     			}
     		})
-    	};
+    	});
+   		
+   		$(function(){
+			$(document).on("click",".thumbnail",function(){
+				location.href="<%=contextPath %>/detail.bo?bno=" + $(this).children('input').val();
+			});
+		});
+    	
     </script>
 	
 </body>

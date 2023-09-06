@@ -108,7 +108,46 @@
     button:hover{
         cursor: pointer;
     }
-</style>
+    
+	.listbar {
+	  width: 150px;
+	  height: 220px;
+	  border: 1px solid black;
+	  position: fixed;
+	  top: 400px; 
+	  left: 150px;
+	  text-align: center;
+	  background-color: white; 
+	}
+	
+	.listbar>div {
+		color: white;
+		width: 100%;
+		height: 48px;
+		background-color: black;
+		text-align: center;
+		line-height: 44px;
+		
+	}
+	#firdiv{
+		background-color: white;
+		color: black;
+		width: 100%;
+		height: 28px;
+		text-align: center;
+		line-height: 28px;
+	}
+	.listbar a{
+		text-decoration: none;
+		color:white;
+	}
+	
+	
+	.listbar a:hover {
+		text-decoration: 1px underline;
+		color:white;
+	}
+	</style>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
@@ -117,7 +156,7 @@
         <h1>블랙리스트</h1>
         
         <form action="<%= contextPath %>/search.bl?cpage=1" id="bl-saerch">
-            <input type="text" name="searchkey" value> 
+            <input type="text" name="searchkey"> 
             <button type="submit">검색</button>
         </form>
         <br><br>
@@ -160,29 +199,37 @@
 						<% } %>
 	                <% } %>                
 					                              	
-                    <!-- 공지글 작성하기버튼 누를시 -->
-                    <script>
-                    	$(function(){
-                    		$("#EnrollForm").click(function(){
-                    			location.href="<%= contextPath %>/EnrollForm.bl";
-                    		})
-                    	})
-                    </script>
-                    
-                    <!-- 블랙리스트 상세보기 -->
-                     <script>
-				    	$(function(){
-				    		$(".listtr").click(function(){
-				    				const num = $(this).children().eq(0).text();
-									location.href = '<%= contextPath %>/DetailView.bl?num='+num;
-				    		})
-				    	})
-				    </script>
+                
 				    
                 </tbody>
             </table>
         </div>
     </div>
+    
+        <!-- 공지글 작성하기버튼 누를시 -->
+    <script>
+    	$(function(){
+    		$("#EnrollForm").click(function(){
+    			location.href="<%= contextPath %>/EnrollForm.bl";
+     	   })
+        })
+                    
+        <!-- 블랙리스트 상세보기 -->
+		$(function(){
+			$(".listtr").click(function(){
+				const num = $(this).children().eq(0).text();
+					location.href = '<%= contextPath %>/DetailView.bl?num='+num;
+				})
+			})
+		</script>
+    
+    <div class="listbar" align="center">
+		<div id="firdiv"><b>MENU</b></div>
+		<div><a href="<%= contextPath %>/listpage.no?cpage=1"><b>공지사항</b></a></div>
+		<div><a href="<%= contextPath %>/list.qa?qpage=1"><b>QNA</b></a></div>
+		<div><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></div>
+		<div><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></div>
+  	</div>
 
 		<!-- 페이징 바 -->
         <div class="btn" style="text-align: center;">

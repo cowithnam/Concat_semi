@@ -15,7 +15,6 @@
  <style>
         .wrap{
             box-sizing: border-box;
-            /* border: 1px solid black; */
             background-color: black;
             color: white;
             border-radius: 30px ;
@@ -35,13 +34,11 @@
             margin-top: 8px;
         }
         #navi{
-            /* border: 1px solid white; */
             box-sizing: border-box;
             width: 300px;
             margin-left: 30px;
         }
         #main{
-            /* border: 1px solid white; */
             box-sizing: border-box;
             width: 400px;
         }
@@ -164,7 +161,7 @@
                     <tr>
                         <th style="height: 50px; width: 300px;" >※ 등급 </th>
                         <% if(grade != null){ %>
-                        <td><img src="<%=grade.getGrade_img() %>" id="gradeimg" ></td>
+                        <td><img src="<%=grade.getGrade_img()%>" id="gradeimg" width="80" height="80"></td>
                         <% } %>
                         <td class="gradedetail2" style="display:none">
                     	    <div> 
@@ -186,8 +183,11 @@
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 닉네임</th>
-                        <td><input type="text" id="nickName" name="nickName" value="<%= m.getNickname() %>" maxlength="6">></td>
-                        <td><span class="error_next_box" id="nickMsg"><br></span></td>
+                        <td><input type="text" id="nickName" name="nickName" value="<%= m.getNickname() %>" maxlength="6"></td>
+                        
+                    </tr>
+                    <tr>
+                    	<td colspan="2">> <span class="error_next_box" id="nickMsg"></span></td>
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 전화번호 </th>
@@ -207,6 +207,7 @@
                     <button type="button" class="exit" data-toggle="modal" data-target="#exitModal">회원탈퇴</button>
                 </div>  
                 </form>
+                <br><br>
         </div>
     </div>
     <script>
@@ -351,12 +352,11 @@
                     ,dataType:"text"
                     ,data: {checkNick:nickName}
                     ,success:function(nick){
-                    	 console.log(nickName);
 
                         if(nick == 'NNNNN'){
-                            $("#nickMsg").html("<b>닉네임 사용가능합니다 사용하시겠습니까?</b>");
+                        	$("#nickMsg").html("<b>중복된 닉네임입니다.!</b>");
                         }else{
-                            $("#nickMsg").html("<b>중복된 닉네임입니다.!</b>");
+                            $("#nickMsg").html("<b>닉네임 사용가능합니다 사용하시겠습니까?</b>");
                         }
                     }
                     ,error:function(){

@@ -420,7 +420,7 @@ private Properties prop = new Properties();
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				nick = rset.getInt(nick);
+				nick = rset.getInt("nick");
 			}
 			
 		} catch (SQLException e) {
