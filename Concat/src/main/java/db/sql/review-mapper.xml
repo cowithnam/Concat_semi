@@ -274,4 +274,8 @@ WHERE MEM_ID = ?
 	     , ?
 	     )
 </entry>
+
+<entry key="replyDelete">
+	
+</entry>
 </properties>

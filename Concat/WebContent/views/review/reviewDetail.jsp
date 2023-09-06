@@ -204,7 +204,6 @@
         	
     	    $(function(){ 
            		selectReplyList();
-           		
            		setInterval(selectReplyList, 4000);
            	})
         	
@@ -221,14 +220,12 @@
         					selectReplyList();
         					$("#content").val("");
         				}
-        				
         			},
         			error:function(){
         				console.log("댓글작성에 실패했습니다.")
         			}
         		})
         	}
-        	
         	
         	function selectReplyList(){
         		$.ajax({
@@ -238,9 +235,7 @@
         			},
         			success:function(list){
         				console.log(list);
-        				
         				let result ="";
-        				
            				for(let i=0; i<list.length; i++){
         					result += "<br>" + "<br>"
                                     + "<div class='review-recontent' style='font-size: 14px;'>"
@@ -275,5 +270,6 @@
         	}
         </script>	
     
+   		<%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>

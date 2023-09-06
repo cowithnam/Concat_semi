@@ -218,8 +218,6 @@
 		<div><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></div>
 		<div><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></div>
   </div>
-
+	    <%@ include file="../common/footerbar.jsp" %>
 </body>
-</html></p>
-
-    </html>
+</html>

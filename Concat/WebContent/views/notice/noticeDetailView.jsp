@@ -101,7 +101,6 @@
 	            <button id="button1" onclick = "nolist();">목록보기</button>
             </div>
     </div>
-</body>
 <script >
 //목록보기이동
  function nolist(){
@@ -120,4 +119,6 @@
  }
 
 </script>
+    <%@ include file="../common/footerbar.jsp" %>
+</body>
 </html>

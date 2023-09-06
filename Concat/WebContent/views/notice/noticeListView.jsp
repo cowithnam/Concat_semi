@@ -233,7 +233,6 @@ int maxPage = pi.getMaxPage();
 		<div><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></div>
 		<div><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></div>
       </div>
-</body>
 <script>
    //공지사항 작성하기    
     function Listwrite(){
@@ -251,5 +250,6 @@ int maxPage = pi.getMaxPage();
        })
    
     </script>
-
+	    <%@ include file="../common/footerbar.jsp" %>
+</body>
 </html>
