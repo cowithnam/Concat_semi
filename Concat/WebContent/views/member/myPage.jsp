@@ -36,16 +36,13 @@
             width: 300px;
             margin-left: 30px;
         }
+        
         #main{
             box-sizing: border-box;
             width: 800px;
         }
         .cont{
             float: left;
-        }
-        a{
-            text-decoration: none;
-            color: white;
         }
         input{
             border-radius: 5px;
@@ -132,8 +129,6 @@
 <body>
 	<%@ include file ="../common/menubar.jsp" %>
 	<div class="wrap">
-        <div id="header_1">
-            <img src="resources/image/concatlo.png" style="width: 300px; height: 100px;">
             <div id="header_2">
             	<% if(pro == null){ %>
             	<!-- 프로필 사진이 없을경우  -->
@@ -143,14 +138,12 @@
                 <img src="<%=contextPath %>/<%=pro.getFilePath() %>" id="profileimg" style="height: 150px; width: 150px;" onclick="profile();">
                 <% } %>
             </div>
-        </div>
 
-        <div id="navi" class="cont">
-            <br><br><br><br><br>
-            <h3><a href="#">판매 목록 ▷</a></h3> <br><br>
-            <h3><a href="#">찜한 상품 ▷</a></h3> <br><br>
-            <h3><a href="#">문의 목록 ▷</a></h3> <br><br>   
-            <h3><a href="#">신고 목록 ▷</a></h3> <br>
+        <div id="navi" class="cont" align="right">
+            <h3><a href="#">판매 목록</a></h3> <br><br>
+            <h3><a href="#">찜한 상품</a></h3> <br><br>
+            <h3><a href="#">문의 목록</a></h3> <br><br>   
+            <h3><a href="#">신고 목록</a></h3> <br>
         </div>
         <div id="main" class="cont" align="center">
         	<div style="width: 230px; height: 50px;" align="right">
@@ -165,11 +158,11 @@
                 <table>
                     <tr>
                         <th style="height: 50px;">※ 닉네임</th>
-                        <td><input type="text" id="nickName" name="nickName" value="<%= m.getNickname() %>" maxlength="6"></td>
+                        <td><input type="text" id="nickName" name="nickName" value="<%= m.getNickname() %>" maxlength="6" required></td>
                         
                     </tr>
                     <tr>
-                    	<td colspan="2">> <span class="error_next_box" id="nickMsg"></span></td>
+                    	<td colspan="2"> <span class="error_next_box" id="nickMsg"></span></td>
                     </tr>
                     <tr>
                         <th style="height: 50px;">※ 전화번호 </th>
@@ -252,15 +245,6 @@
                         <br><br>
                     </form>
                   </div>
-    
-                  <script>
-                    function vaildatePwd(){
-                        if($("input[name=updatePwd]").val() != $("input[name=checkPwd]").val()){
-                            alert("변경할 비밀번호가 일치하지 않습니다.")
-                            return false;
-                        }
-                    }
-                  </script>
             </div>
         </div>
     </div>
@@ -293,6 +277,13 @@
     </div>
     
     <script>
+	    function vaildatePwd(){
+	        if($("input[name=updatePwd]").val() != $("input[name=checkPwd]").val()){
+	            alert("변경할 비밀번호가 일치하지 않습니다.")
+	            return false;
+	        }
+	    }
+    	
 	    function addHypen(obj) {
 		    var number = obj.value.replace(/[^0-9]/g, "");
 		    var phone = "";
@@ -318,11 +309,6 @@
 		    }
 		    obj.value = phone;
 		}
-	    
-    </script>
-    
-    <script>
-
     
     $(function() {
         $("#nickName").keyup(function(){
@@ -336,9 +322,9 @@
                     ,success:function(nick){
 
                         if(nick == 'NNNNN'){
-                        	$("#nickMsg").html("<b>중복된 닉네임입니다.!</b>");
+                        	$("#nickMsg").html("<b> > 중복된 닉네임입니다.!</b>");
                         }else{
-                            $("#nickMsg").html("<b>닉네임 사용가능합니다 사용하시겠습니까?</b>");
+                            $("#nickMsg").html("<b> > 닉네임 사용가능합니다 사용하시겠습니까?</b>");
                         }
                     }
                     ,error:function(){
@@ -346,7 +332,11 @@
                     }
                 })	
             })
-    })
+ 	 })
+ 	 
+ 	 $(function(){
+ 		 $("#navi>a").css("color","black");
+ 	 })
     </script>
 </body>
 </html>

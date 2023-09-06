@@ -253,7 +253,8 @@ button:hover {
 
 	</div>
 	<br>
-
+	<br>
+	<br>
 	<div class="paging=area" align="center">
 
 		<%if(currentPage != 1){ %>

@@ -37,26 +37,18 @@ public class MyPageUpdateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (ServletFileUpload.isMultipartContent(request)) {
-			// 1-1. ���ۿ뷮 ����
 			int maxSize = 10 * 1024 * 1024;
 
-			// 1-2. �����ų ������ �������� ���
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/member_upfiles/");
 
-			// 2. ���޵� ���� ���ε�
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
 					new MyFileRenamePolicy());
 
-			// 3. db�� ����� �� �̱�
 			Member m = new Member();
-			m.setMemId(multiRequest.getParameter("memId"));
-			m.setMemName(multiRequest.getParameter("memName"));
-			m.setNickname(multiRequest.getParameter("nickName"));
 			m.setEmail(multiRequest.getParameter("email"));
 			m.setPhone(multiRequest.getParameter("phone"));
 			m.setMemNo(Integer.parseInt(multiRequest.getParameter("memNo")));
 
-			// Attachment�� ������ insert�� ������ �̱�
 			
 			Profile profile = null;
 			if(multiRequest.getOriginalFileName("file") !=null){
