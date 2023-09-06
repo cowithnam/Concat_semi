@@ -288,12 +288,13 @@ a:visited { color:white; }
         <thead>
         <tr align="center" style="border: 1px solid black;"><b>MENU</b></tr></thead>
     <tbody>
+     	<tr><td><a href="<%= contextPath %>/listpage.no?cpage=1"><b>공지사항</b></a></td></tr>
         <tr><td><a href="<%= contextPath %>/list.qa?qpage=1"><b>QNA</b></a></td></tr>
-    <tr><td><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></td></tr>
-    <tr><td><a href="<%= contextPath %>/insert.bo"><b>블랙리스트</b></a></td></tr>
+    	<tr><td><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></td></tr>
+    	<tr><td><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></td></tr>
 </tbody>
     </table>
-	</div>
+</div>
 </body>
 <script>
    //공지사항 작성하기    

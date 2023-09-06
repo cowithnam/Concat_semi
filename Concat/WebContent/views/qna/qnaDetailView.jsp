@@ -32,13 +32,13 @@ hr {
 	margin-bottom: 20px;
 }
 
-h3 {
+h2 {
 	display: inline;
 	position: relative;
 	left: 15px;
 }
 
-h6 {
+h4 {
 	display: inline;
 	position: relative;
 	left: 650px;
@@ -98,10 +98,7 @@ textarea {
 	width: 100%
 }
 #outer>#content2>table{
-color: gray;
     margin-top: 20px;
-    font-size: 15px;
-    font-weight: lighter;
     height: 50px;
     width: 100%;
     }
@@ -110,22 +107,25 @@ table{
 	border-collapse: collapse}
 		
 table>tr{
-width: 100%;
-height: 100%;
-
-}
-tr>#td1{
 	width: 100%;
 	height: 100%;
 }
-tr>#td2{
+.td1{
 	width: 100%;
 	height: 100%;
+	padding: 5px;
+	font-size: 15px;
+	font-weight: bolder;
 }
-#tr1{
+.td2{
+	width: 100%;
+	height: 100%;
+	padding: 5px;
+}
+.tr1{
 	border: 0;
 }
-#tr2{
+.tr2{
 	border-bottom: 1px solid lightgray;
 }
 textarea{
@@ -142,15 +142,12 @@ textarea{
 		<div>
 			<h3><%=q.getQnaTitle()%></h3>
 		</div>
-		<div>
-			<h6>
-				작성자 :
-				<%=q.getQnaWriterNick()%>
-			</h6>
-			<h6>
-				작성일 :
-				<%=q.getCreateDate()%></h6>
-		</div>
+		 <div>
+            <h4>작성자 :
+				<%=q.getQnaWriterNick()%> </h4><h4>작성일 :
+				<%=q.getCreateDate()%></h4>
+        </div>
+		
 
 
 		<div id="content1">
@@ -165,13 +162,10 @@ textarea{
 		<hr style="border: 1px solid lightgray;">
 		<div align="center" id="content2">
 			
-			<table id="answer99">
-				<tbody id = "inserttr">
-					
-			
-			
-		</tbody>
-			</table>
+		<table id="answer99">
+			<tbody id = "inserttr">
+			</tbody>
+		</table>
 			<br><br>
 			
 			
@@ -240,27 +234,25 @@ function answer() {
 }
 
 function insertReply() {
-    $.ajax({
-        url: "answer.qa",
-        data: {
-            content: $("#replyContent").val(),
-            qno: <%=q.getQnaNo() %>
-        },
-        type: "post",
-        success: function (result) {
-        	console.log(result)
-            
-            if (result > 0) {
-            	 selectReplyList()
-                $("#replyContent").val("");
-               
-                
-            }
-        },
-        error: function () {
-            console.log("댓글 작성용 ajax 통신 실패");
-        }
-    })
+	if($("#replyContent").val() != ""){
+	    $.ajax({
+	        url: "answer.qa",
+	        data: {
+	            content: $("#replyContent").val(),
+	            qno: <%=q.getQnaNo() %>
+	        },
+	        type: "post",
+	        success: function (result) {
+	            if (result > 0) {
+	            	 selectReplyList()
+	                $("#replyContent").val("");
+	            }
+	        },
+	        error: function () {
+	            console.log("댓글 작성용 ajax 통신 실패");
+	        }
+	    })
+	}
 }
 
 
@@ -271,10 +263,9 @@ function selectReplyList() {
         success: function (list) {
             let result = "";
             for (let i = 0; i < list.length; i++) {
-                result += "<tr>" + "<td id='td1'>" + list[i].repWriter + "</td>" + "</tr>"
-                        + "<tr id='tr2'>" + "<td id='td2'>" + list[i].content + "</td>" + "</tr>";
+                result += "<tr>" + "<td calss='td1'>" + list[i].repWriter + "</td>" + "</tr>"
+                        + "<tr class='tr2'>" + "<td class='td2'>" + list[i].content + "</td>" + "</tr>";
             }
-			console.log(result)
             $("#answer99>tbody").html(result);
         },
         error: function () {
