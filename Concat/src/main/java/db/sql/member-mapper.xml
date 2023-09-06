@@ -17,8 +17,8 @@
 	FROM MEMBER
 	WHERE MEM_ID = ?
 	AND MEM_PWD = ?
-	AND STATUS = 'U'
-	 OR STATUS = 'A'
+	AND (STATUS = 'U'
+	 OR STATUS = 'A')
 </entry>
 <entry key="insertMember">
 			INSERT

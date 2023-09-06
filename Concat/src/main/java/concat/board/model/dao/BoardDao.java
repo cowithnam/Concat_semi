@@ -497,6 +497,7 @@ public class BoardDao {
 		ResultSet rset = null;
 		String sql = prop.getProperty("searchList");
 		
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
