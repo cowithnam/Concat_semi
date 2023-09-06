@@ -44,7 +44,7 @@ public class MyPageEnrollController extends HttpServlet {
 
 				out.println("<script>");
 
-				out.println("alert('로그인 후 이용가능한 서비스입니다. ㅠ_ㅠ');");
+				out.println("alert();");
 
 				out.println("history.back();");
 
