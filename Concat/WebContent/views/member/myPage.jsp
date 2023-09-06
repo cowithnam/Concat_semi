@@ -15,10 +15,8 @@
  <style>
         .wrap{
             box-sizing: border-box;
-            background-color: black;
-            color: white;
             border-radius: 30px ;
-            width: 1000px;
+            width: 1200px;
             height: 700px;
             margin: auto;
             margin-top: 100px;
@@ -40,7 +38,7 @@
         }
         #main{
             box-sizing: border-box;
-            width: 400px;
+            width: 800px;
         }
         .cont{
             float: left;
@@ -154,33 +152,17 @@
             <h3><a href="#">문의 목록 ▷</a></h3> <br><br>   
             <h3><a href="#">신고 목록 ▷</a></h3> <br>
         </div>
-        <div id="main" class="cont" align="center" >
-            <p style="font-size: 30px; margin: 30px;" >My page</p>
+        <div id="main" class="cont" align="center">
+        	<div style="width: 230px; height: 50px;" align="right">
+	            <p style="font-size: 30px; display: inline-block; margin-bottom: 0px;" ><%= m.getMemName() %>님</p>
+	            <% if(grade != null){ %>
+	            <img src="<%=grade.getGrade_img()%>" id="gradeimg" width="50" height="50" style="position: relative; bottom: 8px;"> 
+	            <% } %>
+	            <br>
+        	</div>
+				<%= m.getMemId() %>
 			<form id="myPage-form" action="<%= contextPath %>/update.me" method="post" enctype="multipart/form-data" id="mypageform">
                 <table>
-                    <tr>
-                        <th style="height: 50px; width: 300px;" >※ 등급 </th>
-                        <% if(grade != null){ %>
-                        <td><img src="<%=grade.getGrade_img()%>" id="gradeimg" width="80" height="80"></td>
-                        <% } %>
-                        <td class="gradedetail2" style="display:none">
-                    	    <div> 
-                    	    	0 ~ 29	B <br>
-	                            30 ~ 99	S <br>
-	                            100 ~ 199 G <br>
-	                            200 ~ 99999 D
-                        	</div>
-                        </td>
-                       
-                    </tr>
-                    <tr>
-                        <th style="height: 50px; width: 300px;" >※ 아이디 </th>
-                        <td><input type="text" name="memId" value="<%= m.getMemId() %>" maxlength="12" readonly></td>
-                    </tr>
-                    <tr>
-                        <th style="height: 50px;">※ 이름</th>
-                        <td><input type="text" name="memName" value="<%= m.getMemName() %>" maxlength="6" required></td>
-                    </tr>
                     <tr>
                         <th style="height: 50px;">※ 닉네임</th>
                         <td><input type="text" id="nickName" name="nickName" value="<%= m.getNickname() %>" maxlength="6"></td>

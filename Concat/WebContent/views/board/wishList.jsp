@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 <style>
         .outer{
-            width: 1000px;
+            width: 800px;
             margin: auto;
         }
 

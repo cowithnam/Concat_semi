@@ -139,7 +139,7 @@
              </script>
             
            	<% if(list.isEmpty()){ %>
-	            <div>
+	            <div style="width: 900px; font-size: 25px; font-weight: bolder; border: 0px">
                    조회된 후기가 없습니다.
                 </div>
            	<% }else {%>

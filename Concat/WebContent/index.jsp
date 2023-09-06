@@ -60,7 +60,7 @@
     			success:function(list){
     				let div = "";
     				if(!list.isEmpty){
-	    				for(let i=0; i<list.length;i++){
+	    				for(let i=0; i<10;i++){
 	    					div += "<div class='thumbnail' align='center'><input type='hidden' value='"
 	    						  +	list[i].boardNo + "'><img src='"
 	    					      + list[i].thumbnail + "' width='200' height='180' style='border-radius: 5px;'>"
