@@ -14,6 +14,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import concat.common.MyFileRenamePolicy;
+import concat.image.model.vo.Profile;
 import concat.member.model.service.MemberService;
 import concat.member.model.vo.Member;
 
@@ -53,29 +54,30 @@ public class MyPageUpdateController extends HttpServlet {
 			m.setNickname(multiRequest.getParameter("nickName"));
 			m.setEmail(multiRequest.getParameter("email"));
 			m.setPhone(multiRequest.getParameter("phone"));
+			m.setMemNo(Integer.parseInt(multiRequest.getParameter("memNo")));
 
 			// Attachment에 여러번 insert할 데이터 뽑기
-
-			int result = 0;
-
-			if (result > 0) {
-			                       
-				response.setContentType("text/html; charset=utf-8");
-
-				PrintWriter out = response.getWriter();
-
-				out.println("<script>");
-
-				out.println("alert('성공적으로 회원정보를 수정하였습니다.^_^');");
-
-				out.println("history.back();");
-
-				out.println("</script>");
-				
-			} else {
-				System.out.println("실패다 이자식아");
-
+			
+			Profile profile = null;
+			if(multiRequest.getOriginalFileName("file") !=null){
+				profile = new Profile();
+				profile.setOriginName(multiRequest.getOriginalFileName("file"));
+				profile.setUpdateName(multiRequest.getFilesystemName("file"));
+				profile.setFilePath("resources/member_upfiles");
+				profile.setMemNo(m.getMemNo());
 			}
+
+				Member up = new MemberService().updateMember(m, profile);
+				
+				if (up != null) {
+					
+					request.getSession().setAttribute("loginMember", up);
+					response.sendRedirect(request.getContextPath()+"/myPage.me");
+					
+				} else {
+					System.out.println("실패다 이자식아");
+					
+				}
 		}
 	}
 

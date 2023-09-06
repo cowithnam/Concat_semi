@@ -292,7 +292,7 @@ button:hover {
   	</div>
 </body>
 
-<script>
+	<script>
         function qnawrite(){
         	location.href="<%= contextPath%>/insert.qa"
         }
@@ -307,6 +307,5 @@ button:hover {
              })
 
     </script>
-
 
 </html>

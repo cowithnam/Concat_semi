@@ -119,7 +119,7 @@ h1{display: inline;}
 
             <br><br>
 
-  <div id="outer">
+ 	<div id="outer">
                 <h1>FAQ</h1>
                 <hr>
     <div class="layout">

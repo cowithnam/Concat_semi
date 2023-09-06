@@ -162,13 +162,6 @@
         </div>
       </div>
 
-      <div class="shop-search" align="right" style="width: 970px; margin-bottom: 20px; margin-top: 20px;">
-          <div>
-            <input type="text" style="height: 26px; border-radius: 5px; border: 1px solid black;">
-            <button id="shop-search" style="position: relative; right: 4px;"></button>
-          </div>
-      </div>
-
       <div class="list-area">
       	  <% if(!list.isEmpty()){ %>
 	      	  <% for(Board b : list){ %>
