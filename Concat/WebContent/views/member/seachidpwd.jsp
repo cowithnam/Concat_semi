@@ -88,10 +88,10 @@ a.link-copy {
 }
 
 #idbtn{
-	background: black;
+  background: black;
   color: white;
   border-radius: 150px;
-  width: 150px; 
+  width: 380px; 
   float: left;
 }
 #idbtn:hover{
@@ -100,7 +100,7 @@ a.link-copy {
 }
 
 #pwdbtn{
-	background: black;
+  background: black;
   color: white;
   width: 400px;
   margin-left: 3px;
@@ -308,7 +308,7 @@ a.link-copy {
       <img src="resources/image/concat.png" style="width: 300px; height: 300px;">
       <button id="sign-up" class="btn">아이디찾기</button>
       <button id="sign-in" class="btn">비밀번호찾기</button>
-      <p><a class="link-copy" href="http://localhost:8001/Concat/#" target="_blank">메인페이지로</a></p>
+      <p><a class="link-copy" href="<%=request.getContextPath() %>/#" target="_blank">메인페이지로</a></p>
     </section>
   
     <section class="sign-up">
@@ -341,13 +341,11 @@ a.link-copy {
   			
            	<div class ="btnSearch">
            	<button type="button" onclick="searchId();" id="idbtn" class="btn">아이디찾기</button>
-           	<button type="button" id="idbtn" class="btn">뒤로가기</button>
-           	
            	</div>
           </form>
           <div id="idform"></div>
           <p>비밀번호를 잊어버리셨나요 ? <a href="#" class="link-in">비밀번호찾기</a></p>
-          <p>아이디가 없으신가요 ? <a href="http://localhost:8001/Concat/login.me#enrollform" >회원가입 및 로그인</a></p>
+          <p>아이디가 없으신가요 ? <a href="<%= request.getContextPath() %>/login.me#enrollform" >회원가입 및 로그인</a></p>
  	
         </div>
         
@@ -371,13 +369,13 @@ a.link-copy {
           </form>
           <div id="pwdform"></div>
           <p>아이디를 잊어버리셨나요 ? <a href="#" class="link-up">아이디찾기</a></p>
-          <p>로그인을 하실건가요 ? <a href="http://localhost:8001/Concat/login.me" >로그인 및 회원가입</a></p>
+          <p>로그인을 하실건가요 ? <a href="<%= request.getContextPath() %>/login.me" >로그인 및 회원가입</a></p>
         </div>
       </article>
   
       <article class="signup-right">
         <i class="fas fa-2x fa-bars bars-style"></i>
-        <p><a class="link-copy" href="http://localhost:8001/Concat/#" target="_blank">메인페이지로</a></p>
+        <p><a class="link-copy" href="<%= request.getContextPath() %>/#" target="_blank">메인페이지로</a></p>
   
       </article>
     </section>
