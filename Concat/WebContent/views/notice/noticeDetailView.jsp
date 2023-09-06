@@ -18,6 +18,7 @@
             text-align: left;
         }
 
+        
         hr{
             margin-bottom: 20px;
         }
