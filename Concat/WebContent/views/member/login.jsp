@@ -287,7 +287,7 @@ a.link-copy {
       <img src="resources/image/concat.png" style="width: 300px; height: 300px;">
       <button id="sign-up" class="btn" >로그인</button>
       <button id="sign-in" class="btn">회원가입</button>
-      <p><a class="link-copy" href="http://localhost:8001/Concat/#" target="_blank">메인페이지로</a></p>
+      <p><a class="link-copy" href="<%=request.getContextPath() %>" target="_blank">메인페이지로</a></p>
     </section>
   
     <section class="sign-up">
@@ -370,7 +370,7 @@ a.link-copy {
   
       <article class="signup-right">
         <i class="fas fa-2x fa-bars bars-style"></i>
-        <p><a class="link-copy" href="http://localhost:8001/Concat/#" target="_blank">메인페이지로</a></p>
+        <p><a class="link-copy" href="<%=request.getContextPath() %>" target="_blank">메인페이지로</a></p>
   
       </article>
     </section>
