@@ -175,7 +175,7 @@
                     <% if(loginMember != null) {%>
                         <button type="button" onclick="insertReply();">댓글등록</button>
                     <% }else { %>
-                        <button type="button" disabled>댓글등록</button>
+                        <button type="button" style="background-color: gray;" disabled>댓글등록</button>
                     <% } %>
                     </div>
                 </div> 
