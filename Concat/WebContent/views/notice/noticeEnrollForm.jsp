@@ -67,15 +67,12 @@
             </div>
         </form>
     </div>
-</body>
-
 <script>
     function backno(){
         location.href = '<%=contextPath%>/listpage.no?cpage=1'
 
     }
 </script>
-</html>
-
+<%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>

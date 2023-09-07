@@ -13,7 +13,7 @@
     <style>
         #outer{
             width: 1000px;
-            height: 800px;
+            height: auto;
             margin: auto;
             text-align: left;
         }
@@ -101,7 +101,6 @@
 	            <button id="button1" onclick = "nolist();">목록보기</button>
             </div>
     </div>
-</body>
 <script >
 //목록보기이동
  function nolist(){
@@ -120,4 +119,7 @@
  }
 
 </script>
+<br><br>
+<%@ include file="../common/footerbar.jsp" %>
+</body>
 </html>

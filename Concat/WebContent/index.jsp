@@ -34,8 +34,10 @@
   
   .footerbar{
         margin: auto;
-        width: 1200px;
-        font-size: 14px;
+        width: 1300px;
+        font-size: 12px;
+        padding-left: 50px;
+        padding-top: 20px;
   }
 </style>
 <body>
@@ -57,10 +59,10 @@
             </div>
         </div> 
     </div>
-    <br> <br>
-	<div class="footerbar">
-        <img src="resources/image/concatlogo.png" style="height: 50px; width: 100px;">
-        Copyrights ⓒ CONCAT. All rights reserved.
+    <br><br><br>
+	<div class="footerbar" style="border-top: 1px solid lightgrey;">
+        <img src="resources/image/concatlogo.png" style="height: 60px; width: 100px;"> <br>
+	    Copyrights ⓒ CONCAT. All rights reserved.b
     </div>
     
     <script>

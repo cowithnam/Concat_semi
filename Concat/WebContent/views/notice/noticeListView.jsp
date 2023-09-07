@@ -151,6 +151,14 @@ int maxPage = pi.getMaxPage();
 		text-decoration: 1px underline;
 		color:white;
 	}
+	
+	.paging-area>button {
+		width: 30px;
+		height: 30px;
+		background-color: black;
+		color: white;
+		font-size: 15px;
+	}
 
 </style>
 </head>
@@ -198,12 +206,12 @@ int maxPage = pi.getMaxPage();
 
 	</div>
 <br>
-	<div class="paging=area" align="center">
+	<div class="paging-area" align="center">
 
 		<%if(currentPage != 1){ %>
 		<button
 			onclick="location.href='<%=contextPath %>/listpage.no?cpage=<%=currentPage-1%> '">
-			&lt;</button>
+			◀</button>
 		<% }%>
 
 		<% for(int p = startPage; p<=endPage; p++){ %>
@@ -218,7 +226,7 @@ int maxPage = pi.getMaxPage();
 		<%if(currentPage != maxPage){ %>
 		<button
 			onclick="location.href='<%=contextPath %>/listpage.no?cpage=<%=currentPage+1%>'">
-			&gt;</button>
+			▶</button>
 		<% }%>
 
 
@@ -233,7 +241,6 @@ int maxPage = pi.getMaxPage();
 		<div><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></div>
 		<div><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></div>
       </div>
-</body>
 <script>
    //공지사항 작성하기    
     function Listwrite(){
@@ -251,5 +258,6 @@ int maxPage = pi.getMaxPage();
        })
    
     </script>
-
+<%@ include file="../common/footerbar.jsp" %>
+</body>
 </html>

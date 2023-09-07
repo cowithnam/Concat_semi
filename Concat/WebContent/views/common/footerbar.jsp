@@ -6,18 +6,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    .footerbar{
+  .footerbar{
         margin: auto;
-        width: 1200px;
-    }
+        width: 1300px;
+        font-size: 12px;
+        padding-left: 50px;
+        padding-top: 20px;
+  }
 
 </style>
 </head>
 <body>
     <br><br>
-    <div class="footerbar">
-        <img src="resources/image/concatlogo.png" style="height: 130px; width: 130px;"><br>
-        Copyrights ⓒ CONCAT. All rights reserved.
+    <div class="footerbar" style="border-top: 1px solid lightgrey;">
+        <img src="resources/image/concatlogo.png" style="height: 60px; width: 100px;"> <br>
+	    Copyrights ⓒ CONCAT. All rights reserved.b
     </div>
 </body>
 </html>

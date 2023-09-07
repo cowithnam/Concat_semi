@@ -98,17 +98,12 @@
             <button type="button" class = "enroll-btn" onclick = "backno();">뒤로가기</button>
         </form>
     </div>
-</body>
-
 <script>
     function backno(){
     	location.href = '<%=contextPath %>/detail.qa?num=<%=q.getQnaNo()%>'
 
     }
-
-    
 </script>
-</html>
-
+<%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>

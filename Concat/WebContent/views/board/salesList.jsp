@@ -176,6 +176,8 @@
 		   <% } %>
       </div>
   </div>
+  
+  <%@ include file="../common/footerbar.jsp" %>
 
   <script>
     $(function(){
@@ -214,6 +216,6 @@
     	})
     })
   </script>
-    
+<%@ include file="../common/footerbar.jsp" %>    
 </body>
 </html>

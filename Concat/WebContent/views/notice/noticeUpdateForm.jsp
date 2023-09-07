@@ -67,15 +67,13 @@
             </div>
         </form>
     </div>
-</body>
-
 <script>
     function backno(){
         location.href = '<%=contextPath%>/detail.no?num=<%=n.getNoticeNo()%>'
 
     }
 </script>
-</html>
-
+<%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>
+

@@ -215,6 +215,8 @@ h1{display: inline;}
 		<div><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></div>
 		<div><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></div>
 </div>
+<br>
+<%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>
   

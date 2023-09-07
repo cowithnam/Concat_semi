@@ -204,6 +204,6 @@
     	}
     </script>
 
-    <%@ include file="../common/footerbar.jsp" %>
+<%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>

@@ -202,6 +202,8 @@
   	<% } %>
   </div>
   
+  <%@ include file="../common/footerbar.jsp" %>
+  
   <script>
 	  function wish(){
 			  if($(".wish").hasClass("wantWish")){

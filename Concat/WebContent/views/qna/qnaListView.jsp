@@ -23,7 +23,7 @@
 <style>
 #outer {
 	width: 1100px;
-	height: 600px;
+	height: auto;
 	margin: auto;
 }
 
@@ -154,14 +154,14 @@ button:hover {
 }
 
 .listbar {
-  width: 150px;
-  height: 220px;
-  border: 1px solid black;
-  position: fixed;
-  top: 400px; 
-  left: 150px;
-  text-align: center;
-  background-color: white; 
+	width: 150px;
+	height: 220px;
+	border: 1px solid black;
+	position: fixed;
+	top: 400px;
+	left: 150px;
+	text-align: center;
+	background-color: white;
 }
 
 .listbar>div {
@@ -171,9 +171,9 @@ button:hover {
 	background-color: black;
 	text-align: center;
 	line-height: 44px;
-	
 }
-#firdiv{
+
+#firdiv {
 	background-color: white;
 	color: black;
 	width: 100%;
@@ -181,15 +181,23 @@ button:hover {
 	text-align: center;
 	line-height: 28px;
 }
-.listbar a{
-	text-decoration: none;
-	color:white;
-}
 
+.listbar a {
+	text-decoration: none;
+	color: white;
+}
 
 .listbar a:hover {
 	text-decoration: 1px underline;
-	color:white;
+	color: white;
+}
+
+.paging-area>button {
+	width: 30px;
+	height: 30px;
+	background-color: black;
+	color: white;
+	font-size: 15px;
 }
 </style>
 </head>
@@ -243,17 +251,14 @@ button:hover {
 
 			</table>
 		</div>
-
-	</div>
-	<br>
-	<br>
-	<br>
-	<div class="paging=area" align="center">
+		<br>
+		<br>
+	<div class="paging-area" align="center">
 
 		<%if(currentPage != 1){ %>
 		<button
 			onclick="location.href='<%=contextPath %>/list.qa?qpage=<%=currentPage-1%> '">
-			&lt;</button>
+			◀</button>
 		<% }%>
 
 		<% for(int p = startPage; p<=endPage; p++){ %>
@@ -268,13 +273,13 @@ button:hover {
 		<%if(currentPage != maxPage){ %>
 		<button
 			onclick="location.href='<%=contextPath %>/list.qa?qpage=<%=currentPage+1%>'">
-			&gt;</button>
+			▶</button>
 		<% }%>
 
 
 	</div>
 
-
+</div>
 
 
 	<div class="listbar" align="center">
@@ -284,8 +289,6 @@ button:hover {
 		<div><a href="<%= contextPath %>/list.fq"><b>FAQ</b></a></div>
 		<div><a href="<%= contextPath %>/list.bl?cpage=1"><b>블랙리스트</b></a></div>
   	</div>
-</body>
-
 	<script>
         function qnawrite(){
         	location.href="<%= contextPath%>/insert.qa"
@@ -301,5 +304,6 @@ button:hover {
         })
 
     </script>
-
+<%@ include file="../common/footerbar.jsp" %>
+</body>
 </html>

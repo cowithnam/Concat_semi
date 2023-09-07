@@ -212,7 +212,6 @@ textarea{
 		</div>
 
 		<br> <br>
-</body>
 <script>
 $(function(){
 	selectReplyList();
@@ -277,4 +276,6 @@ function selectReplyList() {
 }
 
 </script>
+<%@ include file="../common/footerbar.jsp" %>
+</body>
 </html>

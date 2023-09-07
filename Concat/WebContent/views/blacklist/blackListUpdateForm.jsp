@@ -141,6 +141,7 @@
                 $("#productImg").attr("src", "resources/image/noneImg.png");
             }
         }
-   </script>   
+   </script>
+<%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>

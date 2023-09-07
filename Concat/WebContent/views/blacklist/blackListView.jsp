@@ -229,6 +229,7 @@
   	</div>
 
 		<!-- 페이징 바 -->
+		<br>
         <div class="btn" style="text-align: center;">
 			<% if(currentPage != 1) { %>
             <button style="font-size: 12px; onclick="location.href='<%= contextPath %>/list.bl?cpage=<%= currentPage-1 %>'"> ◀ </button>
@@ -245,6 +246,7 @@
             <% if(currentPage != maxPage) {%>
             <button style="font-size: 12px; onclick="location.href='<%= contextPath %>/list.bl?cpage=<%= currentPage+1 %>'"> ▶ </button>
             <% } %>
-        </div>	
+        </div>
+<%@ include file="../common/footerbar.jsp" %>	
 </body>
 </html>
