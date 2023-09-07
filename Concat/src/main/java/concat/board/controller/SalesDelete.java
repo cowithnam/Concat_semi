@@ -1,6 +1,8 @@
 package concat.board.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +37,9 @@ public class SalesDelete extends HttpServlet {
 		if(result > 0) {
 			response.sendRedirect(request.getContextPath()+"/shop.do?cNo=0");
 		}else {
-			
+			request.setAttribute("errorMsg", "상품 삭제에 실패했습니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
 		
 	}

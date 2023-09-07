@@ -3,6 +3,7 @@ package concat.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,13 +38,9 @@ public class LoginSetController extends HttpServlet {
 		
 		
 		if(loginMember == null) {
-			response.setContentType("text/html; charset=utf-8");
-			
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-	        out.println("alert('');");
-	        out.println("history.back();");
-	        out.println("</script>"); 
+			request.setAttribute("errorMsg", "로그인에 실패했습니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}else {
 			request.getSession().setAttribute("loginMember", loginMember);
 			response.sendRedirect(request.getContextPath());

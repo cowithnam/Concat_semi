@@ -1,6 +1,8 @@
 package concat.board.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,6 +51,10 @@ public class SalesDetailForm extends HttpServlet {
 			request.setAttribute("img", img);
 			request.setAttribute("wish", wish);
 			request.getRequestDispatcher("views/board/salesDetail.jsp").forward(request, response);
+		}else {
+			request.setAttribute("errorMsg", "상세정보 조회에 실패했습니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
 	}
 

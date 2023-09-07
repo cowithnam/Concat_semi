@@ -31,14 +31,12 @@ public class IdCheckController extends HttpServlet {
 		String checkId = request.getParameter("checkId");
 				
 				int count = new MemberService().idCheck(checkId);
-				
 			
 				if(count > 0) { 
 					response.getWriter().print("NNNNN");
 				}else { 
 					response.getWriter().print("NNNNY");
 				}
-
 	}
 
 	/**

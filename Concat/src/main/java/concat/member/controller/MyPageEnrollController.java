@@ -38,17 +38,9 @@ public class MyPageEnrollController extends HttpServlet {
 		
 		
 		if(session.getAttribute("loginMember") == null) { 
-			 response.setContentType("text/html; charset=utf-8");
-
-				PrintWriter out = response.getWriter();
-
-				out.println("<script>");
-
-				out.println("alert(';");
-
-				out.println("history.back();");
-
-				out.println("</script>");
+			request.setAttribute("errorMsg", "내정보 조회에 실패했습니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}else { 
 			
 			Profile pro = new MemberService().selectProfile(((Member)session.getAttribute("loginMember")).getMemNo());

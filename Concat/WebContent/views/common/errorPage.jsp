@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String errorMsg = (String)request.getAttribute("errorMsg");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +19,7 @@
 	<img src="/resources/image/hqdefault.jpg">
 	<br>
 	<p>
-		<h1>실패했습니다!</h1>
+		<h1><%=errorMsg %>!</h1>
 		<br>
 		<h2>전 페이지로 돌아가 다시 작성해주세요.</h2>
 	</p>

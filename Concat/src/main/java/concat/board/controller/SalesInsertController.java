@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -68,6 +69,10 @@ public class SalesInsertController extends HttpServlet {
 				request.getSession().setAttribute("alertMsg", "");
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("views/board/salesList.jsp").forward(request, response);
+			}else {
+				request.setAttribute("errorMsg", "판매글 작성에 실패했습니다");
+				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+				view.forward(request, response);
 			}
 		}
 	}

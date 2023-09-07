@@ -26,7 +26,6 @@ public class QnaUpdateController extends HttpServlet {
      */
     public QnaUpdateController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -46,15 +45,13 @@ public class QnaUpdateController extends HttpServlet {
 		
 		int result =  new QnaService().updateQna(q);
 		
-		
-		
 		if(result >0) {
 			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg","성공적으로 공지사항 수정 되었습니다");
+			session.setAttribute("alertMsg","성공적으로 문의사항이 수정 되었습니다");
 			response.sendRedirect(request.getContextPath() + "/detail.qa?num="+q.getQnaNo());
 			
 		}else {
-			request.setAttribute("errorMsg", "공지사항 수정에 실패 했습니다");
+			request.setAttribute("errorMsg", "문의사항 수정에 실패 했습니다");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}

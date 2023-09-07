@@ -1,6 +1,8 @@
 package concat.review.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -81,7 +83,9 @@ request.setCharacterEncoding("utf-8");
 				response.sendRedirect(request.getContextPath() + "/listDetail.re?num="+rNo);
 				
 			}else {
-				
+				request.setAttribute("errorMsg", "리뷰 수정에 실패했습니다");
+				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+				view.forward(request, response);
 			}
 			
 		}

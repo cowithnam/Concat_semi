@@ -49,10 +49,9 @@ public class NoticeDeleteController extends HttpServlet {
 			return;
 			
 		}else {
-			request.setAttribute("errorMsg", "글삭제에 실패 했습니다");
+			request.setAttribute("errorMsg", "공지 삭제에 실패 했습니다");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
-			
 		}
 		
 	

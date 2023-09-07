@@ -3,6 +3,7 @@ package concat.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,8 +39,9 @@ public class ExitController extends HttpServlet {
 			request.getSession().setAttribute("alertMsg", "");
 			response.sendRedirect(request.getContextPath());
 		}else {
-			//session.setAttribute("alertMsg", "");
-			response.sendRedirect(request.getContextPath() + "/myPage.me");
+			request.setAttribute("errorMsg", "회원 탈퇴에 실패했습니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
 	}
 

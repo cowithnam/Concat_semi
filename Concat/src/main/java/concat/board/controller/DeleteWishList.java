@@ -52,7 +52,7 @@ public class DeleteWishList extends HttpServlet {
 			response.setContentType("apllication/json; UTF-8");
 			new Gson().toJson("result",response.getWriter());
 		}else {
-			request.setAttribute("errorMsg", "");
+			request.setAttribute("errorMsg", "위시리스트 삭제에 실패했습니다");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
