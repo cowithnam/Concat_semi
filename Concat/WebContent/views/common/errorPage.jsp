@@ -15,8 +15,8 @@
 	}
 </style>
 </head>
-<body>
-	<img src="/resources/image/hqdefault.jpg">
+<body align="center">
+	<img src="resources/image/hqdefault.jpg">
 	<br>
 	<p>
 		<h1><%=errorMsg %>!</h1>
