@@ -67,7 +67,6 @@ public class BlackListController extends HttpServlet {
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
-		
 		request.getRequestDispatcher("views/blacklist/blackListView.jsp").forward(request, response);
 	}
 

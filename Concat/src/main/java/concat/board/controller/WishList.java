@@ -41,8 +41,9 @@ public class WishList extends HttpServlet {
 		ArrayList<Wish> wList = new BoardService().selectWishList(memNo);
 		for(Wish w : wList) {
 			Board b = new BoardService().selectWishBoard(w.getBoardNo());
-			
-			list.add(b);
+			if(b != null) {
+				list.add(b);
+			}
 		}
 		
 		request.setAttribute("list", list);

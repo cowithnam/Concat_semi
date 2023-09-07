@@ -73,8 +73,7 @@ public class BlackListInsertController extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/list.bl?cpage=1");
 				
 			}else {
-				// ½ÇÆĞÇßÀ»°æ¿ì
-				request.setAttribute("errorMsg", "°øÁö»çÇ× µî·Ï¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+				request.setAttribute("errorMsg", "ë¸”ë™ë¦¬ìŠ¤íŠ¸ ì‘ì„±ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤");
 				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 				view.forward(request, response);
 			}

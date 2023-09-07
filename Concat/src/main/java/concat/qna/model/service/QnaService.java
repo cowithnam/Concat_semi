@@ -121,4 +121,14 @@ public class QnaService {
 		}close(conn);
 		return result;
 	}
+	
+	public ArrayList<Qna> selectMyList(int memNo){
+		Connection conn = getConnection();
+		
+		ArrayList<Qna> list = new QnaDao().selectMyList(memNo,conn);
+		
+		close(conn);
+		
+		return list;
+	}
 }

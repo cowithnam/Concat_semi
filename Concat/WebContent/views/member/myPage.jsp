@@ -15,7 +15,6 @@
  <style>
         .wrap{
             box-sizing: border-box;
-            border-radius: 30px ;
             width: 1200px;
             height: 700px;
             margin: auto;
@@ -364,13 +363,21 @@
             })
  	 })
  	 
- 	 $(function(){
- 	 	$("#navi>a").css("color","black");
- 	 })
- 	 
  	 $(function() {
 	 	$(".cell-list").click(function() {
-			location.href="<%=contextPath %>/myCellList.bo?mNo=<%=loginMember.getMemNo() %>";
+			location.href="<%=contextPath %>/myCellList.bo";
+		});
+	 	
+	 	$(".wish-list").click(function() {
+			location.href="<%=contextPath %>/wishList.bo";
+		});
+	 	
+	 	$(".inquiry-list").click(function() {
+			location.href="<%=contextPath %>/myList.qa";
+		});
+	 	
+	 	$(".report-list").click(function() {
+			location.href="<%=contextPath %>/myReport.bl";
 		});
 	 })
     </script>

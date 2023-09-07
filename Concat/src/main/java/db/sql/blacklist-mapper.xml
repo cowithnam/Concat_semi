@@ -16,6 +16,22 @@
 	 ORDER 
 	    BY BL_NO DESC
 </entry>
+<entry key="selectMyReport">
+	SELECT 
+	       BL_NO
+	     , BL_TITLE
+	     , BL_CONTENT
+	     , MEM_ID
+	     , BLACK_ID
+	     , COUNT
+	     , BL_DATE
+	  FROM BLACKLIST B
+	  JOIN MEMBER ON (BL_WRITER = MEM_NO)
+	 WHERE B.STATUS = 'Y'
+       AND BL_WRITER = ?
+	 ORDER 
+	    BY BL_NO DESC
+</entry>
 
 <entry key="increaseCount">
 	UPDATE BLACKLIST

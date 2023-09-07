@@ -163,7 +163,6 @@ public class QnaDao {
 						rset.getString("qna_title"),
 						rset.getDate("create_date"),
 						rset.getString("qna_writer_nick")));
-				
 			}
 			
 			
@@ -292,6 +291,33 @@ public class QnaDao {
 		}finally {
 			close(pstmt);
 		}return result;
+	}
+	
+	public ArrayList<Qna> selectMyList(int memNo,Connection conn) {
+		ArrayList<Qna> list = new ArrayList<Qna>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		
+		String sql = prop.getProperty("selectMyList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Qna(rset.getInt("qna_no"),
+						rset.getString("qna_title"),
+						rset.getDate("create_date"),
+						rset.getString("qna_writer_nick")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 }

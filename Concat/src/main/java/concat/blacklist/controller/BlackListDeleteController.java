@@ -31,14 +31,14 @@ public class BlackListDeleteController extends HttpServlet {
 		
 		int result = new BlackListService().deletelist(num);
 		
-		if(result > 0) { // ¼º°ø
-			request.getSession().setAttribute("alertMsg", "¼º°øÀûÀ¸·Î °øÁö»çÇ× »èÁ¦ µÇ¾ú½À´Ï´Ù");
+		if(result > 0) { 
+			request.getSession().setAttribute("alertMsg", "ì„±ê³µì ìœ¼ë¡œ ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤");
 			
 			response.sendRedirect(request.getContextPath() + "/list.bl?cpage=1");
 			
-		}else { // ½ÇÆĞ
-			request.setAttribute("errorMsg", "°øÁö»çÇ× »èÁ¦¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
-
+		}else {
+			request.setAttribute("errorMsg", "ì‚­ì œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
+			response.sendRedirect(request.getContextPath()+"/DetailView.bl?num=" + num);
 		}
 	}
 

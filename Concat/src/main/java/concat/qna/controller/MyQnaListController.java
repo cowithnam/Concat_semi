@@ -1,4 +1,4 @@
-package concat.board.controller;
+package concat.qna.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import concat.board.model.service.BoardService;
-import concat.board.model.vo.Board;
 import concat.member.model.vo.Member;
+import concat.qna.model.service.QnaService;
+import concat.qna.model.vo.Qna;
 
 /**
- * Servlet implementation class MySellList
+ * Servlet implementation class MyQnaListController
  */
-@WebServlet("/myCellList.bo")
-public class MySellList extends HttpServlet {
+@WebServlet("/myList.qa")
+public class MyQnaListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MySellList() {
+    public MyQnaListController() {
         super();
     }
 
@@ -36,11 +36,10 @@ public class MySellList extends HttpServlet {
 			memNo = ((Member)request.getSession().getAttribute("loginMember")).getMemNo();
 		}
 		
-		ArrayList<Board> list = new BoardService().selectCellList(memNo);
+		ArrayList<Qna> list = new QnaService().selectMyList(memNo);
 		
 		request.setAttribute("list", list);
-		
-		request.getRequestDispatcher("views/board/mySalesList.jsp").forward(request, response);
+		request.getRequestDispatcher("views/qna/myQna.jsp").forward(request, response);
 	}
 
 	/**

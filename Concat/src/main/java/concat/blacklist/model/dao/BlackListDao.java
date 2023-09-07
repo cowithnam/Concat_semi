@@ -28,7 +28,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return 블랙리스트 전체 조회
+	 * @return 
 	 */
 	public ArrayList<BlackList> selectBlacklistList(Connection conn){
 		ArrayList<BlackList> list = new ArrayList<BlackList>();
@@ -60,8 +60,39 @@ public class BlackListDao {
 		return list;
 	}
 	
+	public ArrayList<BlackList> selectMyReport(int memNo,Connection conn){
+		ArrayList<BlackList> list = new ArrayList<BlackList>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyReport");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new BlackList(rset.getInt("bl_no"),
+									   rset.getString("bl_title"),
+									   rset.getString("bl_content"),
+									   rset.getString("mem_id"),
+									   rset.getString("black_id"),
+									   rset.getInt("count"),
+									   rset.getDate("bl_date")
+									   ));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 	/**
-	 * @return 조회수 증가
+	 * @return 
 	 */
 	public int increaseCount(Connection conn, int blNo) {
 		int result = 0;
@@ -84,7 +115,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return 블랙리스트상세 조회
+	 * @return 
 	 */
 	public BlackList selectBlackList(Connection conn, int blNo) {
 		BlackList b = null;
@@ -119,7 +150,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return 블랙리스트 작성글 추가
+	 * @return 
 	 */
 	public int insertBlacklist(Connection conn, BlackList bl) {
 		int result =0;
@@ -145,7 +176,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return 블랙리스트 이미지 추가
+	 * @return 
 	 */
 	public int insertImage(Connection conn, Image image) {
 		int result = 0;
@@ -171,7 +202,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return 블랙리스트 이미지 조회
+	 * @return
 	 */
 	public Image selectImage(Connection conn, int blNo) {
 		Image image = null;
@@ -204,7 +235,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return 블랙리스트 조회수 조회
+	 * @return
 	 */
 	public int selectListCount(Connection conn) {
 		int listCount = 0;
@@ -230,7 +261,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return 블랙리스트 리스트 전체글 조회
+	 * @return 
 	 */
 	public ArrayList<BlackList> selectList(Connection conn, PageInfo pi) {
 		ArrayList<BlackList> list = new ArrayList<BlackList>();
@@ -269,7 +300,7 @@ public class BlackListDao {
 	}
 	
 	/**
-	 * @return  블랙리스트 작성글 삭제
+	 * @return  
 	 */
 	public int deletelist(Connection conn, int num) {
 		int result = 0;

@@ -1,6 +1,8 @@
 package concat.blacklist.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,19 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import concat.blacklist.model.service.BlackListService;
 import concat.blacklist.model.vo.BlackList;
-import concat.image.model.vo.Image;
+import concat.member.model.vo.Member;
 
 /**
- * Servlet implementation class BlackListDetailController
+ * Servlet implementation class MyReportController
  */
-@WebServlet("/DetailView.bl")
-public class BlackListDetailController extends HttpServlet {
+@WebServlet("/myReport.bl")
+public class MyReportController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BlackListDetailController() {
+    public MyReportController() {
         super();
     }
 
@@ -29,21 +31,15 @@ public class BlackListDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int blNo = Integer.parseInt(request.getParameter("num")); 
-		
-		int result = new BlackListService().increaseCount(blNo);
-		
-		if(result > 0) {
-			BlackList b = new BlackListService().selectBlackList(blNo);
-			Image image = new BlackListService().selectImage(blNo);
-			
-			request.setAttribute("image", image);
-			request.setAttribute("b", b);
-			request.getRequestDispatcher("views/blacklist/blackListDetailView.jsp").forward(request, response);
-		}else {
-			request.setAttribute("alertMsg", "상세 정보 조회에 실패했습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.bl?cpage=1");
+		int memNo = 0;
+		if(request.getSession().getAttribute("loginMember") != null) {
+			memNo = ((Member)request.getSession().getAttribute("loginMember")).getMemNo();
 		}
+		
+		ArrayList<BlackList> list = new BlackListService().selectMyReport(memNo);
+		
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/blacklist/MyReport.jsp").forward(request, response);
 	}
 
 	/**

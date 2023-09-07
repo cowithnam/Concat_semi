@@ -225,27 +225,20 @@ button:hover {
 					</tr>
 				</thead>
 				<tbody>
-
 					<%if(list.isEmpty()){ %>
 					<tr>
 						<td colspan="4">존재하는 QNA 게시글이 없습니다.</td>
 					</tr>
 					<%}else{%>
-
-
-
-					<% for(Qna q : list){ %>
-
-					<tr id="selectr">
-						<td><%=q.getQnaNo() %></td>
-						<td><%=q.getQnaTitle() %></td>
-						<td><%=q.getQnaWriterNick() %></td>
-						<td><%=q.getCreateDate() %></td>
-					</tr>
-
-					<%} %>
+						<% for(Qna q : list){ %>
+							<tr id="selectr">
+								<td><%=q.getQnaNo() %></td>
+								<td><%=q.getQnaTitle() %></td>
+								<td><%=q.getQnaWriterNick() %></td>
+								<td><%=q.getCreateDate() %></td>
+							</tr>
+						<%} %>
 					<%}%>
-
 				</tbody>
 
 			</table>
@@ -305,7 +298,7 @@ button:hover {
               location.href = '<%=contextPath %>/detail.qa?num='+num;
               
               })
-             })
+        })
 
     </script>
 

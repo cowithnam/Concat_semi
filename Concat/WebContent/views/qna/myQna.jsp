@@ -1,9 +1,9 @@
-<%@page import="concat.board.model.vo.Board"%>
+<%@page import="concat.qna.model.vo.Qna"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -88,32 +88,37 @@
 	<div class="outer">
 		<div id="navi" class="cont" align="right">
         	<div style="margin-right: 20px;" class="my-navi my-page" align="center">마이페이지</div>
-            <div style="margin-right: 20px;" class="my-navi select-navi" align="center">판매 목록</div>
+            <div style="margin-right: 20px;" class="my-navi cell-list" align="center">판매 목록</div>
             <div style="margin-right: 20px;" class="my-navi wish-list" align="center">찜한 상품</div>
-            <div style="margin-right: 20px;" class="my-navi inquiry-list" align="center">문의 목록</div>   
+            <div style="margin-right: 20px;" class="my-navi select-navi" align="center">문의 목록</div>   
             <div style="margin-right: 20px;" class="my-navi report-list" align="center">신고 목록</div>
         </div>
         <div id="main" class="cont">
-        	<h1>판매 목록</h1>
-	        <table>
+        	<h1>문의 목록</h1>
+	        <table class="area-no">
 	            <thead>
 	                <tr>
-	                    <th width="168" height="40" style="border-left: none;">사진</th>
-	                    <th width="128" height="40">판매상태</th>
-	                    <th width="400" height="40">상품명</th>
-	                    <th width="300" height="40">가격</th>
-	                </tr>
+						<th width="100" class="num">NO</th>
+						<th width="650">제목</th>
+						<th width="150">작성자</th>
+						<th width="150">작성일</th>
+					</tr>
 	            </thead>
 	            <tbody align="center">
-	            	<% for(Board b : list){ %>
-		                <tr>
-		                    <td><img src="<%=b.getThumbnail() %>" width="80" height="80"></td>
-	                        <td><h4><%= b.gettStatus()%></h4></td>
-		                    <td><h3><%=b.getBoardTitle() %></h3><h5><%=b.getBrand() %></h5></td>
-		                    <td style="color: #ff006c;"><h4><%=b.getPrice() %></h4></td>
-		                	<input type="hidden" name="bno" value="<%=b.getBoardNo() %>">
-		                </tr>
-	                <% } %>
+	            	<%if(list.isEmpty()){ %>
+					<tr>
+						<td colspan="4" style="height: 200px;">존재하는 QNA 게시글이 없습니다.</td>
+					</tr>
+					<%}else{%>
+						<% for(Qna q : list){ %>
+							<tr id="selectr">
+								<td><%=q.getQnaNo() %></td>
+								<td><%=q.getQnaTitle() %></td>
+								<td><%=q.getQnaWriterNick() %></td>
+								<td><%=q.getCreateDate() %></td>
+							</tr>
+						<%} %>
+					<%}%>
 	            </tbody>
 	        </table>
 	        <div align="right" class="slist-button">
@@ -143,18 +148,26 @@
 				location.href="<%=contextPath %>/myPage.me";
 			});
 		 	
+			$(".cell-list").click(function() {
+				location.href="<%=contextPath %>/myCellList.bo";
+			});
+			
 		 	$(".wish-list").click(function() {
 				location.href="<%=contextPath %>/wishList.bo";
 			});
 		 	
-			$(".inquiry-list").click(function() {
-				location.href="<%=contextPath %>/myList.qa";
-			});
 			 	
 			$(".report-list").click(function() {
 				location.href="<%=contextPath %>/myReport.bl";
 			});
-	 	})
+	 	
+            $(".area-no > tbody > #selectr").click(function(){
+            	const num =$(this).children().eq(0).text();
+              	
+              location.href = '<%=contextPath %>/detail.qa?num='+num;
+              
+            })
+        })
     </script>
 </body>
 </html>

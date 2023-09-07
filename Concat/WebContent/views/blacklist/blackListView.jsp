@@ -198,15 +198,12 @@
 		                    </tr>
 						<% } %>
 	                <% } %>                
-					                              	
-                
-				    
                 </tbody>
             </table>
         </div>
     </div>
     
-        <!-- 공지글 작성하기버튼 누를시 -->
+        <!-- 작성하기버튼 누를시 -->
     <script>
     	$(function(){
     		$("#EnrollForm").click(function(){

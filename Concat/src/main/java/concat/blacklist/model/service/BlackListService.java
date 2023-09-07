@@ -126,4 +126,11 @@ public class BlackListService {
 		close(conn);
 		return list;
 	}
+	
+	public ArrayList<BlackList> selectMyReport(int memNo) {
+		Connection conn = getConnection();
+		ArrayList<BlackList> list = new BlackListDao().selectMyReport(memNo, conn);
+		close(conn);
+		return list;
+	}
 }

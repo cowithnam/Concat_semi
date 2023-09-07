@@ -78,7 +78,19 @@ SELECT *
             )
           WHERE RNUM BETWEEN ? AND ?
 </entry>
-
+<entry key="selectMyList">
+    SELECT 
+           QNA_NO
+         , QNA_TITLE
+         , CREATE_DATE
+         , QNA_WRITER_NICK
+      FROM QNA Q
+      JOIN MEMBER ON (QNA_WRITER = MEM_NO)
+     WHERE Q.STATUS = 'Y'
+       AND QNA_WRITER = ?
+     ORDER 
+        BY QNA_NO DESC
+</entry>
 <entry key="increaseCount">
 UPDATE QNA
 SET COUNT = COUNT+1

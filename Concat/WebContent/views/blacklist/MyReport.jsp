@@ -1,9 +1,9 @@
-<%@page import="concat.board.model.vo.Board"%>
+<%@page import="concat.blacklist.model.vo.BlackList"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	ArrayList<BlackList> list = (ArrayList<BlackList>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -43,15 +43,6 @@
         	font-size: 25px;
         }
         
-        .myProfile{
-        	border: 2px solid lightgray;
-        	width: 450px;
-        	height: 340px;
-        	padding: 50px;
-        	border-radius: 10px;
-        	margin-left: 20px;
-        }
-        
         .select-navi{
         	text-decoration : underline;
         	text-underline-position: under;
@@ -88,32 +79,41 @@
 	<div class="outer">
 		<div id="navi" class="cont" align="right">
         	<div style="margin-right: 20px;" class="my-navi my-page" align="center">마이페이지</div>
-            <div style="margin-right: 20px;" class="my-navi select-navi" align="center">판매 목록</div>
+            <div style="margin-right: 20px;" class="my-navi cell-list" align="center">판매 목록</div>
             <div style="margin-right: 20px;" class="my-navi wish-list" align="center">찜한 상품</div>
             <div style="margin-right: 20px;" class="my-navi inquiry-list" align="center">문의 목록</div>   
-            <div style="margin-right: 20px;" class="my-navi report-list" align="center">신고 목록</div>
+            <div style="margin-right: 20px;" class="my-navi select-navi" align="center">신고 목록</div>
         </div>
         <div id="main" class="cont">
-        	<h1>판매 목록</h1>
-	        <table>
+        	<h1>문의 목록</h1>
+	        <table class="area-no">
 	            <thead>
 	                <tr>
-	                    <th width="168" height="40" style="border-left: none;">사진</th>
-	                    <th width="128" height="40">판매상태</th>
-	                    <th width="400" height="40">상품명</th>
-	                    <th width="300" height="40">가격</th>
-	                </tr>
+                        <th width="110" height="40">NO</th>
+                        <th width="500">제목</th>
+                        <th width="150">작성자</th>
+                        <th width="150">작성일</th>
+                        <th width="150">조회수</th>
+                    </tr>
 	            </thead>
 	            <tbody align="center">
-	            	<% for(Board b : list){ %>
-		                <tr>
-		                    <td><img src="<%=b.getThumbnail() %>" width="80" height="80"></td>
-	                        <td><h4><%= b.gettStatus()%></h4></td>
-		                    <td><h3><%=b.getBoardTitle() %></h3><h5><%=b.getBrand() %></h5></td>
-		                    <td style="color: #ff006c;"><h4><%=b.getPrice() %></h4></td>
-		                	<input type="hidden" name="bno" value="<%=b.getBoardNo() %>">
-		                </tr>
-	                <% } %>
+	            	<!-- case1. 공지글이 없을 경우 -->
+	               	<% if(list.isEmpty()) { %>
+		               	<tr>
+		                	<td colspan="5">존재하는 블랙리스트가 없습니다.</td>
+		           	    </tr>
+	                <% } else { %>
+		             	 <!-- case2. 공지글이 있을 경우-->
+		                <% for(BlackList b : list) { %>
+		                    <tr class="listtr">
+		                        <td height="40"><%= b.getBlNo() %></td>
+		                        <td height="40"><%= b.getBlTitle() %></td>
+		                        <td height="40"><%= b.getBlWriter() %></td>
+		                        <td height="40"><%= b.getBlDate() %></td>
+		                        <td height="40"><%= b.getCount() %></td>
+		                    </tr>
+						<% } %>
+	                <% } %>  
 	            </tbody>
 	        </table>
 	        <div align="right" class="slist-button">
@@ -138,23 +138,30 @@
         		history.back();
         })
         
-        $(function() {
+        $(function(){
 		 	$(".my-page").click(function() {
 				location.href="<%=contextPath %>/myPage.me";
 			});
 		 	
+			$(".cell-list").click(function() {
+				location.href="<%=contextPath %>/myCellList.bo";
+			});
+			
 		 	$(".wish-list").click(function() {
 				location.href="<%=contextPath %>/wishList.bo";
 			});
 		 	
+			 	
 			$(".inquiry-list").click(function() {
 				location.href="<%=contextPath %>/myList.qa";
 			});
-			 	
-			$(".report-list").click(function() {
-				location.href="<%=contextPath %>/myReport.bl";
-			});
-	 	})
+	 		
+			$(".listtr").click(function(){
+				const num = $(this).children().eq(0).text();
+					location.href = '<%= contextPath %>/DetailView.bl?num='+num;
+			})
+        })
     </script>
+
 </body>
 </html>
