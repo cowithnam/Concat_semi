@@ -122,7 +122,6 @@
         </div>
         
     </div>
-    
      <script>
         $(function(){
             $("selectAll").click(function(){
@@ -156,6 +155,6 @@
 			});
 	 	})
     </script>
-<%@ include file="../common/footerbar.jsp" %>
+    <%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>

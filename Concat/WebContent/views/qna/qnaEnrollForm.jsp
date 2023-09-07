@@ -5,12 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-
-
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +12,7 @@
     <style>
         #outer{
             width: 1000px;
-            height: 800px;
+            height: auto;
             margin: auto;
             text-align: left;
         }

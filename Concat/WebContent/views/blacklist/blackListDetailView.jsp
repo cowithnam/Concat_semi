@@ -16,7 +16,7 @@
 <style>
     .outer{
         width: 1000px;
-        height: 600px;
+        height: auto;
         box-sizing: border-box;
         margin: auto;
     }

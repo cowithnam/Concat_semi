@@ -4,27 +4,16 @@
     
     <% Qna q = (Qna)request.getAttribute("q");%>
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항작성</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>공지사항작성</title>
     <style>
         
       #outer{
             width: 1000px;
-            height: 800px;
+            height: auto;
             margin: auto;
             text-align: left;
         }

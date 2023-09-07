@@ -20,7 +20,7 @@
 <style>
     #outer{
         width: 1100px;
-        height: 700px;
+        height: auto;
         margin: auto;
     }
     

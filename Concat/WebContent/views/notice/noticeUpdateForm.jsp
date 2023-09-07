@@ -11,7 +11,7 @@
     <style>
         #outer{
             width: 1000px;
-            height: 800px;
+            height: auto;
             margin: auto;
             text-align: left;
         }

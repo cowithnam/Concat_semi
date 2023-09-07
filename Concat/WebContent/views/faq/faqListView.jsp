@@ -9,7 +9,7 @@
 
 #outer{
             width: 1100px;
-            height: 600px;
+            height: auto;
             margin: auto;
         }	
         
