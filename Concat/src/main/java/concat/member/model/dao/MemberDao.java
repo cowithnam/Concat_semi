@@ -59,7 +59,6 @@ private Properties prop = new Properties();
 							   rset.getString("grade_no"),
 							   rset.getInt("total_score"));
 			}
-			System.out.println();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -187,7 +186,7 @@ private Properties prop = new Properties();
 	}
 	
 	public int deleteMember(Connection conn, String userPwd, String userId) {
-		// update�?=> 처리??????=> ?�랜?�션 처리
+		// update�?=> 처리??????=> ?�랜?�션 처리
 		int result = 0;
 		PreparedStatement pstmt = null;
 		

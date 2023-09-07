@@ -29,7 +29,7 @@ public class MemberJoinController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		String memId = request.getParameter("memId");
 		String memPwd = request.getParameter("memPwd");
@@ -50,7 +50,6 @@ request.setCharacterEncoding("UTF-8");
 			request.getSession().setAttribute("alertMsg", ""); 
 			response.sendRedirect(request.getContextPath());
 		}else { // ����
-			System.out.println("");
 			//request.setAttribute("errorMsg", "ȸ�����Կ� �����߽��ϴ�.");
 			//RequestDispatcher view = request.getRequestDispatcher("views/comon/errorPage.jsp");
 			//view.forward(request, response);

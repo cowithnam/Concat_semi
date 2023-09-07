@@ -89,7 +89,7 @@
 <entry key="selectReview">
 	SELECT
            REVIEW_NO
-         , MEM_ID
+         , NICKNAME
          , CELL_ID
 	     , REVIEW_TITLE
 	     , REVIEW_CONTENT

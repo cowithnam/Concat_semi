@@ -31,7 +31,6 @@ public class NoticeUpdatePage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			int noticeNo = Integer.parseInt(request.getParameter("num"));
-			System.out.println(noticeNo);
 		
 			Notice n = new NoticeService().selectedNotice(noticeNo);
 		

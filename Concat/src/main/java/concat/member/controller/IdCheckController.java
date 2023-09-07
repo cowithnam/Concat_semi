@@ -32,7 +32,6 @@ public class IdCheckController extends HttpServlet {
 				
 				int count = new MemberService().idCheck(checkId);
 				
-				System.out.println(count);
 			
 				if(count > 0) { 
 					response.getWriter().print("NNNNN");
