@@ -15,7 +15,7 @@ import concat.board.model.vo.Board;
 /**
  * Servlet implementation class MySellList
  */
-@WebServlet("/mySellList.bo")
+@WebServlet("/myCellList.bo")
 public class MySellList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

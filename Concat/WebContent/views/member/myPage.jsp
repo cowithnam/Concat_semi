@@ -28,13 +28,14 @@
         #header_2{
             float:right;
             margin:auto;
-            width: 530px;
+            width: 570px;
             margin-top: 8px;
         }
         #navi{
             box-sizing: border-box;
-            width: 300px;
+            width: 260px;
             margin-left: 30px;
+            box-shadow: 5px 0 5px -5px #333;
         }
         
         #main{
@@ -109,6 +110,29 @@
         .gradedetail1{
             cursor: pointer;
         }
+        
+        .my-navi{
+        	width: 140px;
+        	height: 60px;
+        	margin-bottom: 30px;
+        	padding-top: 10px;
+        	font-size: 25px;
+        }
+        
+        .myProfile{
+        	border: 2px solid lightgray;
+        	width: 450px;
+        	height: 340px;
+        	padding: 50px;
+        	border-radius: 10px;
+        	margin-left: 20px;
+        }
+        
+        .select-navi{
+        	text-decoration : underline;
+        	text-underline-position: under;
+        	font-weight: bolder;
+        }
 
 
     </style>
@@ -140,10 +164,11 @@
             </div>
 
         <div id="navi" class="cont" align="right">
-            <h3><a href="#">판매 목록</a></h3> <br><br>
-            <h3><a href="#">찜한 상품</a></h3> <br><br>
-            <h3><a href="#">문의 목록</a></h3> <br><br>   
-            <h3><a href="#">신고 목록</a></h3> <br>
+        	<div style="margin-right: 20px;" class="my-navi select-navi" align="center">마이페이지</div>
+            <div style="margin-right: 20px;" class="my-navi cell-list" align="center">판매 목록</div>
+            <div style="margin-right: 20px;" class="my-navi wish-list" align="center">찜한 상품</div>
+            <div style="margin-right: 20px;" class="my-navi inquiry-list" align="center">문의 목록</div>   
+            <div style="margin-right: 20px;" class="my-navi report-list" align="center">신고 목록</div>
         </div>
         <div id="main" class="cont" align="center">
         	<div style="width: 230px; height: 50px;" align="right">
@@ -153,36 +178,41 @@
 	            <% } %>
 	            <br>
         	</div>
+	        <div style="width: 75px; height: 30px; font-size: 19px; font-weight: 600" align="right">
 				<%= m.getMemId() %>
-			<form id="myPage-form" action="<%= contextPath %>/update.me" method="post" enctype="multipart/form-data" id="mypageform">
-                <table>
-                    <tr>
-                        <th style="height: 50px;">※ 닉네임</th>
-                        <td><input type="text" id="nickName" name="nickName" value="<%= m.getNickname() %>" maxlength="6" required></td>
-                        
-                    </tr>
-                    <tr>
-                    	<td colspan="2"> <span class="error_next_box" id="nickMsg"></span></td>
-                    </tr>
-                    <tr>
-                        <th style="height: 50px;">※ 전화번호 </th>
-                        <td><input type="text" name="phone" onKeyup = "addHypen(this);" value="<%= m.getPhone() %>"></td>
-                    </tr>
-                    <tr>
-                        <th style="height: 50px;">※ 이메일 </th>
-                        <td><input type="email" name="email" value="<%= m.getEmail() %>" placeholder="@ 포함해서 입력"></td>
-                    </tr>
-                </table> 
-                <input type="hidden" name="memNo" value="<%=m.getMemNo()%>"> 
-		        <input type="file" name="file" id="file" style="display:none" onchange="loadimg(this)">
-                <br>
-                <div>
-                    <button type="submit" class="sujung" onclick="return update();">정보수정</button>
-                    <button type="button" class="chenge" data-toggle="modal" data-target="#updatePwdModal" >비밀번호변경</button>
-                    <button type="button" class="exit" data-toggle="modal" data-target="#exitModal">회원탈퇴</button>
-                </div>  
-                </form>
-                <br><br>
+	        </div>
+	        <br>
+        	<div class="myProfile">
+				<form id="myPage-form" action="<%= contextPath %>/update.me" method="post" enctype="multipart/form-data" id="mypageform">
+	                <table>
+	                    <tr>
+	                        <th width="100" height="50">닉네임</th>
+	                        <td><input type="text" id="nickName" name="nickName" value="<%= m.getNickname() %>" maxlength="6" required></td>
+	                        
+	                    </tr>
+	                    <tr>
+	                    	<td colspan="2"> <span class="error_next_box" id="nickMsg"></span></td>
+	                    </tr>
+	                    <tr>
+	                        <th height="50">전화번호 </th>
+	                        <td><input type="text" name="phone" onKeyup = "addHypen(this);" value="<%= m.getPhone() %>"></td>
+	                    </tr>
+	                    <tr>
+	                        <th height="50">이메일 </th>
+	                        <td><input type="email" name="email" value="<%= m.getEmail() %>" placeholder="@ 포함해서 입력"></td>
+	                    </tr>
+	                </table> 
+	                <input type="hidden" name="memNo" value="<%=m.getMemNo()%>"> 
+			        <input type="file" name="file" id="file" style="display:none" onchange="loadimg(this)">
+	                <br>
+	                <div>
+	                    <button type="submit" class="sujung" onclick="return update();">정보수정</button>
+	                    <button type="button" class="chenge" data-toggle="modal" data-target="#updatePwdModal" >비밀번호변경</button>
+	                    <button type="button" class="exit" data-toggle="modal" data-target="#exitModal">회원탈퇴</button>
+	                </div>  
+	                </form>
+        	</div>
+            <br><br>
         </div>
     </div>
     <script>
@@ -335,8 +365,14 @@
  	 })
  	 
  	 $(function(){
- 		 $("#navi>a").css("color","black");
+ 	 	$("#navi>a").css("color","black");
  	 })
+ 	 
+ 	 $(function() {
+	 	$(".cell-list").click(function() {
+			location.href="<%=contextPath %>/myCellList.bo?mNo=<%=loginMember.getMemNo() %>";
+		});
+	 })
     </script>
 </body>
 </html>
