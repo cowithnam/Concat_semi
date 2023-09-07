@@ -52,10 +52,14 @@ public class UpdatePwdController extends HttpServlet {
 				out.println("<script>");
 
 				out.println("alert();");
-
-				out.println("history.back();");
+				
+				out.println("alert('비밀번호가 변경되었습니다.');");
 
 				out.println("</script>");
+				
+			request.getSession().invalidate();
+				
+			response.sendRedirect(request.getContextPath());
 		}
 	}
 

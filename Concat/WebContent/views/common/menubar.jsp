@@ -253,6 +253,12 @@
     </style>
 </head>
 <body style="position: relative;">
+		<% if(alertMsg != null){ %>
+			<script>
+				alert("<%= alertMsg %>");
+			</script>
+			<% session.removeAttribute("alertMsg"); %>
+		<% } %>
     <div id="wrap">
         <div id="header">
             <div id="header1">

@@ -167,7 +167,7 @@ public class ReviewDao {
 			
 			if(rset.next()) {
 				r = new Review(rset.getInt("review_no"),
-							   rset.getString("nickname"),
+							   rset.getString("mem_id"),
 							   rset.getString("cell_id"),
 							   rset.getString("review_title"),
 							   rset.getString("review_content"),

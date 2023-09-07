@@ -36,7 +36,7 @@ public class ExitController extends HttpServlet {
 		int result = new MemberService().deleteMember(memPwd ,memId);
 		if(result > 0) {
 			request.getSession().removeAttribute("loginMember");
-			request.getSession().setAttribute("alertMsg", "");
+			request.getSession().setAttribute("alertMsg", "성공적으로 탈퇴하였습니다.");
 			response.sendRedirect(request.getContextPath());
 		}else {
 			request.setAttribute("errorMsg", "회원 탈퇴에 실패했습니다");

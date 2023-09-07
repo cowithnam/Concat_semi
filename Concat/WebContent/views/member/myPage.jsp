@@ -150,7 +150,7 @@
 
 </head>
 <body>
-	<%@ include file ="../common/menubar.jsp" %>
+<%@ include file ="../common/menubar.jsp" %>
 	<div class="wrap">
             <div id="header_2">
             	<% if(pro == null){ %>
@@ -308,7 +308,7 @@
     <script>
 	    function vaildatePwd(){
 	        if($("input[name=updatePwd]").val() != $("input[name=checkPwd]").val()){
-	            alert("변경할 비밀번호가 일치하지 않습니다.")
+	            alert("변경할 비밀번호가 일치하지 않습니다.");
 	            return false;
 	        }
 	    }

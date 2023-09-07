@@ -38,9 +38,8 @@ public class LoginSetController extends HttpServlet {
 		
 		
 		if(loginMember == null) {
-			request.setAttribute("errorMsg", "로그인에 실패했습니다");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
+			request.getSession().setAttribute("alertMsg", "아이디 또는 비밀번호가 맞지 않습니다.");
+			response.sendRedirect(request.getContextPath()+"/login.me");
 		}else {
 			request.getSession().setAttribute("loginMember", loginMember);
 			response.sendRedirect(request.getContextPath());
