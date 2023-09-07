@@ -2,6 +2,7 @@ package concat.member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,13 +47,13 @@ public class MemberJoinController extends HttpServlet {
 		int result = new MemberService().insertMember(loginMember);
 		
 		
-		if(result > 0) { // ����
-			request.getSession().setAttribute("alertMsg", ""); 
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "성공적으로 가입 되었습니다. 환영합니다!"); 
 			response.sendRedirect(request.getContextPath());
-		}else { // ����
-			//request.setAttribute("errorMsg", "ȸ�����Կ� �����߽��ϴ�.");
-			//RequestDispatcher view = request.getRequestDispatcher("views/comon/errorPage.jsp");
-			//view.forward(request, response);
+		}else {
+			request.setAttribute("errorMsg", "회원 가입에 실패했습니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
 	}
 

@@ -7,10 +7,9 @@
 <title>Concat</title>
 <style>
   #content{
-  	width: 1500px;
-  	height: 600px;
+  	width: 1300px;
+  	height: auto;
   	margin: auto;
-  	padding-left: 117px;
   }
   .list-area{
   	width: 1400px;
@@ -32,6 +31,12 @@
   	display: inline-block;
    	border-radius: 5px;
   }
+  
+  .footerbar{
+        margin: auto;
+        width: 1200px;
+        font-size: 14px;
+  }
 </style>
 <body>
 	<%@ include file="views/common/menubar.jsp" %>
@@ -51,6 +56,11 @@
             <div class="list-area">
             </div>
         </div> 
+    </div>
+    <br> <br>
+	<div class="footerbar">
+        <img src="resources/image/concatlogo.png" style="height: 50px; width: 100px;">
+        Copyrights ⓒ CONCAT. All rights reserved.
     </div>
     
     <script>

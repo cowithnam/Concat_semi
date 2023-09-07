@@ -40,7 +40,7 @@
         
         #header1>img:hover{cursor: pointer;}
 
-        #header2{width: 60%;}
+        #header2{width: 48%;}
 
         #search{
             border: 2px solid black;
@@ -49,7 +49,7 @@
             border-radius: 20px;
             position: relative;
             top: 80px;
-            left: 300px;
+            left: 250px;
         }
 
         #search *{

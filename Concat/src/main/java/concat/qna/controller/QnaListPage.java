@@ -30,7 +30,6 @@ public class QnaListPage extends HttpServlet {
      */
     public QnaListPage() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -41,31 +40,20 @@ public class QnaListPage extends HttpServlet {
 		int currentPage; 
 		int pageLimit;  
 		int boardLimit; 
-		
 	
 		int maxPage;  
 		int startPage;
 		int endPage; 
 		
-		 
-		
-		
-		
 		qnaCount = new QnaService().qnaCount();
 		
 		
 		currentPage = Integer.parseInt(request.getParameter("qpage")); 
-		
-		
-		
 	
 		pageLimit = 10;
 		
 		
 		boardLimit = 10;
-		
-		
-		
        
 		maxPage = (int)Math.ceil((double)qnaCount / boardLimit);
 		
@@ -80,20 +68,14 @@ public class QnaListPage extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		
-		
-		
 		QnaInfo qi = new QnaInfo(qnaCount, currentPage , pageLimit , boardLimit , maxPage , startPage, endPage);
 		
 		
 		ArrayList<Qna> list = new QnaService().selectList(qi);
 		
-		
-		
 		request.setAttribute("qi", qi);
 		request.setAttribute("list",list);
 		;
-		
 		
 		request.getRequestDispatcher("views/qna/qnaListView.jsp").forward(request, response);
 	}

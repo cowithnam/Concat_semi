@@ -1,6 +1,8 @@
 package concat.qna.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +43,9 @@ public class QnaDetailController extends HttpServlet {
 			request.getRequestDispatcher("views/qna/qnaDetailView.jsp").forward(request, response);
 			
 		}else {
-			
+			request.setAttribute("errorMsg", "문의글 조회에 실패했습니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
 	}
 

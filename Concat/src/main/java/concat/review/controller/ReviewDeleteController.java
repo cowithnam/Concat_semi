@@ -1,6 +1,8 @@
 package concat.review.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,14 +34,15 @@ public class ReviewDeleteController extends HttpServlet {
 		
 		int result = new ReviewService().deletelist(rNo);
 		
-		if(result > 0) { // ����
-			request.getSession().setAttribute("alertMsg", "");
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "성공적으로 리뷰가 삭제되었습니다.");
 			
 			response.sendRedirect(request.getContextPath() + "/list.re?cpage=1");
 			
-		}else { // ����
-			request.setAttribute("errorMsg", "");
-
+		}else {
+			request.setAttribute("errorMsg", "리뷰 삭제에 실패했습니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
 	}
 

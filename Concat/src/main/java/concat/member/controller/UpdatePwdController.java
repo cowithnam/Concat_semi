@@ -3,6 +3,7 @@ package concat.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +39,9 @@ public class UpdatePwdController extends HttpServlet {
 		
 		
 		if(upPwd == null) {
-			
+			request.setAttribute("errorMsg", "비밀번호 변경에 실패했습니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}else {
 			request.getSession().setAttribute("loginMember", upPwd);
 			

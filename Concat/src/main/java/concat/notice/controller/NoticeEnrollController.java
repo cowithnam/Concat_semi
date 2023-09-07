@@ -63,7 +63,6 @@ public class NoticeEnrollController extends HttpServlet {
 			request.setAttribute("errorMsg", "공지사항 등록에 실패 했습니다" );
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
-			
 		}
 		
 		

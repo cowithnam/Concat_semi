@@ -3,8 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Review r = (Review)request.getAttribute("r");
-	Image i = (Image)request.getAttribute("image");
+   Review r = (Review)request.getAttribute("r");
+   Image i = (Image)request.getAttribute("image");
 %>
 <!DOCTYPE html>
 <html>
@@ -67,7 +67,7 @@
     }
     
     .btn{
-    	text-align: right;
+       text-align: right;
         padding-right: 20px;
     }
 
@@ -127,13 +127,13 @@
 </head>
 <body>
 
-	<%@ include file="../common/menubar.jsp" %>
-	
-	<div class="wrap" align="center">
-		<br>
-		<form action="<%= contextPath %>/updateForm.re?rNo=<%= r.getReviewNo() %>" method="post" enctype="multipart/form-data">
+   <%@ include file="../common/menubar.jsp" %>
+   
+   <div class="wrap" align="center">
+      <br>
+      <form action="<%= contextPath %>/updateForm.re?rNo=<%= r.getReviewNo() %>" method="post" enctype="multipart/form-data">
         <div class="img">
-        	<img src="<%= contextPath %>/<%= i.getFilePath() %>">
+           <img src="<%= contextPath %>/<%= i.getFilePath() %>">
         </div>
         
         <div class="profile">
@@ -175,7 +175,7 @@
                     <% if(loginMember != null) {%>
                         <button type="button" onclick="insertReply();">댓글등록</button>
                     <% }else { %>
-                        <button type="button" disabled>댓글등록</button>
+                        <button type="button" disabled style="background-color: gray;">댓글등록</button>
                     <% } %>
                     </div>
                 </div> 
@@ -189,91 +189,92 @@
                 <button type="submit">수정</button>
                 <button type="button" id="delete">삭제</button>
             <% } %>
-			    <button type="button" onclick="history.back();">뒤로가기</button>   
+             <button type="button" onclick="history.back();">뒤로가기</button>   
             </div>
             </form>
         </div>
     </div>
-    	
- 	    <script>
-        	$(function(){
-        		$("#delete").click(function(){
-	        		location.href='<%= contextPath %>/delete.re?num=<%= r.getReviewNo() %>'
-        		})
-        	})
-        	
-    	    $(function(){ 
-           		selectReplyList();
-           		
-           		setInterval(selectReplyList, 4000);
-           	})
-        	
-        	function insertReply() {
-        		$.ajax({
-        			url:"replyInsert.re",
-        			data:{
-        				content:$("#content").val(),
-        				rNo:<%= r.getReviewNo() %>,
-        			},
-        			type:"post",
-        			success:function(result){
-        				if(result > 0){
-        					selectReplyList();
-        					$("#content").val("");
-        				}
-        				
-        			},
-        			error:function(){
-        				console.log("댓글작성에 실패했습니다.")
-        			}
-        		})
-        	}
-        	
-        	
-        	function selectReplyList(){
-        		$.ajax({
-        			url:"replyList.re",
-        			data:{
-        				rNo:<%= r.getReviewNo() %>
-        			},
-        			success:function(list){
-        				console.log(list);
-        				
-        				let result ="";
-        				
-           				for(let i=0; i<list.length; i++){
-        					result += "<br>" + "<br>"
-                                    + "<div class='review-recontent' style='font-size: 14px;'>"
-        							+ "<div class='review'>"
-        							+ "<div class='review-user'>"
-        							+ "<div>"
-        							+ "<h4 style='margin:0px; margin-top:0px; font-size: 18px; padding-left: 20px;'>"
-        							+ list[i].replyWriter
-        							+ "</h4>"
-        							+ "</div>"
-        							+ "</div>"
-									+ "<div style='padding-left: 50px; width: 550px;'>"
-									+ "<textarea id='content' rows='4' cols='50' style='resize: none; border: none; font-size: 15px;' readonly>"
-									+ list[i].replyContent
-									+ "</textarea>"
-									+ "<br>"
-									+ "<div style='text-align: right; padding-right:40px;'>"
-									+ "작성일 : "
-									+ list[i].createDate 
-									+ "</div>"
-                                    + "<br>"
-									+ "</div>"
-									+ "</div>"
-									+ "</div>";
-        				}
-        				$("#reply").html(result);
-        			},
-        			error:function(){
-        				console.log("댓글조회에 실패했습니다.")
-        			}
-        		})
-        	}
-        </script>	
+       
+        <script>
+           $(function(){
+              $("#delete").click(function(){
+                 location.href='<%= contextPath %>/delete.re?num=<%= r.getReviewNo() %>'
+              })
+           })
+           
+           $(function(){ 
+                 selectReplyList();
+                 
+                 setInterval(selectReplyList, 4000);
+              })
+           
+           function insertReply() {
+              $.ajax({
+                 url:"replyInsert.re",
+                 data:{
+                    content:$("#content").val(),
+                    rNo:<%= r.getReviewNo() %>,
+                 },
+                 type:"post",
+                 success:function(result){
+                    if(result > 0){
+                       selectReplyList();
+                       $("#content").val("");
+                    }
+                    
+                 },
+                 error:function(){
+                    console.log("댓글작성에 실패했습니다.")
+                 }
+              })
+           }
+           
+           
+           function selectReplyList(){
+              $.ajax({
+                 url:"replyList.re",
+                 data:{
+                    rNo:<%= r.getReviewNo() %>
+                 },
+                 success:function(list){
+                    console.log(list);
+                    
+                    let result ="";
+                    
+                       for(let i=0; i<list.length; i++){
+                       result += "<br>" 
+                      		   + "<br>"
+                               + "<div class='review-recontent' style='font-size: 14px;'>"
+                             + "<div class='review'>"
+                             + "<div class='review-user'>"
+                             + "<div>"
+                             + "<h4 style='margin:0px; margin-top:0px; font-size: 18px; padding-left: 20px;'>"
+                             + list[i].replyWriter
+                             + "</h4>"
+                             + "</div>"
+                             + "</div>"
+                           + "<div style='padding-left: 50px; width: 550px;'>"
+                           + "<textarea id='content' rows='4' cols='50' style='resize: none; border: none; font-size: 15px;' readonly>"
+                           + list[i].replyContent
+                           + "</textarea>"
+                           + "<br>"
+                           + "<div style='text-align: right; padding-right:40px;'>"
+                           + "작성일 : "
+                           + list[i].createDate 
+                           + "</div>"
+                           + "<br>"
+                           + "</div>"
+                           + "</div>"
+                           + "</div>"
+                    }
+                    $("#reply").html(result);
+                 },
+                 error:function(){
+                    console.log("댓글조회에 실패했습니다.")
+                 }
+              })
+           }
+        </script>   
     
 </body>
 </html>

@@ -41,6 +41,10 @@ public class NewInsertController extends HttpServlet {
 		
 		if(!categoryList.isEmpty()) {
 			request.getRequestDispatcher("views/board/newInsert.jsp").forward(request, response);
+		}else {
+			request.setAttribute("errorMsg", "상세정보 조회에 실패했습니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
 	}
 

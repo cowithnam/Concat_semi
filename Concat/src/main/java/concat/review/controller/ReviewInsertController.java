@@ -73,7 +73,9 @@ public class ReviewInsertController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/list.re?cpage=1");
 			
 		}else {
-			
+			request.setAttribute("errorMsg", "리뷰 작성에 실패했습니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
 	
 	}

@@ -27,7 +27,6 @@ public class QnaEnrollController extends HttpServlet {
      */
     public QnaEnrollController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -55,11 +54,11 @@ public class QnaEnrollController extends HttpServlet {
 	
 		
 		if(result>0) {
-			session.setAttribute("alertMsg", "성공적으로 QNA가 등록되었습니다!");
+			session.setAttribute("alertMsg", "성공적으로 문의글이 등록되었습니다!");
 			response.sendRedirect(request.getContextPath()+"/list.qa?qpage=1");
 			return;
 		}else {
-			request.setAttribute("errorMsg", "QNA 등록에 실패 했습니다" );
+			request.setAttribute("errorMsg", "문의글 등록에 실패 했습니다" );
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 			
@@ -70,7 +69,6 @@ public class QnaEnrollController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

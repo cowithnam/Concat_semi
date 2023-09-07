@@ -37,13 +37,9 @@ public class BlackListSearchController extends HttpServlet {
 		
 		ArrayList<BlackList> list2 = new BlackListService().searchList(key);
 		
-		if(list2 != null) {
 			
-			request.setAttribute("list2", list2);
-			request.getRequestDispatcher("views/blacklist/blackListSerachView.jsp").forward(request, response);
-		}else {
-			
-		}
+		request.setAttribute("list2", list2);
+		request.getRequestDispatcher("views/blacklist/blackListSerachView.jsp").forward(request, response);
 	}
 
 	/**

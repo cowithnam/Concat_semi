@@ -37,13 +37,8 @@ public class SearchController extends HttpServlet {
 		
 		ArrayList<Board> list = new BoardService().searchList(key);
 		
-		if(list != null) {
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/board/salesList.jsp").forward(request, response);
-		}else {
-			
-		}
-		
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/board/salesList.jsp").forward(request, response);
 	}
 
 	/**

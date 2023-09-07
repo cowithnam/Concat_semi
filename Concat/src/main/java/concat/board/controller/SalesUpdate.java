@@ -1,6 +1,8 @@
 package concat.board.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +45,9 @@ public class SalesUpdate extends HttpServlet {
 		if(result > 0) {
 			response.sendRedirect(request.getContextPath()+"/detail.bo?bno="+bno);
 		}else {
-			
+			request.setAttribute("errorMsg", "판매글 수정에 실패했습니다");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
 	}
 
