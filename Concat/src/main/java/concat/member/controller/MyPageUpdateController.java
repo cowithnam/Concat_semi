@@ -42,10 +42,11 @@ public class MyPageUpdateController extends HttpServlet {
 
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/member_upfiles/");
 
-			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
-					new MyFileRenamePolicy());
+			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",new MyFileRenamePolicy());
 
 			Member m = new Member();
+			m.setMemId(multiRequest.getParameter("memId"));
+			m.setNickname(multiRequest.getParameter("nickName"));
 			m.setEmail(multiRequest.getParameter("email"));
 			m.setPhone(multiRequest.getParameter("phone"));
 			m.setMemNo(Integer.parseInt(multiRequest.getParameter("memNo")));

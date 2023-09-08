@@ -199,6 +199,10 @@ button:hover {
 	color: white;
 	font-size: 15px;
 }
+
+.area-no>tbody>tr:hover{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>

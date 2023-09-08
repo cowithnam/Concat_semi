@@ -184,6 +184,9 @@
         	<div class="myProfile">
 				<form id="myPage-form" action="<%= contextPath %>/update.me" method="post" enctype="multipart/form-data" id="mypageform">
 	                <table>
+	                	<tr style="display: none;">
+	                		<td colspan="2"> <input type="hidden" name="memId" value="<%=m.getMemId() %>"> </td>
+	                	</tr>
 	                    <tr>
 	                        <th width="100" height="50">닉네임</th>
 	                        <td><input type="text" id="nickName" name="nickName" value="<%= m.getNickname() %>" maxlength="6" required></td>

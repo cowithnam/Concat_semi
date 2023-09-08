@@ -42,10 +42,10 @@ public class MemberService {
 			result2 = new MemberDao().updateProfile(conn , profile);
 		}
 		
+		
 		if(result2 == 0) {
 			result2 = new MemberDao().insertProfile(conn,m.getMemNo() , profile);
 		}
-		
 		
 		Member up = null;
 		
@@ -69,7 +69,7 @@ public class MemberService {
 		if(result > 0) {
 			commit(conn);
 			
-			// 갱신???�원객체 ?�시 조회?�오�?
+			// 갱신???�원객체 ?�시 조회?�오�?
 			upPwd = new MemberDao().selectMember(conn, memId);
 		}else {
 			rollback(conn);

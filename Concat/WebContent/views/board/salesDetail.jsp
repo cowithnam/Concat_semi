@@ -16,7 +16,7 @@
   <style>
     .outer{
       width: 1000px;
-      height: auto;
+      height: 800px;
       margin: auto;
     }
 
@@ -141,12 +141,21 @@
           									  <% } %></h4>
           <h4>유효기간 : <%=b.getDueDate() %></h4>
           <hr>
-          <% if(wish == null){ %>
-          	<button type="button" id="noneWish" class="wish" onclick="wish();">♥</button>
-          <% }else{ %>
-          	<button type="button" id="wantWish" class="wish wantWish" onclick="wish();">♥</button>
-          <% } %>
-          <button type="button" style="width: 360px; height: 60px;" id="sell">구매하기</button>
+          <% if(loginMember != null){ %>
+	          <% if(wish == null){ %>
+	          	<button type="button" id="noneWish" class="wish" onclick="wish();">♥</button>
+	          <% }else{ %>
+	          	<button type="button" id="wantWish" class="wish wantWish" onclick="wish();">♥</button>
+	          <% } %>
+	      <% }else{ %>
+	      		<button type="button" id="noneWish" class="wish" onclick="error();">♥</button>
+	       <% } %>
+	       
+	       <% if(loginMember != null){ %>
+          		<button type="button" style="width: 360px; height: 60px;" id="sell" onclick="test();">구매하기</button>
+           <% }else{ %>
+           		<button type="button" style="width: 360px; height: 60px;" id="sell" onclick="error();">구매하기</button>
+           <% } %>
           <a href="https://ecrm.police.go.kr/sci/pcc_V3_send" style="font-size: 16px;" >신고 여부 확인</a>
           <hr>
       </div>
@@ -202,12 +211,12 @@
   	<% } %>
   </div>
   
-  <%@ include file="../common/footerbar.jsp" %>
+ 
   
   <script>
 	  function wish(){
 			  if($(".wish").hasClass("wantWish")){
-			    	$.ajax({
+			  	$.ajax({
 			    		url:"removeWish",
 			     		data:{bNo:<%=b.getBoardNo() %>},
 			      		success:function(result){
@@ -234,18 +243,22 @@
 			    	})
 			  	  }
 	  }  
+	  
+	  function test(){
+		  $(".modal").fadeIn();
+	  }
+	  
+	  function error(){
+		  alert("로그인 후 이용가능한 서비스입니다.");
+	  }
+	  
 	  $(function(){ 
-
-		  $("#sell").click(function(){
-		    $(".modal").fadeIn();
-		  });
-		  
 		  $(".modal").click(function(){
-		    $(".modal").fadeOut();
+			    $(".modal").fadeOut();
 		  });
 		  
-		});
+	  });
   </script>
-  
+<%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>

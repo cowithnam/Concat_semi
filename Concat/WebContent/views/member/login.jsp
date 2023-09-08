@@ -279,7 +279,14 @@ a.link-copy {
 ::placeholder{
   color: lightgray;
 }
-    </style>
+
+.idCheck{
+	background-color: black;
+	color: white;
+	border-radius: 10px;
+	margin-top: 2px;
+}
+</style>
     
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
@@ -342,28 +349,28 @@ a.link-copy {
           <h2>회원가입</h2>
           <form class="form" action="<%=request.getContextPath()%>/memberjoin.me" method="post" id="enrollform" >
             <div class="form-field">
-              <input type="text" name="memId" id="memId" placeholder="첫글자 영문자로, 그 후 영문자,숫자 포함 4~12자 입력" minlength="4" maxlength="12" required/>
-              <button type="button" onclick="idCheck();">중복확인</button>
+              <input type="text" name="memId" id="memId" placeholder="아이디 : 첫글자 영문자, 영문자,숫자 포함 4~12자 입력" minlength="4" maxlength="12" required/>
+              <button type="button" onclick="idCheck();" class="idCheck">중복확인</button>
               <br>
             </div>
   
             <div class="form-field">
-              <input type="password" name="memPwd1" id="memPwd1" placeholder="영문자,숫자,특수문자 포함 8자~15자 입력" minlength="6" maxlength="15" required /> <br>
+              <input type="password" name="memPwd1" id="memPwd1" placeholder="비밀번호 : 영문자,숫자,특수문자 포함 6자~15자 입력" minlength="6" maxlength="15" required /> <br>
             </div>
             <div class="form-field">
               <input type="password" name="memPwd" id="memPwd2" placeholder="위의 비밀번호와 일치되게 입력" minlength="6" maxlength="15" required /> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="memName" id="memName" placeholder="한글로만 이뤄져야하며 2글자 ~ 5글자로 입력" minlength="2" maxlength="15" required/> <br>
+              <input type="text" name="memName" id="memName" placeholder="이름 : 한글 2글자 ~ 5글자 입력" minlength="2" maxlength="15" required/> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="nickName" id="nickName" placeholder="한글은 2 ~ 5글자, 영어,숫자 15글자로 입력" minlength="2" maxlength="15" required/> <br>
+              <input type="text" name="nickName" id="nickName" placeholder="닉네임 : 한글 2 ~ 5글자, 영어,숫자 15글자 입력" minlength="2" maxlength="15" required/> <br>
             </div>
             <div class="form-field">
-              <input type="email" name="email" id="email" placeholder="이메일형식에 맞게 입력" required/> <br>
+              <input type="email" name="email" id="email" placeholder="이메일 : 이메일형식에 맞게 입력" required/> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="phone" id="phone" onKeyup = "addHypen(this);" placeholder="전화번호를 -빼고 입력" maxlength="13" required/>
+              <input type="text" name="phone" id="phone" onKeyup = "addHypen(this);" placeholder="전화번호 : -빼고 입력" maxlength="13" required/>
             </div>
     
             <button type="submit" class="btn-sign btn-up" onclick="joinClick();">회원가입</button>

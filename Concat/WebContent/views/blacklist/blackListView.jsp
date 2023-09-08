@@ -147,7 +147,10 @@
 		text-decoration: 1px underline;
 		color:white;
 	}
-	</style>
+	.area-no>tbody>tr:hover{
+		cursor: pointer;
+	}
+</style>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
@@ -170,7 +173,7 @@
         <br>
         
         <div align="center" class="list">
-            <table style='max-height:130px'>
+            <table style='max-height:130px' class="area-no">
                 <thead>
                     <tr>
                         <th class="num">NO</th>

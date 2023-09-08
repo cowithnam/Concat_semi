@@ -107,11 +107,10 @@ private Properties prop = new Properties();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, m.getMemName());
-			pstmt.setString(2, m.getNickname());
-			pstmt.setString(3, m.getEmail());
-			pstmt.setString(4, m.getPhone());
-			pstmt.setString(5, m.getMemId());
+			pstmt.setString(1, m.getNickname());
+			pstmt.setString(2, m.getEmail());
+			pstmt.setString(3, m.getPhone());
+			pstmt.setString(4, m.getMemId());
 			
 			result = pstmt.executeUpdate();
 			

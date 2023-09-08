@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,7 +94,9 @@
             <h1 style="text-align: center;">후기 작성</h1>
             <hr style="width: 720px;">
             <div class="head2">
+            	<% if(loginMember != null){ %>
                 <p><h3><%= loginMember.getNickname() %>님,  거래는 어떠셨나요 ?</h3></p>
+                <% } %>
                 <p><h3>후기를 작성해주세요</h3></p>
             </div>
         </div>

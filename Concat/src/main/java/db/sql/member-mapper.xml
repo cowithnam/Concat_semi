@@ -45,11 +45,10 @@
 </entry>
 <entry key="updateMember">
 	UPDATE MEMBER
-	   SET MEM_NAME = ?
-         , NICKNAME = ?
+	   SET
+	   	   NICKNAME = ?
 	     , EMAIL = ?
 	     , PHONE = ?
-	     , ENROLL_DATE = SYSDATE
 	 WHERE MEM_ID = ?
 </entry>
 <entry key="selectMember">
@@ -67,8 +66,8 @@
 			     , TOTAL_SCORE
 			  FROM MEMBER
 			 WHERE MEM_ID = ?
-			 AND STATUS = 'U'
-			  OR STATUS = 'A'
+			 AND (STATUS = 'U'
+			  OR STATUS = 'A')
 </entry>
 <entry key="updatePwd">
 			UPDATE MEMBER

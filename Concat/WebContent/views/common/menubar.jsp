@@ -190,9 +190,9 @@
             position: fixed;
             background-image: url(resources/image/minibar.png);
             background-repeat: no-repeat;
-            background-size: 130px 105px;
+            background-size: 130px 125px;
             width: 130px;
-            height: 120px;
+            height: 125px;
         }
 
         #minibar>a{
@@ -250,6 +250,12 @@
             border: 1px solid black;
         }
         
+        #top{
+        	position: relative;
+        	right: 15px;
+        	top: 63px;
+        }
+        
     </style>
 </head>
 <body style="position: relative;">
@@ -268,7 +274,7 @@
                 <div id="search">
                     <span style="font-size: 33px; font-weight: bolder;">C</span>
                     <form action="<%= contextPath %>/search.co">
-                        <input type="text" name="search" placeholder="검색어를 입력해 주세요" >
+                        <input type="text" name="search" placeholder="검색할 상품정보를 입력해 주세요" >
                         <button type="submit"></button>
                     </form>
                 </div>
@@ -343,6 +349,7 @@
             	<a onclick="needLogin()" id="zzim">찜 목록</a> <br>
 	            <a onclick="needLogin()" id="sell-page">판매하기</a>
             <% } %>
+	        <a href="#header" id="top">Top</a>
         </div>
     </div>
 
