@@ -163,7 +163,7 @@ textarea{
 			
 			
 			<% if (loginMember != null) { %>
-    			<% if (q.getQnaWriter().equals(loginMember.getMemNo() + "") || loginMember.getMemId().equals("user01")) { %>
+    			<% if (q.getQnaWriter().equals(loginMember.getMemNo() + "") || loginMember.getMemId().equals("admin")) { %>
 		
 				<textarea name="content" cols="30" rows="10" id="replyContent"
 				style="resize: none;" placeholder="댓글을 입력하세요"></textarea>
@@ -182,7 +182,7 @@ textarea{
 			<br>
 			
 			<% if (loginMember != null) { %>
-    <% if (loginMember.getMemId().equals("user01")) { %>
+    <% if (loginMember.getMemId().equals("admin")) { %>
         
         <button type="button" id="button1" onclick="insertReply();">답변 등록</button>
         

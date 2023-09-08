@@ -15,7 +15,7 @@
   <style>
     .outer{
       width: 1000px;
-      height: auto;
+      height: 800px;
       margin: auto;
     }
 
@@ -97,7 +97,7 @@
     }
     
     .btn{
-    	position: relative;
+      position: relative;
       left: 408px;
       bottom: 780px;     	
     }

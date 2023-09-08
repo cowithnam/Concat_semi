@@ -37,7 +37,6 @@ public class UpdatePwdController extends HttpServlet {
 		
 		Member upPwd = new MemberService().updatePwd(memId, memPwd, updatePwd);
 		
-		
 		if(upPwd == null) {
 			request.getSession().setAttribute("errorMsg", "비밀번호 변경에 실패했습니다");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
