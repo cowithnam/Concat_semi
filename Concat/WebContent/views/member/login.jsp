@@ -349,28 +349,28 @@ a.link-copy {
           <h2>회원가입</h2>
           <form class="form" action="<%=request.getContextPath()%>/memberjoin.me" method="post" id="enrollform" >
             <div class="form-field">
-              <input type="text" name="memId" id="memId" placeholder="아이디 : 첫글자 영문자, 영문자,숫자 포함 4~12자 입력" minlength="4" maxlength="12" required/>
+              <input type="text" name="memId" id="memId" placeholder="아이디 : 영문자,숫자 포함 4~12자 입력" minlength="4" maxlength="12" required/>
               <button type="button" onclick="idCheck();" class="idCheck">중복확인</button>
               <br>
             </div>
   
             <div class="form-field">
-              <input type="password" name="memPwd1" id="memPwd1" placeholder="비밀번호 : 영문자,숫자,특수문자 포함 6자~15자 입력" minlength="6" maxlength="15" required /> <br>
+              <input type="password" name="memPwd1" id="memPwd1" placeholder="비밀번호 : 영문자,숫자,특수문자 포함 6자~15자 입력" required /> <br>
             </div>
             <div class="form-field">
-              <input type="password" name="memPwd" id="memPwd2" placeholder="위의 비밀번호와 일치되게 입력" minlength="6" maxlength="15" required /> <br>
+              <input type="password" name="memPwd" id="memPwd2" placeholder="위의 비밀번호와 일치되게 입력"required /> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="memName" id="memName" placeholder="이름 : 한글 2글자 ~ 5글자 입력" minlength="2" maxlength="15" required/> <br>
+              <input type="text" name="memName" id="memName" placeholder="이름 : 한글 2글자 ~ 5글자 입력"  required/> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="nickName" id="nickName" placeholder="닉네임 : 한글 2 ~ 5글자, 영어,숫자 15글자 입력" minlength="2" maxlength="15" required/> <br>
+              <input type="text" name="nickName" id="nickName" placeholder="닉네임 : 한글 2 ~ 5글자, 영어,숫자 15글자 입력" required/> <br>
             </div>
             <div class="form-field">
               <input type="email" name="email" id="email" placeholder="이메일 : 이메일형식에 맞게 입력" required/> <br>
             </div>
             <div class="form-field">
-              <input type="text" name="phone" id="phone" onKeyup = "addHypen(this);" placeholder="전화번호 : -빼고 입력" maxlength="13" required/>
+              <input type="text" name="phone" id="phone" onKeyup = "addHypen(this);" placeholder="전화번호 : -빼고 입력" required/>
             </div>
     
             <button type="submit" class="btn-sign btn-up" onclick="joinClick();">회원가입</button>
@@ -514,14 +514,14 @@ a.link-copy {
         // Behavior of the inputs and labels
         for (input of el.inputs) {
 
-        input.addEventListener('keydown', function() {
-            this.labels[0].style.top = '10px';
-        });
-        input.addEventListener('blur', function() {
-            if (this.value === '') {
-            this.labels[0].style.top = '25px';
-            }
-        })
+	        input.addEventListener('keydown', function() {
+	            this.labels[0].style.top = '10px'
+	        });
+	        input.addEventListener('blur', function() {
+	            if (this.value === '') {
+	            this.labels[0].style.top = '25px'
+	            }
+	        })
         }
         
      
@@ -588,14 +588,14 @@ a.link-copy {
     
     <script>
     	function joinClick(){
-    		const idInput = document.querySelector("memId");
-        	const pwdInput1 = document.querySelector("memPwd1");
-    		const pwdInput2 = document.querySelector("memPwd2");
-        	const nameInput = document.querySelector("memName");
-        	const nickInput = document.querySelector("nickName");
-        	const emailInput = document.querySelector("email");
-        	const phoneInput = document.querySelector("phone");
-
+    		const idInput = document.querySelector("#memId");
+        	const pwdInput1 = document.querySelector("#memPwd1");
+    		const pwdInput2 = document.querySelector("#memPwd2");
+        	const nameInput = document.querySelector("#memName");
+        	const nickInput = document.querySelector("#nickName");
+        	const emailInput = document.querySelector("#email");
+        	const phoneInput = document.querySelector("#phone");
+			console.log(idInput);
 	        // 1) 아이디 검사
 	        let regExp = /^[a-z][a-z\d]{3,11}$/;
 	        if(!regExp.test(idInput.value)){
@@ -630,7 +630,7 @@ a.link-copy {
 	        }
 	
 	        // 5) 닉네임
-	        regExp =/^[가-힣\w!@#$%^&*]{2,15}$/i{
+	        regExp =/^[가-힣\w!@#$%^&*]{2,15}$/i;
 	        if(!regExp.test(nickInput.value)){
 	          alert("맞는 형식의 닉네임을 입력해주세요.");
 	          pwdInput2.value="";
@@ -639,14 +639,37 @@ a.link-copy {
 	        }
 	
 	        // 6) 전화번호
-	        regExp = /^[\d]{,13}$i/{
+	        regExp = /^[\d]{,13}$i/;
 	          if(!regExp.test(phoneInput.value)){
 	            alert("맞는 형식의 전화번호를 입력해주세요.");
 	            phoneInput.value = "";
 	            phoneInput.focus();
 	            return false;
 	        }
-	        }
+	
+	    	}
+
+      function loginclick() {
+        const login1 = document.querySelector("id");
+        const login2 = document.querySelector("password");
+
+         // 1) 아이디 검사
+        let regExp = /^[a-z][a-z\d]{3,11}$/;
+        if(!regExp.test(login1.value)){
+            alert("맞는 형식의 아이디를 입력해주세요.");
+            login1.select();
+            return false;
+        }
+        
+        // 2) 비밀번호 검사
+        regExp =/^[a-z\d!@#$%^&*]{8,15}$/i;
+        if(!regExp.test(login2.value)){
+            alert("맞는 형식의 비밀번호를 입력해주세요.");
+            login2.value = "";
+            login2.focus();
+            return false;
+        }
+        
 	
 	    	}
 

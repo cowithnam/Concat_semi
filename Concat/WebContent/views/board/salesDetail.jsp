@@ -117,6 +117,18 @@
       font-size: 15px;
       font-weight: bold;
     }
+    
+   	.complete>button {
+		width: 100px;
+		height: 40px;
+		background-color: black;
+		color: white;
+		border-radius: 10px;
+		font-size: 18px;
+		position: relative;
+		bottom: 450px;
+		left: 1300px;
+	}
   </style>
 </head>
 <body>
@@ -189,6 +201,11 @@
 		<div>
 			<button type="button" onclick="location.href='<%= contextPath %>/delete.bo?bno=<%= b.getBoardNo() %>'">삭제</button>
 		</div>
+	</div>
+  <% } %>
+   <% if(loginMember != null && b.getMemNo().equals(loginMember.getMemId())) {%>
+	<div class="complete">
+		<button type="button" onclick="location.href='<%= contextPath %>/complete.bo?bno=<%= b.getBoardNo() %>'">판매완료</button>
 	</div>
   <% } %>
   

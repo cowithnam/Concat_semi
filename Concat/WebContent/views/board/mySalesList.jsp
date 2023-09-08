@@ -14,7 +14,7 @@
         .outer{
             box-sizing: border-box;
             width: 1200px;
-            height: 700px;
+            height: auto;
             margin: auto;
             margin-top: 100px;
         }
@@ -106,7 +106,7 @@
 	            </thead>
 	            <tbody align="center">
 	            	<% for(Board b : list){ %>
-		                <tr>
+		                <tr class="mySalesList">
 		                    <td><img src="<%=b.getThumbnail() %>" width="80" height="80"></td>
 	                        <td><h4><%= b.gettStatus()%></h4></td>
 		                    <td><h3><%=b.getBoardTitle() %></h3><h5><%=b.getBrand() %></h5></td>
@@ -123,15 +123,9 @@
         
     </div>
      <script>
-        $(function(){
-            $("selectAll").click(function(){
-                if($(this).is(':checked')){
-                    $("input[name=bno]").prop("checked",true);
-                }else{
-                    $("input[name=bno]").prop("checked",false);
-                }
-            })
-        })
+	     $(".mySalesList").click(function(){
+		       	location.href="<%=contextPath %>/detail.bo?bno="+$(this).children("input").val();
+	     });
         
         $("#page-back").click(function(){
         		history.back();
@@ -155,6 +149,6 @@
 			});
 	 	})
     </script>
-    <%@ include file="../common/footerbar.jsp" %>
+<%@ include file="../common/footerbar.jsp" %>
 </body>
 </html>

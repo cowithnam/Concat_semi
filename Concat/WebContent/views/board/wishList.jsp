@@ -127,6 +127,7 @@
 	            <button type="button" id="page-back">뒤로가기</button>
 	        </div>
 		</div>
+		
        
     </div>
 

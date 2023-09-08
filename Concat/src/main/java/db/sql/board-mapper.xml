@@ -52,7 +52,6 @@
       JOIN BRAND ON (BRAND = BRAND_NO)
       JOIN TRADE USING (T_STATUS)
 	 WHERE I.BOARD_TYPE = 1
-	   AND B.STATUS = 'Y'
 	   AND MEM_NO = ?
 	 ORDER
 	    BY BOARD_NO DESC
@@ -229,5 +228,12 @@
         AND I.BOARD_TYPE = 1
 	 ORDER
 	    BY BOARD_NO DESC
+</entry>
+<entry key="completeBoard">
+	UPDATE
+	       BOARD
+	   SET STATUS = 'N'
+	     , T_STATUS = 'N'
+	 WHERE BOARD_NO = ?
 </entry>
 </properties>

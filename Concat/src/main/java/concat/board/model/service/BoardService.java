@@ -220,4 +220,20 @@ public class BoardService {
 		close(conn);
 		return list;
 	}
+	
+	public int completeBoard(int bno) {
+Connection conn = getConnection();
+		
+		int result = new BoardDao().completeBoard(bno,conn);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 }

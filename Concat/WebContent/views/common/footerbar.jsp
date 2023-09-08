@@ -18,7 +18,7 @@
 </head>
 <body>
     <br><br>
-    <div class="footerbar" style="border-top: 1px solid lightgrey;">
+    <div class="footerbar">
         <img src="resources/image/concatlogo.png" style="height: 60px; width: 100px;"> <br>
 	    Copyrights ⓒ CONCAT. All rights reserved.b
     </div>

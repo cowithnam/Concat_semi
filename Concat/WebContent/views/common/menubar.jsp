@@ -148,9 +148,20 @@
             margin-right: 15px;
             transform: scale(1);
         }
-
+		.menu-review>button:hover{
+			cursor: pointer; 
+			text-decoration : underline;
+        	text-underline-position: under;
+        	font-weight: bolder;
+        }
+       	.menu-help>button:hover{
+			cursor: pointer; 
+			text-decoration : underline;
+        	text-underline-position: under;
+        	font-weight: bolder;
+        }
+        	
         #cg-div:hover{cursor: pointer;}
-        #cg-div>div>button:hover{cursor: pointer;}
         #cg-div:hover>div{display: block;}
 
 
@@ -311,8 +322,8 @@
                     </ul>
             </div>
             </div>
-            <div><button type="button" onclick="reivew();">구매후기</button></div>   
-            <div><button type="button" onclick="notice()">고객센터</button></div>  
+            <div class="menu-review"><button type="button" onclick="reivew();">구매후기</button></div>   
+            <div class="menu-help"><button type="button" onclick="notice()">고객센터</button></div>  
         </div>
     </div>
 
